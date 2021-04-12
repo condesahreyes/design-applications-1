@@ -9,9 +9,9 @@ namespace Pruebas
     public class CategoriaTest
     {
 
-        private static readonly string nombre1 = "Hernán";
-        private static readonly string nombre2 = "Rodrigo";
-        private static readonly string nombreLargo = "HernánNombreLargo";
+        private static readonly string nombre1 = "Personal";
+        private static readonly string nombre2 = "Trabajo";
+        private static readonly string nombreLargo = "CategoriaTiempoLibre";
         private static readonly string nombreCorto = "Ro";
         private readonly string mensajeNombreIncorrecto = "El nombre debe tener entre 3 y 15 caracteres";
 
