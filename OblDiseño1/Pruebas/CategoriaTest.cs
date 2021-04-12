@@ -9,38 +9,39 @@ namespace Pruebas
     public class CategoriaTest
     {
 
-        private readonly string nombre1 = "Hernán";
-        private readonly string nombre2 = "Rodrigo";
-        private readonly string nombreLargo = "HernánNombreLargo";
-        private readonly string nombreCorto = "Ro";
+        private static readonly string nombre1 = "Hernán";
+        private static readonly string nombre2 = "Rodrigo";
+        private static readonly string nombreLargo = "HernánNombreLargo";
+        private static readonly string nombreCorto = "Ro";
+        private readonly string mensajeNombreIncorrecto = "El nombre debe tener entre 3 y 15 caracteres";
 
-        Categoria categoria = new Categoria(nombreCat1);
+        Categoria categoria = new Categoria(nombre1);
 
         [TestMethod]
         public void AltaCategoriaTest()
         {
-            Assert.AreEqual(nombre1, categoria.nombre)
+            Assert.AreEqual(nombre1, categoria.Nombre);
         }
 
         [TestMethod]
         public void ModificacionCategoriaTest()
         {
             categoria.setNombre(nombre2);
-            Assert.AreEqual(nombre2, categoria.nombre)
+            Assert.AreEqual(nombre2, categoria.Nombre);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCategoriaDataException))]
         public void AltaCategoriaNombreLargo()
         {
-            Categoria nombreLargo = new Categoria(nombreLargo);
+                Categoria nombreLargoCat = new Categoria(nombreLargo);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCategoriaDataException))]
         public void AltaCategoriaNombreCorto()
         {
-            Categoria nombreCorto = new Categoria(nombreCorto);
+            Categoria nombreCortoCat = new Categoria(nombreCorto);
         }
 
         [TestMethod]
