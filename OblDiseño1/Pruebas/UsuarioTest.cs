@@ -12,6 +12,7 @@ namespace Pruebas
         //Variables
         private static readonly string nombre = "user";
         private static readonly string contrasenia = "contrasenia123";
+        private static readonly string contrasenia2 = "contrasenia1234";
         private static readonly string contraseniaCorta = "1234";
         private static readonly string contraseniaLarga = "contrasenia123456789012345";
 
@@ -45,17 +46,73 @@ namespace Pruebas
         }
 
         [TestMethod]
-        public void AgregarTarjeta()
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void AltaUsuarioNombreVacio()
+        {
+            Usuario unUsuario = new Usuario("", contraseniaLarga, null, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void AltaUsuarioContraseniaCorta()
+        {
+            Usuario unUsuario = new Usuario(nombre, contraseniaCorta, null, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void AltaUsuarioContraseniaLarga()
+        {
+            Usuario unUsuario = new Usuario(nombre, contraseniaLarga, null, null, null);
+        }
+
+        [TestMethod]
+        public void CambiarContrasenia()
+        {
+            usuario.cambiarContrasenia(contrasenia2);
+            Assert.AreEqual(contrasenia2, usuario.Contrasenia);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void CambiarContraseniaCorta()
+        {
+            usuario.cambiarContrasenia(contraseniaCorta);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void CambiarContraseniaLarga()
+        {
+            usuario.cambiarContrasenia(contraseniaLarga);
+        }
+
+        [TestMethod]
+        public void AgregarTarjetaPorPrimeraVez()
         {
             usuario.AgregarTarjeta(tarjeta);
             Assert.IsNotNull(usuario.tarjetas);
         }
 
         [TestMethod]
-        public void AgregarDupla()
+        public void EliminarMiUnicaTarjeta()
+        {
+            usuario.EliminarTarjeta(tarjeta);
+            Assert.IsNull(usuario.tarjetas);
+        }
+
+        [TestMethod]
+        public void AgregarDuplaPorPrimeraVez()
         {
             duplas.AgregarDuplas(dupla);
             Assert.IsNotNull(usuario.duplas);
+        }
+
+        [TestMethod]
+        public void EliminarMiUnicaDupla()
+        {
+            usuario.EliminarDupla(dupla);
+            Assert.IsNull(usuario.duplas);
         }
 
         [TestMethod]
@@ -64,19 +121,6 @@ namespace Pruebas
             duplas.AgregarCategoria(categoria);
             Assert.IsNotNull(usuario.categorias);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
-        public void AltaUsuarioContraseniaCorta()
-        {
-            Usuario usuario = new Usuario(nombre, contraseniaCorta, null, null, null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
-        public void AltaUsuarioContraseniaLarga()
-        {
-            Usuario usuario = new Usuario(nombre, contraseniaLarga, null, null, null);
-        }
+      
     }
 }
