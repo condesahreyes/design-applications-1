@@ -10,23 +10,43 @@ namespace Pruebas
     public class UsuarioTest
     {
         //Variables
-        private static readonly string nombre = "user";
-        private static readonly string contrasenia = "contrasenia123";
-        private static readonly string contrasenia2 = "contrasenia1234";
-        private static readonly string contraseniaCorta = "1234";
-        private static readonly string contraseniaLarga = "contrasenia123456789012345";
+        private static string nombre = "user";
+        private static string contrasenia = "contrasenia123";
+        private static string contrasenia2 = "contrasenia1234";
+        private static string contraseniaCorta = "1234";
+        private static string contraseniaLarga = "contrasenia123456789012345";
 
         //ArrayList
-        private ArrayList tarjetas = new ArrayList();
-        private ArrayList duplas = new ArrayList();
-        private ArrayList categorias = new ArrayList();
+        private ArrayList tarjetas;
+        private ArrayList duplas;
+        private ArrayList categorias;
 
         //Objetos
-        Usuario usuario = new Usuario(nombre, contrasenia, null, null, null);
-        Categoria categoria = new Categoria("Personal");
-        Tarjeta tarjeta = new Tarjeta("Visa Gold", "Visa", "12345", "ABCD", "15/12/21", categoria, null);
-        Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", 1, null, "20/01/21", "", categoria);
+        Usuario usuario;
+        Categoria categoria;
+        Tarjeta tarjeta;
+        Dupla_UsuarioContrasenia dupla;
 
+        [TestInitialize]
+        public void Setup()
+        {
+        nombre = "user";
+        contrasenia = "contrasenia123";
+        contrasenia2 = "contrasenia1234";
+        contraseniaCorta = "1234";
+        contraseniaLarga = "contrasenia123456789012345";
+
+        tarjetas = new ArrayList();
+        duplas = new ArrayList();
+        categorias = new ArrayList();
+        /*
+        usuario = new Usuario(nombre, contrasenia, null, null, null);
+        categoria = new Categoria("Personal");
+        tarjeta = new Tarjeta("Visa Gold", "Visa", "12345", "ABCD", "15/12/21", categoria, null);
+        dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", 1, null, "20/01/21", "", categoria);
+        */
+         }
+        /*
         [TestMethod]
         public void AltaUsuarioListasVacias()
         {
@@ -97,6 +117,7 @@ namespace Pruebas
         [TestMethod]
         public void EliminarMiUnicaTarjeta()
         {
+            usuario.AgregarTarjeta(tarjeta);
             usuario.EliminarTarjeta(tarjeta);
             Assert.IsNull(usuario.tarjetas);
         }
@@ -111,16 +132,25 @@ namespace Pruebas
         [TestMethod]
         public void EliminarMiUnicaDupla()
         {
+            duplas.AgregarDuplas(dupla);
             usuario.EliminarDupla(dupla);
             Assert.IsNull(usuario.duplas);
         }
 
         [TestMethod]
-        public void AgregarCategoria()
+        public void AgregarCategoriaPorPrimeraVez()
         {
-            duplas.AgregarCategoria(categoria);
+            categorias.AgregarCategoria(categoria);
             Assert.IsNotNull(usuario.categorias);
         }
-      
+
+        [TestMethod]
+        public void EliminarMiUnicaCategoria()
+        {
+            categorias.AgregarCategoria(categoria);
+            categorias.EliminarCategoria(categoria);
+            Assert.IsNull(usuario.categorias);
+        }
+        */
     }
 }
