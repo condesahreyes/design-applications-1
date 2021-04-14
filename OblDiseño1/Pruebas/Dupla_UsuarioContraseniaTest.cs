@@ -233,6 +233,29 @@ namespace Pruebas
 
 
         [TestMethod]
+        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        public void GeneracionDeContrasenia_LargoMenorQueCeroExeption()
+        {
+            int largoInvalido = -3;
+            Dupla_UsuarioContrasenia.generarContrasenia(largoInvalido, incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        public void GeneracionDeContrasenia_NinguTipoDenCaracterExeption()
+        {
+            Dupla_UsuarioContrasenia.generarContrasenia(largoSeguridadMedia, !incluirMayus, !incluirMinus, !incluirDigitos, !incluirEspeciales);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        public void GeneracionDeContrasenia_MasTiposQueCaracteresExeption()
+        {
+            int largoInvalido = 3;
+            Dupla_UsuarioContrasenia.generarContrasenia(largoInvalido, incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);
+        }
+
+        [TestMethod]
         public void Baja_DuplaUsuarioContrasenia()
         {
             //newDupla.darDeBaja_Dupla();
