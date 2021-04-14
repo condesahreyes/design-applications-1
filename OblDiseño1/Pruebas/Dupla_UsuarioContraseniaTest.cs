@@ -54,7 +54,7 @@ namespace Pruebas
             //private readonly string tipo = "SitioWeb";
             nota = "Esto es una nota para el test";
 
-            nombreCategoria = "CategoriaEjemplo";
+            nombreCategoria = "Categoria";
             categoria = new Categoria(nombreCategoria);
 
 
@@ -138,7 +138,7 @@ namespace Pruebas
         [TestMethod]
         public void Modificacion_categoria_DuplaUsuarioContrasenia()
         {
-            Categoria newCategoria = new Categoria("Categoria De Ejemplo 2");
+            Categoria newCategoria = new Categoria("Categoria2");
             newDupla.Categoria = newCategoria;
             Assert.AreEqual(newCategoria, newDupla.Categoria);
         }
