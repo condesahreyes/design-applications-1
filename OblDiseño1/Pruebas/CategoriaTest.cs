@@ -8,6 +8,10 @@ namespace Pruebas
     [TestClass]
     public class CategoriaTest
     {
-
+        [TestMethod]
+        public void algo()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }

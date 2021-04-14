@@ -43,6 +43,8 @@ namespace Pruebas
         Dupla_UsuarioContrasenia newDupla;
 
 
+
+
         [TestInitialize]
         public void Setup() 
         {
@@ -95,45 +97,6 @@ namespace Pruebas
     */
 
 
-    public bool[] getTiposDeCaracteresContenidos(String str) 
-        {
-            bool contieneMayusculas = false;
-            bool contieneMinusculas = false;
-            bool contieneDigitos = false;
-            bool contineeEspeciales = false;
-            for (int i = 0; i < str.Length && !contieneMayusculas; i++)
-            {
-                int codigoASCII = (int)str[i];
-                if (codigoASCII >= 65 && codigoASCII <= 90)
-                {
-                    contieneMayusculas = true;
-                }
-                else if (codigoASCII >= 97 && codigoASCII <= 122)
-                {
-                    contieneMinusculas = true;
-                }
-                else if (codigoASCII >= 48 && codigoASCII <= 57)
-                {
-                    contieneDigitos = true;
-                }
-                else if ((codigoASCII >= 32 && codigoASCII <= 47) || (codigoASCII >= 58 && codigoASCII <= 64)
-                    || (codigoASCII >= 91 && codigoASCII <= 96) || (codigoASCII >= 123 && codigoASCII <= 126))
-                {
-                    contineeEspeciales = true;
-                }
-            }
-
-            /*
-             toReturn[0] == true -> si str contiene mayusculas
-             toReturn[1] == true -> si str contiene minusculas
-             toReturn[2] == true -> si str contiene dijitos
-             toReturn[3] == true -> si str contiene especiales
-            */
-
-            bool[] toReturn = {contieneMayusculas, contieneMinusculas, contieneDigitos, contineeEspeciales};
-            return toReturn;
-        }
-
         [TestMethod]
         public void Alta_DuplaUsuarioContrasenia()
         {
@@ -142,57 +105,81 @@ namespace Pruebas
 
         [TestMethod]
         public void Alta_Verificacion_Datos_DuplaUsuarioContrasenia()
-        { 
-            Assert.AreEqual(userName, newDupla.usernameDupla);
-            Assert.AreEqual(userPssw, newDupla.pssDupla);
-            Assert.AreEqual(sitio, newDupla.nombreSitioApp);
+        {
+            Assert.AreEqual(userName, newDupla.UsernameDupla);
+            Assert.AreEqual(userPssw, newDupla.PssDupla);
+            Assert.AreEqual(sitio, newDupla.NombreSitioApp);
             //Assert.AreEqual(tipo, newDupla.tipoSitioOApp);
-            Assert.AreEqual(nota, newDupla.nota);
-            Assert.AreEqual(nivelSeguridad, newDupla.nivelSeguridadPss);
-            Assert.AreEqual(dataBrench, newDupla.dataBrench);
-            Assert.AreEqual(ultimaModificacion, newDupla.fechaUltimaModificacion);
-            Assert.AreEqual(categoria, newDupla.categoria);
+            Assert.AreEqual(nota, newDupla.Nota);
+            Assert.AreEqual(nivelSeguridad, newDupla.NivelSeguridadPss);
+            Assert.AreEqual(dataBrench, newDupla.DataBrench);
+            Assert.AreEqual(ultimaModificacion, newDupla.FechaUltimaModificacion);
+            Assert.AreEqual(categoria, newDupla.Categoria);
+        }
+
+
+        [TestMethod]
+        public void Modificacion_nivelSeguridadPassword_DuplaUsuarioContrasenia()
+        {
+            string newPassword = "aaaaa";
+            int newNivelSeguridad = 1;
+            newDupla.PssDupla = newPassword;
+            Assert.AreEqual(newNivelSeguridad, newDupla.NivelSeguridadPss);
         }
 
         [TestMethod]
-        public void ModificacionDatos_DuplaUsuarioContrasenia()
+        public void Modificacion_fechaUltimaModificacion_DuplaUsuarioContrasenia()
         {
-            //Estos son los campos que el usuario puede modificar
-            string newUserName = "PedroEjemplo";
-            string newPassword = "aaaaa";
-            string newSitio = "otroStioDeEjemplo.edu.uy";
-            string newNota = "mala contrasenia";
-            Categoria newCategoria = new Categoria("Categoria De Ejemplo 2");
-
             DateTime nuevaUltimaModificacion = new DateTime(2021, 03, 29);
-
-            //Estos se infiero de los anteriores
-            int newNivelSeguridad = 1;
-       
-
-            newDupla.usernameDupla = newUserName;
-            newDupla.pssDupla = newPassword;
-            newDupla.nombreSitioApp = newSitio;
-            newDupla.nota = newNota;
-            newDupla.categoria = newCategoria;
-            newDupla.fechaUltimaModificacion = nuevaUltimaModificacion;
-
-            Assert.AreEqual(newUserName, newDupla.usernameDupla);
-            Assert.AreEqual(newPassword, newDupla.pssDupla);
-            Assert.AreEqual(newSitio, newDupla.nombreSitioApp);
-            //Assert.AreEqual(tipo, newDupla.tipoSitioOApp);
-            Assert.AreEqual(newNota, newDupla.nota);
-            Assert.AreEqual(newNivelSeguridad, newDupla.nivelSeguridadPss);
-            Assert.AreEqual(nuevaUltimaModificacion, newDupla.fechaUltimaModificacion);
-            Assert.AreEqual(newCategoria, newDupla.categoria);
+            newDupla.FechaUltimaModificacion = nuevaUltimaModificacion;
+            Assert.AreEqual(nuevaUltimaModificacion, newDupla.FechaUltimaModificacion);
         }
 
+        [TestMethod]
+        public void Modificacion_categoria_DuplaUsuarioContrasenia()
+        {
+            Categoria newCategoria = new Categoria("Categoria De Ejemplo 2");
+            newDupla.Categoria = newCategoria;
+            Assert.AreEqual(newCategoria, newDupla.Categoria);
+        }
+
+        [TestMethod]
+        public void Modificacion_nota_DuplaUsuarioContrasenia()
+        {
+            string newNota = "mala contrasenia";
+            newDupla.Nota = newNota;
+            Assert.AreEqual(newNota, newDupla.Nota);
+        }
+
+        [TestMethod]
+        public void Modificacion_sitioApp_DuplaUsuarioContrasenia()
+        {
+            string newSitio = "otroStioDeEjemplo.edu.uy";
+            newDupla.NombreSitioApp = newSitio;
+            Assert.AreEqual(newSitio, newDupla.NombreSitioApp);
+        }
+
+        [TestMethod]
+        public void Modificacion_password_DuplaUsuarioContrasenia()
+        {
+            string newPassword = "aaaaa";
+            newDupla.PssDupla = newPassword;
+            Assert.AreEqual(newPassword, newDupla.PssDupla);
+        }
+
+        [TestMethod]
+        public void Modificacion_userName_DuplaUsuarioContrasenia()
+        {
+            string newUserName = "PedroEjemplo";
+            newDupla.UsernameDupla = newUserName;
+            Assert.AreEqual(newUserName, newDupla.UsernameDupla);
+        }
 
 
         [TestMethod]
         public void GeneracionDeContrasenia_LargoCorrecto() 
         {
-            string contraseniaDeLargoInseguro = Dupla_UsuarioContrasenia.generarContrasenia(largoInseguro, incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);
+            string contraseniaDeLargoInseguro = Dupla_UsuarioContrasenia.generarContrasenia(largoInseguro, incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);           
             Assert.AreEqual(largoInseguro, contraseniaDeLargoInseguro.Length);
         }
 
@@ -200,7 +187,7 @@ namespace Pruebas
         public void GeneracionDeContrasenia_CaracteresCorrectos() 
         {
             string contraseniaParaTestearCaracteres = Dupla_UsuarioContrasenia.generarContrasenia(largoInseguro, incluirMayus, !incluirMinus, incluirDigitos, incluirEspeciales);
-            bool[] tiposDeCaracteresContenidos = getTiposDeCaracteresContenidos(contraseniaParaTestearCaracteres);
+            bool[] tiposDeCaracteresContenidos = Dupla_UsuarioContrasenia.getTiposDeCaracteresContenidos(contraseniaParaTestearCaracteres);
             Assert.IsTrue(tiposDeCaracteresContenidos[0] && !tiposDeCaracteresContenidos[1] && tiposDeCaracteresContenidos[2] && tiposDeCaracteresContenidos[3]);
         }
 
@@ -248,7 +235,8 @@ namespace Pruebas
         [TestMethod]
         public void Baja_DuplaUsuarioContrasenia()
         {
-            newDupla.darDeBaja_Dupla();
+            //newDupla.darDeBaja_Dupla();
+            newDupla = null;
             Assert.IsNull(newDupla);
         }
     }

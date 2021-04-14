@@ -2,8 +2,10 @@
 {
     public class Categoria
     {
-        public Categoria()
+        private string nombre { get; set; }
+        public Categoria(string nombreCategoria)
         {
+            nombre = nombreCategoria;
         }
     }
 }
