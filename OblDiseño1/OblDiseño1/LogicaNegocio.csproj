@@ -44,6 +44,7 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="Dupla_UsuarioContrasenia.cs" />
     <Compile Include="InvalidCategoriaDataException.cs" />
+    <Compile Include="Exepcion_DatosDeContraseniaInvalidos.cs" />
     <Compile Include="Tarjeta.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
