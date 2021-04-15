@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
