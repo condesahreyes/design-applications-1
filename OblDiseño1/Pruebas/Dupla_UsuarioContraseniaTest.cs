@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OblDiseño1;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Pruebas
 {
     [TestClass]
     public class Dupla_UsuarioContraseniaTest
     {
-       
+
     }
 }
