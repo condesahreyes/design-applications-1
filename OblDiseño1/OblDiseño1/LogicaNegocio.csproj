@@ -45,7 +45,7 @@
     <Compile Include="Dupla_UsuarioContrasenia.cs" />
     <Compile Include="InvalidCategoriaDataException.cs" />
     <Compile Include="Tarjeta.cs" />
-    <Compile Include="TarjetaNumeroIncorrectoException.cs" />
+    <Compile Include="TarjetaIncorrectaException.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,56 +14,54 @@ namespace Pruebas
         long numero = 1876322167154328;
         int codigoSeguridad = 241;
         DateTime fechaVencimiento = new DateTime(2024, 10, 05);
-        Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria,"");
+        Tarjeta tarjetaEsperada = new Tarjeta("Rodri", "Visa",1876322167154328, 241, new DateTime(2024, 10, 05), new Categoria("Personal"), "");
 
 
 
 
         [TestMethod]
-        public void Crear_Tarjeta_Test() 
+        public void Crear_Tarjeta_Test()
         {
-            Tarjeta tarjetaCreada = new Tarjeta();
+            Tarjeta tarjetaCreada = new Tarjeta("Rodri", "Visa", 1876322167154328, 241, new DateTime(2024, 10, 05), new Categoria("Personal"), "");
             Assert.IsNotNull(tarjetaCreada);
         }
 
 
         [TestMethod]
-        public void Alta_Tarjeta_Test()
+        public void Tarjetas_Iguales_Test()
         {
-            Assert.AreEqual(tarjetaEsperada, new Tarjeta().altaTarjeta("Rodri", "Visa", 1876322167154328, 241, new DateTime(2024, 10, 05), "Personal",""));
+            Assert.AreEqual(tarjetaEsperada, new Tarjeta("Rodri", "Visa", 1876322167154328, 241, new DateTime(2024, 10, 05), categoria, ""));
         }
+
+        public void Tarjetas_Diferentes_Test()
+        {
+            Assert.AreNotEqual(tarjetaEsperada, new Tarjeta("Rodri", "Visa", 2198322311154602, 125, new DateTime(2024, 11, 01), categoria, ""));
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_NumeroIncorrecto_Test() 
+        public void Tarjeta_NumeroIncorrecto_Test()
         {
-            Tarjeta tarjetaNumeroIncoreccto = new Tarjeta().altaTarjeta(nombre, tipo, 8371635461, codigoSeguridad, fechaVencimiento, categoria,"");
-            
+            Tarjeta tarjetaNumeroIncoreccto = new Tarjeta(nombre, tipo, 8371635461, codigoSeguridad, fechaVencimiento, categoria, "");
+
         }
 
-        [TestMethod]
-        public void Modificar_Tarjeta_Test() 
-        {
-            Tarjeta tarjetaResultante = new Tarjeta();
-            tarjetaResultante.altaTarjeta("Hernan","MasterCard",8471998674553411,789, new DateTime(2024, 10, 05),"Trabajo","");
-            tarjeta.modificarTarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, "");
-            Assert.AreEqual(tarjetaEsperada, tarjetaResultante);
-        }
 
         [TestMethod]
-        public void Baja_Tarjeta_Test() 
+        public void Baja_Tarjeta_Test()
         {
-            Tarjeta tarjetaABorrar = new Tarjeta().altaTarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, "");
-            tarjetaABorrar.bajaTarjeta();
+            Tarjeta tarjetaABorrar = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, "");
+            // tarjetaABorrar.borrarTarjeta();
             Assert.IsNull(tarjetaABorrar);
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_CodigoSeguridadIncorrecto_Test()
+        public void Tarjeta_CodigoSeguridadLargo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta().altaTarjeta(nombre, tipo, numero, 23834, fechaVencimiento, categoria, "");
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, 23834, fechaVencimiento, categoria, "");
 
         }
 
@@ -71,37 +69,36 @@ namespace Pruebas
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_NombreNulo_Test()
+        public void Tarjeta_NombreNulo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta().altaTarjeta(null, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, "");
+            Tarjeta tarjetaEsperada = new Tarjeta(null, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, "");
 
         }
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_TipoNulo_Test()
+        public void Tarjeta_TipoNulo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta().altaTarjeta(nombre, null, numero, codigoSeguridad, fechaVencimiento, categoria, "");
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, null, numero, codigoSeguridad, fechaVencimiento, categoria, "");
 
         }
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_CodigoSeguridadNulo_Test()
+        public void Tarjeta_CodigoSeguridadCorto_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta().altaTarjeta(nombre, tipo, numero, null, fechaVencimiento, categoria, "");
-
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, 0, fechaVencimiento, categoria, "");
         }
 
         [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
-        public void Alta_Tarjeta_fechaVencimientoNulo_Test()
+        public void Tarjeta_fechaVencimientoInvalida_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta().altaTarjeta(nombre, tipo, numero, codigoSeguridad, null, categoria, "");
-
+            DateTime algo = new DateTime(0000, 000, 00);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, new DateTime(1200,40,12), categoria, "");
         }
 
-        
+
 
 
 
