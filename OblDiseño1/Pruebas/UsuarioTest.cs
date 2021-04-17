@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
 
@@ -17,9 +18,9 @@ namespace Pruebas
         private static string contraseniaLarga;
         private static string nombreCategoria;
 
-        private ArrayList tarjetas;
-        private ArrayList duplas;
-        private ArrayList categorias;
+        private List<Tarjeta> tarjetas;
+        private List<Dupla_UsuarioContrasenia> duplas;
+        private List<Categoria> categorias;
 
         private Usuario usuario;
         private Tarjeta tarjeta;
@@ -37,11 +38,11 @@ namespace Pruebas
             contraseniaLarga = "contrasenia123456789012345";
             nombreLargo = "Este es un nombre muy largo";
 
-            duplas = new ArrayList();
-            tarjetas = new ArrayList();
-            categorias = new ArrayList();
+            duplas = new List<Dupla_UsuarioContrasenia>();
+            tarjetas = new List<Tarjeta>();
+            categorias = new List<Categoria>();
 
-            usuario = new Usuario(nombre, contrasenia, categorias, tarjetas, duplas);
+            usuario = new Usuario(nombre, contrasenia);
             categoria = new Categoria(nombreCategoria);
             tarjeta = new Tarjeta("Visa Gold", "Visa", 1234567891234567, 123, new DateTime(2021, 12, 15), categoria, null);
             dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", "", categoria);
@@ -70,28 +71,28 @@ namespace Pruebas
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void AltaUsuarioNombreVacio()
         {
-            Usuario unUsuario = new Usuario("", contrasenia, null, null, null);
+            Usuario unUsuario = new Usuario("", contrasenia);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void AltaUsuarioNombreLargo()
         {
-            Usuario unUsuario = new Usuario(nombreLargo, contrasenia, null, null, null);
+            Usuario unUsuario = new Usuario(nombreLargo, contrasenia);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void AltaUsuarioContraseniaCorta()
         {
-            Usuario unUsuario = new Usuario(nombre, contraseniaCorta, null, null, null);
+            Usuario unUsuario = new Usuario(nombre, contraseniaCorta);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void AltaUsuarioContraseniaLarga()
         {
-            Usuario unUsuario = new Usuario(nombre, contraseniaLarga, null, null, null);
+            Usuario unUsuario = new Usuario(nombre, contraseniaLarga);
         }
 
         [TestMethod]

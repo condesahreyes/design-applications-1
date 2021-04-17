@@ -21,33 +21,32 @@ namespace OblDiseño1
         private const int LARGO_CONTRASENIA_MIN = 5;
         private const int LARGO_CONTRASENIA_MAX = 25;
 
-        private ArrayList duplas = new ArrayList();
-        private ArrayList tarjetas = new ArrayList();
-        private ArrayList categorias = new ArrayList();
+        private List<Dupla_UsuarioContrasenia> duplas;
+        private List<Tarjeta> tarjetas;
+        private List<Categoria> categorias;
 
         public string Nombre { get => nombre; set => setNombre(value); }
         public string Contrasenia { get => contrasenia; set => setContrasenia(value); }
 
-        public Usuario(string nombre, string contrasenia, ArrayList categorias, ArrayList tarjetas, ArrayList duplas)
-        {
+        public Usuario(string nombre, string contrasenia) { 
             Nombre = nombre;
             Contrasenia = contrasenia;
-            this.categorias = categorias;
-            this.tarjetas = tarjetas;
-            this.duplas = duplas;
-        }
+            this.categorias = new List<Categoria>();
+            this.tarjetas = new List<Tarjeta>();
+            this.duplas = new List<Dupla_UsuarioContrasenia>();
+            }
 
-        public ArrayList getTarjetas()
+        public List<Tarjeta> getTarjetas()
         {
             return this.tarjetas;
         }
 
-        public ArrayList getDuplas()
+        public List<Dupla_UsuarioContrasenia> getDuplas()
         {
             return this.duplas;
         }
 
-        public ArrayList getCategorias()
+        public List<Categoria> getCategorias()
         {
             return this.categorias;
         }
