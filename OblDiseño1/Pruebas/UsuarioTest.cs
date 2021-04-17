@@ -10,11 +10,11 @@ namespace Pruebas
     public class UsuarioTest
     {
         //Variables
-        private static string nombre = "user";
-        private static string contrasenia = "contrasenia123";
-        private static string contrasenia2 = "contrasenia1234";
-        private static string contraseniaCorta = "1234";
-        private static string contraseniaLarga = "contrasenia123456789012345";
+        private static string nombre;
+        private static string contrasenia;
+        private static string contrasenia2;
+        private static string contraseniaCorta;
+        private static string contraseniaLarga;
 
         //ArrayList
         private ArrayList tarjetas;
@@ -30,23 +30,24 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
-        nombre = "user";
-        contrasenia = "contrasenia123";
-        contrasenia2 = "contrasenia1234";
-        contraseniaCorta = "1234";
-        contraseniaLarga = "contrasenia123456789012345";
+            nombre = "user";
+            contrasenia = "contrasenia123";
+            contrasenia2 = "contrasenia1234";
+            contraseniaCorta = "1234";
+            contraseniaLarga = "contrasenia123456789012345";
 
-        tarjetas = new ArrayList();
-        duplas = new ArrayList();
-        categorias = new ArrayList();
-        /*
-        usuario = new Usuario(nombre, contrasenia, null, null, null);
-        categoria = new Categoria("Personal");
-        tarjeta = new Tarjeta("Visa Gold", "Visa", "12345", "ABCD", "15/12/21", categoria, null);
-        dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", 1, null, "20/01/21", "", categoria);
-        */
-         }
-        /*
+            tarjetas = new ArrayList();
+            duplas = new ArrayList();
+            categorias = new ArrayList();
+
+            usuario = new Usuario(nombre, contrasenia, categorias, tarjetas, duplas);
+            categoria = new Categoria("Personal");
+
+            tarjeta = new Tarjeta("Visa Gold", "Visa", 1234567891234567, 123, new DateTime(2021, 12, 15), categoria, null);
+            dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", "", categoria);
+
+        }
+
         [TestMethod]
         public void AltaUsuarioListasVacias()
         {
@@ -89,7 +90,7 @@ namespace Pruebas
         [TestMethod]
         public void CambiarContrasenia()
         {
-            usuario.cambiarContrasenia(contrasenia2);
+            usuario.setContrasenia(contrasenia2);
             Assert.AreEqual(contrasenia2, usuario.Contrasenia);
         }
 
@@ -97,60 +98,60 @@ namespace Pruebas
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void CambiarContraseniaCorta()
         {
-            usuario.cambiarContrasenia(contraseniaCorta);
+            usuario.setContrasenia(contraseniaCorta);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void CambiarContraseniaLarga()
         {
-            usuario.cambiarContrasenia(contraseniaLarga);
+            usuario.setContrasenia(contraseniaLarga);
         }
 
         [TestMethod]
         public void AgregarTarjetaPorPrimeraVez()
         {
-            usuario.AgregarTarjeta(tarjeta);
-            Assert.IsNotNull(usuario.tarjetas);
+            usuario.agregarTarjeta(tarjeta);
+            Assert.AreEqual(1, usuario.getTarjetas().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaTarjeta()
         {
-            usuario.AgregarTarjeta(tarjeta);
-            usuario.EliminarTarjeta(tarjeta);
-            Assert.IsNull(usuario.tarjetas);
+            usuario.agregarTarjeta(tarjeta);
+            usuario.eliminarTarjeta(tarjeta);
+            Assert.AreEqual(0, usuario.getTarjetas().Count);
         }
 
         [TestMethod]
         public void AgregarDuplaPorPrimeraVez()
         {
-            duplas.AgregarDuplas(dupla);
-            Assert.IsNotNull(usuario.duplas);
+            usuario.agregarDupla(dupla);
+            Assert.AreEqual(1, usuario.getDuplas().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaDupla()
         {
-            duplas.AgregarDuplas(dupla);
-            usuario.EliminarDupla(dupla);
-            Assert.IsNull(usuario.duplas);
+            usuario.agregarDupla(dupla);
+            usuario.eliminarDupla(dupla);
+            Assert.AreEqual(0, usuario.getDuplas().Count);
         }
 
         [TestMethod]
         public void AgregarCategoriaPorPrimeraVez()
         {
-            categorias.AgregarCategoria(categoria);
-            Assert.IsNotNull(usuario.categorias);
+            usuario.agregarCategoria(categoria);
+            Assert.AreEqual(1, usuario.getCategorias().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaCategoria()
         {
-            categorias.AgregarCategoria(categoria);
-            categorias.EliminarCategoria(categoria);
-            Assert.IsNull(usuario.categorias);
+            usuario.agregarCategoria(categoria);
+            usuario.eliminarCategoria(categoria);
+            Assert.AreEqual(0, usuario.getCategorias().Count);
         }
-        */
+
     }
 }
