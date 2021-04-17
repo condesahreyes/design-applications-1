@@ -13,17 +13,17 @@ namespace OblDiseño1
 
         private string nombre;
         private string contrasenia;
-        const string mnsjUsuarioError = "El nombre de usuario debe tener entre 1 y 25 caracteres";
-        const string mnsjContraseniaError = "La contraseña debe tener entre 5 y 25 caracteres";
+        private const string mnsjUsuarioError = "El nombre de usuario debe tener entre 1 y 25 caracteres";
+        private const string mnsjContraseniaError = "La contraseña debe tener entre 5 y 25 caracteres";
 
-        const int LARGO_NOMBRE_MIN = 1;
-        const int LARGO_NOMBRE_MAX = 25;
-        const int LARGO_CONTRASENIA_MIN = 5;
-        const int LARGO_CONTRASENIA_MAX = 25;
+        private const int LARGO_NOMBRE_MIN = 1;
+        private const int LARGO_NOMBRE_MAX = 25;
+        private const int LARGO_CONTRASENIA_MIN = 5;
+        private const int LARGO_CONTRASENIA_MAX = 25;
 
-        ArrayList duplas = new ArrayList();
-        ArrayList tarjetas = new ArrayList();
-        ArrayList categorias = new ArrayList();
+        private ArrayList duplas = new ArrayList();
+        private ArrayList tarjetas = new ArrayList();
+        private ArrayList categorias = new ArrayList();
 
         public string Nombre { get => nombre; set => setNombre(value); }
         public string Contrasenia { get => contrasenia; set => setContrasenia(value); }
@@ -59,7 +59,7 @@ namespace OblDiseño1
                 this.nombre = unNombre;
         }
 
-        public bool nombreInvalido(string unNombre)
+        private bool nombreInvalido(string unNombre)
         {
             if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
                 return true;
@@ -74,7 +74,7 @@ namespace OblDiseño1
                 this.contrasenia = unaContrasenia;
         }
 
-        public bool contraseniaInvalida(string contrasenia)
+        private bool contraseniaInvalida(string contrasenia)
         {
             if (contrasenia.Length < LARGO_CONTRASENIA_MIN || contrasenia.Length > LARGO_CONTRASENIA_MAX)
                 return true;

@@ -21,10 +21,10 @@ namespace Pruebas
         private ArrayList duplas;
         private ArrayList categorias;
 
-        Usuario usuario;
-        Tarjeta tarjeta;
-        Categoria categoria;
-        Dupla_UsuarioContrasenia dupla;
+        private Usuario usuario;
+        private Tarjeta tarjeta;
+        private Categoria categoria;
+        private Dupla_UsuarioContrasenia dupla;
 
         [TestInitialize]
         public void Setup()
