@@ -10,12 +10,23 @@ namespace OblDiseño1
 
     public class Usuario
     {
+
         private string nombre;
         private string contrasenia;
+        const string mnsjUsuarioError = "El nombre de usuario debe tener entre 1 y 25 caracteres";
+        const string mnsjContraseniaError = "La contraseña debe tener entre 5 y 25 caracteres";
 
-        ArrayList categorias = new ArrayList();
-        ArrayList tarjetas = new ArrayList();
+        const int LARGO_NOMBRE_MIN = 1;
+        const int LARGO_NOMBRE_MAX = 25;
+        const int LARGO_CONTRASENIA_MIN = 5;
+        const int LARGO_CONTRASENIA_MAX = 25;
+
         ArrayList duplas = new ArrayList();
+        ArrayList tarjetas = new ArrayList();
+        ArrayList categorias = new ArrayList();
+
+        public string Nombre { get => nombre; set => setNombre(value); }
+        public string Contrasenia { get => contrasenia; set => setContrasenia(value); }
 
         public Usuario(string nombre, string contrasenia, ArrayList categorias, ArrayList tarjetas, ArrayList duplas)
         {
@@ -25,10 +36,6 @@ namespace OblDiseño1
             this.tarjetas = tarjetas;
             this.duplas = duplas;
         }
-
-
-        public string Nombre { get => nombre; set => setNombre(value); }
-        public string Contrasenia { get => contrasenia; set => setContrasenia(value); }
 
         public ArrayList getTarjetas()
         {
@@ -46,18 +53,32 @@ namespace OblDiseño1
         }
         public void setNombre(string unNombre)
         {
-            if (unNombre.Length < 1 || unNombre.Length > 25)
-                throw new InvalidUsuarioDataException("El nombre debe tener entre 5 y 25 caracteres");
+            if (nombreInvalido(unNombre))
+                throw new InvalidUsuarioDataException(mnsjUsuarioError);
             else
                 this.nombre = unNombre;
         }
 
+        public bool nombreInvalido(string unNombre)
+        {
+            if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
+                return true;
+            return false;
+        }
+
         public void setContrasenia(string unaContrasenia)
         {
-            if (unaContrasenia.Length < 5 || unaContrasenia.Length > 25)
-                throw new InvalidUsuarioDataException("La contraseña debe tener entre 5 y 25 caracteres");
+            if (contraseniaInvalida(unaContrasenia))
+                throw new InvalidUsuarioDataException(mnsjContraseniaError);
             else
                 this.contrasenia = unaContrasenia;
+        }
+
+        public bool contraseniaInvalida(string contrasenia)
+        {
+            if (contrasenia.Length < LARGO_CONTRASENIA_MIN || contrasenia.Length > LARGO_CONTRASENIA_MAX)
+                return true;
+            return false;
         }
 
         public void agregarTarjeta(Tarjeta tarjeta)
@@ -91,5 +112,6 @@ namespace OblDiseño1
         {
             this.categorias.Remove(categoria);
         }
+
     }
 }

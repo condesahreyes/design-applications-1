@@ -9,40 +9,40 @@ namespace Pruebas
     [TestClass]
     public class UsuarioTest
     {
-        //Variables
         private static string nombre;
         private static string contrasenia;
+        private static string nombreLargo;
         private static string contrasenia2;
         private static string contraseniaCorta;
         private static string contraseniaLarga;
+        private static string nombreCategoria;
 
-        //ArrayList
         private ArrayList tarjetas;
         private ArrayList duplas;
         private ArrayList categorias;
 
-        //Objetos
         Usuario usuario;
-        Categoria categoria;
         Tarjeta tarjeta;
+        Categoria categoria;
         Dupla_UsuarioContrasenia dupla;
 
         [TestInitialize]
         public void Setup()
         {
             nombre = "user";
+            contraseniaCorta = "1234";
+            nombreCategoria = "personal";
             contrasenia = "contrasenia123";
             contrasenia2 = "contrasenia1234";
-            contraseniaCorta = "1234";
             contraseniaLarga = "contrasenia123456789012345";
+            nombreLargo = "Este es un nombre muy largo";
 
-            tarjetas = new ArrayList();
             duplas = new ArrayList();
+            tarjetas = new ArrayList();
             categorias = new ArrayList();
 
             usuario = new Usuario(nombre, contrasenia, categorias, tarjetas, duplas);
-            categoria = new Categoria("Personal");
-
+            categoria = new Categoria(nombreCategoria);
             tarjeta = new Tarjeta("Visa Gold", "Visa", 1234567891234567, 123, new DateTime(2021, 12, 15), categoria, null);
             dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", "", categoria);
 
@@ -70,7 +70,14 @@ namespace Pruebas
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void AltaUsuarioNombreVacio()
         {
-            Usuario unUsuario = new Usuario("", contraseniaLarga, null, null, null);
+            Usuario unUsuario = new Usuario("", contrasenia, null, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        public void AltaUsuarioNombreLargo()
+        {
+            Usuario unUsuario = new Usuario(nombreLargo, contrasenia, null, null, null);
         }
 
         [TestMethod]
