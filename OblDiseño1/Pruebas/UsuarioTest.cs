@@ -45,7 +45,7 @@ namespace Pruebas
             usuario = new Usuario(nombre, contrasenia);
             categoria = new Categoria(nombreCategoria);
             tarjeta = new Tarjeta("Visa Gold", "Visa", 1234567891234567, 123, new DateTime(2021, 12, 15), categoria, null);
-            dupla = new Dupla_UsuarioContrasenia("Hernán", "1234", "Instagram", "", categoria);
+            dupla = new Dupla_UsuarioContrasenia("Hernán", "12345", "Instagram", "", categoria);
 
         }
 

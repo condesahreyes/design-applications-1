@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OblDiseño1
 {
@@ -50,6 +45,14 @@ namespace OblDiseño1
         {
             return this.categorias;
         }
+
+        private bool nombreInvalido(string unNombre)
+        {
+            if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
+                return true;
+            return false;
+        }
+
         public void setNombre(string unNombre)
         {
             if (nombreInvalido(unNombre))
@@ -58,9 +61,9 @@ namespace OblDiseño1
                 this.nombre = unNombre;
         }
 
-        private bool nombreInvalido(string unNombre)
+        private bool contraseniaInvalida(string contrasenia)
         {
-            if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
+            if (contrasenia.Length < LARGO_CONTRASENIA_MIN || contrasenia.Length > LARGO_CONTRASENIA_MAX)
                 return true;
             return false;
         }
@@ -73,13 +76,6 @@ namespace OblDiseño1
                 this.contrasenia = unaContrasenia;
         }
 
-        private bool contraseniaInvalida(string contrasenia)
-        {
-            if (contrasenia.Length < LARGO_CONTRASENIA_MIN || contrasenia.Length > LARGO_CONTRASENIA_MAX)
-                return true;
-            return false;
-        }
-
         public void agregarTarjeta(Tarjeta tarjeta)
         {
             this.tarjetas.Add(tarjeta);
@@ -89,7 +85,6 @@ namespace OblDiseño1
         {
             this.tarjetas.Remove(tarjeta);
         }
-
 
         public void agregarDupla(Dupla_UsuarioContrasenia dupla)
         {
