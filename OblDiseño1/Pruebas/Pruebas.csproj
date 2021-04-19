@@ -53,6 +53,7 @@
     <Compile Include="Dupla_UsuarioContraseniaTest.cs" />
     <Compile Include="TarjetaTest.cs" />
     <Compile Include="CategoriaTest.cs" />
+    <Compile Include="ChequeadorDeDataBreachesTest.cs" />
     <Compile Include="UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
