@@ -117,5 +117,14 @@ namespace OblDiseño1
                 return false;
         }
 
+        public override string ToString()
+        {
+            return ("Nombre : " + this.Nombre + " Tipo: " + this.Tipo +
+                " Numero: " + this.Numero + " Codigo de Seguridad: " +
+                this.CodigoSeguridad + " Fecha de Vencimiento: " +
+                this.FechaVencimiento + "Categoria: " + this.Categoria +
+                "Nota: " + this.NotaOpcional);
+        }
+
     }
 }

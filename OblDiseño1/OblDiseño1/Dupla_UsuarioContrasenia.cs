@@ -429,6 +429,12 @@ namespace OblDiseño1
             return toReturn;
         }
 
+        public override string ToString()
+        {
+            return ("Nombre : " + this.UsernameDupla + " Contraseña: " + this.PssDupla +
+                " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria +
+                " Nivel de seguridad: " + this.NivelSeguridadPss);
+        }
 
     }
 }

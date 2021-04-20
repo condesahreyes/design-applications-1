@@ -112,7 +112,7 @@ namespace Pruebas
         [TestMethod]
         public void CambiarContrasenia()
         {
-            usuario.setContrasenia(contrasenias[2]);
+            usuario.ActualizarContrasenia(contrasenias[2]);
 
             Assert.AreEqual(contrasenias[2], usuario.Contrasenia);
         }
@@ -121,65 +121,65 @@ namespace Pruebas
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void CambiarContraseniaCorta()
         {
-            usuario.setContrasenia(contraseniaCorta);
+            usuario.ActualizarContrasenia(contraseniaCorta);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUsuarioDataException))]
         public void CambiarContraseniaLarga()
         {
-            usuario.setContrasenia(contraseniaLarga);
+            usuario.ActualizarContrasenia(contraseniaLarga);
         }
 
         [TestMethod]
         public void AgregarTarjetaPorPrimeraVez()
         {
-            usuario.agregarTarjeta(tarjeta);
+            usuario.AgregarTarjeta(tarjeta);
 
-            Assert.AreEqual(1, usuario.getTarjetas().Count);
+            Assert.AreEqual(1, usuario.ObtenerTarjetas().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaTarjeta()
         {
-            usuario.agregarTarjeta(tarjeta);
-            usuario.eliminarTarjeta(tarjeta);
+            usuario.AgregarTarjeta(tarjeta);
+            usuario.EliminarTarjeta(tarjeta);
 
-            Assert.AreEqual(0, usuario.getTarjetas().Count);
+            Assert.AreEqual(0, usuario.ObtenerTarjetas().Count);
         }
 
         [TestMethod]
         public void AgregarDuplaPorPrimeraVez()
         {
-            usuario.agregarDupla(dupla);
+            usuario.AgregarDupla(dupla);
 
-            Assert.AreEqual(1, usuario.getDuplas().Count);
+            Assert.AreEqual(1, usuario.ObtenerDuplas().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaDupla()
         {
-            usuario.agregarDupla(dupla);
-            usuario.eliminarDupla(dupla);
+            usuario.AgregarDupla(dupla);
+            usuario.EliminarDupla(dupla);
 
-            Assert.AreEqual(0, usuario.getDuplas().Count);
+            Assert.AreEqual(0, usuario.ObtenerDuplas().Count);
         }
 
         [TestMethod]
         public void AgregarCategoriaPorPrimeraVez()
         {
-            usuario.agregarCategoria(categoria);
+            usuario.AgregarCategoria(categoria);
 
-            Assert.AreEqual(1, usuario.getCategorias().Count);
+            Assert.AreEqual(1, usuario.ObtenerCategorias().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaCategoria()
         {
-            usuario.agregarCategoria(categoria);
-            usuario.eliminarCategoria(categoria);
+            usuario.AgregarCategoria(categoria);
+            usuario.EliminarCategoria(categoria);
 
-            Assert.AreEqual(0, usuario.getCategorias().Count);
+            Assert.AreEqual(0, usuario.ObtenerCategorias().Count);
         }
 
         [TestMethod]
@@ -191,10 +191,10 @@ namespace Pruebas
             { 
                 Categoria unaCategoria = new Categoria(nombresCategorias[i]);
                 categorias.Add(unaCategoria);
-                usuario.agregarCategoria(unaCategoria);
+                usuario.AgregarCategoria(unaCategoria);
             }
 
-            CollectionAssert.AreEquivalent(categorias,usuario.getCategorias());
+            CollectionAssert.AreEquivalent(categorias,usuario.ObtenerCategorias());
         }
 
         [TestMethod]
@@ -207,10 +207,10 @@ namespace Pruebas
                 Tarjeta unaTarjeta= new Tarjeta(nombresTarjetas[i], tiposTarjetas[i],
                 numTarjetas[i], codigosTarjetas[i], new DateTime(2021, 12, 15), categoria, null); ;
                 tarjetas.Add(unaTarjeta);
-                usuario.agregarTarjeta(unaTarjeta);
+                usuario.AgregarTarjeta(unaTarjeta);
             }
 
-            CollectionAssert.AreEquivalent(tarjetas, usuario.getTarjetas());
+            CollectionAssert.AreEquivalent(tarjetas, usuario.ObtenerTarjetas());
         }
 
         [TestMethod]
@@ -223,10 +223,10 @@ namespace Pruebas
                 Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i], 
                     contrasenias[i], "Instagram", "", categoria);
                 duplas.Add(unaDupla);
-                usuario.agregarDupla(unaDupla);
+                usuario.AgregarDupla(unaDupla);
             }
 
-            CollectionAssert.AreEquivalent(duplas, usuario.getDuplas());
+            CollectionAssert.AreEquivalent(duplas, usuario.ObtenerDuplas());
         }
 
         [TestMethod]
@@ -234,14 +234,17 @@ namespace Pruebas
         {
             List<string> listarCategoriasPorMetodo = new List<string>();
             List<string> listaCategorias = new List<string>();
+
             for (int i = 0; i < nombresCategorias.Length; i++)
             {
                 Categoria unaCategoria = new Categoria(nombresCategorias[i]);
-                listarCategoriasPorMetodo[i] = unaCategoria.listarCategorias();
-                listaCategorias[i]= "Nombre : " + unaCategoria.Nombre;
+                usuario.AgregarCategoria(unaCategoria);
+                listaCategorias.Add("Nombre : " + unaCategoria.Nombre);
             }
 
-            CollectionAssert.AreEquivalent(categorias, usuario.getCategorias());
+            listarCategoriasPorMetodo = usuario.ListarCategorias();
+
+            CollectionAssert.AreEquivalent(listaCategorias, listarCategoriasPorMetodo);
         }
 
         [TestMethod]
@@ -254,14 +257,19 @@ namespace Pruebas
             for (int i = 0; i < nombresTarjetas.Length; i++)
             {
                 Tarjeta unaTarjeta = new Tarjeta(nombresTarjetas[i], tiposTarjetas[i],
-                numTarjetas[i], codigosTarjetas[i], new DateTime(2021, 12, 15), categoria, null); ;
-                listarTarjetasPorMetodo[i]= unaTarjeta.ListarTarjetas();
-                listaCategorias[i] = "Nombre : " + unaTarjeta.Nombre + " Tipo: " + unaTarjeta.Tipo +
+                numTarjetas[i], codigosTarjetas[i], new DateTime(2021, 12, 15), categoria, null);
+
+                usuario.AgregarTarjeta(unaTarjeta);
+
+                listaCategorias.Add("Nombre : " + unaTarjeta.Nombre + " Tipo: " + unaTarjeta.Tipo +
                 " Numero: " + unaTarjeta.Numero + " Codigo de Seguridad: " +
                 unaTarjeta.CodigoSeguridad + " Fecha de Vencimiento: " +
                 unaTarjeta.FechaVencimiento + "Categoria: " + unaTarjeta.Categoria +
-                "Nota: " + unaTarjeta.NotaOpcional;
+                "Nota: " + unaTarjeta.NotaOpcional);
+
             }
+
+            listarTarjetasPorMetodo = usuario.ListarTarjetas();
 
             CollectionAssert.AreEquivalent(listaCategorias, listarTarjetasPorMetodo);
         }
@@ -276,13 +284,17 @@ namespace Pruebas
             {
                 Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
                     contrasenias[i], "Instagram", "", categoria);
-                listarDuplasPorMetodo[i] = unaDupla.ListarDuplas();
-                listaDuplas[i] = "Nombre : " + unaDupla.UsernameDupla + " Contraseña: " + unaDupla.PssDupla +
+
+                usuario.AgregarDupla(unaDupla);
+
+                listaDuplas.Add("Nombre : " + unaDupla.UsernameDupla + " Contraseña: " + unaDupla.PssDupla +
                 " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria +
-                " Nivel de seguridad: " + unaDupla.NivelSeguridadPss;
+                " Nivel de seguridad: " + unaDupla.NivelSeguridadPss);
             }
 
-            CollectionAssert.AreEquivalent(duplas, usuario.getDuplas());
+            listarDuplasPorMetodo = usuario.ListarDuplas();
+
+            CollectionAssert.AreEquivalent(listaDuplas, listarDuplasPorMetodo);
         }
 
     }

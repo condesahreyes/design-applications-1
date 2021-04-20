@@ -19,5 +19,11 @@
             else
                 this.nombre = nombre;
         }
+
+        public override string ToString()
+        {
+            return "Nombre : " + this.Nombre;
+        }
+
     }
 }
