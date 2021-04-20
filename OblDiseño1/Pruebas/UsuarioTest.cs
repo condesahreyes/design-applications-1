@@ -58,7 +58,7 @@ namespace Pruebas
             categoria = new Categoria(nombresCategorias[0]);
             tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
                 codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
-            dupla = new Dupla_UsuarioContrasenia(nombres[1], contraseniaCorta, 
+            dupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[0], 
                 "Instagram", "", categoria);
 
         }
@@ -287,9 +287,9 @@ namespace Pruebas
 
                 usuario.AgregarDupla(unaDupla);
 
-                listaDuplas.Add("Nombre : " + unaDupla.UsernameDupla + " Contraseña: " + unaDupla.PssDupla +
+                listaDuplas.Add("Nombre : " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contrasenia +
                 " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria +
-                " Nivel de seguridad: " + unaDupla.NivelSeguridadPss);
+                " Nivel de seguridad: " + unaDupla.NivelSeguridadContrasenia);
             }
 
             listarDuplasPorMetodo = usuario.ListarDuplas();

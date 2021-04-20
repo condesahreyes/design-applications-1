@@ -251,9 +251,9 @@ namespace OblDiseño1
         
         public override string ToString()
         {
-            return ("Nombre : " + this.UsernameDupla + " Contraseña: " + this.PssDupla +
+            return ("Nombre : " + this.NombreUsuario + " Contraseña: " + this.Contrasenia +
                 " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria +
-                " Nivel de seguridad: " + this.NivelSeguridadPss);
+                " Nivel de seguridad: " + this.NivelSeguridadContrasenia);
         }
 
     }
