@@ -33,8 +33,8 @@ namespace OblDiseño1
             List<Object> duplasVulneradas = new List<Object>();
 
             foreach(string dato in datosDelDataBreach)
-                foreach (Dupla_UsuarioContrasenia dupla in Usuario.getDuplas())
-                    if (dato.Equals(dupla.PssDupla))
+                foreach (Dupla_UsuarioContrasenia dupla in Usuario.ObtenerDuplas())
+                    if (dato.Equals(dupla.Contrasenia))
                         duplasVulneradas.Add(dupla);
 
             return duplasVulneradas;
@@ -46,7 +46,7 @@ namespace OblDiseño1
 
             foreach (string dato in datosDelDataBreach)
                 if (EsNumeroDeTarjetaValido(dato))
-                    foreach (Tarjeta tarjeta in Usuario.getTarjetas())
+                    foreach (Tarjeta tarjeta in Usuario.ObtenerTarjetas())
                     {
                         string numeroDeLaTarjetaAString = "" + tarjeta.Numero;
                         if (dato.Equals(numeroDeLaTarjetaAString))

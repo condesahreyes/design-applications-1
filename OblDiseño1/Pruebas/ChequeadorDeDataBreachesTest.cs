@@ -111,16 +111,16 @@ namespace Pruebas
             string nombreUsuario = "JuanEjemplez";
             string contraseniaUsuario = "aaaaaa";
             usuario = new Usuario(nombreUsuario, contraseniaUsuario);
-            usuario.agregarCategoria(categoriaEjemplo);
-            usuario.agregarDupla(duplaEjemplo_1);
-            usuario.agregarDupla(duplaEjemplo_2);
-            usuario.agregarDupla(duplaEjemplo_3);
-            usuario.agregarDupla(duplaEjemplo_4);
-            usuario.agregarDupla(duplaEjemplo_5);
-            usuario.agregarTarjeta(tarjetaEjemplo_1);
-            usuario.agregarTarjeta(tarjetaEjemplo_2);
-            usuario.agregarTarjeta(tarjetaEjemplo_3);
-            usuario.agregarTarjeta(tarjetaEjemplo_4);
+            usuario.AgregarCategoria(categoriaEjemplo);
+            usuario.AgregarDupla(duplaEjemplo_1);
+            usuario.AgregarDupla(duplaEjemplo_2);
+            usuario.AgregarDupla(duplaEjemplo_3);
+            usuario.AgregarDupla(duplaEjemplo_4);
+            usuario.AgregarDupla(duplaEjemplo_5);
+            usuario.AgregarTarjeta(tarjetaEjemplo_1);
+            usuario.AgregarTarjeta(tarjetaEjemplo_2);
+            usuario.AgregarTarjeta(tarjetaEjemplo_3);
+            usuario.AgregarTarjeta(tarjetaEjemplo_4);
 
 
             breachVacio = new List<string>{ };
