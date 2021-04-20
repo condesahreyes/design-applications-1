@@ -97,7 +97,7 @@ namespace OblDiseño1
         {
             int largo = unaContrasenia.Length;
 
-            if (EsLargoValidoContrasenia(largo) && largo != 0)
+            if (EsLargoInvalidoContrasenia(largo) && largo != 0)
                 throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
                     $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
 
@@ -148,7 +148,7 @@ namespace OblDiseño1
         {
             string contrasenia;
 
-            if (EsLargoValidoContrasenia(largo))
+            if (EsLargoInvalidoContrasenia(largo))
                 throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe contener " +
                     $"entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
             else if (ContarTrues(caracteresRequeridos) == 0)
@@ -168,7 +168,7 @@ namespace OblDiseño1
             return -1;
         }
 
-        private static bool EsLargoValidoContrasenia(int largo)
+        private static bool EsLargoInvalidoContrasenia(int largo)
         {
             return largo < CONTRASENIA_LARGO_MIN || largo > CONTRASENIA_LARGO_MAX;
         }
@@ -247,6 +247,13 @@ namespace OblDiseño1
         private static string DevolverCaracterAlazar(string cadena)
         {
             return cadena[GenerarNumAlazar(0, cadena.Length)].ToString();
+        }
+        
+        public override string ToString()
+        {
+            return ("Nombre : " + this.UsernameDupla + " Contraseña: " + this.PssDupla +
+                " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria +
+                " Nivel de seguridad: " + this.NivelSeguridadPss);
         }
 
     }
