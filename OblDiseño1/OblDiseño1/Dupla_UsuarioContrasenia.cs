@@ -6,429 +6,248 @@ namespace OblDiseño1
 {
     public class Dupla_UsuarioContrasenia
     {
-        //private static readonly string caracteresEspecialesAceptados = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-        private string usernameDupla;
-        private string pssDupla;
+
+        public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value);}
+
+        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value);}
+
+        public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value);}
+
+        public string TipoSitioOApp { get; set;}
+
+        public string Nota { get => nota; set => ActualizarNota(value);}
+
+        public Categoria Categoria { get; set;}
+
+        public DateTime FechaUltimaModificacion { get; set;}
+
+        public int NivelSeguridadContrasenia { get => nivelSeguridadContrasenia;}
+
+        public bool DataBrench { get; set;}
+
+        private const string caracteresNumericos = "0123456789";
+        private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+
+        private string contrasenia;
+        private string nombreUsuario;
+
+        private const int CONTRASENIA_LARGO_MIN = 5;
+        private const int CONTRASENIA_LARGO_MAX = 25;
+        private const int NOMBRE_LARGO_MIN = 5;
+        private const int NOMBRE_LARGO_MAX = 25;
+        private const int SITIO_LARGO_MIN = 3;
+        private const int SITIO_LARGO_MAX = 25;
+        private const int NOTA_LARGO_MAX = 250;
+        private int nivelSeguridadContrasenia;
         private string nombreSitioApp;
-        private string tipoSitioOApp;
         private string nota;
-        
-        private Categoria categoria;
-        private DateTime fechaUltimaModificacion;
 
-        private int nivelSeguridadPss;
+        private static string[] caracteresPorPosicion = { caracteresMayusculas, 
+            caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
 
-        private bool dataBrench;
-
-
-        public Dupla_UsuarioContrasenia(string userName, string userPssw, string sitio, string laNota, Categoria laCategoria)
+        public Dupla_UsuarioContrasenia(string unNombreUsuario, string unaContrasenia, 
+            string unSitio, string laNota, Categoria laCategoria)
         {
-            usernameDupla = userName;
-            pssDupla = userPssw;
-            nombreSitioApp = sitio;
-            //tipoSitioOApp: String
-            nota = laNota;
-            
-            categoria = laCategoria;
-            fechaUltimaModificacion = DateTime.Today;
-
-            nivelSeguridadPss = calcularSeguridad(pssDupla);
-
-            dataBrench = false;
+            NombreUsuario = unNombreUsuario;
+            Contrasenia = unaContrasenia;
+            NombreSitioApp = unSitio;
+            Nota = laNota;
+            Categoria = laCategoria;
+            FechaUltimaModificacion = DateTime.Today;
+            nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+            DataBrench = false;
         }
 
-
-        public string UsernameDupla { get => usernameDupla; set => usernameDupla = value; }
-        public string PssDupla { get => pssDupla; set => setNuevaPassword(value); }
-        public string NombreSitioApp { get => nombreSitioApp; set => nombreSitioApp = value; }
-        public string TipoSitioOApp { get => tipoSitioOApp; set => tipoSitioOApp = value; }
-        public string Nota { get => nota; set => nota = value; }
-
-        public Categoria Categoria { get => categoria; set => categoria = value; }
-        public DateTime FechaUltimaModificacion { get => fechaUltimaModificacion; set => fechaUltimaModificacion = value; }
-
-        public int NivelSeguridadPss { get => nivelSeguridadPss; private set => actualizarNivelDeSeguridad(); }
-
-        public bool DataBrench { get => dataBrench; set => dataBrench = value; }
-
-        public void setNuevaPassword(string nuevaPassword)
+        public void ActualizarNota(string unaNota)
         {
-            pssDupla = nuevaPassword;
-            actualizarNivelDeSeguridad();
+            int largoNota = unaNota.Length;
+
+            if (largoNota > NOTA_LARGO_MAX)
+                throw new Exepcion_DatosDeContraseniaInvalidos($"La nota debe contener " +
+                    $"como maximo {NOTA_LARGO_MAX} caracteres");
+            else
+                nota = unaNota;
         }
 
-        private void actualizarNivelDeSeguridad()
+        public void ActualizarNombreSitioApp(string unNombreSitioApp)
         {
-            nivelSeguridadPss = calcularSeguridad(pssDupla);
+            int largoNombre = unNombreSitioApp.Length;
+
+            if (largoNombre < SITIO_LARGO_MIN || largoNombre > SITIO_LARGO_MAX)
+                throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
+                    $"contener entre {SITIO_LARGO_MIN} y {SITIO_LARGO_MAX} caracteres");
+            else
+                nombreSitioApp = unNombreSitioApp;
         }
 
-        /* REFERENCIAS:
-
-        NIVELES DE SEGURIDAD:
-        ● (1) Rojo: Contraseña con largo menor a 8 caracteres. 
-        ● (2) Naranja: Contraseña con largo entre 8 y 14 caracteres. 
-        ● (3) Amarillo: Contraseña con largo mayor a 14 caracteres, sólo mayúsculas o minúsculas. 
-        ● (4) Verde Claro: Contraseña con largo mayor a 14 caracteres, con mayúsculas y minúsculas. 
-        ● (5) Verde Oscuro: Contraseña con largo mayor a 14 caracteres, con mayúsculas, minúsculas, números y símbolos.
-        
-
-        CARACTERES ACEPTADOS:
-            Letras Mayusculas ---------> "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                          ASCII code 65 to 90 (inclusive)
-
-            Letras Minusculas ---------> "abcdefghijklmnopqrstuvwxyz"
-                                          ASCII code 97 to 122 (inclusive)
-
-            Digitos (numeros) ---------> "0123456789"
-                                          ASCII code 48 to 57 (inclusive)
-
-            Caracteres Especiales -----> " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-                                          ASCII code 32 to 47 (inclusive) &&
-                                          ASCII code 58 to 64 (inclusive) &&
-                                          ASCII code 91 to 96 (inclusive) &&
-                                          ASCII code 123 to 126 (inclusive)
-            
-        */
-
-        /*
-        Resumen:
-                Retorna un int correspondiente al nivel de seguridad de una contrasenia
-                recibida como parametro
-
-        Parametros:
-                Un "string"
-
-        Retorno:
-                un int cuyo valor es igual a la cantidad de trues pasados por parametro 
-                Ej:
-                    contarTrues(False, False, False, False) --> retorna 0
-                    contarTrues(True, True, False, False) ----> retorna 2
-                    contarTrues(True, True, False, True) -----> retorna 3
-                    contarTrues(True, True, True, True) ------> retorna 4
-        */
-        public static int calcularSeguridad(string password) 
+        public void ActualizarNombreUsuario(string unNombreUsuario)
         {
-            int nivelDeSeguridad;
-            int pswLength = password.Length;
-            bool[] tiposDeCaracteres = getTiposDeCaracteresContenidos(password);
-            if (pswLength < 8) 
-            {
-                nivelDeSeguridad = 1;
-            }
-            else if (pswLength <= 14) 
-            {
-                nivelDeSeguridad = 2;
-            }
-            else if (!(tiposDeCaracteres[0] && tiposDeCaracteres[1])) //tieneMayusculas(password) && tieneMinusculas(password)
-            {
-                nivelDeSeguridad = 3;
-            }
-            else if (!(tiposDeCaracteres[2] && tiposDeCaracteres[3])) //tieneNumeros(password) && tieneSimbolos(password)
-            {
-                nivelDeSeguridad = 4;
-            }
-            else 
-            {
-                nivelDeSeguridad = 5;
-            }
+            int largoNombre = unNombreUsuario.Length;
 
-            return nivelDeSeguridad;
+            if (largoNombre < NOMBRE_LARGO_MIN || largoNombre > NOMBRE_LARGO_MAX)
+                throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
+                    $"contener entre {NOMBRE_LARGO_MIN} y {NOMBRE_LARGO_MAX} caracteres");
+            else
+                nombreUsuario = unNombreUsuario;
         }
 
-        /*
-       Resumen:
-               Recibe parametros que indican los equerimientos de la contrasenia deseada.
-               Si son validos devuelde una contrasenia que cumple con dichos requerimientos.
-               De no serlo, tira una exepcion acorde
-
-       Parametros:
-               largo --------------> la cantidad de caracteres presentes en la contrasenia (si < 1, tira una exeption)
-
-               incluirMayus -------> si es "true", la contrasenia contendra al menos una letra en Mayusculas
-                                     si es "false", la contrasenia contendra 0 (cero) letras Mayusculas
-
-               incluirMinus -------> si es "true", la contrasenia contendra al menos una letra en Minuscula
-                                     si es "false", la contrasenia contendra 0 (cero) letras Minusculas
-
-               incluirDigitos -----> si es "true", la contrasenia contendra al menos un Digito (numero)
-                                     si es "false", la contrasenia contendra no contrndra Digitos (numeros)
-
-               incluirEspeciales --> si es "true", la contrasenia contendra al menos un caracter Especial
-                                     si es "false", la contrasenia contendra 0 (cero) caracteres Especiales
-
-       Retorno:
-               Si los parametros no son validos: tira una exepcion
-                          Posibles parametros no validos:
-                                   * si: (largo < 1) ---> la contrasenia tiene que tener al menos un caracters
-
-                                   * si: !(incluirMayus || incluirMinus || incluirDigitos || incluirEspeciales) == true
-                                                     ---> la contrasenia solo puede contener caracteres de los 4 tipos
-                                                          correspodientes a ese variable, por lo que al menos una tiene 
-                                                          que se true.
-
-                                   * si: largo es menor a la cantidad de parametros booleanos en verdadero
-                                                     ---> es imposible incluir mas tipos de caracteres que caracteres.
-
-               Si los parametros son validos:
-                           Retorna un string de Length == largo, que contiene al menos un caracter cada tipo 
-                           correspondiente a el/los parametro/s booleano/s ingresados en "true"
-       */
-        public static string generarContrasenia(int largo, bool incluirMayus, bool incluirMinus, bool incluirDigitos, bool incluirEspeciales)
+        public void ActualizarContrasenia(string unaContrasenia)
         {
-            String contrasenia;
+            int largo = unaContrasenia.Length;
 
-            if(largo <= 0) 
+            if (EsLargoValidoContrasenia(largo) && largo != 0)
+                throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
+                    $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
+
+            contrasenia = unaContrasenia;
+
+            nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+        }
+
+        public static int CalcularSeguridad(string unaContrasenia)
+        {
+            int contraseniaLargo = unaContrasenia.Length;
+            bool[] tiposDeCaracteres = ObtenerTiposCaracteresContenidos(unaContrasenia);
+
+            if (contraseniaLargo < 8)
+                return 1;
+            else if (contraseniaLargo <= 14)
+                return 2;
+            else if (tiposDeCaracteres[0] && tiposDeCaracteres[1] && tiposDeCaracteres[2] && tiposDeCaracteres[3])
+                return 5;
+            else if (tiposDeCaracteres[0] && tiposDeCaracteres[1])
+                return 4;
+            else if (tiposDeCaracteres[0] || tiposDeCaracteres[1])
+                return 3;
+
+            return -1;
+        }
+
+        public static bool[] ObtenerTiposCaracteresContenidos(string str)
+        {
+            char caracterDelString;
+            int tipoCaracter;
+            bool[] tiposDeCaracteres = new bool[caracteresPorPosicion.Length];
+
+            for (int i = 0; i < str.Length; i++)
             {
-                throw new Exepcion_DatosDeContraseniaInvalidos("Largo invalido: una contrasenia debe tener al menos un caracter");
+                caracterDelString = str[i];
+                tipoCaracter = TipoDeUnCaracter(caracterDelString);
+
+                if (tipoCaracter != -1)
+                    tiposDeCaracteres[tipoCaracter] = true;
+
             }
-            else if (!(incluirMayus || incluirMinus || incluirDigitos || incluirEspeciales))
-            {
-                throw new Exepcion_DatosDeContraseniaInvalidos("Requerimientos invalidos: una contrasenia debe contener al menos un tipo de caracter");
-            }
-            else if(largo < contarTrues(incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales))
-            {
-                throw new Exepcion_DatosDeContraseniaInvalidos("Requerimientos invalidos: el largo de la contrasenia debe ser mayor o igual a la cantidad de tipos de caracteres deseados");
-            }
-            else 
-            {
-                contrasenia = generarPlantilla(largo, incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);
-            }
+
+            return tiposDeCaracteres;
+        }
+
+        public static string GenerarContrasenia(int largo, bool[] caracteresRequeridos)
+        {
+            string contrasenia;
+
+            if (EsLargoValidoContrasenia(largo))
+                throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe contener " +
+                    $"entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
+            else if (ContarTrues(caracteresRequeridos) == 0)
+                throw new Exepcion_DatosDeContraseniaInvalidos("Debe seleccionar al menos un caracter");
+
+            contrasenia = GenerarString(largo, caracteresRequeridos);
+
             return contrasenia;
         }
 
-
-        /*
-        Resumen:
-                El metodo "generarContrasenia" habia quedado demaciado extenso, por lo
-                que se extrajo a este metodo la logica de generar el string contrasenia,
-                mientras que en "generarContrasenia" se dejaron los checkeos.
-
-        Parametros:
-                Identico que generarContrasenia 
-
-        Retorno:
-                Identico que generarContrasenia, pero sin las Exeption, ya que este metodo
-                solo se llama una vez que ya esta chekeado que los parametros sean validos.
-        */
-        private static string generarPlantilla(int largo, bool incluirMayus, bool incluirMinus, bool incluirDigitos, bool incluirEspeciales)
+        private static int TipoDeUnCaracter(char caracter)
         {
-            string especialesPool = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-            string numPool = "0123456789";
-            string minusPool = "abcdefghijklmnopqrstuvwxyz";
-            string mayusPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            for (int i = 0; i < caracteresPorPosicion.Length; i++)
+                if (caracteresPorPosicion[i].Contains(caracter.ToString()))
+                    return i;
 
-            int tiposDeCarateresRequeridos = contarTrues(incluirMayus, incluirMinus, incluirDigitos, incluirEspeciales);
-            int tiposDeCaracteresPorAgregar = tiposDeCarateresRequeridos;
-            int caracteresPorAgregar = largo;
-
-            StringBuilder plantilla = new StringBuilder();
-            Random generadorNumRandom = new Random();
-            int sueloDeRandom = 0;
-
-            int incluidos = 0;
-            string[] referencia = new string[tiposDeCarateresRequeridos];
-            bool[] referenciaBool = new bool[tiposDeCarateresRequeridos];
-            if (incluirMayus) 
-            {
-                referencia[incluidos] = "Mayus";
-                referenciaBool[incluidos] = false;
-                incluidos++;
-            } 
-            if (incluirMinus)
-            {
-                referencia[incluidos] = "Minus";
-                referenciaBool[incluidos] = false;
-                incluidos++;
-            }
-            if (incluirDigitos)
-            {
-                referencia[incluidos] = "Digitos";
-                referenciaBool[incluidos] = false;
-                incluidos++;
-            }
-            if (incluirEspeciales)
-            {
-                referencia[incluidos] = "Especiales";
-                referenciaBool[incluidos] = false;
-            }
-
-
-            for(int i = 0; i < largo; i++)
-            {
-                if(caracteresPorAgregar > tiposDeCaracteresPorAgregar) 
-                {
-                    int aIncluir = generadorNumRandom.Next(sueloDeRandom, tiposDeCarateresRequeridos);
-                    string toAppend;
-                    switch (referencia[aIncluir])
-                    {
-                        case "Mayus":
-                            toAppend = Char.ToString(mayusPool[generadorNumRandom.Next(sueloDeRandom, mayusPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Minus":
-                            toAppend = Char.ToString(minusPool[generadorNumRandom.Next(sueloDeRandom, minusPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Digitos":
-                            toAppend = Char.ToString(numPool[generadorNumRandom.Next(sueloDeRandom, numPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Especiales":
-                            toAppend = Char.ToString(especialesPool[generadorNumRandom.Next(sueloDeRandom, especialesPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        default:
-                            break;
-                    }   
-                    caracteresPorAgregar--;            
-                    if (!referenciaBool[aIncluir])
-                    {
-                        tiposDeCaracteresPorAgregar--;
-                        referenciaBool[aIncluir] = true;
-                    }
-                }
-                else
-                {
-                    int aIncluir = generadorNumRandom.Next(sueloDeRandom, tiposDeCarateresRequeridos);
-                    while (referenciaBool[aIncluir])
-                    {
-                        aIncluir = masMasCircular(aIncluir, sueloDeRandom, tiposDeCarateresRequeridos);
-                    }
-                    string toAppend;
-                    switch (referencia[aIncluir])
-                    {
-                        case "Mayus":
-                            toAppend = Char.ToString(mayusPool[generadorNumRandom.Next(sueloDeRandom, mayusPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Minus":
-                            toAppend = Char.ToString(minusPool[generadorNumRandom.Next(sueloDeRandom, minusPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Digitos":
-                            toAppend = Char.ToString(numPool[generadorNumRandom.Next(sueloDeRandom, numPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        case "Especiales":
-                            toAppend = Char.ToString(especialesPool[generadorNumRandom.Next(sueloDeRandom, especialesPool.Length)]);
-                            plantilla.Append(toAppend);
-                            break;
-                        default:
-                            break;
-                    }
-                    caracteresPorAgregar--;
-                    tiposDeCaracteresPorAgregar--;
-                    referenciaBool[aIncluir] = true;
-                }
-            }
-
-            return plantilla.ToString();
+            return -1;
         }
 
-        /*
-        Resumen:
-                Incrementa en 1 el parametro "numero", y en caso que despues de quede valiendo igual
-                o mas que una cota superior, lo iguala a una cota inferior.
-
-        Parametros:
-                numero -------> el int que se desea incremetar
-                cotaInferior -> la cota inferior
-                cotaSuperior -> la cota superior
-
-        Retorno:
-                si (numero + 1) < cotaSuperior --> cotaSuperior
-                si (numero + 1) >= cotaSuperior -> cotaInferior
-        */
-        private static int masMasCircular(int numero, int cotaInferior, int cotaSuperior)
+        private static bool EsLargoValidoContrasenia(int largo)
         {
-            int toReturn = numero + 1;
-            if (toReturn >= cotaSuperior) toReturn = cotaInferior;
-            return toReturn;
+            return largo < CONTRASENIA_LARGO_MIN || largo > CONTRASENIA_LARGO_MAX;
         }
 
-        /*
-        Resumen:
-                Devuelve la cantidad de "true" pasados por parameteo
+        private static int GenerarNumAlazar(int numMin, int numMax)
+        {
+            Random numRandom = new Random();
+            int num = numRandom.Next(numMin, numMax);
 
-        Parametros:
-                4 booleanos
+            return num;
+        }
 
-        Retorno:
-                un int cuyo valor es igual a la cantidad de trues pasados por parametro 
-                Ej:
-                    contarTrues(False, False, False, False) --> retorna 0
-                    contarTrues(True, True, False, False) ----> retorna 2
-                    contarTrues(True, True, False, True) -----> retorna 3
-                    contarTrues(True, True, True, True) ------> retorna 4
-        */
-        private static int contarTrues(bool b1, bool b2, bool b3, bool b4) 
+        private static string GenerarString(int largoString, bool[] caracteresRequeridos)
+        {
+
+            string stringGenerado = "";
+
+            bool[] caracteresFaltantes = CopiarArrayBool(caracteresRequeridos);
+
+            while (largoString > 0)
+            {
+                stringGenerado = ConstruirStringPorLetra(caracteresRequeridos, ref caracteresFaltantes, stringGenerado);
+                int tiposDeCarateresRestantes = ContarTrues(caracteresFaltantes);
+                if (tiposDeCarateresRestantes + 1 == largoString)
+                    caracteresRequeridos = caracteresFaltantes;
+                largoString--;
+            }
+
+            return stringGenerado;
+        }
+
+        private static bool[] CopiarArrayBool(bool[] array)
+        {
+            int largoArray = array.Length;
+            bool[] arrayGenerado = new bool[largoArray];
+
+            for (int i = 0; i < largoArray; i++)
+                arrayGenerado[i] = array[i];
+
+            return arrayGenerado;
+        }
+
+        private static int ContarTrues(bool[] array)
         {
             int cantidadDeTrues = 0;
-            if (b1) cantidadDeTrues++;
-            if (b2) cantidadDeTrues++;
-            if (b3) cantidadDeTrues++;
-            if (b4) cantidadDeTrues++;
+            int largoArray = array.Length;
+
+            for (int i = 0; i < largoArray; i++)
+                if (array[i])
+                    cantidadDeTrues++;
+
             return cantidadDeTrues;
-        } 
-
-
-        /*
-        Resumen:
-                Devuelve los distiontos tipos de caracteres presentes en un string
-                Tipos de caracteres: Matusculas, Minusculas, Numeros (o digitos), Especiales
-
-        Parametros:
-                Un string
-
-        Retorno:
-                Un array de bool de largo 4, cuyos indices indican si el correspondiente tipo de caracter 
-                se encuentra en el parametro.
-                
-                Ej: getTiposDeCaracteresContenidos(parametroStr)
-                    arrayBool[0] == true -> si solo si parametroStr contiene al menos una Mayuscula
-                    arrayBool[1] == true -> si solo si parametroStr contiene al menos una Minuscula
-                    arrayBool[2] == true -> si solo si parametroStr contiene al menos un Numero (Digito)
-                    arrayBool[3] == true -> si solo si parametroStr contiene al menos un caracter Especial
-         */
-        public static bool[] getTiposDeCaracteresContenidos(String str)
-        {
-            bool contieneMayusculas = false;
-            bool contieneMinusculas = false;
-            bool contieneDigitos = false;
-            bool contineeEspeciales = false;
-            for (int i = 0; i < str.Length; i++)
-            {
-                int codigoASCII = (int)str[i];
-                if (codigoASCII >= 65 && codigoASCII <= 90)
-                {
-                    contieneMayusculas = true;
-                }
-                else if (codigoASCII >= 97 && codigoASCII <= 122)
-                {
-                    contieneMinusculas = true;
-                }
-                else if (codigoASCII >= 48 && codigoASCII <= 57)
-                {
-                    contieneDigitos = true;
-                }
-                else if ((codigoASCII >= 32 && codigoASCII <= 47) || (codigoASCII >= 58 && codigoASCII <= 64)
-                    || (codigoASCII >= 91 && codigoASCII <= 96) || (codigoASCII >= 123 && codigoASCII <= 126))
-                {
-                    contineeEspeciales = true;
-                }
-            }
-
-            /*
-             toReturn[0] == true -> si str contiene mayusculas
-             toReturn[1] == true -> si str contiene minusculas
-             toReturn[2] == true -> si str contiene dijitos
-             toReturn[3] == true -> si str contiene especiales
-            */
-
-            bool[] toReturn = { contieneMayusculas, contieneMinusculas, contieneDigitos, contineeEspeciales };
-            return toReturn;
         }
 
+        private static string ConstruirStringPorLetra(bool[] esCaracteresRequeridos, ref bool[] esCaracteresFaltantes,
+    string aSeguirGenerando)
+        {
+            bool generoUnCaracter = false;
+            int numAlazaro = 0;
+
+            while (!generoUnCaracter)
+            {
+                numAlazaro = GenerarNumAlazar(0, 4);
+
+                if (esCaracteresRequeridos[numAlazaro])
+                {
+                    generoUnCaracter = true;
+                    string caracterGenerado = DevolverCaracterAlazar(caracteresPorPosicion[numAlazaro]);
+                    esCaracteresFaltantes[numAlazaro] = false;
+                    aSeguirGenerando += caracterGenerado;
+                }
+            }
+            return aSeguirGenerando;
+        }
+
+        private static string DevolverCaracterAlazar(string cadena)
+        {
+            return cadena[GenerarNumAlazar(0, cadena.Length)].ToString();
+        }
 
     }
 }
