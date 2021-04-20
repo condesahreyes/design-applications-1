@@ -8,36 +8,18 @@ namespace Pruebas
     [TestClass]
     public class ChequeadorDeDataBreachesTest
     {
-        Usuario usuario;
-        List<string> infoBreacheada;
-        List<string> contraseniaDeDuplaBreachada;
-        List<string> numeroTagetaBreachada;
-        List<string> breachVacio;
-        List<Object> duplaBreachada;
-        List<Object> tarjetaBreachada;
-        List<Object> entidadesVulneradas;
-        ChequeadorDeDataBreaches chequeador;
 
-        public bool EsNuemroDeTargetaBalido(string posibleNumeroDeTargeta)
-        {
-            bool esValido = true;
-            if (!(posibleNumeroDeTargeta.Length == 16))
-            {
-                esValido = false;
-            }
-            else
-            {
-                for (int i = 0; i < posibleNumeroDeTargeta.Length && esValido; i++)
-                {
-                    int codigoASCII = (int)posibleNumeroDeTargeta[i];
-                    if (codigoASCII < 48 || codigoASCII > 57)
-                    {
-                        esValido = false;
-                    }
-                }
-            }
-            return esValido;
-        }
+        private Usuario usuario;
+
+        private List<string> infoBreacheada;
+        private List<string> contraseniaDeDuplaBreachada;
+        private List<string> numeroTagetaBreachada;
+        private List<string> breachVacio;
+        private List<Object> duplaBreachada;
+        private List<Object> tarjetaBreachada;
+        private List<Object> entidadesVulneradas;
+
+        private ChequeadorDeDataBreaches chequeador;
 
         [TestInitialize]
         public void Setup()
@@ -53,30 +35,42 @@ namespace Pruebas
             string tipoTarjeta_2 = "OCA";
             string tipoTarjeta_3 = "MasterCard";
             string tipoTarjeta_4 = "McDonalds";
+
             long numeroTarjeta_1 = 1234567812345678;
             long numeroTarjeta_2 = 7676767676767676;
             long numeroTarjeta_3 = 9999888877776666;
             long numeroTarjeta_4 = 1000999988887777;
+
             int codigoSeguridadTargeta_1 = 123;
             int codigoSeguridadTargeta_2 = 888;
             int codigoSeguridadTargeta_3 = 369;
             int codigoSeguridadTargeta_4 = 198;
+
             DateTime fechaVencimientoTargeta_1 = new DateTime(2030, 04, 20);
             DateTime fechaVencimientoTargeta_2 = new DateTime(2025, 07, 17);
             DateTime fechaVencimientoTargeta_3 = new DateTime(2030, 04, 20);
             DateTime fechaVencimientoTargeta_4 = new DateTime(2029, 05, 25);
+
             String notaTarjeta_1 = "Esta es una tarjeta para tests";
             String notaTarjeta_2 = "Esta tambien es una tarjeta para tests";
             String notaTarjeta_3 = "Esta tambien es otra tafjeta para rests";
             String notaTarjeta_4 = "Esta es una tarjeta muy seria";
-            Tarjeta tarjetaEjemplo_1 = new Tarjeta(nombreTargeta_1, tipoTarjeta_1, numeroTarjeta_1, codigoSeguridadTargeta_1,
-                                                 fechaVencimientoTargeta_1, categoriaEjemplo, notaTarjeta_1);
-            Tarjeta tarjetaEjemplo_2 = new Tarjeta(nombreTargeta_2, tipoTarjeta_2, numeroTarjeta_2, codigoSeguridadTargeta_2,
-                                                 fechaVencimientoTargeta_2, categoriaEjemplo, notaTarjeta_2);
-            Tarjeta tarjetaEjemplo_3 = new Tarjeta(nombreTargeta_3, tipoTarjeta_3, numeroTarjeta_3, codigoSeguridadTargeta_3,
-                                                 fechaVencimientoTargeta_3, categoriaEjemplo, notaTarjeta_3);
-            Tarjeta tarjetaEjemplo_4 = new Tarjeta(nombreTargeta_4, tipoTarjeta_4, numeroTarjeta_4, codigoSeguridadTargeta_4,
-                                                 fechaVencimientoTargeta_4, categoriaEjemplo, notaTarjeta_4);
+
+            Tarjeta tarjetaEjemplo_1 = new Tarjeta(nombreTargeta_1, tipoTarjeta_1, 
+                numeroTarjeta_1, codigoSeguridadTargeta_1, fechaVencimientoTargeta_1, 
+                categoriaEjemplo, notaTarjeta_1);
+
+            Tarjeta tarjetaEjemplo_2 = new Tarjeta(nombreTargeta_2, tipoTarjeta_2, 
+                numeroTarjeta_2, codigoSeguridadTargeta_2, fechaVencimientoTargeta_2, 
+                categoriaEjemplo, notaTarjeta_2);
+
+            Tarjeta tarjetaEjemplo_3 = new Tarjeta(nombreTargeta_3, tipoTarjeta_3, 
+                numeroTarjeta_3, codigoSeguridadTargeta_3, fechaVencimientoTargeta_3, 
+                categoriaEjemplo, notaTarjeta_3);
+
+            Tarjeta tarjetaEjemplo_4 = new Tarjeta(nombreTargeta_4, tipoTarjeta_4, 
+                numeroTarjeta_4, codigoSeguridadTargeta_4, fechaVencimientoTargeta_4,
+                categoriaEjemplo, notaTarjeta_4);
 
             string userNameDupla_1 = "JuanJuanJuan";
             string userNameDupla_2 = "JuanFacebook";
@@ -98,16 +92,21 @@ namespace Pruebas
             string notaDupla_3 = "Hacer una cuenta aca fue el peor error de mi vida";
             string notaDupla_4 = "Hice esta porque me suspendieron la otra";
             string notaDupla_5 = "Hice esta porque me suspendieron la de respuesto";
-            Dupla_UsuarioContrasenia duplaEjemplo_1 = new Dupla_UsuarioContrasenia(userNameDupla_1, passwordDupla_1, sitioDupla_1,
-                                                                                 notaDupla_1, categoriaEjemplo);
-            Dupla_UsuarioContrasenia duplaEjemplo_2 = new Dupla_UsuarioContrasenia(userNameDupla_2, passwordDupla_2, sitioDupla_2,
-                                                                                 notaDupla_2, categoriaEjemplo);
-            Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(userNameDupla_3, passwordDupla_3, sitioDupla_3,
-                                                                                 notaDupla_3, categoriaEjemplo);
-            Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(userNameDupla_4, passwordDupla_4, sitioDupla_4,
-                                                                                 notaDupla_4, categoriaEjemplo);
-            Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(userNameDupla_5, passwordDupla_5, sitioDupla_5,
-                                                                                 notaDupla_5, categoriaEjemplo);
+
+            Dupla_UsuarioContrasenia duplaEjemplo_1 = new Dupla_UsuarioContrasenia(userNameDupla_1,
+                passwordDupla_1, sitioDupla_1, notaDupla_1, categoriaEjemplo);
+
+            Dupla_UsuarioContrasenia duplaEjemplo_2 = new Dupla_UsuarioContrasenia(userNameDupla_2,
+                passwordDupla_2, sitioDupla_2, notaDupla_2, categoriaEjemplo);
+
+            Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(userNameDupla_3, 
+                passwordDupla_3, sitioDupla_3, notaDupla_3, categoriaEjemplo);
+
+            Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(userNameDupla_4, 
+                passwordDupla_4, sitioDupla_4, notaDupla_4, categoriaEjemplo);
+
+            Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(userNameDupla_5, 
+                passwordDupla_5, sitioDupla_5, notaDupla_5, categoriaEjemplo);
 
             string nombreUsuario = "JuanEjemplez";
             string contraseniaUsuario = "aaaaaa";
@@ -125,19 +124,20 @@ namespace Pruebas
 
 
             breachVacio = new List<string>{ };
-            infoBreacheada = new List<string> { "Contracontra123.", "aadsfsafas", "trololololololo, lolololo", "1234567812345678", "9999888877776666" };
+            infoBreacheada = new List<string> { "Contracontra123.", "aadsfsafas", "abcdefghijklm, " +
+                "lolololo", "1234567812345678", "9999888877776666" };
             numeroTagetaBreachada = new List<string> { "9999888877776666" };
             contraseniaDeDuplaBreachada = new List<string> { "ContraTwitter23." };
             duplaBreachada = new List<Object> { duplaEjemplo_3 };
             tarjetaBreachada = new List<Object> { tarjetaEjemplo_3 };
-            entidadesVulneradas = new List<Object> { duplaEjemplo_1, duplaEjemplo_2, duplaEjemplo_4, tarjetaEjemplo_1, tarjetaEjemplo_3 };
-
+            entidadesVulneradas = new List<Object> { duplaEjemplo_1, duplaEjemplo_2, duplaEjemplo_4, 
+                tarjetaEjemplo_1, tarjetaEjemplo_3 };
 
             chequeador = new ChequeadorDeDataBreaches(usuario);
         }
 
         [TestMethod]
-        public void Alta_ChequeadorDeDataBreaches()
+        public void AltaChequearDataBreaches()
         {
             Assert.IsNotNull(chequeador);
         }
@@ -149,31 +149,35 @@ namespace Pruebas
         }
         
         [TestMethod]
-        public void VerificarBreachVacio()
+        public void VerificarVulneradosVacio()
         {
             int elementosBreacheados = 0;
-            List < Object > entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio);
+            List <Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio);
+
             Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
         }
 
         [TestMethod]
-        public void VerificarBreachTarjeta()
+        public void VerificarVulneradosTarjeta()
         {
             List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(numeroTagetaBreachada);
+
             CollectionAssert.AreEqual(entidadesBreachadas, tarjetaBreachada);
         }
 
         [TestMethod]
-        public void VerificarBreachDupla()
+        public void VerificarVulneradosDupla()
         {
             List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(contraseniaDeDuplaBreachada);
+
             CollectionAssert.AreEqual(entidadesBreachadas, duplaBreachada);
         }
 
         [TestMethod]
-        public void VerificarBreacheo()
+        public void VerificarVulnerados()
         {
             List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(infoBreacheada);
+
             CollectionAssert.AreEquivalent(entidadesBreachadas, entidadesVulneradas);
         }
     }
