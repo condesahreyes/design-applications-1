@@ -9,20 +9,14 @@ namespace Pruebas
     public class ChequeadorDeDataBreachesTest
     {
         Usuario usuario;
-
         List<string> infoBreacheada;
-        List<string> numeroDeTagetasBreachadas;
-        string datoBreacheado_1;
-        string datoBreacheado_2;
-        string datoBreacheado_3;
-        string datoBreacheado_4;
-        List<Dupla_UsuarioContrasenia> duplasBreachadas;
-        List<Tarjeta> targetasBreachadas;
-        List<Object> entidadesComprometidas;
+        List<string> contraseniaDeDuplaBreachada;
+        List<string> numeroTagetaBreachada;
+        List<string> breachVacio;
+        List<Object> duplaBreachada;
+        List<Object> tarjetaBreachada;
+        List<Object> entidadesVulneradas;
         ChequeadorDeDataBreaches chequeador;
-
-        List<Dupla_UsuarioContrasenia> duplasFiltradas;
-        List<Tarjeta> targetasFiltradas;
 
         public bool EsNuemroDeTargetaBalido(string posibleNumeroDeTargeta)
         {
@@ -50,7 +44,7 @@ namespace Pruebas
         {
             string nombreCategoria = "SuperCategoria";
             Categoria categoriaEjemplo = new Categoria(nombreCategoria);
-
+            
             string nombreTargeta_1 = "Tarjeta_1";
             string nombreTargeta_2 = "Tarjeta_2";
             string nombreTargeta_3 = "Tarjeta_3";
@@ -62,11 +56,11 @@ namespace Pruebas
             long numeroTarjeta_1 = 1234567812345678;
             long numeroTarjeta_2 = 7676767676767676;
             long numeroTarjeta_3 = 9999888877776666;
-            long numeroTarjeta_4 = 0000999988887777;
+            long numeroTarjeta_4 = 1000999988887777;
             int codigoSeguridadTargeta_1 = 123;
             int codigoSeguridadTargeta_2 = 888;
             int codigoSeguridadTargeta_3 = 369;
-            int codigoSeguridadTargeta_4 = 098;
+            int codigoSeguridadTargeta_4 = 198;
             DateTime fechaVencimientoTargeta_1 = new DateTime(2030, 04, 20);
             DateTime fechaVencimientoTargeta_2 = new DateTime(2025, 07, 17);
             DateTime fechaVencimientoTargeta_3 = new DateTime(2030, 04, 20);
@@ -127,15 +121,17 @@ namespace Pruebas
             usuario.agregarTarjeta(tarjetaEjemplo_1);
             usuario.agregarTarjeta(tarjetaEjemplo_2);
             usuario.agregarTarjeta(tarjetaEjemplo_3);
+            usuario.agregarTarjeta(tarjetaEjemplo_4);
 
 
-            infoBreacheada = new List<string> { "Contracontra123.", "aadsfsafas", "trololololololo, lolololo", "1234567812345678" };
-            numeroDeTagetasBreachadas = new List<string> { "1234567812345678" };
-            datoBreacheado_1 = "Contracontra098,";
-            datoBreacheado_2 = "ihlkuluiokik";
-            datoBreacheado_3 = "lalalalalalaaaaaaaaaaaaaaaaaaa";
-            datoBreacheado_4 = "0000999988887777";
-            entidadesComprometidas = new List<Object> { duplaEjemplo_1, tarjetaEjemplo_1, numeroTarjeta_4 };
+            breachVacio = new List<string>{ };
+            infoBreacheada = new List<string> { "Contracontra123.", "aadsfsafas", "trololololololo, lolololo", "1234567812345678", "9999888877776666" };
+            numeroTagetaBreachada = new List<string> { "9999888877776666" };
+            contraseniaDeDuplaBreachada = new List<string> { "ContraTwitter23." };
+            duplaBreachada = new List<Object> { duplaEjemplo_3 };
+            tarjetaBreachada = new List<Object> { tarjetaEjemplo_3 };
+            entidadesVulneradas = new List<Object> { duplaEjemplo_1, duplaEjemplo_2, duplaEjemplo_4, tarjetaEjemplo_1, tarjetaEjemplo_3 };
+
 
             chequeador = new ChequeadorDeDataBreaches(usuario);
         }
@@ -151,38 +147,34 @@ namespace Pruebas
         {
             Assert.AreSame(usuario, chequeador.Usuario);
         }
-
-        [TestMethod]
-        public void VerificarListaDeContraseniasBreachadas()
-        {
-            chequeador.agregarBreach(infoBreacheada);
-            CollectionAssert.AreEquivalent(infoBreacheada, chequeador.InfoBreachada);
-        }
-
-        [TestMethod]
-        public void VerificarListaDeTarjetasBreachadas()
-        {
-            chequeador.agregarBreach(infoBreacheada);
-            CollectionAssert.AreEquivalent(numeroDeTagetasBreachadas, chequeador.TarjetasBreachadas);
-        }
-
-        [TestMethod]
-        public void VerificarDatoBrachadoAgregadoIndividualmente()
-        {
-            chequeador.agregarBreach(infoBreacheada);
-            chequeador.agregarDatoBreachado(datoBreacheado_1);
-            CollectionAssert.Contains(datoBreacheado_1, chequeador.InfoBreachada);
-        } 
         
         [TestMethod]
-        public void VerificarBreach()
+        public void VerificarBreachVacio()
         {
-            chequeador.agregarBreach(infoBreacheada);
-            chequeador.agregarDatoBreachado(datoBreacheado_1);
-            chequeador.agregarDatoBreachado(datoBreacheado_2);
-            chequeador.agregarDatoBreachado(datoBreacheado_3);
-            chequeador.agregarDatoBreachado(datoBreacheado_4);
-            CollectionAssert.AreEquivalent(entidadesComprometidas, chequeador.getEntidadesComprometidas());
+            int elementosBreacheados = 0;
+            List < Object > entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio);
+            Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
+        }
+
+        [TestMethod]
+        public void VerificarBreachTarjeta()
+        {
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(numeroTagetaBreachada);
+            CollectionAssert.AreEqual(entidadesBreachadas, tarjetaBreachada);
+        }
+
+        [TestMethod]
+        public void VerificarBreachDupla()
+        {
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(contraseniaDeDuplaBreachada);
+            CollectionAssert.AreEqual(entidadesBreachadas, duplaBreachada);
+        }
+
+        [TestMethod]
+        public void VerificarBreacheo()
+        {
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(infoBreacheada);
+            CollectionAssert.AreEquivalent(entidadesBreachadas, entidadesVulneradas);
         }
     }
 }
