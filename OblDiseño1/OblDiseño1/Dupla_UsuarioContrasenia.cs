@@ -7,24 +7,28 @@ namespace OblDiseño1
     public class Dupla_UsuarioContrasenia
     {
 
-        public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
-        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
-        public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value); }
-        public string TipoSitioOApp { get; set; }
-        public string Nota { get => nota; set => ActualizarNota(value); }
+        public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value);}
 
-        public Categoria Categoria { get; set; }
+        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value);}
 
-        public DateTime FechaUltimaModificacion { get; set; }
+        public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value);}
 
-        public int NivelSeguridadContrasenia { get => nivelSeguridadContrasenia; }
+        public string TipoSitioOApp { get; set;}
 
-        public bool DataBrench { get; set; }
+        public string Nota { get => nota; set => ActualizarNota(value);}
+
+        public Categoria Categoria { get; set;}
+
+        public DateTime FechaUltimaModificacion { get; set;}
+
+        public int NivelSeguridadContrasenia { get => nivelSeguridadContrasenia;}
+
+        public bool DataBrench { get; set;}
 
         private const string caracteresNumericos = "0123456789";
         private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
         private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        private const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
         private string contrasenia;
         private string nombreUsuario;
@@ -155,6 +159,15 @@ namespace OblDiseño1
             return contrasenia;
         }
 
+        private static int TipoDeUnCaracter(char caracter)
+        {
+            for (int i = 0; i < caracteresPorPosicion.Length; i++)
+                if (caracteresPorPosicion[i].Contains(caracter.ToString()))
+                    return i;
+
+            return -1;
+        }
+
         private static bool EsLargoValidoContrasenia(int largo)
         {
             return largo < CONTRASENIA_LARGO_MIN || largo > CONTRASENIA_LARGO_MAX;
@@ -234,15 +247,6 @@ namespace OblDiseño1
         private static string DevolverCaracterAlazar(string cadena)
         {
             return cadena[GenerarNumAlazar(0, cadena.Length)].ToString();
-        }
-
-        private static int TipoDeUnCaracter(char caracter)
-        {
-            for (int i = 0; i < caracteresPorPosicion.Length; i++)
-                if (caracteresPorPosicion[i].Contains(caracter.ToString()))
-                    return i;
-
-            return -1;
         }
 
     }
