@@ -20,6 +20,14 @@ namespace Pruebas
         public void Setup()
         {
             this.sistema = new Sistema();
+
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
+
+                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
+            }
+
         }
 
         [TestMethod]
@@ -30,7 +38,6 @@ namespace Pruebas
             for (int i = 0; i < nombres.Length; i++)
             {
                 Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
-                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
                 listaUsuarios.Add(usuario);
             }
 
@@ -52,18 +59,7 @@ namespace Pruebas
         [TestMethod]
         public void DevolverUnUsuario()
         {
-            Usuario usuarioQueQuiero = null;
-
-            for (int i = 0; i < nombres.Length; i++)
-            {
-                Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
-
-                if (usuarioQueQuiero == null)
-                    usuarioQueQuiero = usuario;
-
-                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
-            }
-
+            Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]); ;
             Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
 
             Assert.AreEqual(usuarioQueQuiero, usuarioObtenido);
@@ -72,18 +68,42 @@ namespace Pruebas
         [TestMethod]
         public void NoExisteUsuario()
         {
-            Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]);
+            Usuario usuarioQueQuiero = new Usuario("Un nombre", "unaContrasenia");
+            Usuario usuariosObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
 
-            for (int i = 1; i < nombres.Length; i++)
-            {
-                Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
+            Assert.AreNotEqual(usuarioQueQuiero, usuariosObtenido);
+        }
 
-                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
-            }
+        [TestMethod]
+        public void IngresoSistena()
+        {
+            bool puedoIngresar = PuedoIngresarAlSistema(nombres[0], contrasenias[0]);
 
-            Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
+            Assert.AreEqual(true, puedoIngresar);
+        }
 
-            Assert.AreNotEqual(usuarioQueQuiero, usuarioObtenido);
+        [TestMethod]
+        public void NoIngresarAlSistenaErrorContraseniaYNombre()
+        {
+            bool puedoIngresar = PuedoIngresarAlSistema("Hernán", "contraseña");
+
+            Assert.AreEqual(false, puedoIngresar);
+        }
+
+        [TestMethod]
+        public void NoIngresarContraseniaIncorrecta()
+        {
+            bool puedoIngresar = PuedoIngresarAlSistema(nombres[0], "contraseñaMal");
+
+            Assert.AreEqual(false, puedoIngresar);
+        }
+
+        [TestMethod]
+        public void NoIngresarNombreUsuarioIncorrecto()
+        {
+            bool puedoIngresar = PuedoIngresarAlSistema("Hernán", contrasenias[0]);
+
+            Assert.AreEqual(false, puedoIngresar);
         }
 
     }
