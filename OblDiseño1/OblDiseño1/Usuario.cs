@@ -139,5 +139,14 @@ namespace OblDiseño1
             return duplasString;
         }
 
+        public override bool Equals(object obj)
+        {
+            Usuario usuarioAComparar = (Usuario)obj;
+            if (Nombre.Equals(usuarioAComparar.Nombre))
+                return true;
+            else
+                return false;
+        }
+
     }
 }

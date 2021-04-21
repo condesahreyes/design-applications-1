@@ -44,9 +44,11 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="ChequeadorDeDataBreaches.cs" />
     <Compile Include="Dupla_UsuarioContrasenia.cs" />
+    <Compile Include="ExepcionObjetosRepetidos.cs" />
     <Compile Include="InvalidCategoriaDataException.cs" />
     <Compile Include="Exepcion_DatosDeContraseniaInvalidos.cs" />
     <Compile Include="InvalidUsuarioDataException.cs" />
+    <Compile Include="Sistema.cs" />
     <Compile Include="Tarjeta.cs" />
     <Compile Include="TarjetaIncorrectaException.cs" />
     <Compile Include="Usuario.cs" />

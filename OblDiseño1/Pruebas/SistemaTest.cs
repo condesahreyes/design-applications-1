@@ -30,11 +30,13 @@ namespace Pruebas
             for (int i = 0; i < nombres.Length; i++)
             {
                 Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
-                sistema.AgregarUsuario(usuario);
+                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
                 listaUsuarios.Add(usuario);
             }
 
-            CollectionAssert.AreEquivalent(listaUsuarios, sistema.ObtenerUsuarios);
+            List<Usuario> usuariosDesdeMetodo = sistema.ObtenerUsuarios();
+
+            CollectionAssert.AreEqual(listaUsuarios, usuariosDesdeMetodo);
         }
 
         [TestMethod]
@@ -43,13 +45,46 @@ namespace Pruebas
         {
             string nombreAux = nombres[0];
 
-            Usuario usuario1 = new Usuario(nombres[0], contrasenias[0]);
-            Usuario usuario2 = new Usuario(nombreAux, contrasenias[1]);
-
-            sistema.AgregarUsuario(usuario1);
-            sistema.AgregarUsuario(usuario2);
+            sistema.AgregarUsuario(nombres[0], contrasenias[0]);
+            sistema.AgregarUsuario(nombreAux, contrasenias[1]);
         }
 
+        [TestMethod]
+        public void DevolverUnUsuario()
+        {
+            Usuario usuarioQueQuiero = null;
+
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
+
+                if (usuarioQueQuiero == null)
+                    usuarioQueQuiero = usuario;
+
+                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
+            }
+
+            Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
+
+            Assert.AreEqual(usuarioQueQuiero, usuarioObtenido);
+        }
+
+        [TestMethod]
+        public void NoExisteUsuario()
+        {
+            Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]);
+
+            for (int i = 1; i < nombres.Length; i++)
+            {
+                Usuario usuario = new Usuario(nombres[i], contrasenias[i]);
+
+                sistema.AgregarUsuario(nombres[i], contrasenias[i]);
+            }
+
+            Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
+
+            Assert.AreNotEqual(usuarioQueQuiero, usuarioObtenido);
+        }
 
     }
 }
