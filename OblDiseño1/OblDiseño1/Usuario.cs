@@ -142,7 +142,7 @@ namespace OblDiseño1
         public override bool Equals(object obj)
         {
             Usuario usuarioAComparar = (Usuario)obj;
-            if (Nombre.Equals(usuarioAComparar.Nombre) && Contrasenia.Equals(usuarioAComparar.Contrasenia))
+            if (Nombre.Equals(usuarioAComparar.Nombre))
                 return true;
             else
                 return false;

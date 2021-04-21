@@ -61,7 +61,6 @@ namespace Pruebas
         {
             Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]); ;
             Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
-
             Assert.AreEqual(usuarioQueQuiero, usuarioObtenido);
         }
 
@@ -77,7 +76,7 @@ namespace Pruebas
         [TestMethod]
         public void IngresoSistena()
         {
-            bool puedoIngresar = PuedoIngresarAlSistema(nombres[0], contrasenias[0]);
+            bool puedoIngresar = sistema.PuedoIngresarAlSistema(nombres[0], contrasenias[0]);
 
             Assert.AreEqual(true, puedoIngresar);
         }
@@ -85,7 +84,7 @@ namespace Pruebas
         [TestMethod]
         public void NoIngresarAlSistenaErrorContraseniaYNombre()
         {
-            bool puedoIngresar = PuedoIngresarAlSistema("Hernán", "contraseña");
+            bool puedoIngresar = sistema.PuedoIngresarAlSistema("Hernán", "contraseña");
 
             Assert.AreEqual(false, puedoIngresar);
         }
@@ -93,7 +92,7 @@ namespace Pruebas
         [TestMethod]
         public void NoIngresarContraseniaIncorrecta()
         {
-            bool puedoIngresar = PuedoIngresarAlSistema(nombres[0], "contraseñaMal");
+            bool puedoIngresar = sistema.PuedoIngresarAlSistema(nombres[0], "contraseñaMal");
 
             Assert.AreEqual(false, puedoIngresar);
         }
@@ -101,7 +100,7 @@ namespace Pruebas
         [TestMethod]
         public void NoIngresarNombreUsuarioIncorrecto()
         {
-            bool puedoIngresar = PuedoIngresarAlSistema("Hernán", contrasenias[0]);
+            bool puedoIngresar = sistema.PuedoIngresarAlSistema("Diego", contrasenias[0]);
 
             Assert.AreEqual(false, puedoIngresar);
         }
