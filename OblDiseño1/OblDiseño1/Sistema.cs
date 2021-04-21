@@ -38,5 +38,20 @@ namespace OblDiseño1
             return usuario;
         }
 
+        public bool PuedoIngresarAlSistema(string unNombreUsuario, string unaContrasenia)
+        {
+            Usuario unUsuario = DevolverUsuario(unNombreUsuario);
+
+            if (unUsuario == null)
+                return false;
+
+            string contraseniaDelUsuairo = unUsuario.Contrasenia;
+
+            if (contraseniaDelUsuairo != unaContrasenia)
+                return false;
+
+            return true;
+        }
+
     }
 }
