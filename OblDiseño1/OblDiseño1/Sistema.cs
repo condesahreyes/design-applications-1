@@ -11,10 +11,9 @@ namespace OblDiseño1
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
             Usuario existeUsuario = DevolverUsuario(nombreUsuario);
+
             if(existeUsuario != null)
-            {
                 throw new ExepcionObjetosRepetidos("Ya existe el usuario");
-            }
 
             Usuario nuevoUsuario = new Usuario(nombreUsuario, contrasenia);
             usuarios.Add(nuevoUsuario);
@@ -40,6 +39,4 @@ namespace OblDiseño1
         }
 
     }
-
-
 }
