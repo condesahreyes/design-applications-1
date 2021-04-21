@@ -14,10 +14,10 @@ namespace Pruebas
         private readonly int nivelSeguridadVERDE_CLARO = 4;
         private readonly int nivelSeguridadVERDE_OSCURO = 5;
         private readonly int cantidadContraseniasROJAS = 2;
-        private readonly int cantidadContraseniasNARANJAS = 3;
+        private readonly int cantidadContraseniasNARANJAS = 4;
         private readonly int cantidadContraseniasAMARILLAS = 0;
         private readonly int cantidadContraseniasVERDE_CLARAS = 2;
-        private readonly int cantidadContraseniasVERDE_OSCURAS = 4;
+        private readonly int cantidadContraseniasVERDE_OSCURAS = 5;
         private Usuario usuario;
         private List<Dupla_UsuarioContrasenia> contraseniasROJAS;
         private List<Dupla_UsuarioContrasenia> contraseniasNARANJAS;
@@ -48,17 +48,17 @@ namespace Pruebas
             string userNameDupla_13 = "JuanTwitter11";
             string passwordDupla_1 = "Contracontra123.";            //VO
             string passwordDupla_2 = "Contracontra123.";            //VO
-            string passwordDupla_3 = "c*ntra7witterrrrrrrrrrr";     //VO
+            string passwordDupla_3 = "C*ntra7witterrrrrrrrrrr";     //VO
             string passwordDupla_4 = "1234567a1";                   //N
             string passwordDupla_5 = "ContraTwitter45.";            //VO
             string passwordDupla_6 = "aaaaa";                       //R
-            string passwordDupla_7 = "AAAAAA*";                     //N
+            string passwordDupla_7 = "AAAAAA**-";                   //N
             string passwordDupla_8 = "12-*SAAaa.";                  //N
             string passwordDupla_9 = "aaaaaaaaaa";                  //N 
             string passwordDupla_10 = "oooooooooooooo7*Ooooooo";    //VO
             string passwordDupla_11 = "aaaaaaaaaaaaaaAAAAAAAAA";    //VC
             string passwordDupla_12 = "a*1A2";                      //R
-            string passwordDupla_13 = "ALALALALALALALALALALAL";     //VC
+            string passwordDupla_13 = "ALALALALALALALALALALaL";     //VC
             string sitioDupla_1 = "ejemplo.ej.edu.uy";
             string sitioDupla_2 = "facebook.com";
             string sitioDupla_3 = "twitter.com";
@@ -158,70 +158,70 @@ namespace Pruebas
         public void CantidadContraseniasROJAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(reporte.numeroContrasROJO, cantidadContraseniasROJAS);
+            Assert.AreEqual(cantidadContraseniasROJAS, reporte.numeroContrasROJO);
         }
 
         [TestMethod]
         public void CantidadContraseniasNARANJAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(reporte.numeroContrasNARANJA, cantidadContraseniasNARANJAS);
+            Assert.AreEqual(cantidadContraseniasNARANJAS, reporte.numeroContrasNARANJA);
         }
 
         [TestMethod]
         public void CantidadContraseniasAMARILLAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(reporte.numeroContrasAMARILLO, cantidadContraseniasAMARILLAS);
+            Assert.AreEqual(cantidadContraseniasAMARILLAS, reporte.numeroContrasAMARILLO);
         }
         
         [TestMethod]
         public void CantidadContraseniasVERDE_CLARAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(reporte.numeroContrasVERDE_CLARO, cantidadContraseniasVERDE_CLARAS);
+            Assert.AreEqual(cantidadContraseniasVERDE_CLARAS, reporte.numeroContrasVERDE_CLARO);
         }
 
         [TestMethod]
         public void CantidadContraseniasVERDE_OSCURAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(reporte.numeroContrasVERDE_OSCURO, cantidadContraseniasVERDE_OSCURAS);
+            Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS, reporte.numeroContrasVERDE_OSCURO);
         }
 
         [TestMethod]
         public void ListaContrasenias_ROJAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(reporte.ListaROJO, contraseniasROJAS);
+            CollectionAssert.AreEquivalent(contraseniasROJAS, reporte.ListaROJO);
         }
 
         [TestMethod]
         public void ListaContrasenias_NARANJAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(reporte.ListaNARANJA, contraseniasNARANJAS);
+            CollectionAssert.AreEquivalent(contraseniasNARANJAS, reporte.ListaNARANJA);
         }
 
         [TestMethod]
         public void ListaContrasenias_AMARILLAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(reporte.ListaAMARILLO, contraseniasAMARILLAS);
+            CollectionAssert.AreEquivalent(contraseniasAMARILLAS, reporte.ListaAMARILLO);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_CLARAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(reporte.ListaVERDE_CLARO, contraseniasVERDE_CLARAS);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_CLARAS, reporte.ListaVERDE_CLARO);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_OSCURAS()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(reporte.ListaVERDE_OSCURO, contraseniasVERDE_OSCURAS);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_OSCURAS, reporte.ListaVERDE_OSCURO);
         }
     }
 }
