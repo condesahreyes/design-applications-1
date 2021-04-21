@@ -46,46 +46,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categoria.cs">
+    <Compile Include="InterfacesDeContrasenias\InterfazContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Categoria.Designer.cs">
-      <DependentUpon>Categoria.cs</DependentUpon>
+    <Compile Include="InterfacesDeContrasenias\InterfazContrasenia.Designer.cs">
+      <DependentUpon>InterfazContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tarjeta.cs">
+    <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tarjeta.Designer.cs">
-      <DependentUpon>Tarjeta.cs</DependentUpon>
+    <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.Designer.cs">
+      <DependentUpon>InterfazTarjeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="UsuarioContrasenia.cs">
+    <Compile Include="InterfacesMenu\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UsuarioContrasenia.Designer.cs">
-      <DependentUpon>UsuarioContrasenia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Menu.Designer.cs">
+    <Compile Include="InterfacesMenu\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="InterfazDeCategorias\InterfazCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="InterfazDeCategorias\InterfazCategoria.Designer.cs">
+      <DependentUpon>InterfazCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazIngreso\InterfazIngresoSistema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazIngreso\InterfazIngresoSistema.Designer.cs">
+      <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Categoria.resx">
-      <DependentUpon>Categoria.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazContrasenia.resx">
+      <DependentUpon>InterfazContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeTarjetas\InterfazTarjeta.resx">
+      <DependentUpon>InterfazTarjeta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menu.resx">
+    <EmbeddedResource Include="InterfacesMenu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazDeCategorias\InterfazCategoria.resx">
+      <DependentUpon>InterfazCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazIngreso\InterfazIngresoSistema.resx">
+      <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -95,13 +101,8 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Tarjeta.resx">
-      <DependentUpon>Tarjeta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UsuarioContrasenia.resx">
-      <DependentUpon>UsuarioContrasenia.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -115,5 +116,39 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo32.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Categorias.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contraseñas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tarjetas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compartir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reporte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data breaches.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo31.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OblDiseño1\LogicaNegocio.csproj">
+      <Project>{A10C0FE5-5672-40C8-9F8B-9F741C3C1DD2}</Project>
+      <Name>LogicaNegocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

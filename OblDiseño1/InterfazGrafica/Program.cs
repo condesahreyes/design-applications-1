@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using InterfazGrafica.InterfazIngreso;
+using System;
 using System.Windows.Forms;
+using OblDiseño1;
 
 namespace InterfazGrafica
 {
@@ -16,7 +15,8 @@ namespace InterfazGrafica
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Sistema sistema = new Sistema();
+            Application.Run(new InterfazIngresoSistema(ref sistema));
         }
     }
 }
