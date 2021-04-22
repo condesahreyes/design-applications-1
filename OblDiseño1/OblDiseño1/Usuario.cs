@@ -25,13 +25,15 @@ namespace OblDiseño1
         public string Nombre { get => nombre; set => ActualizarNombre(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-        public Usuario(string nombre, string contrasenia) { 
+
+        public Usuario(string nombre, string contrasenia)
+        {
             Nombre = nombre;
             Contrasenia = contrasenia;
             this.categorias = new List<Categoria>();
             this.tarjetas = new List<Tarjeta>();
             this.duplas = new List<Dupla_UsuarioContrasenia>();
-            }
+        }
 
         public List<Tarjeta> ObtenerTarjetas()
         {
@@ -65,7 +67,7 @@ namespace OblDiseño1
 
         private bool ContraseniaInvalida(string contrasenia)
         {
-            if (contrasenia.Length < LARGO_CONTRASENIA_MIN || 
+            if (contrasenia.Length < LARGO_CONTRASENIA_MIN ||
                 contrasenia.Length > LARGO_CONTRASENIA_MAX)
                 return true;
             return false;
@@ -148,5 +150,69 @@ namespace OblDiseño1
                 return false;
         }
 
+        public ReporteSeguridadContrasenias ObtenerReporteSeguridadContrasenias()
+        {
+            ReporteSeguridadContrasenias reporte = new ReporteSeguridadContrasenias(76);
+            foreach (Dupla_UsuarioContrasenia dupla in this.duplas)
+            {
+                switch (dupla.NivelSeguridadContrasenia)
+                {
+                    case 1:
+                        reporte.numeroContrasROJO++;
+                        reporte.ListaROJO.Add(dupla);
+                        break;
+                    case 2:
+                        reporte.numeroContrasNARANJA++;
+                        reporte.ListaNARANJA.Add(dupla);
+                        break;
+                    case 3:
+                        reporte.numeroContrasAMARILLO++;
+                        reporte.ListaAMARILLO.Add(dupla);
+                        break;
+                    case 4:
+                        reporte.numeroContrasVERDE_CLARO++;
+                        reporte.ListaVERDE_CLARO.Add(dupla);
+                        break;
+                    case 5:
+                        reporte.numeroContrasVERDE_OSCURO++;
+                        reporte.ListaVERDE_OSCURO.Add(dupla);
+                        break;
+                    default:
+                        throw new Exepcion_NivelDeSeguridadNoValido("Una de las Duplas " +
+                            "devolvio un nivel de seguridad fuera del rango valido (1 a 5)" +
+                            " en \"ObtenerReporteSeguridadContrasenias()\"");
+                        break;
+                }
+            }
+            return reporte;
+        }
+    }
+
+    public struct ReporteSeguridadContrasenias
+    {
+        public int numeroContrasROJO;
+        public int numeroContrasNARANJA;
+        public int numeroContrasAMARILLO;
+        public int numeroContrasVERDE_CLARO;
+        public int numeroContrasVERDE_OSCURO;
+        public List<Dupla_UsuarioContrasenia> ListaROJO;
+        public List<Dupla_UsuarioContrasenia> ListaNARANJA;
+        public List<Dupla_UsuarioContrasenia> ListaAMARILLO;
+        public List<Dupla_UsuarioContrasenia> ListaVERDE_CLARO;
+        public List<Dupla_UsuarioContrasenia> ListaVERDE_OSCURO;
+
+        public ReporteSeguridadContrasenias(int placeHolder)
+        {
+            this.numeroContrasROJO = 0;
+            this.numeroContrasNARANJA = 0;
+            this.numeroContrasAMARILLO = 0;
+            this.numeroContrasVERDE_CLARO = 0;
+            this.numeroContrasVERDE_OSCURO = 0;
+            this.ListaROJO = new List<Dupla_UsuarioContrasenia> { };
+            this.ListaNARANJA = new List<Dupla_UsuarioContrasenia> { };
+            this.ListaAMARILLO = new List<Dupla_UsuarioContrasenia> { };
+            this.ListaVERDE_CLARO = new List<Dupla_UsuarioContrasenia> { };
+            this.ListaVERDE_OSCURO = new List<Dupla_UsuarioContrasenia> { };
+        }
     }
 }

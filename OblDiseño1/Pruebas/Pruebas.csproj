@@ -55,6 +55,7 @@
     <Compile Include="TarjetaTest.cs" />
     <Compile Include="CategoriaTest.cs" />
     <Compile Include="ChequeadorDeDataBreachesTest.cs" />
+    <Compile Include="ReporteSeguridadContraseniasTest.cs" />
     <Compile Include="UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
