@@ -160,37 +160,47 @@ namespace OblDiseño1
                     case 1:
                         reporte.numeroContrasROJO++;
                         reporte.ListaROJO.Add(dupla);
+
                         CantiadadContraseniasDeCadaNivel cantidadEnCategoria_1 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
                         cantidadEnCategoria_1.cantidadROJO++;
                         reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_1;
+                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
                         break;
                     case 2:
                         reporte.numeroContrasNARANJA++;
                         reporte.ListaNARANJA.Add(dupla);
+
                         CantiadadContraseniasDeCadaNivel cantidadEnCategoria_2 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
                         cantidadEnCategoria_2.cantidadNARANJA++;
                         reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_2;
+                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
                         break;
                     case 3:
                         reporte.numeroContrasAMARILLO++;
                         reporte.ListaAMARILLO.Add(dupla);
+
                         CantiadadContraseniasDeCadaNivel cantidadEnCategoria_3 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
                         cantidadEnCategoria_3.cantidadAMARILLO++;
                         reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_3;
+                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
                         break;
                     case 4:
                         reporte.numeroContrasVERDE_CLARO++;
                         reporte.ListaVERDE_CLARO.Add(dupla);
+
                         CantiadadContraseniasDeCadaNivel cantidadEnCategoria_4 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
                         cantidadEnCategoria_4.cantidadVERDE_CLARO++;
                         reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_4;
+                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
                         break;
                     case 5:
                         reporte.numeroContrasVERDE_OSCURO++;
                         reporte.ListaVERDE_OSCURO.Add(dupla);
+
                         CantiadadContraseniasDeCadaNivel cantidadEnCategoria_5 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
                         cantidadEnCategoria_5.cantidadVERDE_OSCURO++;
                         reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_5;
+                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
                         break;
                     default:
                         throw new Exepcion_NivelDeSeguridadNoValido("Una de las Duplas " +
@@ -216,6 +226,7 @@ namespace OblDiseño1
         public List<Dupla_UsuarioContrasenia> ListaVERDE_CLARO;
         public List<Dupla_UsuarioContrasenia> ListaVERDE_OSCURO;
         public Dictionary<string, CantiadadContraseniasDeCadaNivel> cantidadesEnCadaCategoria;
+        public List<string> nombresDeLasCategorias;
         public ReporteSeguridadContrasenias(int placeHolder)
         {
             this.numeroContrasROJO = 0;
@@ -229,6 +240,7 @@ namespace OblDiseño1
             this.ListaVERDE_CLARO = new List<Dupla_UsuarioContrasenia> { };
             this.ListaVERDE_OSCURO = new List<Dupla_UsuarioContrasenia> { };
             this.cantidadesEnCadaCategoria = new Dictionary<string, CantiadadContraseniasDeCadaNivel>();
+            this.nombresDeLasCategorias = new List<string>();
         }
 
         public CantiadadContraseniasDeCadaNivel obtenerCantidadesEnCategoria(string nombreCategoria)
@@ -242,6 +254,12 @@ namespace OblDiseño1
                 cantidadesEnCadaCategoria[nombreCategoria] = new CantiadadContraseniasDeCadaNivel(76);
                 return this.cantidadesEnCadaCategoria[nombreCategoria];
             }
+        }
+
+        public void agregarNombreCategoria(string nombreCategoria)
+        {
+            if (!nombresDeLasCategorias.Contains(nombreCategoria))
+                nombresDeLasCategorias.Add(nombreCategoria);
         }
     }
 
