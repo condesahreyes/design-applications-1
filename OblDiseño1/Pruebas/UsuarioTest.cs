@@ -239,7 +239,7 @@ namespace Pruebas
             {
                 Categoria unaCategoria = new Categoria(nombresCategorias[i]);
                 usuario.AgregarCategoria(unaCategoria);
-                listaCategorias.Add("Nombre : " + unaCategoria.Nombre);
+                listaCategorias.Add("" + unaCategoria.Nombre);
             }
 
             listarCategoriasPorMetodo = usuario.ListarCategorias();

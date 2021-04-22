@@ -2,6 +2,7 @@
 using System;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Windows.Forms;
+using InterfazGrafica.InterfazDeCategorias;
 
 namespace InterfazGrafica.InterfazCategoria
 {
@@ -27,6 +28,13 @@ namespace InterfazGrafica.InterfazCategoria
             this.Hide();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
+        }
+
+        private void btnAgregarCategoria_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            InterfazAgregarCategoria agregarCategoria = new InterfazAgregarCategoria(ref sistema, ref usuario);
+            agregarCategoria.Show();
         }
     }
 }

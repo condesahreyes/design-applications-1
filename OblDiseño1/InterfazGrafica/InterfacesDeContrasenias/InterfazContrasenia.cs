@@ -21,5 +21,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
         }
+
+        private void btnAgregarContrasenia_Click(object sender, System.EventArgs e)
+        {
+            this.Hide();
+            InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref sistema, ref usuario);
+            agregarContrasenia.Show();
+        }
     }
 }

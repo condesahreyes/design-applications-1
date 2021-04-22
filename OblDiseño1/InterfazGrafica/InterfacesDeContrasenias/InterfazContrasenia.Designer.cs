@@ -102,6 +102,7 @@
             this.btnAgregarContrasenia.TabIndex = 2;
             this.btnAgregarContrasenia.Text = "Agregar";
             this.btnAgregarContrasenia.UseVisualStyleBackColor = true;
+            this.btnAgregarContrasenia.Click += new System.EventHandler(this.btnAgregarContrasenia_Click);
             // 
             // listaCategorias
             // 

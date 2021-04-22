@@ -28,5 +28,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
         }
+
+        private void btnAgregarTarjeta_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
