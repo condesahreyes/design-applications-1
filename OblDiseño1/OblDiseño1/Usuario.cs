@@ -21,6 +21,8 @@ namespace OblDiseño1
         private List<Dupla_UsuarioContrasenia> duplas;
         private List<Tarjeta> tarjetas;
         private List<Categoria> categorias;
+        private Dictionary<string, Usuario> contraseniasCompartidasConmigo;
+        private Dictionary<string, Usuario> contraseniasCompartidasPorMi;
 
         public string Nombre { get => nombre; set => ActualizarNombre(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
@@ -31,7 +33,9 @@ namespace OblDiseño1
             this.categorias = new List<Categoria>();
             this.tarjetas = new List<Tarjeta>();
             this.duplas = new List<Dupla_UsuarioContrasenia>();
-            }
+            this.contraseniasCompartidasConmigo = new Dictionary<string, Usuario>();
+            this.contraseniasCompartidasPorMi = new Dictionary<string, Usuario>();
+        }
 
         public List<Tarjeta> ObtenerTarjetas()
         {
@@ -138,6 +142,7 @@ namespace OblDiseño1
 
             return duplasString;
         }
+
 
     }
 }

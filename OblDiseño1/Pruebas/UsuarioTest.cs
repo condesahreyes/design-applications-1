@@ -297,5 +297,49 @@ namespace Pruebas
             CollectionAssert.AreEquivalent(listaDuplas, listarDuplasPorMetodo);
         }
 
+        [TestMethod]
+        public void ContraseñasCompartidasConmigo()
+        {
+            string[] contraseniasCompartidasConmigo = { contrasenias[0], contrasenias[1] };
+            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[0], contrasenias[0],
+               "Instagram", "", categoria);
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+              "Facebook", "", categoria);
+
+            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
+            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
+            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0].Contrasenia, usuario);
+            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1].Contrasenia, usuario);
+
+            List<string> listaEsperada = new List<string> {contrasenias[0], contrasenias[1]};
+
+            CollectionAssert.AreEquivalent(listaEsperada,usuario.ObtenerContraseniasCompartidasConmigo());
+        }
+
+
+        [TestMethod]
+        public void ContraseñasCompartidasPorMi()
+        {
+            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
+            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+              "Instagram", "", categoria);
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+              "Facebook", "", categoria);
+
+            usuario.AgregarDupla(primerdupla);
+            usuario.AgregarDupla(segundadupla);
+
+            usuario.CompartirContrasenia(usuario.ObtenerDuplas()[0].Contrasenia, usuarioAlQueCompartoContrasenia);
+            usuario.CompartirContrasenia(usuario.ObtenerDuplas()[1].Contrasenia, usuarioAlQueCompartoContrasenia);
+
+            List<string> listaResultante = new List<string> { contrasenias[1], contrasenias[2] };
+
+            CollectionAssert.AreEquivalent(usuario.ObtenerContraseniasCompartidasPorMi(), listaResultante);
+        }
+
+
+
     }
 }
