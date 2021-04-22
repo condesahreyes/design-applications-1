@@ -150,135 +150,54 @@ namespace OblDiseño1
                 return false;
         }
 
-        public ReporteSeguridadContrasenias ObtenerReporteSeguridadContrasenias()
+        public reporte ObtenerReporteSeguridadContrasenias()
         {
-            ReporteSeguridadContrasenias reporte = new ReporteSeguridadContrasenias(76);
+            paresSeguridad[] misPares = new paresSeguridad[6];
+            Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
+            foreach (Categoria cat in this.categorias)
+                categoria.Add(cat.Nombre, new int[6]);
+
+            for (int i = 0; i < 6; i++)
+                misPares[i] = new paresSeguridad(0, null);
+
             foreach (Dupla_UsuarioContrasenia dupla in this.duplas)
             {
-                switch (dupla.NivelSeguridadContrasenia)
-                {
-                    case 1:
-                        reporte.numeroContrasROJO++;
-                        reporte.ListaROJO.Add(dupla);
 
-                        CantiadadContraseniasDeCadaNivel cantidadEnCategoria_1 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
-                        cantidadEnCategoria_1.cantidadROJO++;
-                        reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_1;
-                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
-                        break;
-                    case 2:
-                        reporte.numeroContrasNARANJA++;
-                        reporte.ListaNARANJA.Add(dupla);
-
-                        CantiadadContraseniasDeCadaNivel cantidadEnCategoria_2 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
-                        cantidadEnCategoria_2.cantidadNARANJA++;
-                        reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_2;
-                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
-                        break;
-                    case 3:
-                        reporte.numeroContrasAMARILLO++;
-                        reporte.ListaAMARILLO.Add(dupla);
-
-                        CantiadadContraseniasDeCadaNivel cantidadEnCategoria_3 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
-                        cantidadEnCategoria_3.cantidadAMARILLO++;
-                        reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_3;
-                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
-                        break;
-                    case 4:
-                        reporte.numeroContrasVERDE_CLARO++;
-                        reporte.ListaVERDE_CLARO.Add(dupla);
-
-                        CantiadadContraseniasDeCadaNivel cantidadEnCategoria_4 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
-                        cantidadEnCategoria_4.cantidadVERDE_CLARO++;
-                        reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_4;
-                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
-                        break;
-                    case 5:
-                        reporte.numeroContrasVERDE_OSCURO++;
-                        reporte.ListaVERDE_OSCURO.Add(dupla);
-
-                        CantiadadContraseniasDeCadaNivel cantidadEnCategoria_5 = reporte.obtenerCantidadesEnCategoria(dupla.Categoria.Nombre);
-                        cantidadEnCategoria_5.cantidadVERDE_OSCURO++;
-                        reporte.cantidadesEnCadaCategoria[dupla.Categoria.Nombre] = cantidadEnCategoria_5;
-                        reporte.agregarNombreCategoria(dupla.Categoria.Nombre);
-                        break;
-                    default:
-                        throw new Exepcion_NivelDeSeguridadNoValido("Una de las Duplas " +
-                            "devolvio un nivel de seguridad fuera del rango valido (1 a 5)" +
-                            " en \"ObtenerReporteSeguridadContrasenias()\"");
-                        break;
-                }
+                string nombreCategoria = dupla.Categoria.Nombre;
+                int nivelSeguridad = dupla.NivelSeguridadContrasenia;
+                categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
+                misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
+                misPares[nivelSeguridad].cantidad++;
             }
-            return reporte;
+            reporte miReporte = new reporte(misPares, categoria);
+            return miReporte;
         }
+
     }
 
-    public struct ReporteSeguridadContrasenias
+    public struct paresSeguridad
     {
-        public int numeroContrasROJO;
-        public int numeroContrasNARANJA;
-        public int numeroContrasAMARILLO;
-        public int numeroContrasVERDE_CLARO;
-        public int numeroContrasVERDE_OSCURO;
-        public List<Dupla_UsuarioContrasenia> ListaROJO;
-        public List<Dupla_UsuarioContrasenia> ListaNARANJA;
-        public List<Dupla_UsuarioContrasenia> ListaAMARILLO;
-        public List<Dupla_UsuarioContrasenia> ListaVERDE_CLARO;
-        public List<Dupla_UsuarioContrasenia> ListaVERDE_OSCURO;
-        public Dictionary<string, CantiadadContraseniasDeCadaNivel> cantidadesEnCadaCategoria;
-        public List<string> nombresDeLasCategorias;
-        public ReporteSeguridadContrasenias(int placeHolder)
-        {
-            this.numeroContrasROJO = 0;
-            this.numeroContrasNARANJA = 0;
-            this.numeroContrasAMARILLO = 0;
-            this.numeroContrasVERDE_CLARO = 0;
-            this.numeroContrasVERDE_OSCURO = 0;
-            this.ListaROJO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaNARANJA = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaAMARILLO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaVERDE_CLARO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaVERDE_OSCURO = new List<Dupla_UsuarioContrasenia> { };
-            this.cantidadesEnCadaCategoria = new Dictionary<string, CantiadadContraseniasDeCadaNivel>();
-            this.nombresDeLasCategorias = new List<string>();
-        }
+        public int cantidad;
+        public List<Dupla_UsuarioContrasenia> unaListaDuplas;
 
-        public CantiadadContraseniasDeCadaNivel obtenerCantidadesEnCategoria(string nombreCategoria)
+        public paresSeguridad(int cant, List<Dupla_UsuarioContrasenia> dupla)
         {
-            if (cantidadesEnCadaCategoria.ContainsKey(nombreCategoria))
-            {
-                return this.cantidadesEnCadaCategoria[nombreCategoria];
-            }
-            else
-            {
-                cantidadesEnCadaCategoria[nombreCategoria] = new CantiadadContraseniasDeCadaNivel(76);
-                return this.cantidadesEnCadaCategoria[nombreCategoria];
-            }
-        }
-
-        public void agregarNombreCategoria(string nombreCategoria)
-        {
-            if (!nombresDeLasCategorias.Contains(nombreCategoria))
-                nombresDeLasCategorias.Add(nombreCategoria);
+            cantidad = cant;
+            unaListaDuplas = new List<Dupla_UsuarioContrasenia>();
         }
     }
 
-    public struct CantiadadContraseniasDeCadaNivel
+    public struct reporte
     {
-        public int cantidadROJO;
-        public int cantidadNARANJA;
-        public int cantidadAMARILLO;
-        public int cantidadVERDE_CLARO;
-        public int cantidadVERDE_OSCURO;
+        public paresSeguridad[] duplasPorSeguridad;
+        public Dictionary<string, int[]> duplasPorCategoria;
 
-        public CantiadadContraseniasDeCadaNivel(int placeHolder)
+        public reporte(paresSeguridad[] pares, Dictionary<string, int[]> dicionrio)
         {
-            this.cantidadROJO = 0;
-            this.cantidadNARANJA = 0;
-            this.cantidadAMARILLO = 0;
-            this.cantidadVERDE_CLARO = 0;
-            this.cantidadVERDE_OSCURO = 0;
+            duplasPorSeguridad = pares;
+            duplasPorCategoria = dicionrio;
         }
     }
+
 
 }
