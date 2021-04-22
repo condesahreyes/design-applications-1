@@ -215,4 +215,5 @@ namespace OblDiseño1
             this.ListaVERDE_OSCURO = new List<Dupla_UsuarioContrasenia> { };
         }
     }
+
 }
