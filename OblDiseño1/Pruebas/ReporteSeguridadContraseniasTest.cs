@@ -247,40 +247,40 @@ namespace Pruebas
         public void CantiadadContraseniasROJO_Categoria_SuperCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasROJAS_enSuperCategoria, 
-                reporte.obtenerCategoria(categoria_SuperCategoria.Nombre).cantidadROJO);
+            Assert.AreEqual(cantidadContraseniasROJAS_enSuperCategoria, 
+                reporte.obtenerCantidadesEnCategoria(categoria_SuperCategoria.Nombre).cantidadROJO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasNARANJA_Categoria_SuperCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasNARANJAS_enSuperCategoria,
-                reporte.obtenerCategoria(categoria_SuperCategoria.Nombre).cantidadNARANJA);
+            Assert.AreEqual(cantidadContraseniasNARANJAS_enSuperCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_SuperCategoria.Nombre).cantidadNARANJA);
         }
 
         [TestMethod]
         public void CantiadadContraseniasAMARILLO_Categoria_SuperCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasAMARILLAS_enSuperCategoria,
-                reporte.obtenerCategoria(categoria_SuperCategoria.Nombre).cantidadAMARILLO);
+            Assert.AreEqual(cantidadContraseniasAMARILLAS_enSuperCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_SuperCategoria.Nombre).cantidadAMARILLO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasVERDE_CLARO_Categoria_SuperCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasVERDE_CLARAS_enSuperCategoria,
-                reporte.obtenerCategoria(categoria_SuperCategoria.Nombre).cantidadVERDE_CLARO);
+            Assert.AreEqual(cantidadContraseniasVERDE_CLARAS_enSuperCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_SuperCategoria.Nombre).cantidadVERDE_CLARO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasVERDE_OSCURO_Categoria_SuperCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasVERDE_OSCURAS_enSuperCategoria,
-                reporte.obtenerCategoria(categoria_SuperCategoria.Nombre).cantidadVERDE_OSCURO);
+            Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS_enSuperCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_SuperCategoria.Nombre).cantidadVERDE_OSCURO);
         }
 
 
@@ -288,40 +288,40 @@ namespace Pruebas
         public void CantiadadContraseniasROJO_Categoria_UltraCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasROJAS_enUltraCategoria,
-                reporte.obtenerCategoria(categoria_UltraCategoria.Nombre).cantidadROJO);
+            Assert.AreEqual(cantidadContraseniasROJAS_enUltraCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_UltraCategoria.Nombre).cantidadROJO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasNARANJA_Categoria_UltraCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasNARANJAS_enUltraCategoria,
-                reporte.obtenerCategoria(categoria_UltraCategoria.Nombre).cantidadNARANJA);
+            Assert.AreEqual(cantidadContraseniasNARANJAS_enUltraCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_UltraCategoria.Nombre).cantidadNARANJA);
         }
 
         [TestMethod]
         public void CantiadadContraseniasAMARILLO_Categoria_UltraCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasAMARILLAS_enUltraCategoria,
-                reporte.obtenerCategoria(categoria_UltraCategoria.Nombre).cantidadAMARILLO);
+            Assert.AreEqual(cantidadContraseniasAMARILLAS_enUltraCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_UltraCategoria.Nombre).cantidadAMARILLO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasVERDE_CLARO_Categoria_UltraCategoriaa()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasVERDE_CLARAS_enUltraCategoria,
-                reporte.obtenerCategoria(categoria_UltraCategoria.Nombre).cantidadVERDE_CLARO);
+            Assert.AreEqual(cantidadContraseniasVERDE_CLARAS_enUltraCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_UltraCategoria.Nombre).cantidadVERDE_CLARO);
         }
 
         [TestMethod]
         public void CantiadadContraseniasVERDE_OSCURO_Categoria_UltraCategoria()
         {
             ReporteSeguridadContrasenias reporte = usuario.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(cantidadContraseniasVERDE_OSCURAS_enUltraCategoria,
-                reporte.obtenerCategoria(categoria_UltraCategoria.Nombre).cantidadVERDE_OSCURO);
+            Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS_enUltraCategoria,
+                reporte.obtenerCantidadesEnCategoria(categoria_UltraCategoria.Nombre).cantidadVERDE_OSCURO);
         }
 
 
