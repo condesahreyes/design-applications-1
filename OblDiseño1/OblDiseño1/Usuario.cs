@@ -21,8 +21,8 @@ namespace OblDiseño1
         private List<Dupla_UsuarioContrasenia> duplas;
         private List<Tarjeta> tarjetas;
         private List<Categoria> categorias;
-        private Dictionary<string, Usuario> contraseniasCompartidasConmigo;
-        private Dictionary<string, Usuario> contraseniasCompartidasPorMi;
+        private Dictionary<Dupla_UsuarioContrasenia, Usuario> contraseniasCompartidasConmigo;
+        private Dictionary<Dupla_UsuarioContrasenia, Usuario> contraseniasCompartidasPorMi;
 
         public string Nombre { get => nombre; set => ActualizarNombre(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
@@ -33,8 +33,8 @@ namespace OblDiseño1
             this.categorias = new List<Categoria>();
             this.tarjetas = new List<Tarjeta>();
             this.duplas = new List<Dupla_UsuarioContrasenia>();
-            this.contraseniasCompartidasConmigo = new Dictionary<string, Usuario>();
-            this.contraseniasCompartidasPorMi = new Dictionary<string, Usuario>();
+            this.contraseniasCompartidasConmigo = new Dictionary<Dupla_UsuarioContrasenia, Usuario>();
+            this.contraseniasCompartidasPorMi = new Dictionary<Dupla_UsuarioContrasenia, Usuario>();
         }
 
         public List<Tarjeta> ObtenerTarjetas()
@@ -50,6 +50,16 @@ namespace OblDiseño1
         public List<Categoria> ObtenerCategorias()
         {
             return this.categorias;
+        }
+
+        public Dictionary<Dupla_UsuarioContrasenia, Usuario> ObtenerContraseniasCompartidasConmigo()
+        {
+            return this.contraseniasCompartidasConmigo;
+        }
+
+        public Dictionary<Dupla_UsuarioContrasenia, Usuario> ObtenerContraseniasCompartidasPorMi()
+        {
+            return this.contraseniasCompartidasPorMi;
         }
 
         private bool NombreInvalido(string unNombre)
@@ -142,6 +152,46 @@ namespace OblDiseño1
 
             return duplasString;
         }
+
+        public void CompartirContrasenia(Dupla_UsuarioContrasenia dupla, Usuario usuarioACompartir)
+        {
+            if (ExisteDuplaAsociada(dupla))
+            {
+                usuarioACompartir.ObtenerContraseniasCompartidasConmigo().Add(dupla, this);
+                this.contraseniasCompartidasPorMi.Add(dupla, usuarioACompartir);
+            }
+            else
+            {
+                throw new InvalidUsuarioDataException("No existe una contraseña asociada a " +dupla.Contrasenia + "para este usuario");
+            }
+        }
+
+        public bool ExisteDuplaAsociada(Dupla_UsuarioContrasenia dupla)
+        {
+            return this.ObtenerDuplas().Contains(dupla);
+        }
+
+        public void DejarDeCompartirContrasenia(Dupla_UsuarioContrasenia dupla, Usuario usuarioAlQueDejoDeCompartir)
+        {
+            if (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
+            {
+                this.ObtenerContraseniasCompartidasPorMi().Remove(dupla);
+                usuarioAlQueDejoDeCompartir.ObtenerContraseniasCompartidasConmigo().Remove(dupla);
+            }
+            else
+                throw new InvalidUsuarioDataException("La contraseña " +dupla.Contrasenia + "no ha sido compartido aun con este usuario" );
+        }
+
+        public List<string> ConvertirDiccionarioAListaString(Dictionary<Dupla_UsuarioContrasenia, Usuario> contrasenias)
+        {
+            List<string> resultado = new List<string>();
+            foreach (var iterador in contrasenias)
+            {
+                resultado.Add(iterador.Key.ToString());
+            }
+            return resultado;
+        }
+
 
 
     }
