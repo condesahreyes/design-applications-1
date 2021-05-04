@@ -70,6 +70,12 @@
     <Compile Include="InterfacesMenu\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfacesReporte\InterfazReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesReporte\InterfazReporte.Designer.cs">
+      <DependentUpon>InterfazReporte.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesMenu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesReporte\InterfazReporte.resx">
+      <DependentUpon>InterfazReporte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazDeCategorias\InterfazAgregarCategoria.resx">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
