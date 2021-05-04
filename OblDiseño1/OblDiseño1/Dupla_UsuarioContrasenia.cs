@@ -144,6 +144,15 @@ namespace OblDiseño1
             return tiposDeCaracteres;
         }
 
+        private static int TipoDeUnCaracter(char caracter)
+        {
+            for (int i = 0; i < caracteresPorPosicion.Length; i++)
+                if (caracteresPorPosicion[i].Contains(caracter.ToString()))
+                    return i;
+
+            return -1;
+        }
+
         public static string GenerarContrasenia(int largo, bool[] caracteresRequeridos)
         {
             string contrasenia;
@@ -159,14 +168,7 @@ namespace OblDiseño1
             return contrasenia;
         }
 
-        private static int TipoDeUnCaracter(char caracter)
-        {
-            for (int i = 0; i < caracteresPorPosicion.Length; i++)
-                if (caracteresPorPosicion[i].Contains(caracter.ToString()))
-                    return i;
-
-            return -1;
-        }
+       
 
         private static bool EsLargoInvalidoContrasenia(int largo)
         {
