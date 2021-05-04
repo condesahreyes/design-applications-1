@@ -166,41 +166,40 @@ namespace OblDiseño1
                 return false;
         }
 
-        public ReporteSeguridadContrasenias ObtenerReporteSeguridadContrasenias()
+        public reporte ObtenerReporteSeguridadContrasenias()
         {
-            ReporteSeguridadContrasenias reporte = new ReporteSeguridadContrasenias(76);
+            paresSeguridad[] misPares = new paresSeguridad[6];
+            Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
+            foreach (Categoria cat in this.categorias)
+                categoria.Add(cat.Nombre, new int[6]);
+
+            for (int i = 0; i < 6; i++)
+                misPares[i] = new paresSeguridad(0, null);
+
             foreach (Dupla_UsuarioContrasenia dupla in this.duplas)
             {
-                switch (dupla.NivelSeguridadContrasenia)
-                {
-                    case 1:
-                        reporte.numeroContrasROJO++;
-                        reporte.ListaROJO.Add(dupla);
-                        break;
-                    case 2:
-                        reporte.numeroContrasNARANJA++;
-                        reporte.ListaNARANJA.Add(dupla);
-                        break;
-                    case 3:
-                        reporte.numeroContrasAMARILLO++;
-                        reporte.ListaAMARILLO.Add(dupla);
-                        break;
-                    case 4:
-                        reporte.numeroContrasVERDE_CLARO++;
-                        reporte.ListaVERDE_CLARO.Add(dupla);
-                        break;
-                    case 5:
-                        reporte.numeroContrasVERDE_OSCURO++;
-                        reporte.ListaVERDE_OSCURO.Add(dupla);
-                        break;
-                    default:
-                        throw new Exepcion_NivelDeSeguridadNoValido("Una de las Duplas " +
-                            "devolvio un nivel de seguridad fuera del rango valido (1 a 5)" +
-                            " en \"ObtenerReporteSeguridadContrasenias()\"");
-                        break;
-                }
+
+                string nombreCategoria = dupla.Categoria.Nombre;
+                int nivelSeguridad = dupla.NivelSeguridadContrasenia;
+                categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
+                misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
+                misPares[nivelSeguridad].cantidad++;
             }
-            return reporte;
+            reporte miReporte = new reporte(misPares, categoria);
+            return miReporte;
+        }
+
+    }
+
+    public struct paresSeguridad
+    {
+        public int cantidad;
+        public List<Dupla_UsuarioContrasenia> unaListaDuplas;
+
+        public paresSeguridad(int cant, List<Dupla_UsuarioContrasenia> dupla)
+        {
+            cantidad = cant;
+            unaListaDuplas = new List<Dupla_UsuarioContrasenia>();
         }
 
             public void CompartirContrasenia(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
@@ -270,31 +269,17 @@ namespace OblDiseño1
             }
     }
 
-    public struct ReporteSeguridadContrasenias
+    public struct reporte
     {
-        public int numeroContrasROJO;
-        public int numeroContrasNARANJA;
-        public int numeroContrasAMARILLO;
-        public int numeroContrasVERDE_CLARO;
-        public int numeroContrasVERDE_OSCURO;
-        public List<Dupla_UsuarioContrasenia> ListaROJO;
-        public List<Dupla_UsuarioContrasenia> ListaNARANJA;
-        public List<Dupla_UsuarioContrasenia> ListaAMARILLO;
-        public List<Dupla_UsuarioContrasenia> ListaVERDE_CLARO;
-        public List<Dupla_UsuarioContrasenia> ListaVERDE_OSCURO;
+        public paresSeguridad[] duplasPorSeguridad;
+        public Dictionary<string, int[]> duplasPorCategoria;
 
-        public ReporteSeguridadContrasenias(int placeHolder)
+        public reporte(paresSeguridad[] pares, Dictionary<string, int[]> dicionrio)
         {
-            this.numeroContrasROJO = 0;
-            this.numeroContrasNARANJA = 0;
-            this.numeroContrasAMARILLO = 0;
-            this.numeroContrasVERDE_CLARO = 0;
-            this.numeroContrasVERDE_OSCURO = 0;
-            this.ListaROJO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaNARANJA = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaAMARILLO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaVERDE_CLARO = new List<Dupla_UsuarioContrasenia> { };
-            this.ListaVERDE_OSCURO = new List<Dupla_UsuarioContrasenia> { };
+            duplasPorSeguridad = pares;
+            duplasPorCategoria = dicionrio;
         }
     }
+
+
 }
