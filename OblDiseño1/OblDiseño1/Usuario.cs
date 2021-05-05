@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace OblDiseño1
 {
@@ -125,6 +127,15 @@ namespace OblDiseño1
         public void EliminarCategoria(Categoria categoria)
         {
             this.categorias.Remove(categoria);
+        }
+
+        public Categoria DevolverCategoria(string nombreCategoria)
+        {
+
+            foreach (Categoria cat in categorias)
+                if (cat.Nombre == nombreCategoria)
+                    return cat;
+            return null;
         }
 
         public List<string> ListarTarjetas()

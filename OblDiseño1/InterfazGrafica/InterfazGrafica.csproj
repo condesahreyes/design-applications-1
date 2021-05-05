@@ -82,6 +82,12 @@
     <Compile Include="InterfazDeCategorias\InterfazCategoria.Designer.cs">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.Designer.cs">
+      <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazIngreso\InterfazIngresoSistema.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazDeCategorias\InterfazCategoria.resx">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazDeCategorias\InterfazModificarCategoria.resx">
+      <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazIngreso\InterfazIngresoSistema.resx">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>

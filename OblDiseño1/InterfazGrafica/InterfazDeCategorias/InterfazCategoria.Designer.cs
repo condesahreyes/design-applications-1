@@ -33,9 +33,10 @@
             this.lblListadoCategoria = new System.Windows.Forms.Label();
             this.btnModificarCategoria = new System.Windows.Forms.Button();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
-            this.listCategorias = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridCategorias = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCategorias)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCategoriaVolverMenu
@@ -52,10 +53,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.dataGridCategorias);
             this.panel1.Controls.Add(this.lblListadoCategoria);
             this.panel1.Controls.Add(this.btnModificarCategoria);
             this.panel1.Controls.Add(this.btnAgregarCategoria);
-            this.panel1.Controls.Add(this.listCategorias);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -83,6 +84,7 @@
             this.btnModificarCategoria.TabIndex = 3;
             this.btnModificarCategoria.Text = "Modificar";
             this.btnModificarCategoria.UseVisualStyleBackColor = true;
+            this.btnModificarCategoria.Click += new System.EventHandler(this.btnModificarCategoria_Click);
             // 
             // btnAgregarCategoria
             // 
@@ -94,14 +96,6 @@
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
             this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
             // 
-            // listCategorias
-            // 
-            this.listCategorias.Location = new System.Drawing.Point(20, 51);
-            this.listCategorias.Name = "listCategorias";
-            this.listCategorias.Size = new System.Drawing.Size(427, 189);
-            this.listCategorias.TabIndex = 1;
-            this.listCategorias.UseCompatibleStateImageBehavior = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -109,6 +103,17 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
+            // 
+            // dataGridCategorias
+            // 
+            this.dataGridCategorias.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridCategorias.Location = new System.Drawing.Point(20, 51);
+            this.dataGridCategorias.MultiSelect = false;
+            this.dataGridCategorias.Name = "dataGridCategorias";
+            this.dataGridCategorias.ReadOnly = true;
+            this.dataGridCategorias.Size = new System.Drawing.Size(427, 189);
+            this.dataGridCategorias.TabIndex = 5;
+            this.dataGridCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // InterfazCategorias
             // 
@@ -124,6 +129,7 @@
             this.Load += new System.EventHandler(this.InterfazCategorias_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridCategorias)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,7 +141,7 @@
         private System.Windows.Forms.Label lblListadoCategoria;
         private System.Windows.Forms.Button btnModificarCategoria;
         private System.Windows.Forms.Button btnAgregarCategoria;
-        private System.Windows.Forms.ListView listCategorias;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridCategorias;
     }
 }
