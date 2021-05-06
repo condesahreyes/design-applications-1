@@ -25,27 +25,51 @@ namespace InterfazGrafica.InterfazDeCategorias
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
-            string nomCategoria = textBoxNombreCategoria.Text;
-            Categoria categoria = new Categoria(nomCategoria);
-            if (categoria != null)
-            {
-                usuario.AgregarCategoria(categoria);
-                MessageBox.Show("Categoria '" + nomCategoria + "' creada con exito");
-                this.Hide();
-                InterfazCategorias categoriaInterfaz = new InterfazCategorias(ref usuario, ref sistema);
-                categoriaInterfaz.Show();
+            Categoria categoria = CrearCategoria();
+            AgregarAMisCategorias(categoria);
+        }
 
-            }
-            else
+        private void AgregarAMisCategorias(Categoria categoria)
+        {
+            if (categoria != null)
+                try
+                {
+                    usuario.AgregarCategoria(categoria);
+                    MessageBox.Show("Categoria '" + categoria.Nombre + "' creada con exito");
+                    IrACategoria();
+                }
+                catch (DuplicateNameException)
+                {
+                    MessageBox.Show("Ya existe una categoría con este nombre.");
+                    textBoxNombreCategoria.Clear();
+                }
+        }
+
+        private Categoria CrearCategoria()
+        {
+            Categoria categoria = null;
+            string nomCategoria = textBoxNombreCategoria.Text;
+
+            try
             {
-                MessageBox.Show("No se puede agregar");
-                textBoxNombreCategoria.Clear();
+                categoria = new Categoria(nomCategoria);
             }
+            catch(InvalidCategoriaDataException)
+            {
+                MessageBox.Show("Error el nombre de la categoría debe contener entre 3 a 15 caracteres.");
+            }
+
+            return categoria;
         }
 
         private void btnCancelarCategoria_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            IrACategoria();
+        }
+
+        private void IrACategoria()
+        {
+            this.Close();
             InterfazCategorias categoria = new InterfazCategorias(ref usuario, ref sistema);
             categoria.Show();
         }

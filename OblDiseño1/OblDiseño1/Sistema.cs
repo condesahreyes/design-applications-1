@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Data;
 
 namespace OblDiseño1
 {
@@ -10,16 +11,11 @@ namespace OblDiseño1
 
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
-            Usuario existeUsuario = DevolverUsuario(nombreUsuario);
-
-            if(existeUsuario != null)
-                throw new ExepcionObjetosRepetidos("Ya existe el usuario");
 
             Usuario nuevoUsuario = new Usuario(nombreUsuario, contrasenia);
             usuarios.Add(nuevoUsuario);
 
             return nuevoUsuario;
-
         }
 
         public List<Usuario> ObtenerUsuarios()
@@ -29,13 +25,11 @@ namespace OblDiseño1
 
         public Usuario DevolverUsuario(string nombreUsuario)
         {
-            Usuario usuario = null;
-
             foreach (Usuario us in usuarios)
                 if (us.Nombre.Equals(nombreUsuario))
-                    usuario = us;
-
-            return usuario;
+                    return us;
+            
+                throw new ObjectNotFoundException();
         }
 
         public bool PuedoIngresarAlSistema(string unNombreUsuario, string unaContrasenia)

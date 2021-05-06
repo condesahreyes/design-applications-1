@@ -43,6 +43,7 @@
             this.btnCancelarModCategoria.TabIndex = 18;
             this.btnCancelarModCategoria.Text = "Cancelar";
             this.btnCancelarModCategoria.UseVisualStyleBackColor = true;
+            this.btnCancelarModCategoria.Click += new System.EventHandler(this.btnCancelarModCategoria_Click);
             // 
             // btnModificarCategoria
             // 
@@ -75,9 +76,10 @@
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblListadoTarjetas.Location = new System.Drawing.Point(166, 76);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
-            this.lblListadoTarjetas.Size = new System.Drawing.Size(161, 26);
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(191, 26);
             this.lblListadoTarjetas.TabIndex = 15;
-            this.lblListadoTarjetas.Text = "Nueva Categoría";
+            this.lblListadoTarjetas.Text = "Modificar Categoría";
+            this.lblListadoTarjetas.Click += new System.EventHandler(this.lblListadoTarjetas_Click);
             // 
             // textBoxModificarCategoria
             // 
@@ -98,6 +100,7 @@
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.textBoxModificarCategoria);
             this.Name = "InterfazModificarCategoria";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazModificarCategoria";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -121,6 +121,10 @@ namespace OblDiseño1
 
         public void AgregarCategoria(Categoria categoria)
         {
+            foreach (Categoria cat in categorias)
+                if(cat.Nombre.ToLower() == categoria.Nombre.ToLower())
+                    throw new DuplicateNameException();
+
             this.categorias.Add(categoria);
         }
 

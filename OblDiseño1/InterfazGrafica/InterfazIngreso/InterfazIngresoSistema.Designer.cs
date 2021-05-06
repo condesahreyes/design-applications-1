@@ -102,6 +102,7 @@
             this.pssGestor.Name = "pssGestor";
             this.pssGestor.Size = new System.Drawing.Size(100, 20);
             this.pssGestor.TabIndex = 4;
+            this.pssGestor.UseSystemPasswordChar = true;
             // 
             // label3
             // 
