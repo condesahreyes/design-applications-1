@@ -70,6 +70,12 @@
     <Compile Include="InterfacesMenu\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfazDataBreaches\InterfazDataBreaches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazDataBreaches\InterfazDataBreaches.Designer.cs">
+      <DependentUpon>InterfazDataBreaches.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,12 @@
     </Compile>
     <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.Designer.cs">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.Designer.cs">
+      <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfazIngreso\InterfazIngresoSistema.cs">
       <SubType>Form</SubType>
@@ -108,6 +120,9 @@
     <EmbeddedResource Include="InterfacesMenu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InterfazDataBreaches\InterfazDataBreaches.resx">
+      <DependentUpon>InterfazDataBreaches.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfazDeCategorias\InterfazAgregarCategoria.resx">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazDeCategorias\InterfazModificarCategoria.resx">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazIngreso\InterfazCambioContrasenia.resx">
+      <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazIngreso\InterfazIngresoSistema.resx">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>

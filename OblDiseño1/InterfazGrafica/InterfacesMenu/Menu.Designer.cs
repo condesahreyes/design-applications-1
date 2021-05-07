@@ -42,6 +42,7 @@
             this.panelReporte = new System.Windows.Forms.Panel();
             this.btnReportes = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.btnCambiarContrasenia = new System.Windows.Forms.Button();
             this.panel1DataBreaches.SuspendLayout();
             this.panelCompartir.SuspendLayout();
             this.panelContrasenias.SuspendLayout();
@@ -209,6 +210,18 @@
             this.btnCerrarSesion.TabIndex = 24;
             this.btnCerrarSesion.Text = "Cerrar Sesion";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
+            // 
+            // btnCambiarContrasenia
+            // 
+            this.btnCambiarContrasenia.Font = new System.Drawing.Font("Candara Light", 9.25F);
+            this.btnCambiarContrasenia.Location = new System.Drawing.Point(232, 300);
+            this.btnCambiarContrasenia.Name = "btnCambiarContrasenia";
+            this.btnCambiarContrasenia.Size = new System.Drawing.Size(122, 29);
+            this.btnCambiarContrasenia.TabIndex = 28;
+            this.btnCambiarContrasenia.Text = "Cambiar contraseña";
+            this.btnCambiarContrasenia.UseVisualStyleBackColor = true;
+            this.btnCambiarContrasenia.Click += new System.EventHandler(this.button1_Click);
             // 
             // Menu
             // 
@@ -216,6 +229,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(490, 341);
+            this.Controls.Add(this.btnCambiarContrasenia);
             this.Controls.Add(this.panel1DataBreaches);
             this.Controls.Add(this.panelCompartir);
             this.Controls.Add(this.panelContrasenias);
@@ -253,5 +267,6 @@
         private System.Windows.Forms.Panel panelReporte;
         private System.Windows.Forms.Button btnReportes;
         private System.Windows.Forms.Button btnCerrarSesion;
+        private System.Windows.Forms.Button btnCambiarContrasenia;
     }
 }

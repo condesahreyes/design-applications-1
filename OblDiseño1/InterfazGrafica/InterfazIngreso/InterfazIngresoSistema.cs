@@ -86,5 +86,11 @@ namespace InterfazGrafica.InterfazIngreso
             pssGestor.Clear();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia(ref sistema);
+            modificarContrasenia.Show();
+        }
     }
 }

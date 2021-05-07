@@ -30,11 +30,11 @@
         {
             this.btnCategoriaVolverMenu = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridCategorias = new System.Windows.Forms.DataGridView();
             this.lblListadoCategoria = new System.Windows.Forms.Label();
             this.btnModificarCategoria = new System.Windows.Forms.Button();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridCategorias = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCategorias)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +62,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(466, 288);
             this.panel1.TabIndex = 4;
+            // 
+            // dataGridCategorias
+            // 
+            this.dataGridCategorias.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridCategorias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridCategorias.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridCategorias.Location = new System.Drawing.Point(20, 51);
+            this.dataGridCategorias.MultiSelect = false;
+            this.dataGridCategorias.Name = "dataGridCategorias";
+            this.dataGridCategorias.ReadOnly = true;
+            this.dataGridCategorias.RowHeadersWidth = 20;
+            this.dataGridCategorias.Size = new System.Drawing.Size(427, 189);
+            this.dataGridCategorias.TabIndex = 5;
+            this.dataGridCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // lblListadoCategoria
             // 
@@ -103,17 +117,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
-            // 
-            // dataGridCategorias
-            // 
-            this.dataGridCategorias.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridCategorias.Location = new System.Drawing.Point(20, 51);
-            this.dataGridCategorias.MultiSelect = false;
-            this.dataGridCategorias.Name = "dataGridCategorias";
-            this.dataGridCategorias.ReadOnly = true;
-            this.dataGridCategorias.Size = new System.Drawing.Size(427, 189);
-            this.dataGridCategorias.TabIndex = 5;
-            this.dataGridCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // InterfazCategorias
             // 
