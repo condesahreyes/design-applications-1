@@ -58,6 +58,24 @@
     <Compile Include="InterfacesDeContrasenias\InterfazContrasenia.Designer.cs">
       <DependentUpon>InterfazContrasenia.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazAgregarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazAgregarTarjeta.Designer.cs">
+      <DependentUpon>InterfazAgregarTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazEliminarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazEliminarTarjeta.Designer.cs">
+      <DependentUpon>InterfazEliminarTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazModificarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesDeTarjetas\InterfazModificarTarjeta.Designer.cs">
+      <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +113,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeContrasenias\InterfazContrasenia.resx">
       <DependentUpon>InterfazContrasenia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesDeTarjetas\InterfazAgregarTarjeta.resx">
+      <DependentUpon>InterfazAgregarTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesDeTarjetas\InterfazEliminarTarjeta.resx">
+      <DependentUpon>InterfazEliminarTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesDeTarjetas\InterfazModificarTarjeta.resx">
+      <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazTarjeta.resx">
       <DependentUpon>InterfazTarjeta.cs</DependentUpon>

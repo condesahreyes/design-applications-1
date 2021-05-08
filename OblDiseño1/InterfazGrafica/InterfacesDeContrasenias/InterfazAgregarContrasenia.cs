@@ -60,5 +60,15 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             IrAContraseñas();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InterfazAgregarContrasenia_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

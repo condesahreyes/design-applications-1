@@ -6,6 +6,19 @@ namespace OblDiseño1
     public class Sistema
     {
 
+        //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
+        bool hayQueCrearDatosDePrueba = true;
+        public bool getHayQueCrearDatosDePrueba()
+        {
+            return this.hayQueCrearDatosDePrueba;
+        }
+        public void yaSeCrearonDatosDePruva()
+        {
+            this.hayQueCrearDatosDePrueba = false;
+        }
+        //1* HASTA HACA
+
+
         List<Usuario> usuarios = new List<Usuario>();
 
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)

@@ -47,10 +47,12 @@
             this.panel1.Controls.Add(this.pssGestor);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.userGestor);
-            this.panel1.Location = new System.Drawing.Point(141, 24);
+            this.panel1.Location = new System.Drawing.Point(188, 30);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(308, 236);
+            this.panel1.Size = new System.Drawing.Size(411, 290);
             this.panel1.TabIndex = 8;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
@@ -59,9 +61,10 @@
             this.label1.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(91, 11);
+            this.label1.Location = new System.Drawing.Point(121, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 26);
+            this.label1.Size = new System.Drawing.Size(223, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "Ingreso al sistema";
             // 
@@ -74,9 +77,10 @@
             this.ingresoSistema.Font = new System.Drawing.Font("Candara Light", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ingresoSistema.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ingresoSistema.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ingresoSistema.Location = new System.Drawing.Point(121, 193);
+            this.ingresoSistema.Location = new System.Drawing.Point(161, 238);
+            this.ingresoSistema.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ingresoSistema.Name = "ingresoSistema";
-            this.ingresoSistema.Size = new System.Drawing.Size(75, 23);
+            this.ingresoSistema.Size = new System.Drawing.Size(100, 28);
             this.ingresoSistema.TabIndex = 5;
             this.ingresoSistema.Text = "Ingresar";
             this.ingresoSistema.UseVisualStyleBackColor = false;
@@ -90,17 +94,19 @@
             this.label2.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(76, 76);
+            this.label2.Location = new System.Drawing.Point(101, 94);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 23);
+            this.label2.Size = new System.Drawing.Size(92, 29);
             this.label2.TabIndex = 1;
             this.label2.Text = "Usuario";
             // 
             // pssGestor
             // 
-            this.pssGestor.Location = new System.Drawing.Point(167, 129);
+            this.pssGestor.Location = new System.Drawing.Point(223, 159);
+            this.pssGestor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pssGestor.Name = "pssGestor";
-            this.pssGestor.Size = new System.Drawing.Size(100, 20);
+            this.pssGestor.Size = new System.Drawing.Size(132, 22);
             this.pssGestor.TabIndex = 4;
             // 
             // label3
@@ -109,27 +115,30 @@
             this.label3.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label3.Location = new System.Drawing.Point(40, 129);
+            this.label3.Location = new System.Drawing.Point(53, 159);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 22);
+            this.label3.Size = new System.Drawing.Size(138, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "Contraseña";
             // 
             // userGestor
             // 
             this.userGestor.BackColor = System.Drawing.Color.LavenderBlush;
-            this.userGestor.Location = new System.Drawing.Point(167, 76);
+            this.userGestor.Location = new System.Drawing.Point(223, 94);
+            this.userGestor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userGestor.Name = "userGestor";
-            this.userGestor.Size = new System.Drawing.Size(100, 20);
+            this.userGestor.Size = new System.Drawing.Size(132, 22);
             this.userGestor.TabIndex = 3;
             // 
             // InterfazIngresoSistema
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(451, 288);
+            this.ClientSize = new System.Drawing.Size(601, 354);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazIngresoSistema";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso al Sistema";

@@ -53,5 +53,9 @@ namespace InterfazGrafica.InterfazIngreso
             pssGestor.Clear();
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

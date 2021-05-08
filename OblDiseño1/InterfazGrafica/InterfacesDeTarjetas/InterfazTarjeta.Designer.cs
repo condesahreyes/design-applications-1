@@ -30,20 +30,22 @@
         {
             this.btnTarjetasVolverMenu = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridTarjetas = new System.Windows.Forms.DataGridView();
             this.btnEliminarTarjeta = new System.Windows.Forms.Button();
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.btnModificarTarjeta = new System.Windows.Forms.Button();
             this.btnAgregarTarjeta = new System.Windows.Forms.Button();
-            this.listaTarjetas = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTarjetas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTarjetasVolverMenu
             // 
-            this.btnTarjetasVolverMenu.Location = new System.Drawing.Point(12, 306);
+            this.btnTarjetasVolverMenu.Location = new System.Drawing.Point(16, 377);
+            this.btnTarjetasVolverMenu.Margin = new System.Windows.Forms.Padding(4);
             this.btnTarjetasVolverMenu.Name = "btnTarjetasVolverMenu";
-            this.btnTarjetasVolverMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnTarjetasVolverMenu.Size = new System.Drawing.Size(100, 28);
             this.btnTarjetasVolverMenu.TabIndex = 11;
             this.btnTarjetasVolverMenu.Text = "Volver";
             this.btnTarjetasVolverMenu.UseVisualStyleBackColor = true;
@@ -52,25 +54,44 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.dataGridTarjetas);
             this.panel1.Controls.Add(this.btnEliminarTarjeta);
             this.panel1.Controls.Add(this.lblListadoTarjetas);
             this.panel1.Controls.Add(this.btnModificarTarjeta);
             this.panel1.Controls.Add(this.btnAgregarTarjeta);
-            this.panel1.Controls.Add(this.listaTarjetas);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(16, 15);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(466, 288);
+            this.panel1.Size = new System.Drawing.Size(697, 354);
             this.panel1.TabIndex = 10;
+            
+            // 
+            // dataGridTarjetas
+            // 
+            this.dataGridTarjetas.AllowUserToOrderColumns = true;
+            this.dataGridTarjetas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridTarjetas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridTarjetas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridTarjetas.Location = new System.Drawing.Point(13, 58);
+            this.dataGridTarjetas.Name = "dataGridTarjetas";
+            this.dataGridTarjetas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridTarjetas.RowTemplate.Height = 24;
+            this.dataGridTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridTarjetas.Size = new System.Drawing.Size(615, 245);
+            this.dataGridTarjetas.TabIndex = 7;
+            
             // 
             // btnEliminarTarjeta
             // 
-            this.btnEliminarTarjeta.Location = new System.Drawing.Point(388, 262);
+            this.btnEliminarTarjeta.Location = new System.Drawing.Point(517, 322);
+            this.btnEliminarTarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminarTarjeta.Name = "btnEliminarTarjeta";
-            this.btnEliminarTarjeta.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarTarjeta.Size = new System.Drawing.Size(100, 28);
             this.btnEliminarTarjeta.TabIndex = 5;
             this.btnEliminarTarjeta.Text = "Eliminar";
             this.btnEliminarTarjeta.UseVisualStyleBackColor = true;
+            this.btnEliminarTarjeta.Click += new System.EventHandler(this.btnEliminarTarjeta_Click);
             // 
             // lblListadoTarjetas
             // 
@@ -79,61 +100,60 @@
             this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblListadoTarjetas.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoTarjetas.Location = new System.Drawing.Point(15, 7);
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(20, 9);
+            this.lblListadoTarjetas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
-            this.lblListadoTarjetas.Size = new System.Drawing.Size(182, 26);
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(231, 33);
             this.lblListadoTarjetas.TabIndex = 4;
             this.lblListadoTarjetas.Text = "Listado de Tarjetas";
             // 
             // btnModificarTarjeta
             // 
-            this.btnModificarTarjeta.Location = new System.Drawing.Point(307, 262);
+            this.btnModificarTarjeta.Location = new System.Drawing.Point(409, 322);
+            this.btnModificarTarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificarTarjeta.Name = "btnModificarTarjeta";
-            this.btnModificarTarjeta.Size = new System.Drawing.Size(75, 23);
+            this.btnModificarTarjeta.Size = new System.Drawing.Size(100, 28);
             this.btnModificarTarjeta.TabIndex = 3;
             this.btnModificarTarjeta.Text = "Modificar";
             this.btnModificarTarjeta.UseVisualStyleBackColor = true;
+            this.btnModificarTarjeta.Click += new System.EventHandler(this.btnModificarTarjeta_Click);
             // 
             // btnAgregarTarjeta
             // 
-            this.btnAgregarTarjeta.Location = new System.Drawing.Point(226, 262);
+            this.btnAgregarTarjeta.Location = new System.Drawing.Point(301, 322);
+            this.btnAgregarTarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarTarjeta.Name = "btnAgregarTarjeta";
-            this.btnAgregarTarjeta.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarTarjeta.Size = new System.Drawing.Size(100, 28);
             this.btnAgregarTarjeta.TabIndex = 2;
             this.btnAgregarTarjeta.Text = "Agregar";
             this.btnAgregarTarjeta.UseVisualStyleBackColor = true;
             this.btnAgregarTarjeta.Click += new System.EventHandler(this.btnAgregarTarjeta_Click);
             // 
-            // listaTarjetas
-            // 
-            this.listaTarjetas.Location = new System.Drawing.Point(20, 51);
-            this.listaTarjetas.Name = "listaTarjetas";
-            this.listaTarjetas.Size = new System.Drawing.Size(427, 189);
-            this.listaTarjetas.TabIndex = 1;
-            this.listaTarjetas.UseCompatibleStateImageBehavior = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 16);
+            this.label1.Location = new System.Drawing.Point(23, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 0;
             // 
             // InterfazTarjeta
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(783, 420);
             this.Controls.Add(this.btnTarjetasVolverMenu);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InterfazTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tarjetas";
             this.Load += new System.EventHandler(this.InterfazTarjeta_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTarjetas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,7 +166,7 @@
         private System.Windows.Forms.Label lblListadoTarjetas;
         private System.Windows.Forms.Button btnModificarTarjeta;
         private System.Windows.Forms.Button btnAgregarTarjeta;
-        private System.Windows.Forms.ListView listaTarjetas;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridTarjetas;
     }
 }
