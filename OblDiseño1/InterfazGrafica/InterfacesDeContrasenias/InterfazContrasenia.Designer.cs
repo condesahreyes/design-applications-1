@@ -93,6 +93,7 @@
             this.btnModificarContrasenia.TabIndex = 3;
             this.btnModificarContrasenia.Text = "Modificar";
             this.btnModificarContrasenia.UseVisualStyleBackColor = true;
+            this.btnModificarContrasenia.Click += new System.EventHandler(this.btnModificarContrasenia_Click);
             // 
             // btnAgregarContrasenia
             // 
@@ -106,6 +107,7 @@
             // 
             // listaCategorias
             // 
+            this.listaCategorias.HideSelection = false;
             this.listaCategorias.Location = new System.Drawing.Point(20, 51);
             this.listaCategorias.Name = "listaCategorias";
             this.listaCategorias.Size = new System.Drawing.Size(427, 189);

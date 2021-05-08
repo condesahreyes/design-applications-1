@@ -28,5 +28,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref sistema, ref usuario);
             agregarContrasenia.Show();
         }
+
+        private void btnModificarContrasenia_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

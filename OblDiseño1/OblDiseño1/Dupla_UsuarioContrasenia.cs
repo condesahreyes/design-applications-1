@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace OblDiseño1
 {
-    public class Dupla_UsuarioContrasenia
+    public class Dupla_UsuarioContrasenia : IComparable<Dupla_UsuarioContrasenia>
     {
 
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value);}
@@ -43,6 +43,7 @@ namespace OblDiseño1
         private int nivelSeguridadContrasenia;
         private string nombreSitioApp;
         private string nota;
+        private static Random numRandom = new Random();
 
         private static string[] caracteresPorPosicion = { caracteresMayusculas, 
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
@@ -177,7 +178,7 @@ namespace OblDiseño1
 
         private static int GenerarNumAlazar(int numMin, int numMax)
         {
-            Random numRandom = new Random();
+            //Random numRandom = new Random();
             int num = numRandom.Next(numMin, numMax);
 
             return num;
@@ -256,6 +257,11 @@ namespace OblDiseño1
             return ("Nombre : " + this.NombreUsuario + " Contraseña: " + this.Contrasenia +
                 " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria +
                 " Nivel de seguridad: " + this.NivelSeguridadContrasenia);
+        }
+
+        public int CompareTo(Dupla_UsuarioContrasenia otraDupla)
+        {
+            return this.Categoria.Nombre.CompareTo(otraDupla.Categoria.Nombre);
         }
 
     }
