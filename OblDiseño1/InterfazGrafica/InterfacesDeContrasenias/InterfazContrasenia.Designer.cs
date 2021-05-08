@@ -34,9 +34,10 @@
             this.lblListadoContrasenias = new System.Windows.Forms.Label();
             this.btnModificarContrasenia = new System.Windows.Forms.Button();
             this.btnAgregarContrasenia = new System.Windows.Forms.Button();
-            this.listaCategorias = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView_ListaDuplas = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaDuplas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnContraseniaVolverMenu
@@ -52,11 +53,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.dataGridView_ListaDuplas);
             this.panel1.Controls.Add(this.btnEliminarContrasenia);
             this.panel1.Controls.Add(this.lblListadoContrasenias);
             this.panel1.Controls.Add(this.btnModificarContrasenia);
             this.panel1.Controls.Add(this.btnAgregarContrasenia);
-            this.panel1.Controls.Add(this.listaCategorias);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -71,6 +72,7 @@
             this.btnEliminarContrasenia.TabIndex = 5;
             this.btnEliminarContrasenia.Text = "Eliminar";
             this.btnEliminarContrasenia.UseVisualStyleBackColor = true;
+            this.btnEliminarContrasenia.Click += new System.EventHandler(this.btnEliminarContrasenia_Click);
             // 
             // lblListadoContrasenias
             // 
@@ -105,15 +107,6 @@
             this.btnAgregarContrasenia.UseVisualStyleBackColor = true;
             this.btnAgregarContrasenia.Click += new System.EventHandler(this.btnAgregarContrasenia_Click);
             // 
-            // listaCategorias
-            // 
-            this.listaCategorias.HideSelection = false;
-            this.listaCategorias.Location = new System.Drawing.Point(20, 51);
-            this.listaCategorias.Name = "listaCategorias";
-            this.listaCategorias.Size = new System.Drawing.Size(427, 189);
-            this.listaCategorias.TabIndex = 1;
-            this.listaCategorias.UseCompatibleStateImageBehavior = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -121,6 +114,21 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
+            // 
+            // dataGridView_ListaDuplas
+            // 
+            this.dataGridView_ListaDuplas.AllowUserToAddRows = false;
+            this.dataGridView_ListaDuplas.AllowUserToDeleteRows = false;
+            this.dataGridView_ListaDuplas.AllowUserToResizeColumns = false;
+            this.dataGridView_ListaDuplas.AllowUserToResizeRows = false;
+            this.dataGridView_ListaDuplas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_ListaDuplas.Location = new System.Drawing.Point(20, 49);
+            this.dataGridView_ListaDuplas.MultiSelect = false;
+            this.dataGridView_ListaDuplas.Name = "dataGridView_ListaDuplas";
+            this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(428, 207);
+            this.dataGridView_ListaDuplas.TabIndex = 6;
+            this.dataGridView_ListaDuplas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ListaDuplas_CellContentClick);
             // 
             // InterfazContrasenia
             // 
@@ -135,6 +143,7 @@
             this.Text = "Contraseñas";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaDuplas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -147,7 +156,7 @@
         private System.Windows.Forms.Label lblListadoContrasenias;
         private System.Windows.Forms.Button btnModificarContrasenia;
         private System.Windows.Forms.Button btnAgregarContrasenia;
-        private System.Windows.Forms.ListView listaCategorias;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView_ListaDuplas;
     }
 }

@@ -20,34 +20,50 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            List<string> categorias = usuario.ListarCategorias();
-            for (int i = 0; i < categorias.Count; i++)
-            {
-                string categoriaMostrar = categorias[i];
-                comboBoxCategoria.Items.Add(categoriaMostrar);
-            }
-
+            AgregarCategorias();    
         }
+
+        private void AgregarCategorias()
+        {
+            var bindingSource = new BindingSource();
+            bindingSource.DataSource = usuario.ObtenerCategorias();
+            this.comboBoxCategoria.DataSource = bindingSource.DataSource;
+            this.comboBoxCategoria.SelectedIndex = 0;
+        }
+
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
-            string nombreUsuario = textBoxNombre.Text;
-            string contrasenia = textBoxContrasenia.Text;
-            string nombreSitio = textBoxNombreSitioApp.Text;
-            string nombreCategoria = comboBoxCategoria.Text;
-            string nota = textBoxNota.Text;
-            Categoria categoria = new Categoria(nombreCategoria);
-            Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contrasenia, nombreSitio, nota, categoria);
-            usuario.AgregarDupla(dupla);
-            IrAContraseñas();
-
+            try
+            {
+                string nombreUsuario = textBoxNombre.Text;
+                string contrasenia = textBoxContrasenia.Text;
+                string nombreSitio = textBoxNombreSitioApp.Text;
+                string nota = textBoxNota.Text;
+                Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
+                Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contrasenia, nombreSitio, nota, categoria);
+                usuario.AgregarDupla(dupla);
+                IrAContraseñas();
+            }
+            catch (Exepcion_DatosDeContraseniaInvalidos)
+            {
+                MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
+                                "debe cumplir con el siguiente formato: "+
+                                "\n\n" +
+                                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
+                                "> Categoría: Se selecciona de las disponibles en el sistema");
+            }
         }
+
+
 
         private void IrAContraseñas()
         {
-            this.Hide();
             InterfazContrasenia interfazContrasenia = new InterfazContrasenia(ref usuario, ref sistema);
             interfazContrasenia.Show();
+            this.Close();
         }
 
         private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +85,24 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void InterfazAgregarContrasenia_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butto_GenerarContrasenia_Click(object sender, EventArgs e)
+        {
+            string nuevaContra = "";
+            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref usuario, ref sistema);
+            genContra.ShowDialog();
+            string posibleNuevaContra = genContra.ObtenerNuevaContrasenia();
+            if (!posibleNuevaContra.Equals(""))
+            {
+                nuevaContra = genContra.ObtenerNuevaContrasenia();
+            }
+            this.textBoxContrasenia.Text = nuevaContra;
         }
     }
 }

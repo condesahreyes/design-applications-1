@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.textBoxModificarCategoria = new System.Windows.Forms.TextBox();
+            this.button_RevertirCambios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancelarModCategoria
@@ -88,12 +89,23 @@
             this.textBoxModificarCategoria.Size = new System.Drawing.Size(100, 20);
             this.textBoxModificarCategoria.TabIndex = 14;
             // 
+            // button_RevertirCambios
+            // 
+            this.button_RevertirCambios.Location = new System.Drawing.Point(363, 147);
+            this.button_RevertirCambios.Name = "button_RevertirCambios";
+            this.button_RevertirCambios.Size = new System.Drawing.Size(27, 23);
+            this.button_RevertirCambios.TabIndex = 19;
+            this.button_RevertirCambios.Text = "R";
+            this.button_RevertirCambios.UseVisualStyleBackColor = true;
+            this.button_RevertirCambios.Click += new System.EventHandler(this.button_RevertirCambios_Click);
+            // 
             // InterfazModificarCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(490, 341);
+            this.Controls.Add(this.button_RevertirCambios);
             this.Controls.Add(this.btnCancelarModCategoria);
             this.Controls.Add(this.btnModificarCategoria);
             this.Controls.Add(this.label1);
@@ -114,5 +126,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblListadoTarjetas;
         private System.Windows.Forms.TextBox textBoxModificarCategoria;
+        private System.Windows.Forms.Button button_RevertirCambios;
     }
 }
