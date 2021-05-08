@@ -73,6 +73,7 @@
             this.btnDataBreaches.Size = new System.Drawing.Size(100, 100);
             this.btnDataBreaches.TabIndex = 11;
             this.btnDataBreaches.UseVisualStyleBackColor = false;
+            this.btnDataBreaches.Click += new System.EventHandler(this.btnDataBreaches_Click);
             // 
             // panelCompartir
             // 

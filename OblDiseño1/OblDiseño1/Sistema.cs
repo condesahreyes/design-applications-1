@@ -47,5 +47,12 @@ namespace OblDiseño1
             return true;
         }
 
+        public List<object>[] ObtenerDataBreaches(ref Usuario usuario, List<string> datosDataBreaches)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+            
+            return dataBreaches.ObtenerEntidadesVulneradas(datosDataBreaches);
+        }
+
     }
 }

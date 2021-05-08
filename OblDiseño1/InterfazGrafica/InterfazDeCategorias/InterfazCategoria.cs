@@ -33,7 +33,7 @@ namespace InterfazGrafica.InterfazCategoria
 
         private void btnCategoriaVolverMenu_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
         }

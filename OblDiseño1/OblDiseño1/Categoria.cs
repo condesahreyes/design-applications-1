@@ -24,12 +24,5 @@
         {
             return "" + this.Nombre;
         }
-
-        public override bool Equals(object obj)
-        {
-            Categoria aComparar = (Categoria)obj;
-            return Nombre.Equals(aComparar.Nombre) ? true : false;
-        }
-
     }
 }

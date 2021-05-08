@@ -58,6 +58,12 @@
     <Compile Include="InterfacesDeContrasenias\InterfazContrasenia.Designer.cs">
       <DependentUpon>InterfazContrasenia.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfacesDeContrasenias\InterfazModificarContrasenia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesDeContrasenias\InterfazModificarContrasenia.Designer.cs">
+      <DependentUpon>InterfazModificarContrasenia.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +76,11 @@
     <Compile Include="InterfacesMenu\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazDataBreaches.cs">
+    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazDataBreaches.Designer.cs">
-      <DependentUpon>InterfazDataBreaches.cs</DependentUpon>
+    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.Designer.cs">
+      <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.cs">
       <SubType>Form</SubType>
@@ -114,14 +120,17 @@
     <EmbeddedResource Include="InterfacesDeContrasenias\InterfazContrasenia.resx">
       <DependentUpon>InterfazContrasenia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazModificarContrasenia.resx">
+      <DependentUpon>InterfazModificarContrasenia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazTarjeta.resx">
       <DependentUpon>InterfazTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesMenu\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDataBreaches\InterfazDataBreaches.resx">
-      <DependentUpon>InterfazDataBreaches.cs</DependentUpon>
+    <EmbeddedResource Include="InterfazDataBreaches\InterfazChequeoDataBreaches.resx">
+      <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazDeCategorias\InterfazAgregarCategoria.resx">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>

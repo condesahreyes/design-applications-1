@@ -5,6 +5,7 @@ using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesDeTarjetas;
 using InterfazGrafica.InterfacesDeContrasenias;
 using InterfazGrafica.InterfazIngreso;
+using InterfazGrafica.InterfazDataBreaches;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -18,6 +19,9 @@ namespace InterfazGrafica.InterfacesMenu
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
+            Categoria categoria = new Categoria("juancito");
+            usuario.AgregarCategoria(categoria);
+            usuario.AgregarDupla(new Dupla_UsuarioContrasenia("nombre", "contraseña", "netflix", "", categoria));
         }
 
         private void Menu_Load(object sender, EventArgs e)
@@ -73,6 +77,13 @@ namespace InterfazGrafica.InterfacesMenu
             this.Close();
             InterfazCambioContrasenia cambioContrasenia = new InterfazCambioContrasenia(ref sistema);
             cambioContrasenia.Show();
+        }
+
+        private void btnDataBreaches_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+            dataBreaches.Show();
         }
     }
 }

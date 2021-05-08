@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace InterfazGrafica.InterfazDataBreaches
+namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    public partial class InterfazDataBreaches : Form
+    public partial class InterfazModificarContrasenia : Form
     {
-        public InterfazDataBreaches()
+        public InterfazModificarContrasenia()
         {
             InitializeComponent();
         }
