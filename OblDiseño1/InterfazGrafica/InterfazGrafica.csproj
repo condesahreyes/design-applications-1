@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="InterfacesDeTarjetas\InterfazModificarTarjeta.Designer.cs">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +171,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazModificarTarjeta.resx">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.resx">
       <DependentUpon>Interfaz_GenerarContrasenia.cs</DependentUpon>
     </EmbeddedResource>

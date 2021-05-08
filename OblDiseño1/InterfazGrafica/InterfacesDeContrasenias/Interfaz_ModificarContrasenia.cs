@@ -182,5 +182,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
             this.textBox_Contrasenia.Text = nuevaContra;
         }
+
+        private void label_Usuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

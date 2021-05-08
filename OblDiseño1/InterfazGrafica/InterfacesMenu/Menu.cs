@@ -22,7 +22,7 @@ namespace InterfazGrafica.InterfacesMenu
             //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
             if (sistema.getHayQueCrearDatosDePrueba())
             {
-                CargarTarjetasDeEjemplo();
+                //CargarTarjetasDeEjemplo();
                 CargarDatosDeEjemplo();
                  sistema.yaSeCrearonDatosDePruva();
 

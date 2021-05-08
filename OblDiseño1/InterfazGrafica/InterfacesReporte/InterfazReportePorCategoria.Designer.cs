@@ -29,13 +29,13 @@ namespace InterfazGrafica.InterfacesReporte
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label_Titulo = new System.Windows.Forms.Label();
@@ -56,54 +56,54 @@ namespace InterfazGrafica.InterfacesReporte
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.60997F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.39003F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(490, 307);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(653, 378);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // chart1
             // 
-            chartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 38);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(0, 47);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
-            series6.ChartArea = "ChartArea1";
-            series6.Color = System.Drawing.Color.Firebrick;
-            series6.Legend = "Legend1";
-            series6.Name = "Rojo";
-            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series7.ChartArea = "ChartArea1";
-            series7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            series7.Legend = "Legend1";
-            series7.Name = "Naranja";
-            series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series8.ChartArea = "ChartArea1";
-            series8.Color = System.Drawing.Color.Yellow;
-            series8.Legend = "Legend1";
-            series8.Name = "Amarillo";
-            series8.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series9.ChartArea = "ChartArea1";
-            series9.Color = System.Drawing.Color.GreenYellow;
-            series9.Legend = "Legend1";
-            series9.Name = "Verde Claro";
-            series9.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series10.ChartArea = "ChartArea1";
-            series10.Color = System.Drawing.Color.SeaGreen;
-            series10.Legend = "Legend1";
-            series10.Name = "Verde Oscuro";
-            series10.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            this.chart1.Series.Add(series6);
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
-            this.chart1.Series.Add(series9);
-            this.chart1.Series.Add(series10);
-            this.chart1.Size = new System.Drawing.Size(490, 269);
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.Firebrick;
+            series1.Legend = "Legend1";
+            series1.Name = "Rojo";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series2.ChartArea = "ChartArea1";
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            series2.Legend = "Legend1";
+            series2.Name = "Naranja";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series3.ChartArea = "ChartArea1";
+            series3.Color = System.Drawing.Color.Yellow;
+            series3.Legend = "Legend1";
+            series3.Name = "Amarillo";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series4.ChartArea = "ChartArea1";
+            series4.Color = System.Drawing.Color.GreenYellow;
+            series4.Legend = "Legend1";
+            series4.Name = "Verde Claro";
+            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series5.ChartArea = "ChartArea1";
+            series5.Color = System.Drawing.Color.SeaGreen;
+            series5.Legend = "Legend1";
+            series5.Name = "Verde Oscuro";
+            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
+            this.chart1.Series.Add(series5);
+            this.chart1.Size = new System.Drawing.Size(653, 331);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
@@ -111,19 +111,21 @@ namespace InterfazGrafica.InterfacesReporte
             // 
             this.label_Titulo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Titulo.Location = new System.Drawing.Point(3, 0);
+            this.label_Titulo.Location = new System.Drawing.Point(4, 0);
+            this.label_Titulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Titulo.Name = "label_Titulo";
-            this.label_Titulo.Size = new System.Drawing.Size(484, 38);
+            this.label_Titulo.Size = new System.Drawing.Size(645, 47);
             this.label_Titulo.TabIndex = 1;
             this.label_Titulo.Text = "Cantidad de Contrasenias por Categoria/Grupo";
             this.label_Titulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label_Titulo.Click += new System.EventHandler(this.label_Titulo_Click);
             // 
             // button_Volver
             // 
-            this.button_Volver.Location = new System.Drawing.Point(412, 307);
+            this.button_Volver.Location = new System.Drawing.Point(549, 378);
             this.button_Volver.Margin = new System.Windows.Forms.Padding(0);
             this.button_Volver.Name = "button_Volver";
-            this.button_Volver.Size = new System.Drawing.Size(75, 31);
+            this.button_Volver.Size = new System.Drawing.Size(100, 38);
             this.button_Volver.TabIndex = 1;
             this.button_Volver.Text = "Volver";
             this.button_Volver.UseVisualStyleBackColor = true;
@@ -131,11 +133,12 @@ namespace InterfazGrafica.InterfacesReporte
             // 
             // InterfazReportePorCategoria
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(653, 420);
             this.Controls.Add(this.button_Volver);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazReportePorCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazReportePorCategoria";

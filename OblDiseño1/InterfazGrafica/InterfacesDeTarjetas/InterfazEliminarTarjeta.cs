@@ -32,8 +32,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             usuario.EliminarTarjeta(tarjeta);
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
-            interfazTarjeta.Show();
             this.Close();
         }
 

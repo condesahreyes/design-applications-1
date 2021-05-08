@@ -70,5 +70,10 @@ namespace InterfazGrafica.InterfacesReporte
             ventanaReporte.Show();
             this.Close();
         }
+
+        private void label_Titulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

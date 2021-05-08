@@ -244,7 +244,7 @@ namespace OblDiseño1
         }
 
        
-        public List<string> ConvertirDiccionarioAListaString(Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contrasenias)
+        public List<string> ConvertirDiccionarioConClaveDuplaAListaString(Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contrasenias)
         {
             List<string> resultado = new List<string>();
             foreach (var iterador in contrasenias)
@@ -254,7 +254,7 @@ namespace OblDiseño1
             return resultado;
         }
 
-        public List<string> ConvertirDiccionarioConListaAListaString(Dictionary<Usuario, 
+        public List<string> ConvertirDiccionarioConClaveUsuarioListaString(Dictionary<Usuario, 
             List<Dupla_UsuarioContrasenia>> contrasenias)
         {
             List<string> resultado = new List<string>();

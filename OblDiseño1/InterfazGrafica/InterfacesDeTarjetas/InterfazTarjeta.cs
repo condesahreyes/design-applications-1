@@ -77,16 +77,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             if (dataGridTarjetas.RowCount > 0)
             {
                 Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
-                //this.dataGridView_Contrasenias.Sort(dataGridView_Contrasenias.Columns["Categoria"], System.ComponentModel.ListSortDirection.Descending);
-
+                
                 if (tarjetaSeleccionada == null)
                     MessageBox.Show("Error, debe seleccionar una tarjeta");
                 else
                 {
-                    this.Close();
                     InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
                         (ref sistema, ref usuario, ref tarjetaSeleccionada);
                     eliminarTarjeta.Show();
+                    CargarListaTarjetas();
                 }
             }
             else
