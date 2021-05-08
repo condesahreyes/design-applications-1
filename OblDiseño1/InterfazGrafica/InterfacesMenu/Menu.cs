@@ -5,6 +5,8 @@ using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesDeTarjetas;
 using InterfazGrafica.InterfacesDeContrasenias;
 using InterfazGrafica.InterfacesReporte;
+using InterfazGrafica.InterfazIngreso;
+using InterfazGrafica.InterfazDataBreaches;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -89,16 +91,52 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnContrasenias_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            InterfazContrasenia contrasenias = new InterfazContrasenia(ref usuario, ref sistema);
-            contrasenias.Show();
+            if (usuario.ObtenerCategorias().Count > 0)
+            {
+                this.Hide();
+                InterfazContrasenia contrasenias = new InterfazContrasenia(ref usuario, ref sistema);
+                contrasenias.Show();
+            }
+            else
+                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
         }
 
         private void btnTarjetas_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            InterfazTarjeta tarjeta = new InterfazTarjeta(ref usuario, ref sistema);
-            tarjeta.Show();
+            if (usuario.ObtenerCategorias().Count > 0)
+            {
+                this.Hide();
+                InterfazTarjeta tarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+                tarjeta.Show();
+            }
+            else
+                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazIngresoSistema login = new InterfazIngresoSistema(ref sistema);
+            login.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazCambioContrasenia cambioContrasenia = new InterfazCambioContrasenia(ref sistema);
+            cambioContrasenia.Show();
+        }
+
+        private void btnDataBreaches_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+            dataBreaches.Show();
         }
 
         private void btnReportes_Click(object sender, EventArgs e)

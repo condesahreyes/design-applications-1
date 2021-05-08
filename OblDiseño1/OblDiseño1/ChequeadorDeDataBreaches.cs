@@ -10,20 +10,19 @@ namespace OblDiseño1
 
         private const int asciNumericoDesde = 48;
         private const int asciNumericoHasta = 57;
-
+        private const int cantTiposObjetosVulnerables = 2;
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             Usuario = unUsuario;
         }
 
-        public List<Object> ObtenerEntidadesVulneradas(List<string> datosDelDataBreach)
+        public List<Object>[] ObtenerEntidadesVulneradas(List<string> datosDelDataBreach)
         {
-            List<Object> datosVulnerados = new List<Object>();
-            List<Object> tarjetasVulneradas = ObtenerTarjetasVulneradas(datosDelDataBreach);
-            List<Object> duplasVulneradas = ObtenerDuplasVulneradas(datosDelDataBreach);
-
-            if (tarjetasVulneradas != null) datosVulnerados.AddRange(tarjetasVulneradas);
-            if (duplasVulneradas != null) datosVulnerados.AddRange(duplasVulneradas);
+            List<object>[] datosVulnerados = new List<object>[cantTiposObjetosVulnerables];
+            
+            //List<Object> datosVulnerados = new List<Object>();
+            datosVulnerados[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
+            datosVulnerados[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
 
             return datosVulnerados;
         }

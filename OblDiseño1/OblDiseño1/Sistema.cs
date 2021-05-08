@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Data;
 
 namespace OblDiseño1
 {
@@ -22,16 +23,11 @@ namespace OblDiseño1
         //1* HASTA HACA
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
-            Usuario existeUsuario = DevolverUsuario(nombreUsuario);
-
-            if(existeUsuario != null)
-                throw new ExepcionObjetosRepetidos("Ya existe el usuario");
 
             Usuario nuevoUsuario = new Usuario(nombreUsuario, contrasenia);
             usuarios.Add(nuevoUsuario);
 
             return nuevoUsuario;
-
         }
 
         public List<Usuario> ObtenerUsuarios()
@@ -41,13 +37,11 @@ namespace OblDiseño1
 
         public Usuario DevolverUsuario(string nombreUsuario)
         {
-            Usuario usuario = null;
-
             foreach (Usuario us in usuarios)
                 if (us.Nombre.Equals(nombreUsuario))
-                    usuario = us;
-
-            return usuario;
+                    return us;
+            
+                throw new ObjectNotFoundException();
         }
 
         public bool PuedoIngresarAlSistema(string unNombreUsuario, string unaContrasenia)
@@ -63,6 +57,13 @@ namespace OblDiseño1
                 return false;
 
             return true;
+        }
+
+        public List<object>[] ObtenerDataBreaches(ref Usuario usuario, List<string> datosDataBreaches)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+            
+            return dataBreaches.ObtenerEntidadesVulneradas(datosDataBreaches);
         }
 
     }
