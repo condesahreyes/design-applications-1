@@ -100,6 +100,7 @@
     </Compile>
     <Compile Include="InterfacesReporte\InterfazReporteVer.Designer.cs">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
+    </Compile>  
     <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +165,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesReporte\InterfazReporteVer.resx">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfazDataBreaches\InterfazChequeoDataBreaches.resx">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </EmbeddedResource>

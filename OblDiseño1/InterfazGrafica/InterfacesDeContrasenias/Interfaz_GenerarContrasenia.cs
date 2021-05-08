@@ -15,7 +15,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
     {
         private Usuario usuario;
         private Sistema sistema;
-        private string contrasenia;
+        private string contrasenia = "";
         public Interfaz_GenerarContrasenia(ref Usuario usu, ref Sistema sist)
         {
             this.usuario = usu;

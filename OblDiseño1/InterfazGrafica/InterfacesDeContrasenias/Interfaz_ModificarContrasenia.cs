@@ -175,7 +175,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             string nuevaContra = this.textBox_Contrasenia.Text;
             Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref usuario, ref sistema);
             genContra.ShowDialog();
-            nuevaContra = genContra.ObtenerNuevaContrasenia();
+            string posibleNuevaContra = genContra.ObtenerNuevaContrasenia();
+            if (!posibleNuevaContra.Equals(""))
+            {
+                nuevaContra = genContra.ObtenerNuevaContrasenia();
+            }
             this.textBox_Contrasenia.Text = nuevaContra;
         }
     }
