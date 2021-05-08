@@ -199,6 +199,7 @@
             this.btnReportes.Size = new System.Drawing.Size(100, 100);
             this.btnReportes.TabIndex = 11;
             this.btnReportes.UseVisualStyleBackColor = false;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnCerrarSesion
             // 

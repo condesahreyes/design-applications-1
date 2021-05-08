@@ -7,7 +7,19 @@ namespace OblDiseño1
     {
 
         List<Usuario> usuarios = new List<Usuario>();
+        
 
+        //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
+        bool hayQueCrearDatosDePrueba = true;
+        public bool getHayQueCrearDatosDePrueba()
+        {
+            return this.hayQueCrearDatosDePrueba;
+        }
+        public void yaSeCrearonDatosDePruva()
+        {
+            this.hayQueCrearDatosDePrueba = false; 
+        }
+        //1* HASTA HACA
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
             Usuario existeUsuario = DevolverUsuario(nombreUsuario);
