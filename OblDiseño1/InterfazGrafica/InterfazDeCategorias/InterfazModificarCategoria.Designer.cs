@@ -80,7 +80,6 @@
             this.lblListadoTarjetas.Size = new System.Drawing.Size(191, 26);
             this.lblListadoTarjetas.TabIndex = 15;
             this.lblListadoTarjetas.Text = "Modificar Categoría";
-            this.lblListadoTarjetas.Click += new System.EventHandler(this.lblListadoTarjetas_Click);
             // 
             // textBoxModificarCategoria
             // 
