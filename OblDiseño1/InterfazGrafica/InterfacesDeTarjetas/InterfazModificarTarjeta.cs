@@ -23,13 +23,18 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             this.tarjeta = tarjeta;
-
+            List<string> categorias = usuario.ListarCategorias();
+            for (int i = 0; i < categorias.Count; i++)
+            {
+                string categoriaMostrar = categorias[i];
+                comboBoxCategorias.Items.Add(categoriaMostrar);
+            }
             textBoxNombre.Text = tarjeta.Nombre;
             textBoxTipo.Text = tarjeta.Tipo;
             textBoxNumeroTarjeta.Text = tarjeta.Numero.ToString();
             textBoxCodigoSeguridad.Text = tarjeta.CodigoSeguridad.ToString();
             dateTimePicker1.Value = tarjeta.FechaVencimiento;
-            textBoxCategoria.Text = tarjeta.Categoria.Nombre;
+            comboBoxCategorias.Text = tarjeta.Categoria.Nombre;
             textBoxNotaOpcional.Text = tarjeta.NotaOpcional;
         }
 
@@ -45,7 +50,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string numeroTarjeta = textBoxNumeroTarjeta.Text;
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
             DateTime fecha = dateTimePicker1.Value;
-            string nombreCategoria = textBoxCategoria.Text;
+            string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
 
             long numeroTarjetaAConvertir = long.Parse(numeroTarjeta);
@@ -82,6 +87,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Close();
             InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
             interfazTarjeta.Show();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

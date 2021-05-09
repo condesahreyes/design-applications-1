@@ -65,7 +65,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(697, 354);
             this.panel1.TabIndex = 10;
-            
             // 
             // dataGridTarjetas
             // 
@@ -80,7 +79,6 @@
             this.dataGridTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridTarjetas.Size = new System.Drawing.Size(615, 245);
             this.dataGridTarjetas.TabIndex = 7;
-            
             // 
             // btnEliminarTarjeta
             // 

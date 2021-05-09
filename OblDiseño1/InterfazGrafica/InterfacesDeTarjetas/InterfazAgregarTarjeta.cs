@@ -20,37 +20,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
+            List<string> categorias = usuario.ListarCategorias();
+            for (int i = 0; i < categorias.Count; i++)
+            {
+                string categoriaMostrar = categorias[i];
+                comboBoxCategorias.Items.Add(categoriaMostrar);
+            }
         }
 
-        private void lblAgregarTarjeta_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void Agregar_Click(object sender, EventArgs e)
         {
@@ -59,7 +37,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string numeroTarjeta = textBoxNumeroTarjeta.Text;
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
             DateTime fecha = dateTimePicker1.Value;
-            string nombreCategoria = textBoxCategoria.Text;
+            string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
             
             long numeroTarjetaAConvertir = long.Parse(numeroTarjeta);
@@ -67,7 +45,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Categoria categoria = new Categoria(nombreCategoria);
             Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjetaAConvertir, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
             usuario.AgregarTarjeta(nuevaTarjeta);
-            usuario.AgregarCategoria(categoria);
             IrAInterfazTarjeta();
         }
 
@@ -114,6 +91,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         }
 
         private void textBoxNumeroTarjeta_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

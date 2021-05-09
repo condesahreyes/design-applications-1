@@ -47,7 +47,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Agregar = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.Cancelar = new System.Windows.Forms.Button();
-            this.textBoxCategoria = new System.Windows.Forms.TextBox();
+            this.comboBoxCategorias = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label5
@@ -75,7 +75,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label4.Size = new System.Drawing.Size(250, 28);
             this.label4.TabIndex = 32;
             this.label4.Text = "Fecha de Vencimiento";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -89,7 +88,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label3.Size = new System.Drawing.Size(101, 28);
             this.label3.TabIndex = 30;
             this.label3.Text = "Numero";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBoxNumeroTarjeta
             // 
@@ -112,7 +110,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label2.Size = new System.Drawing.Size(63, 28);
             this.label2.TabIndex = 28;
             this.label2.Text = "Tipo";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBoxTipo
             // 
@@ -171,7 +168,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label7.Size = new System.Drawing.Size(119, 28);
             this.label7.TabIndex = 36;
             this.label7.Text = "Categoria";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
@@ -232,15 +228,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Cancelar.UseVisualStyleBackColor = true;
             this.Cancelar.Click += new System.EventHandler(this.Cancelar_Click);
             // 
-            // textBoxCategoria
+            // comboBoxCategorias
             // 
-            this.textBoxCategoria.Location = new System.Drawing.Point(439, 330);
-            this.textBoxCategoria.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxCategoria.Multiline = true;
-            this.textBoxCategoria.Name = "textBoxCategoria";
-            this.textBoxCategoria.Size = new System.Drawing.Size(212, 28);
-            this.textBoxCategoria.TabIndex = 38;
-            this.textBoxCategoria.TextChanged += new System.EventHandler(this.textBoxCategoria_TextChanged);
+            this.comboBoxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCategorias.FormattingEnabled = true;
+            this.comboBoxCategorias.Location = new System.Drawing.Point(439, 330);
+            this.comboBoxCategorias.Name = "comboBoxCategorias";
+            this.comboBoxCategorias.Size = new System.Drawing.Size(212, 24);
+            this.comboBoxCategorias.TabIndex = 45;
+            this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // InterfazAgregarTarjeta
             // 
@@ -250,12 +246,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(806, 513);
+            this.Controls.Add(this.comboBoxCategorias);
             this.Controls.Add(this.Cancelar);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Agregar);
             this.Controls.Add(this.textBoxCodigoSeguridad);
             this.Controls.Add(this.textBoxNotaOpcional);
-            this.Controls.Add(this.textBoxCategoria);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -298,6 +294,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private System.Windows.Forms.Button Agregar;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button Cancelar;
-        private System.Windows.Forms.TextBox textBoxCategoria;
+        private System.Windows.Forms.ComboBox comboBoxCategorias;
     }
 }

@@ -34,7 +34,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Aceptar = new System.Windows.Forms.Button();
             this.textBoxCodigoSeguridad = new System.Windows.Forms.TextBox();
             this.textBoxNotaOpcional = new System.Windows.Forms.TextBox();
-            this.textBoxCategoria = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxCategorias = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // Cancelar
@@ -92,15 +92,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxNotaOpcional.Name = "textBoxNotaOpcional";
             this.textBoxNotaOpcional.Size = new System.Drawing.Size(212, 63);
             this.textBoxNotaOpcional.TabIndex = 57;
-            // 
-            // textBoxCategoria
-            // 
-            this.textBoxCategoria.Location = new System.Drawing.Point(428, 317);
-            this.textBoxCategoria.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxCategoria.Multiline = true;
-            this.textBoxCategoria.Name = "textBoxCategoria";
-            this.textBoxCategoria.Size = new System.Drawing.Size(212, 28);
-            this.textBoxCategoria.TabIndex = 56;
             // 
             // label6
             // 
@@ -244,19 +235,29 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label8.TabIndex = 62;
             this.label8.Text = "Tarjeta A Modificar";
             // 
+            // comboBoxCategorias
+            // 
+            this.comboBoxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCategorias.FormattingEnabled = true;
+            this.comboBoxCategorias.Location = new System.Drawing.Point(428, 313);
+            this.comboBoxCategorias.Name = "comboBoxCategorias";
+            this.comboBoxCategorias.Size = new System.Drawing.Size(216, 24);
+            this.comboBoxCategorias.TabIndex = 63;
+            this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // InterfazModificarTarjeta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(797, 494);
+            this.Controls.Add(this.comboBoxCategorias);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.Cancelar);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Aceptar);
             this.Controls.Add(this.textBoxCodigoSeguridad);
             this.Controls.Add(this.textBoxNotaOpcional);
-            this.Controls.Add(this.textBoxCategoria);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -284,7 +285,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private System.Windows.Forms.Button Aceptar;
         private System.Windows.Forms.TextBox textBoxCodigoSeguridad;
         private System.Windows.Forms.TextBox textBoxNotaOpcional;
-        private System.Windows.Forms.TextBox textBoxCategoria;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
@@ -297,5 +297,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private System.Windows.Forms.Label lblListadoTarjetas;
         private System.Windows.Forms.TextBox textBoxNombre;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBoxCategorias;
     }
 }

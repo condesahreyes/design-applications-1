@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -118,7 +119,7 @@
     </Compile>
     <Compile Include="InterfacesReporte\InterfazReporteVer.Designer.cs">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
-    </Compile>  
+    </Compile>
     <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>

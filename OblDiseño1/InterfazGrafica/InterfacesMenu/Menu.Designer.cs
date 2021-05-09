@@ -56,9 +56,10 @@
             this.panel1DataBreaches.BackgroundImage = global::InterfazGrafica.Properties.Resources.data_breaches;
             this.panel1DataBreaches.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1DataBreaches.Controls.Add(this.btnDataBreaches);
-            this.panel1DataBreaches.Location = new System.Drawing.Point(201, 169);
+            this.panel1DataBreaches.Location = new System.Drawing.Point(268, 208);
+            this.panel1DataBreaches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1DataBreaches.Name = "panel1DataBreaches";
-            this.panel1DataBreaches.Size = new System.Drawing.Size(100, 100);
+            this.panel1DataBreaches.Size = new System.Drawing.Size(133, 123);
             this.panel1DataBreaches.TabIndex = 22;
             // 
             // btnDataBreaches
@@ -69,8 +70,9 @@
             this.btnDataBreaches.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnDataBreaches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDataBreaches.Location = new System.Drawing.Point(0, 0);
+            this.btnDataBreaches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDataBreaches.Name = "btnDataBreaches";
-            this.btnDataBreaches.Size = new System.Drawing.Size(100, 100);
+            this.btnDataBreaches.Size = new System.Drawing.Size(133, 123);
             this.btnDataBreaches.TabIndex = 11;
             this.btnDataBreaches.UseVisualStyleBackColor = false;
             this.btnDataBreaches.Click += new System.EventHandler(this.btnDataBreaches_Click);
@@ -80,9 +82,10 @@
             this.panelCompartir.BackgroundImage = global::InterfazGrafica.Properties.Resources.compartir;
             this.panelCompartir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelCompartir.Controls.Add(this.btnCompartirContrasenia);
-            this.panelCompartir.Location = new System.Drawing.Point(350, 169);
+            this.panelCompartir.Location = new System.Drawing.Point(467, 208);
+            this.panelCompartir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelCompartir.Name = "panelCompartir";
-            this.panelCompartir.Size = new System.Drawing.Size(100, 100);
+            this.panelCompartir.Size = new System.Drawing.Size(133, 123);
             this.panelCompartir.TabIndex = 23;
             // 
             // btnCompartirContrasenia
@@ -93,19 +96,22 @@
             this.btnCompartirContrasenia.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnCompartirContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCompartirContrasenia.Location = new System.Drawing.Point(0, 0);
+            this.btnCompartirContrasenia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCompartirContrasenia.Name = "btnCompartirContrasenia";
-            this.btnCompartirContrasenia.Size = new System.Drawing.Size(100, 100);
+            this.btnCompartirContrasenia.Size = new System.Drawing.Size(133, 123);
             this.btnCompartirContrasenia.TabIndex = 10;
             this.btnCompartirContrasenia.UseVisualStyleBackColor = false;
+            this.btnCompartirContrasenia.Click += new System.EventHandler(this.btnCompartirContrasenia_Click);
             // 
             // panelContrasenias
             // 
             this.panelContrasenias.BackgroundImage = global::InterfazGrafica.Properties.Resources.contraseñas;
             this.panelContrasenias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelContrasenias.Controls.Add(this.btnContrasenias);
-            this.panelContrasenias.Location = new System.Drawing.Point(201, 26);
+            this.panelContrasenias.Location = new System.Drawing.Point(268, 32);
+            this.panelContrasenias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelContrasenias.Name = "panelContrasenias";
-            this.panelContrasenias.Size = new System.Drawing.Size(100, 100);
+            this.panelContrasenias.Size = new System.Drawing.Size(133, 123);
             this.panelContrasenias.TabIndex = 27;
             // 
             // btnContrasenias
@@ -116,8 +122,9 @@
             this.btnContrasenias.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnContrasenias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContrasenias.Location = new System.Drawing.Point(0, 0);
+            this.btnContrasenias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnContrasenias.Name = "btnContrasenias";
-            this.btnContrasenias.Size = new System.Drawing.Size(100, 100);
+            this.btnContrasenias.Size = new System.Drawing.Size(133, 123);
             this.btnContrasenias.TabIndex = 10;
             this.btnContrasenias.UseVisualStyleBackColor = false;
             this.btnContrasenias.Click += new System.EventHandler(this.btnContrasenias_Click);
@@ -127,9 +134,10 @@
             this.panelCategorias.BackgroundImage = global::InterfazGrafica.Properties.Resources.Categorias;
             this.panelCategorias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelCategorias.Controls.Add(this.btnCategorias);
-            this.panelCategorias.Location = new System.Drawing.Point(49, 26);
+            this.panelCategorias.Location = new System.Drawing.Point(65, 32);
+            this.panelCategorias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelCategorias.Name = "panelCategorias";
-            this.panelCategorias.Size = new System.Drawing.Size(100, 100);
+            this.panelCategorias.Size = new System.Drawing.Size(133, 123);
             this.panelCategorias.TabIndex = 26;
             // 
             // btnCategorias
@@ -140,8 +148,9 @@
             this.btnCategorias.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnCategorias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCategorias.Location = new System.Drawing.Point(0, 0);
+            this.btnCategorias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCategorias.Name = "btnCategorias";
-            this.btnCategorias.Size = new System.Drawing.Size(100, 100);
+            this.btnCategorias.Size = new System.Drawing.Size(133, 123);
             this.btnCategorias.TabIndex = 8;
             this.btnCategorias.UseVisualStyleBackColor = false;
             this.btnCategorias.Click += new System.EventHandler(this.btnCategorias_Click);
@@ -152,9 +161,10 @@
             this.panelTarjetas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelTarjetas.Controls.Add(this.btnTarjetas);
             this.panelTarjetas.Controls.Add(this.panelDataBreaches);
-            this.panelTarjetas.Location = new System.Drawing.Point(350, 26);
+            this.panelTarjetas.Location = new System.Drawing.Point(467, 32);
+            this.panelTarjetas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelTarjetas.Name = "panelTarjetas";
-            this.panelTarjetas.Size = new System.Drawing.Size(100, 100);
+            this.panelTarjetas.Size = new System.Drawing.Size(133, 123);
             this.panelTarjetas.TabIndex = 25;
             // 
             // btnTarjetas
@@ -165,8 +175,9 @@
             this.btnTarjetas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnTarjetas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTarjetas.Location = new System.Drawing.Point(0, 0);
+            this.btnTarjetas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTarjetas.Name = "btnTarjetas";
-            this.btnTarjetas.Size = new System.Drawing.Size(100, 100);
+            this.btnTarjetas.Size = new System.Drawing.Size(133, 123);
             this.btnTarjetas.TabIndex = 9;
             this.btnTarjetas.UseVisualStyleBackColor = false;
             this.btnTarjetas.Click += new System.EventHandler(this.btnTarjetas_Click);
@@ -174,9 +185,10 @@
             // panelDataBreaches
             // 
             this.panelDataBreaches.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelDataBreaches.Location = new System.Drawing.Point(41, 96);
+            this.panelDataBreaches.Location = new System.Drawing.Point(55, 118);
+            this.panelDataBreaches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelDataBreaches.Name = "panelDataBreaches";
-            this.panelDataBreaches.Size = new System.Drawing.Size(100, 100);
+            this.panelDataBreaches.Size = new System.Drawing.Size(133, 123);
             this.panelDataBreaches.TabIndex = 14;
             // 
             // panelReporte
@@ -184,9 +196,10 @@
             this.panelReporte.BackgroundImage = global::InterfazGrafica.Properties.Resources.reporte;
             this.panelReporte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelReporte.Controls.Add(this.btnReportes);
-            this.panelReporte.Location = new System.Drawing.Point(49, 169);
+            this.panelReporte.Location = new System.Drawing.Point(65, 208);
+            this.panelReporte.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelReporte.Name = "panelReporte";
-            this.panelReporte.Size = new System.Drawing.Size(100, 100);
+            this.panelReporte.Size = new System.Drawing.Size(133, 123);
             this.panelReporte.TabIndex = 21;
             // 
             // btnReportes
@@ -197,8 +210,9 @@
             this.btnReportes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReportes.Location = new System.Drawing.Point(0, 0);
+            this.btnReportes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Size = new System.Drawing.Size(100, 100);
+            this.btnReportes.Size = new System.Drawing.Size(133, 123);
             this.btnReportes.TabIndex = 11;
             this.btnReportes.UseVisualStyleBackColor = false;
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
@@ -206,9 +220,10 @@
             // btnCerrarSesion
             // 
             this.btnCerrarSesion.Font = new System.Drawing.Font("Candara Light", 9.25F);
-            this.btnCerrarSesion.Location = new System.Drawing.Point(360, 300);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(480, 369);
+            this.btnCerrarSesion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
-            this.btnCerrarSesion.Size = new System.Drawing.Size(118, 29);
+            this.btnCerrarSesion.Size = new System.Drawing.Size(157, 36);
             this.btnCerrarSesion.TabIndex = 24;
             this.btnCerrarSesion.Text = "Cerrar Sesion";
             this.btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -217,9 +232,10 @@
             // btnCambiarContrasenia
             // 
             this.btnCambiarContrasenia.Font = new System.Drawing.Font("Candara Light", 9.25F);
-            this.btnCambiarContrasenia.Location = new System.Drawing.Point(232, 300);
+            this.btnCambiarContrasenia.Location = new System.Drawing.Point(309, 369);
+            this.btnCambiarContrasenia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCambiarContrasenia.Name = "btnCambiarContrasenia";
-            this.btnCambiarContrasenia.Size = new System.Drawing.Size(122, 29);
+            this.btnCambiarContrasenia.Size = new System.Drawing.Size(163, 36);
             this.btnCambiarContrasenia.TabIndex = 28;
             this.btnCambiarContrasenia.Text = "Cambiar contraseña";
             this.btnCambiarContrasenia.UseVisualStyleBackColor = true;
@@ -227,10 +243,10 @@
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(653, 420);
             this.Controls.Add(this.btnCambiarContrasenia);
             this.Controls.Add(this.panel1DataBreaches);
             this.Controls.Add(this.panelCompartir);
@@ -239,6 +255,7 @@
             this.Controls.Add(this.panelTarjetas);
             this.Controls.Add(this.panelReporte);
             this.Controls.Add(this.btnCerrarSesion);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";

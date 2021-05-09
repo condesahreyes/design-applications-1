@@ -23,7 +23,7 @@ namespace InterfazGrafica.InterfacesMenu
             if (sistema.getHayQueCrearDatosDePrueba())
             {
                 //CargarTarjetasDeEjemplo();
-                CargarDatosDeEjemplo();
+                //CargarDatosDeEjemplo();
                  sistema.yaSeCrearonDatosDePruva();
 
             }
@@ -167,6 +167,11 @@ namespace InterfazGrafica.InterfacesMenu
             usuario.AgregarTarjeta(segundaTarjeta);
             usuario.AgregarTarjeta(tercerTarjeta);
             usuario.AgregarTarjeta(cuartaTarjeta);
+
+        }
+
+        private void btnCompartirContrasenia_Click(object sender, EventArgs e)
+        {
 
         }
     }

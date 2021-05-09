@@ -33,13 +33,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         {
             usuario.EliminarTarjeta(tarjeta);
             this.Close();
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            interfazTarjeta.Show();
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
+            this.Close();
             InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
             interfazTarjeta.Show();
-            this.Close();
         }
     }
 }

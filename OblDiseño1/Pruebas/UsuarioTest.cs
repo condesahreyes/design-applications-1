@@ -316,7 +316,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConClaveDuplaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
         }
 
 
@@ -341,7 +341,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueLeCompartenContrasenia.ConvertirDiccionarioConClaveUsuarioListaString(usuarioAlQueLeCompartenContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueLeCompartenContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueLeCompartenContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
 
@@ -365,10 +365,9 @@ namespace Pruebas
             usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
             usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
 
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConClaveDuplaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
-        }
+            
+            Assert.IsFalse(usuarioQueComparteContrasenia.EstaSiendoCompartidaLaContraseniaConElUsuario(primerdupla, usuarioAlQueCompartoContrasenia));
+         }
 
         [TestMethod]
         public void UsuarioQueLeDejanDeCompartirContrasenia()
@@ -391,7 +390,7 @@ namespace Pruebas
             usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirDiccionarioConClaveUsuarioListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
 
@@ -418,7 +417,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConClaveDuplaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
         }
 
         [TestMethod]
@@ -442,7 +441,7 @@ namespace Pruebas
             segundadupla.ActualizarContrasenia("otraPassword");
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirDiccionarioConClaveUsuarioListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
     }

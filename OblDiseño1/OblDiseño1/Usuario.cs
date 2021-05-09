@@ -188,11 +188,17 @@ namespace OblDiseño1
                         usuarioACompartir.Nombre);
                 else
                 {
-                    this.usuariosQueYoComparto.Add(usuarioACompartir);
-                    this.ObtenerContraseniasCompartidasPorMi().Add(duplaACompartir, this.usuariosQueYoComparto);
-
-                    usuarioACompartir.ObtenerDuplasQueMeComparten().Add(duplaACompartir);
-                    usuarioACompartir.ObtenerContraseniasCompartidasConmigo().Add(this, usuarioACompartir.ObtenerDuplasQueMeComparten());
+                    if (EstoyCompartiendoLaContraseniaConAlguien(duplaACompartir))
+                        this.ObtenerContraseniasCompartidasPorMi()[duplaACompartir].Add(usuarioACompartir);
+                    else
+                        CompartirContraseniaPorPrimeraVez(duplaACompartir, usuarioACompartir);
+                    
+                    if (usuarioACompartir.ElUsuarioMeEstaCompartiendoAlgunaContrasenia(this))
+                        usuarioACompartir.ObtenerContraseniasCompartidasConmigo()[this].Add(duplaACompartir);
+                    else
+                    {
+                        usuarioACompartir.MeCompartenLaContraseniaPorPrimeraVez(this, duplaACompartir);
+                    }
                 }
             }
             else
@@ -209,6 +215,30 @@ namespace OblDiseño1
         {
             return (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla) &&
                     this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));
+        }
+
+        public bool EstoyCompartiendoLaContraseniaConAlguien(Dupla_UsuarioContrasenia dupla)
+        {
+            return (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla));
+        }
+
+        public bool ElUsuarioMeEstaCompartiendoAlgunaContrasenia(Usuario usuario)
+        {
+            return (this.ObtenerContraseniasCompartidasConmigo().ContainsKey(usuario));
+        }
+
+        public void CompartirContraseniaPorPrimeraVez(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
+        {
+            List<Usuario> listaConPrimerUsuario = new List<Usuario>();
+            listaConPrimerUsuario.Add(usuarioACompartir);
+            this.ObtenerContraseniasCompartidasPorMi().Add(duplaACompartir, listaConPrimerUsuario);
+        }
+
+        public void MeCompartenLaContraseniaPorPrimeraVez(Usuario usuarioQueMeComparte, Dupla_UsuarioContrasenia duplaQueMeComparte)
+        {
+            List<Dupla_UsuarioContrasenia> listaConPrimerDupla = new List<Dupla_UsuarioContrasenia>();
+            listaConPrimerDupla.Add(duplaQueMeComparte);
+            this.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparte, listaConPrimerDupla);
         }
 
         public void DejarDeCompartirContrasenia(Dupla_UsuarioContrasenia duplaADejarDeCompartir, Usuario usuarioAlQueDejoDeCompartir)
@@ -235,7 +265,10 @@ namespace OblDiseño1
 
         public bool EstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, Usuario usuario)
         {
-            return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));            
+            if (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
+                return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));
+            else
+                return false;
         }
 
         public bool NoEstoyCompartiendoLaContraseniaConAlguien(Dupla_UsuarioContrasenia dupla)
@@ -244,7 +277,8 @@ namespace OblDiseño1
         }
 
        
-        public List<string> ConvertirDiccionarioConClaveDuplaAListaString(Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contrasenias)
+       
+        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contrasenias)
         {
             List<string> resultado = new List<string>();
             foreach (var iterador in contrasenias)
@@ -254,12 +288,15 @@ namespace OblDiseño1
             return resultado;
         }
 
-        public List<string> ConvertirDiccionarioConClaveUsuarioListaString(Dictionary<Usuario, 
+        public List<string> ConvertirContraseñasCompartidasConmigoAListaString(Dictionary<Usuario, 
             List<Dupla_UsuarioContrasenia>> contrasenias)
         {
             List<string> resultado = new List<string>();
             foreach (var iterador in contrasenias)
-                resultado.Add(iterador.Value.ToString());
+            {
+                foreach (var iteradorDuplas in iterador.Value)
+                    resultado.Add(iteradorDuplas.ToString());
+            }
             return resultado;
         }
 

@@ -16,17 +16,18 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            CargarListaTarjetas();
+            CargarListaTarjetas(ref usuario, ref sistema);
 
         }
 
-        private void CargarListaTarjetas()
+        private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
         {
-            usuario.ObtenerTarjetas().Sort();
-            dataGridTarjetas.DataSource = usuario.ObtenerTarjetas();
-            dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
-            dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
-            dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+            if (usuario.ObtenerTarjetas().Count > 0)
+                usuario.ObtenerTarjetas().Sort();
+                dataGridTarjetas.DataSource = usuario.ObtenerTarjetas();
+                dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
+                dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
+                dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
         }
 
 
@@ -44,9 +45,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void btnAgregarTarjeta_Click(object sender, EventArgs e)
         {
-            this.Close();
-            InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
-            interfazAgregar.Show();
+            
+                this.Close();
+                InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
+                interfazAgregar.Show();
         }
 
 
@@ -82,10 +84,22 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     MessageBox.Show("Error, debe seleccionar una tarjeta");
                 else
                 {
+
+
+                    //Posible solucion, pero tira un error 
+                    //MessageBoxButtons botones = MessageBoxButtons.YesNo;
+                    //DialogResult dr = MessageBox.Show("¿Estas seguro que deseas eliminar esta Tarjeta?","", botones, MessageBoxIcon.Exclamation);
+
+                    //if (dr == DialogResult.Yes)
+                    //{
+                    //    this.usuario.EliminarTarjeta(tarjetaSeleccionada);
+                    //}
+                    //CargarListaTarjetas(ref usuario, ref sistema);
+
                     InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
                         (ref sistema, ref usuario, ref tarjetaSeleccionada);
+                    this.Close();
                     eliminarTarjeta.Show();
-                    CargarListaTarjetas();
                 }
             }
             else
