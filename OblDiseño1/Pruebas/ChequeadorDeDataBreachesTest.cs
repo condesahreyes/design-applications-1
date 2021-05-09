@@ -38,10 +38,10 @@ namespace Pruebas
             string tipoTarjeta_3 = "MasterCard";
             string tipoTarjeta_4 = "McDonalds";
 
-            long numeroTarjeta_1 = 1234567812345678;
-            long numeroTarjeta_2 = 7676767676767676;
-            long numeroTarjeta_3 = 9999888877776666;
-            long numeroTarjeta_4 = 1000999988887777;
+            string numeroTarjeta_1 = "1234567812345678";
+            string numeroTarjeta_2 = "7676767676767676";
+            string numeroTarjeta_3 = "9999888877776666";
+            string numeroTarjeta_4 = "1000999988887777";
 
             int codigoSeguridadTargeta_1 = 123;
             int codigoSeguridadTargeta_2 = 888;

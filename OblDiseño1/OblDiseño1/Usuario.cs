@@ -332,6 +332,14 @@ namespace OblDiseño1
                 return false;
         }
 
+        public void RemoverDupla(Dupla_UsuarioContrasenia duplaARemover)
+        {
+            if (this.duplas.Contains(duplaARemover))
+            {
+                this.duplas.Remove(duplaARemover);
+            }
+        }
+
     }
 
     public struct reporte

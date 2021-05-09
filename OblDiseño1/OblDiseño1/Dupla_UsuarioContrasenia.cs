@@ -61,6 +61,11 @@ namespace OblDiseño1
             DataBrench = false;
         }
 
+        private void ActualizarUltimaFechaModificacion()
+        {
+            FechaUltimaModificacion = DateTime.Today;
+        }
+
         public void ActualizarNota(string unaNota)
         {
             int largoNota = unaNota.Length;
@@ -69,7 +74,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"La nota debe contener " +
                     $"como maximo {NOTA_LARGO_MAX} caracteres");
             else
+            {
                 nota = unaNota;
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public void ActualizarNombreSitioApp(string unNombreSitioApp)
@@ -80,7 +88,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {SITIO_LARGO_MIN} y {SITIO_LARGO_MAX} caracteres");
             else
+            {
                 nombreSitioApp = unNombreSitioApp;
+                ActualizarUltimaFechaModificacion();
+            }  
         }
 
         public void ActualizarNombreUsuario(string unNombreUsuario)
@@ -91,7 +102,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {NOMBRE_LARGO_MIN} y {NOMBRE_LARGO_MAX} caracteres");
             else
+            {
                 nombreUsuario = unNombreUsuario;
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public void ActualizarContrasenia(string unaContrasenia)
@@ -101,10 +115,13 @@ namespace OblDiseño1
             if (EsLargoInvalidoContrasenia(largo) && largo != 0)
                 throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
                     $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
+            else
+            {
+                contrasenia = unaContrasenia;
 
-            contrasenia = unaContrasenia;
-
-            nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+                nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public static int CalcularSeguridad(string unaContrasenia)

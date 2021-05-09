@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazGrafica.InterfacesReporte;
+using InterfazGrafica.InterfazDataBreaches;
 using OblDiseño1;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
@@ -41,8 +42,25 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             var bindingSource = new BindingSource();
             bindingSource.DataSource = usuario.ObtenerCategorias();
             this.comboBox_Categoria.DataSource = bindingSource.DataSource;
+            SeleccionarCategoriaOriginal();
             this.richTextBox_Nota.Text = dupla.Nota;
         }
+
+
+        private void SeleccionarCategoriaOriginal()
+        {
+            int indiceCatOriginal = -1;
+            for (int i = 0; i < comboBox_Categoria.Items.Count; i++)
+            {
+                if (this.dupla.Categoria.Nombre.Equals(comboBox_Categoria.Items[i].ToString()))
+                {
+                    indiceCatOriginal = i;
+                    break;
+                }
+            }
+            this.comboBox_Categoria.SelectedIndex = indiceCatOriginal;
+        }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -111,16 +129,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void button__RevertirCategoria_Click(object sender, EventArgs e)
         {
-            int indiceCatOriginal = -1;
-            for (int i = 0; i < comboBox_Categoria.Items.Count; i++)
-            {
-                if (this.dupla.Categoria.Nombre.Equals(comboBox_Categoria.Items[i].ToString()))
-                {
-                    indiceCatOriginal = i;
-                    break;
-                }
-            }
-            this.comboBox_Categoria.SelectedIndex = indiceCatOriginal;
+            SeleccionarCategoriaOriginal();
         }
 
         private void button_Cancelar_Click(object sender, EventArgs e)
@@ -133,6 +142,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             if (ModificarContrasenia())
             {
                 MessageBox.Show("La contrasenia se guardo correctamente");
+                CerrarVentana();
+            }
+            else
+            {
+                MessageBox.Show("No se realizaron cambios");
                 CerrarVentana();
             }
         }
@@ -151,23 +165,46 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     interfazContra.Show();
                     this.Close();
                     break;
+                case "InterfazChequeoDataBreaches":
+                    InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+                    interfazDataBreaches.Show();
+                    this.Close();
+                    break;
             }
         }
 
         private bool ModificarContrasenia()
         {
-            if (!this.dupla.NombreUsuario.Equals(this.textBox_Usuario.Text))
-                this.dupla.NombreUsuario = this.textBox_Usuario.Text;
-            if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
-                this.dupla.Contrasenia = this.textBox_Contrasenia.Text;
-            if (!this.dupla.NombreSitioApp.Equals(this.textBox_Sitio.Text))
-                this.dupla.NombreSitioApp = this.textBox_Sitio.Text;
-            if (!this.dupla.Categoria.Nombre.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
-                this.dupla.Categoria = (Categoria)this.comboBox_Categoria.SelectedItem;
-            if (!this.dupla.Nota.Equals(this.richTextBox_Nota.Text))
-                this.dupla.Nota = this.richTextBox_Nota.Text;
+            bool seRealizaronCambios = false;
 
-            return true;
+            if (!this.dupla.NombreUsuario.Equals(this.textBox_Usuario.Text))
+            {
+                this.dupla.NombreUsuario = this.textBox_Usuario.Text;
+                seRealizaronCambios = true;
+            }      
+            if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
+            {
+                this.dupla.Contrasenia = this.textBox_Contrasenia.Text;
+                seRealizaronCambios = true;
+            }   
+            if (!this.dupla.NombreSitioApp.Equals(this.textBox_Sitio.Text))
+            {
+                this.dupla.NombreSitioApp = this.textBox_Sitio.Text;
+                seRealizaronCambios = true;
+            }                
+            if (!this.dupla.Categoria.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
+            {
+                this.dupla.Categoria = (Categoria)this.comboBox_Categoria.SelectedItem;
+                seRealizaronCambios = true;
+                MessageBox.Show("Categoria");
+            }                
+            if (!this.dupla.Nota.Equals(this.richTextBox_Nota.Text))
+            {
+                this.dupla.Nota = this.richTextBox_Nota.Text;
+                seRealizaronCambios = true;
+            }                
+
+            return seRealizaronCambios;
         }
 
         private void button_GenerarContrasenia_Click(object sender, EventArgs e)

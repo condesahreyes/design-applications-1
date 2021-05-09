@@ -53,13 +53,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
 
-            long numeroTarjetaAConvertir = long.Parse(numeroTarjeta);
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
             Categoria categoria = new Categoria(nombreCategoria);
 
             this.tarjeta.Nombre = textBoxNombre.Text;
             this.tarjeta.Tipo = tipoTarjeta;
-            this.tarjeta.Numero = numeroTarjetaAConvertir;
+            this.tarjeta.Numero = numeroTarjeta;
             this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
             this.tarjeta.FechaVencimiento = fecha;
             this.tarjeta.Categoria = categoria;

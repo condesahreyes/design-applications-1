@@ -7,12 +7,12 @@ namespace Pruebas
     [TestClass]
     public class TarjetaTest
     {
-        private long numero;
+        private string numero;
         private string tipo;
         private string nota;
         private string nombre;
         private int codigoSeguridad;
-        private long numeroIncorrecto;
+        private string numeroIncorrecto;
         private int codigoSeguridadLargo;
         private int codigoSeguridadCorto;
 
@@ -29,13 +29,13 @@ namespace Pruebas
             nombre = "Rodri";
             codigoSeguridad = 241;
             codigoSeguridadCorto = 2;
-            numero = 1876322167154328;
+            numero = "1876322167154328";
             codigoSeguridadLargo = 23834;
-            numeroIncorrecto = 8371635461;
+            numeroIncorrecto = "8371635461";
             categoria = new Categoria("Personal");
             fechaIncorrecta = new DateTime(1200, 04, 12);
             fechaVencimiento = new DateTime(2024, 10, 05);
-            tarjetaEsperada = new Tarjeta("Rodri", "Visa", 1876322167154328, 241, fechaVencimiento, categoria, nota);
+            tarjetaEsperada = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, fechaVencimiento, categoria, nota);
         }
         
         [TestMethod]

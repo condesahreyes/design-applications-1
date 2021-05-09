@@ -19,6 +19,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             this.usuario = usuario;
             this.sistema = sistema;
             this.categoria = categoria;
+            this.textBoxModificarCategoria.Text = this.categoria.Nombre;
         }
 
         private void btnModificarCategoria_Click(object sender, System.EventArgs e)
@@ -57,6 +58,11 @@ namespace InterfazGrafica.InterfazDeCategorias
         private void btnCancelarModCategoria_Click(object sender, System.EventArgs e)
         {
             IrACategoria();
+        }
+
+        private void button_RevertirCambios_Click(object sender, System.EventArgs e)
+        {
+            this.textBoxModificarCategoria.Text = this.categoria.Nombre;
         }
     }
 }

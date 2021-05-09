@@ -22,8 +22,8 @@ namespace InterfazGrafica.InterfacesMenu
             //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
             if (sistema.getHayQueCrearDatosDePrueba())
             {
-                //CargarTarjetasDeEjemplo();
-                //CargarDatosDeEjemplo();
+                CargarTarjetasDeEjemplo();
+                CargarDatosDeEjemplo();
                  sistema.yaSeCrearonDatosDePruva();
 
             }
@@ -149,15 +149,15 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void CargarTarjetasDeEjemplo()
         {
-            Categoria primerCategoria = new Categoria("Personal");
-            Categoria segundaCategoria = new Categoria("Trabajo");
-            Categoria tercerCategoria = new Categoria("Web");
+            Categoria primerCategoria = new Categoria("Personalsssd");
+            Categoria segundaCategoria = new Categoria("Trabajossds");
+            Categoria tercerCategoria = new Categoria("Websdsd");
 
 
-            Tarjeta primerTarjeta = new Tarjeta("Tarjeta BBVA Gold", "VISA", 1342768988934544, 721, new DateTime(2022, 09,17), primerCategoria, "Tarjeta de cobro de sueldo" );
-            Tarjeta segundaTarjeta = new Tarjeta("Tarjeta ITAU", "MASTERCARD", 6726534165445561, 966, new DateTime(2028,03,15), segundaCategoria, "");
-            Tarjeta tercerTarjeta = new Tarjeta("Black Brou", "MASTERCARD", 9347272233351211, 666, new DateTime(2031,02,09), primerCategoria, "Sin mucho que decir");
-            Tarjeta cuartaTarjeta = new Tarjeta("HSBC Credito", "AMERICAN EXPRESS", 8888999936544567,255, new DateTime(2026,11,25), tercerCategoria,"");
+            Tarjeta primerTarjeta = new Tarjeta("Tarjeta BBVA Gold", "VISA", "1342768988934544", 721, new DateTime(2022, 09,17), primerCategoria, "Tarjeta de cobro de sueldo" );
+            Tarjeta segundaTarjeta = new Tarjeta("Tarjeta ITAU", "MASTERCARD", "6726534165445561", 966, new DateTime(2028,03,15), segundaCategoria, "");
+            Tarjeta tercerTarjeta = new Tarjeta("Black Brou", "MASTERCARD", "9347272233351211", 666, new DateTime(2031,02,09), primerCategoria, "Sin mucho que decir");
+            Tarjeta cuartaTarjeta = new Tarjeta("HSBC Credito", "AMERICAN EXPRESS", "8888999936544567",255, new DateTime(2026,11,25), tercerCategoria,"");
 
             usuario.AgregarCategoria(primerCategoria);
             usuario.AgregarCategoria(segundaCategoria);
