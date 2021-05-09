@@ -62,10 +62,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nombreCategoria = textBoxCategoria.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
             
-            long numeroTarjetaAConvertir = long.Parse(numeroTarjeta);
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
             Categoria categoria = new Categoria(nombreCategoria);
-            Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjetaAConvertir, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
+            Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
             usuario.AgregarTarjeta(nuevaTarjeta);
             usuario.AgregarCategoria(categoria);
             IrAInterfazTarjeta();

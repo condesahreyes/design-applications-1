@@ -29,8 +29,8 @@ namespace Pruebas
         private static string[] tiposTarjetas = {"Visa gold",
             "Itau volar", "BBVA credito", "HSBC debito"};
 
-        private static long[] numTarjetas = { 1234567891234567, 
-            7894561234567894, 9876543219876543, 5462134567896543};
+        private static string[] numTarjetas = { "1234567891234567", 
+            "7894561234567894", "9876543219876543", "5462134567896543"};
 
         private static int[] codigosTarjetas = { 123, 321, 456, 789};
 

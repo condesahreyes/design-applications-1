@@ -16,12 +16,12 @@ namespace OblDiseño1
     private string nombre;
     private string tipo;
     private int codigoSeguridad;
-    private long numero;
+    private string numero;
 
     private DateTime fechaVencimiento;
     private Categoria categoria;
 
-    public Tarjeta(string unNombre, string unTipo, long unNumero, int unCodigoseguridad, DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
+    public Tarjeta(string unNombre, string unTipo, string unNumero, int unCodigoseguridad, DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
     {
         Nombre = unNombre;
         Tipo = unTipo;
@@ -38,7 +38,7 @@ namespace OblDiseño1
 
     public string Tipo { get => tipo; set => SetTipo(value); }
 
-    public long Numero {
+    public string Numero {
 
         get => numero;
 

@@ -20,7 +20,6 @@ namespace OblDiseño1
         {
             List<object>[] datosVulnerados = new List<object>[cantTiposObjetosVulnerables];
             
-            //List<Object> datosVulnerados = new List<Object>();
             datosVulnerados[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
             datosVulnerados[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
 
@@ -46,11 +45,8 @@ namespace OblDiseño1
             foreach (string dato in datosDelDataBreach)
                 if (EsNumeroDeTarjetaValido(dato))
                     foreach (Tarjeta tarjeta in Usuario.ObtenerTarjetas())
-                    {
-                        string numeroDeLaTarjetaAString = "" + tarjeta.Numero;
-                        if (dato.Equals(numeroDeLaTarjetaAString))
+                        if (dato == tarjeta.Numero)
                             tarjetasVulneradas.Add(tarjeta);
-                    }
 
             return tarjetasVulneradas;
         }
@@ -58,19 +54,7 @@ namespace OblDiseño1
 
         private bool EsNumeroDeTarjetaValido(string posibleNumeroDeTarjeta)
         {
-            bool esValido = true;
-
-            if (!(posibleNumeroDeTarjeta.Length == 16))
-                return false;
-            else
-                for (int i = 0; i < posibleNumeroDeTarjeta.Length && esValido; i++)
-                {
-                    int valorStringAsci = (int)posibleNumeroDeTarjeta[i];
-                    if (valorStringAsci < asciNumericoDesde || valorStringAsci > asciNumericoHasta)
-                        return false;
-                }
-
-            return true;
+            return (posibleNumeroDeTarjeta.Length == 16) ? true : false;
         }
 
     }

@@ -14,15 +14,18 @@ namespace InterfazGrafica.InterfazCategoria
 
         public InterfazCategorias(ref Usuario usuario, ref Sistema sistema)
         {
-            InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
+
+            InitializeComponent();
             CargarLista();
         }
 
         private void CargarLista()
         {
             List<Categoria> categorias = usuario.ObtenerCategorias();
+            categorias.Sort();
+
             dataGridCategorias.DataSource = categorias;
         }
 
@@ -60,28 +63,25 @@ namespace InterfazGrafica.InterfazCategoria
                     MessageBox.Show("Error, debe seleccionar una categoría");
                 else
                 {
-                    Categoria aModificar = ObtenerCategoriaPorNombre(categoriaSeleccionada.Value.ToString());
-                    this.Hide();
-                    InterfazModificarCategoria modificarCategoria = new InterfazModificarCategoria
-                        (ref sistema, ref usuario, ref aModificar);
-                    modificarCategoria.Show();
+                    Categoria aModificar = ObtenerCategoriaDelDataGrid();
+                    MostrarPantallaModificarCtagoria(ref aModificar);
                 }
             }
             else
                 MessageBox.Show("Error, no hay categorías para modificar");
         }
 
-        private Categoria ObtenerCategoriaPorNombre(string nombreCategoria)
+        private Categoria ObtenerCategoriaDelDataGrid()
         {
-            try
-            {
-                return usuario.DevolverCategoria(nombreCategoria);
-            }catch(Exception ObjectNotFoundException)
-            {
-                MessageBox.Show("Error, no existe esa categoría");
-            }
+            return (Categoria)dataGridCategorias.CurrentRow.DataBoundItem;
+        }
 
-            return null;
+        private void MostrarPantallaModificarCtagoria(ref Categoria aModificar)
+        {
+            this.Hide();
+            InterfazModificarCategoria modificarCategoria = new InterfazModificarCategoria
+                (ref sistema, ref usuario, ref aModificar);
+            modificarCategoria.Show();
         }
 
     }

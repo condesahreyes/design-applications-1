@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazGrafica.InterfacesReporte;
+using InterfazGrafica.InterfazDataBreaches;
 using OblDiseño1;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
@@ -162,6 +163,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 case "InterfazContrasenia":
                     InterfazContrasenia interfazContra = new InterfazContrasenia(ref usuario, ref sistema);
                     interfazContra.Show();
+                    this.Close();
+                    break;
+                case "InterfazChequeoDataBreaches":
+                    InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+                    interfazDataBreaches.Show();
                     this.Close();
                     break;
             }
