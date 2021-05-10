@@ -38,31 +38,41 @@
             // 
             // btnCancelarModCategoria
             // 
-            this.btnCancelarModCategoria.Location = new System.Drawing.Point(259, 242);
+            this.btnCancelarModCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnCancelarModCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancelarModCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelarModCategoria.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.btnCancelarModCategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnCancelarModCategoria.Location = new System.Drawing.Point(310, 268);
             this.btnCancelarModCategoria.Name = "btnCancelarModCategoria";
-            this.btnCancelarModCategoria.Size = new System.Drawing.Size(91, 23);
+            this.btnCancelarModCategoria.Size = new System.Drawing.Size(145, 27);
             this.btnCancelarModCategoria.TabIndex = 18;
             this.btnCancelarModCategoria.Text = "Cancelar";
-            this.btnCancelarModCategoria.UseVisualStyleBackColor = true;
+            this.btnCancelarModCategoria.UseVisualStyleBackColor = false;
             this.btnCancelarModCategoria.Click += new System.EventHandler(this.btnCancelarModCategoria_Click);
             // 
             // btnModificarCategoria
             // 
-            this.btnModificarCategoria.Location = new System.Drawing.Point(144, 242);
+            this.btnModificarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnModificarCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModificarCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificarCategoria.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.btnModificarCategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnModificarCategoria.Location = new System.Drawing.Point(138, 268);
             this.btnModificarCategoria.Name = "btnModificarCategoria";
-            this.btnModificarCategoria.Size = new System.Drawing.Size(91, 23);
+            this.btnModificarCategoria.Size = new System.Drawing.Size(145, 27);
             this.btnModificarCategoria.TabIndex = 17;
             this.btnModificarCategoria.Text = "Modificar";
-            this.btnModificarCategoria.UseVisualStyleBackColor = true;
+            this.btnModificarCategoria.UseVisualStyleBackColor = false;
             this.btnModificarCategoria.Click += new System.EventHandler(this.btnModificarCategoria_Click_1);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label1.Location = new System.Drawing.Point(140, 148);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(172)))), ((int)(((byte)(192)))));
+            this.label1.Location = new System.Drawing.Point(199, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 16;
@@ -73,9 +83,9 @@
             this.lblListadoTarjetas.AutoSize = true;
             this.lblListadoTarjetas.BackColor = System.Drawing.Color.Transparent;
             this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblListadoTarjetas.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblListadoTarjetas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoTarjetas.Location = new System.Drawing.Point(166, 76);
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(264, 53);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
             this.lblListadoTarjetas.Size = new System.Drawing.Size(191, 26);
             this.lblListadoTarjetas.TabIndex = 15;
@@ -83,19 +93,24 @@
             // 
             // textBoxModificarCategoria
             // 
-            this.textBoxModificarCategoria.Location = new System.Drawing.Point(240, 148);
+            this.textBoxModificarCategoria.Location = new System.Drawing.Point(299, 157);
             this.textBoxModificarCategoria.Name = "textBoxModificarCategoria";
-            this.textBoxModificarCategoria.Size = new System.Drawing.Size(100, 20);
+            this.textBoxModificarCategoria.Size = new System.Drawing.Size(156, 20);
             this.textBoxModificarCategoria.TabIndex = 14;
             // 
             // button_RevertirCambios
             // 
-            this.button_RevertirCambios.Location = new System.Drawing.Point(363, 147);
+            this.button_RevertirCambios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.button_RevertirCambios.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_RevertirCambios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_RevertirCambios.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.button_RevertirCambios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.button_RevertirCambios.Location = new System.Drawing.Point(379, 183);
             this.button_RevertirCambios.Name = "button_RevertirCambios";
-            this.button_RevertirCambios.Size = new System.Drawing.Size(27, 23);
+            this.button_RevertirCambios.Size = new System.Drawing.Size(76, 27);
             this.button_RevertirCambios.TabIndex = 19;
-            this.button_RevertirCambios.Text = "R";
-            this.button_RevertirCambios.UseVisualStyleBackColor = true;
+            this.button_RevertirCambios.Text = "Recargar";
+            this.button_RevertirCambios.UseVisualStyleBackColor = false;
             this.button_RevertirCambios.Click += new System.EventHandler(this.button_RevertirCambios_Click);
             // 
             // InterfazModificarCategoria
@@ -103,7 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(563, 386);
             this.Controls.Add(this.button_RevertirCambios);
             this.Controls.Add(this.btnCancelarModCategoria);
             this.Controls.Add(this.btnModificarCategoria);

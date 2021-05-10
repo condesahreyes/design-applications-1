@@ -30,29 +30,35 @@
         {
             this.btnContraseniaVolverMenu = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView_ListaDuplas = new System.Windows.Forms.DataGridView();
             this.btnEliminarContrasenia = new System.Windows.Forms.Button();
             this.lblListadoContrasenias = new System.Windows.Forms.Label();
             this.btnModificarContrasenia = new System.Windows.Forms.Button();
             this.btnAgregarContrasenia = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView_ListaDuplas = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ListaDuplas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnContraseniaVolverMenu
             // 
-            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(12, 306);
+            this.btnContraseniaVolverMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnContraseniaVolverMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnContraseniaVolverMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContraseniaVolverMenu.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnContraseniaVolverMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(3, 308);
             this.btnContraseniaVolverMenu.Name = "btnContraseniaVolverMenu";
-            this.btnContraseniaVolverMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnContraseniaVolverMenu.Size = new System.Drawing.Size(81, 27);
             this.btnContraseniaVolverMenu.TabIndex = 9;
             this.btnContraseniaVolverMenu.Text = "Volver";
-            this.btnContraseniaVolverMenu.UseVisualStyleBackColor = true;
+            this.btnContraseniaVolverMenu.UseVisualStyleBackColor = false;
             this.btnContraseniaVolverMenu.Click += new System.EventHandler(this.btnContraseniaVolverMenu_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.btnContraseniaVolverMenu);
             this.panel1.Controls.Add(this.dataGridView_ListaDuplas);
             this.panel1.Controls.Add(this.btnEliminarContrasenia);
             this.panel1.Controls.Add(this.lblListadoContrasenias);
@@ -61,17 +67,39 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(466, 288);
+            this.panel1.Size = new System.Drawing.Size(539, 338);
             this.panel1.TabIndex = 8;
+            // 
+            // dataGridView_ListaDuplas
+            // 
+            this.dataGridView_ListaDuplas.AllowUserToAddRows = false;
+            this.dataGridView_ListaDuplas.AllowUserToDeleteRows = false;
+            this.dataGridView_ListaDuplas.AllowUserToResizeColumns = false;
+            this.dataGridView_ListaDuplas.AllowUserToResizeRows = false;
+            this.dataGridView_ListaDuplas.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_ListaDuplas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_ListaDuplas.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridView_ListaDuplas.Location = new System.Drawing.Point(39, 49);
+            this.dataGridView_ListaDuplas.MultiSelect = false;
+            this.dataGridView_ListaDuplas.Name = "dataGridView_ListaDuplas";
+            this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(464, 225);
+            this.dataGridView_ListaDuplas.TabIndex = 6;
+            this.dataGridView_ListaDuplas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ListaDuplas_CellContentClick);
             // 
             // btnEliminarContrasenia
             // 
-            this.btnEliminarContrasenia.Location = new System.Drawing.Point(388, 262);
+            this.btnEliminarContrasenia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnEliminarContrasenia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnEliminarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnEliminarContrasenia.Location = new System.Drawing.Point(421, 289);
             this.btnEliminarContrasenia.Name = "btnEliminarContrasenia";
-            this.btnEliminarContrasenia.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnEliminarContrasenia.TabIndex = 5;
             this.btnEliminarContrasenia.Text = "Eliminar";
-            this.btnEliminarContrasenia.UseVisualStyleBackColor = true;
+            this.btnEliminarContrasenia.UseVisualStyleBackColor = false;
             this.btnEliminarContrasenia.Click += new System.EventHandler(this.btnEliminarContrasenia_Click);
             // 
             // lblListadoContrasenias
@@ -79,9 +107,9 @@
             this.lblListadoContrasenias.AutoSize = true;
             this.lblListadoContrasenias.BackColor = System.Drawing.Color.Transparent;
             this.lblListadoContrasenias.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblListadoContrasenias.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblListadoContrasenias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
             this.lblListadoContrasenias.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoContrasenias.Location = new System.Drawing.Point(15, 7);
+            this.lblListadoContrasenias.Location = new System.Drawing.Point(279, 7);
             this.lblListadoContrasenias.Name = "lblListadoContrasenias";
             this.lblListadoContrasenias.Size = new System.Drawing.Size(224, 26);
             this.lblListadoContrasenias.TabIndex = 4;
@@ -89,22 +117,32 @@
             // 
             // btnModificarContrasenia
             // 
-            this.btnModificarContrasenia.Location = new System.Drawing.Point(307, 262);
+            this.btnModificarContrasenia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnModificarContrasenia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModificarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnModificarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnModificarContrasenia.Location = new System.Drawing.Point(325, 289);
             this.btnModificarContrasenia.Name = "btnModificarContrasenia";
-            this.btnModificarContrasenia.Size = new System.Drawing.Size(75, 23);
+            this.btnModificarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnModificarContrasenia.TabIndex = 3;
             this.btnModificarContrasenia.Text = "Modificar";
-            this.btnModificarContrasenia.UseVisualStyleBackColor = true;
+            this.btnModificarContrasenia.UseVisualStyleBackColor = false;
             this.btnModificarContrasenia.Click += new System.EventHandler(this.btnModificarContrasenia_Click);
             // 
             // btnAgregarContrasenia
             // 
-            this.btnAgregarContrasenia.Location = new System.Drawing.Point(226, 262);
+            this.btnAgregarContrasenia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnAgregarContrasenia.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnAgregarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnAgregarContrasenia.Location = new System.Drawing.Point(229, 289);
             this.btnAgregarContrasenia.Name = "btnAgregarContrasenia";
-            this.btnAgregarContrasenia.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnAgregarContrasenia.TabIndex = 2;
             this.btnAgregarContrasenia.Text = "Agregar";
-            this.btnAgregarContrasenia.UseVisualStyleBackColor = true;
+            this.btnAgregarContrasenia.UseVisualStyleBackColor = false;
             this.btnAgregarContrasenia.Click += new System.EventHandler(this.btnAgregarContrasenia_Click);
             // 
             // label1
@@ -115,28 +153,12 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
             // 
-            // dataGridView_ListaDuplas
-            // 
-            this.dataGridView_ListaDuplas.AllowUserToAddRows = false;
-            this.dataGridView_ListaDuplas.AllowUserToDeleteRows = false;
-            this.dataGridView_ListaDuplas.AllowUserToResizeColumns = false;
-            this.dataGridView_ListaDuplas.AllowUserToResizeRows = false;
-            this.dataGridView_ListaDuplas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_ListaDuplas.Location = new System.Drawing.Point(20, 49);
-            this.dataGridView_ListaDuplas.MultiSelect = false;
-            this.dataGridView_ListaDuplas.Name = "dataGridView_ListaDuplas";
-            this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(428, 207);
-            this.dataGridView_ListaDuplas.TabIndex = 6;
-            this.dataGridView_ListaDuplas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ListaDuplas_CellContentClick);
-            // 
             // InterfazContrasenia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
-            this.Controls.Add(this.btnContraseniaVolverMenu);
+            this.ClientSize = new System.Drawing.Size(563, 362);
             this.Controls.Add(this.panel1);
             this.Name = "InterfazContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

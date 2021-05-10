@@ -47,7 +47,7 @@
             this.btnCategoriaVolverMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCategoriaVolverMenu.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCategoriaVolverMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnCategoriaVolverMenu.Location = new System.Drawing.Point(3, 311);
+            this.btnCategoriaVolverMenu.Location = new System.Drawing.Point(3, 302);
             this.btnCategoriaVolverMenu.Name = "btnCategoriaVolverMenu";
             this.btnCategoriaVolverMenu.Size = new System.Drawing.Size(81, 27);
             this.btnCategoriaVolverMenu.TabIndex = 5;

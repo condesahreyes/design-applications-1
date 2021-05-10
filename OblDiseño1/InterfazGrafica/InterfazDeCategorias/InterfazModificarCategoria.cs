@@ -17,12 +17,12 @@ namespace InterfazGrafica.InterfazDeCategorias
 
         public InterfazModificarCategoria(ref Sistema sistema, ref Usuario usuario, ref Categoria categoria)
         {
+            InitializeComponent();
+
             this.usuario = usuario;
             this.sistema = sistema;
             this.categoria = categoria;
             this.textBoxModificarCategoria.Text = this.categoria.Nombre;
-
-            InitializeComponent();
         }
 
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)

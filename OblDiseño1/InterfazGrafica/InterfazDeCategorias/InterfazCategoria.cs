@@ -62,7 +62,7 @@ namespace InterfazGrafica.InterfazCategoria
         {
             bool cantidadCategoriaMayorA0 = (dataGridCategorias.RowCount > 0);
 
-            if (cantidadCategoriaMayorA0)
+            if (!cantidadCategoriaMayorA0)
                 MessageBox.Show(msgNoHayCategorias);
 
             return (dataGridCategorias.RowCount > 0) ? true : false;
