@@ -589,13 +589,14 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             // 
             this.comboBox_Categoria.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox_Categoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Categoria.Font = new System.Drawing.Font("Symbol", 8.25F);
+            this.comboBox_Categoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Categoria.FormattingEnabled = true;
             this.comboBox_Categoria.Location = new System.Drawing.Point(5, 5);
             this.comboBox_Categoria.Margin = new System.Windows.Forms.Padding(0);
             this.comboBox_Categoria.Name = "comboBox_Categoria";
-            this.comboBox_Categoria.Size = new System.Drawing.Size(282, 21);
+            this.comboBox_Categoria.Size = new System.Drawing.Size(282, 32);
             this.comboBox_Categoria.TabIndex = 0;
+            this.comboBox_Categoria.SelectedIndexChanged += new System.EventHandler(this.comboBox_Categoria_SelectedIndexChanged);
             // 
             // panel24
             // 
