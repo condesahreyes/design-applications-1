@@ -12,6 +12,9 @@ namespace InterfazGrafica.InterfazCategoria
         private Usuario usuario;
         private Sistema sistema;
 
+        private readonly string msgNoHayCategorias= "Error, no hay categorías para modificar";
+        private readonly string msgSelecionarCategorias= "Error, debe seleccionar una categoría";
+
         public InterfazCategorias(ref Usuario usuario, ref Sistema sistema)
         {
             this.usuario = usuario;
@@ -29,11 +32,6 @@ namespace InterfazGrafica.InterfazCategoria
             dataGridCategorias.DataSource = categorias;
         }
 
-        private void InterfazCategorias_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCategoriaVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -48,27 +46,26 @@ namespace InterfazGrafica.InterfazCategoria
             agregarCategoria.Show();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void btnModificarCategoria_Click(object sender, EventArgs e)
         {
-            if (dataGridCategorias.RowCount > 0)
-            {
-                var categoriaSeleccionada = dataGridCategorias.CurrentCell;
-
-                if (categoriaSeleccionada == null)
-                    MessageBox.Show("Error, debe seleccionar una categoría");
+            if (HayCategorias())
+                if (ObtenerCategoriaDelDataGrid() == null)
+                    MessageBox.Show(msgSelecionarCategorias);
                 else
                 {
                     Categoria aModificar = ObtenerCategoriaDelDataGrid();
                     MostrarPantallaModificarCtagoria(ref aModificar);
                 }
-            }
-            else
-                MessageBox.Show("Error, no hay categorías para modificar");
+        }
+
+        private bool HayCategorias()
+        {
+            bool cantidadCategoriaMayorA0 = (dataGridCategorias.RowCount > 0);
+
+            if (!cantidadCategoriaMayorA0)
+                MessageBox.Show(msgNoHayCategorias);
+
+            return (dataGridCategorias.RowCount > 0) ? true : false;
         }
 
         private Categoria ObtenerCategoriaDelDataGrid()

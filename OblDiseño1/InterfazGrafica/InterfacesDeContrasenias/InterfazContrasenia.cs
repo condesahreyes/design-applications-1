@@ -90,6 +90,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
                 usuario.RemoverDupla(duplaSeleccionada);
+                MessageBox.Show("Se elimino correctamente");
                 CargarDuplas();
             }
         }

@@ -1,21 +1,15 @@
 ﻿using InterfazGrafica.InterfazCategoria;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
     public partial class InterfazAgregarCategoria : Form
     {
-        Sistema sistema;
-        Usuario usuario;
+        private Sistema sistema;
+        private Usuario usuario;
         public InterfazAgregarCategoria(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();

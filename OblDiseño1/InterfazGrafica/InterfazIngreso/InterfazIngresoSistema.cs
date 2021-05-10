@@ -7,26 +7,19 @@ namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazIngresoSistema : Form
     {
-        Sistema sistema;
+        private Sistema sistema;
 
         public InterfazIngresoSistema(ref Sistema sistema)
         {
-            InitializeComponent();
             this.sistema = sistema;
-            //Usuario para hacer pruebas
-            if (sistema.ObtenerUsuarios().Count == 0)
-            this.sistema.AgregarUsuario("Leonardo", "33333");
-        }
-
-        private void InterfazIngresoSistema_Load(object sender, EventArgs e)
-        {
-
+            InitializeComponent();
         }
 
         private void ingresoSistema_Click(object sender, EventArgs e)
         {
             string nombreUsuario = userGestor.Text;
             string contrasenia = pssGestor.Text;
+
             Usuario usuario = ObtenerUsuario(nombreUsuario, contrasenia);
 
             if (usuario != null && sistema.PuedoIngresarAlSistema(nombreUsuario, contrasenia))
@@ -89,15 +82,11 @@ namespace InterfazGrafica.InterfazIngreso
             pssGestor.Clear();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {}
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
             InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia(ref sistema);
             modificarContrasenia.Show();
         }
-        
     }
 }

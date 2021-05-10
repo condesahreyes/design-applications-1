@@ -139,28 +139,18 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void button_Aceptar_Click(object sender, EventArgs e)
         {
-            try
+            if (HuboCambios())
             {
                 if (ModificarContrasenia())
                 {
                     MessageBox.Show("La contrasenia se guardo correctamente");
                     CerrarVentana();
                 }
-                else
-                {
-                    MessageBox.Show("No se realizaron cambios");
-                    CerrarVentana();
-                }
             }
-            catch (Exepcion_DatosDeContraseniaInvalidos)
+            else
             {
-                MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
-                                "debe cumplir con el siguiente formato: " +
-                                "\n\n" +
-                                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
-                                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
-                                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
-                                "> Categoría: Se selecciona de las disponibles en el sistema");
+                MessageBox.Show("No se realizaron cambios");
+                CerrarVentana();
             }
         }
 
@@ -186,38 +176,77 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
         }
 
-        private bool ModificarContrasenia()
+        private bool HuboCambios()
         {
             bool seRealizaronCambios = false;
-
             if (!this.dupla.NombreUsuario.Equals(this.textBox_Usuario.Text))
             {
-                this.dupla.NombreUsuario = this.textBox_Usuario.Text;
                 seRealizaronCambios = true;
-            }      
+            }
             if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
             {
-                this.dupla.Contrasenia = this.textBox_Contrasenia.Text;
                 seRealizaronCambios = true;
-            }   
+            }
             if (!this.dupla.NombreSitioApp.Equals(this.textBox_Sitio.Text))
             {
-                this.dupla.NombreSitioApp = this.textBox_Sitio.Text;
                 seRealizaronCambios = true;
-            }                
+            }
             if (!this.dupla.Categoria.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
             {
-                this.dupla.Categoria = (Categoria)this.comboBox_Categoria.SelectedItem;
                 seRealizaronCambios = true;
-                MessageBox.Show("Categoria");
-            }                
+            }
             if (!this.dupla.Nota.Equals(this.richTextBox_Nota.Text))
             {
-                this.dupla.Nota = this.richTextBox_Nota.Text;
                 seRealizaronCambios = true;
-            }                
-
+            }
             return seRealizaronCambios;
+        }
+
+
+        private bool ModificarContrasenia()
+        {
+            bool seModificoCorrectamente = false;
+            try
+            {
+                if (!this.dupla.NombreUsuario.Equals(this.textBox_Usuario.Text))
+                {
+                    this.dupla.NombreUsuario = this.textBox_Usuario.Text;
+                    seModificoCorrectamente = true;
+                }
+                if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
+                {
+                    this.dupla.Contrasenia = this.textBox_Contrasenia.Text;
+                    seModificoCorrectamente = true;
+                }
+                if (!this.dupla.NombreSitioApp.Equals(this.textBox_Sitio.Text))
+                {
+                    this.dupla.NombreSitioApp = this.textBox_Sitio.Text;
+                    seModificoCorrectamente = true;
+                }
+                if (!this.dupla.Categoria.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
+                {
+                    this.dupla.Categoria = (Categoria)this.comboBox_Categoria.SelectedItem;
+                    seModificoCorrectamente = true;
+                }
+                if (!this.dupla.Nota.Equals(this.richTextBox_Nota.Text))
+                {
+                    this.dupla.Nota = this.richTextBox_Nota.Text;
+                    seModificoCorrectamente = true;
+                }
+            }
+            catch (Exepcion_DatosDeContraseniaInvalidos)
+            {
+                seModificoCorrectamente = false;
+                MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
+                                "debe cumplir con el siguiente formato: " +
+                                "\n\n" +
+                                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
+                                "> Categoría: Se selecciona de las disponibles en el sistema"
+                                );
+            }
+            return seModificoCorrectamente;
         }
 
         private void button_GenerarContrasenia_Click(object sender, EventArgs e)
@@ -239,6 +268,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+            
+        }
+       
+        private void comboBox_Categoria_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
