@@ -83,5 +83,10 @@ namespace InterfazGrafica.InterfazDataBreaches
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
         }
+
+        private void TextBoxDatosDataBreaches_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

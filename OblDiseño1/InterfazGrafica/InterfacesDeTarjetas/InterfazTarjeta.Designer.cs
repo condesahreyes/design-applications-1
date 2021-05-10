@@ -79,6 +79,7 @@
             this.dataGridTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridTarjetas.Size = new System.Drawing.Size(615, 245);
             this.dataGridTarjetas.TabIndex = 7;
+            this.dataGridTarjetas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTarjetas_CellContentClick);
             // 
             // btnEliminarTarjeta
             // 

@@ -13,6 +13,9 @@ namespace InterfazGrafica.InterfazIngreso
         {
             InitializeComponent();
             this.sistema = sistema;
+            //Usuario para hacer pruebas
+            if (sistema.ObtenerUsuarios().Count == 0)
+            this.sistema.AgregarUsuario("Leonardo", "33333");
         }
 
         private void InterfazIngresoSistema_Load(object sender, EventArgs e)

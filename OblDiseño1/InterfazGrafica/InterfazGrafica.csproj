@@ -120,6 +120,24 @@
     <Compile Include="InterfacesReporte\InterfazReporteVer.Designer.cs">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.Designer.cs">
+      <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.Designer.cs">
+      <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.Designer.cs">
+      <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +211,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesReporte\InterfazReporteVer.resx">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.resx">
+      <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.resx">
+      <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.resx">
+      <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazDataBreaches\InterfazChequeoDataBreaches.resx">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>

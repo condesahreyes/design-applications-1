@@ -139,15 +139,28 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void button_Aceptar_Click(object sender, EventArgs e)
         {
-            if (ModificarContrasenia())
+            try
             {
-                MessageBox.Show("La contrasenia se guardo correctamente");
-                CerrarVentana();
+                if (ModificarContrasenia())
+                {
+                    MessageBox.Show("La contrasenia se guardo correctamente");
+                    CerrarVentana();
+                }
+                else
+                {
+                    MessageBox.Show("No se realizaron cambios");
+                    CerrarVentana();
+                }
             }
-            else
+            catch (Exepcion_DatosDeContraseniaInvalidos)
             {
-                MessageBox.Show("No se realizaron cambios");
-                CerrarVentana();
+                MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
+                                "debe cumplir con el siguiente formato: " +
+                                "\n\n" +
+                                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
+                                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
+                                "> Categoría: Se selecciona de las disponibles en el sistema");
             }
         }
 
@@ -221,6 +234,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         }
 
         private void label_Usuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

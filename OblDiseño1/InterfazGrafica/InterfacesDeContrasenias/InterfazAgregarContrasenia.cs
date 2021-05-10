@@ -48,12 +48,16 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             catch (Exepcion_DatosDeContraseniaInvalidos)
             {
                 MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
-                                "debe cumplir con el siguiente formato: "+
+                                "debe cumplir con el siguiente formato: " +
                                 "\n\n" +
                                 "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
                                 "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
                                 "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
                                 "> Categoría: Se selecciona de las disponibles en el sistema");
+            }
+            catch (InvalidUsuarioDataException)
+            {
+                MessageBox.Show("Error: este usuario ya esta registado para este sitio en el sistema");
             }
         }
 

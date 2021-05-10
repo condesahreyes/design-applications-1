@@ -31,6 +31,8 @@ namespace OblDiseño1
         public string Nombre { get => nombre; set => ActualizarNombre(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
+
+        public Usuario() { }
         
         public Usuario(string nombre, string contrasenia)
         {
@@ -118,7 +120,10 @@ namespace OblDiseño1
 
         public void AgregarDupla(Dupla_UsuarioContrasenia dupla)
         {
-            this.duplas.Add(dupla);
+            if (this.duplas.Contains(dupla))
+                throw new InvalidUsuarioDataException();
+            else 
+                this.duplas.Add(dupla);
         }
 
         public void EliminarDupla(Dupla_UsuarioContrasenia dupla)
@@ -338,6 +343,11 @@ namespace OblDiseño1
             {
                 this.duplas.Remove(duplaARemover);
             }
+        }
+
+        public override string ToString()
+        {
+            return (this.Nombre);
         }
 
     }

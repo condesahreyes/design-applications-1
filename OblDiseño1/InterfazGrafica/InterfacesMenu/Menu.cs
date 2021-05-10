@@ -7,6 +7,8 @@ using InterfazGrafica.InterfacesDeContrasenias;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazIngreso;
 using InterfazGrafica.InterfazDataBreaches;
+using InterfazGrafica.InterfazCompartirContraseñas;
+
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -171,6 +173,13 @@ namespace InterfazGrafica.InterfacesMenu
         }
 
         private void btnCompartirContrasenia_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazContraseñasCompartidas interfazContraseñas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
+            interfazContraseñas.Show();
+        }
+
+        private void buttonContraseñasCompartidasConmigo_Click(object sender, EventArgs e)
         {
 
         }

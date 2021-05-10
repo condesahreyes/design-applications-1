@@ -41,9 +41,10 @@
             // 
             // btnCategoriaVolverMenu
             // 
-            this.btnCategoriaVolverMenu.Location = new System.Drawing.Point(12, 306);
+            this.btnCategoriaVolverMenu.Location = new System.Drawing.Point(16, 377);
+            this.btnCategoriaVolverMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCategoriaVolverMenu.Name = "btnCategoriaVolverMenu";
-            this.btnCategoriaVolverMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnCategoriaVolverMenu.Size = new System.Drawing.Size(100, 28);
             this.btnCategoriaVolverMenu.TabIndex = 5;
             this.btnCategoriaVolverMenu.Text = "Volver";
             this.btnCategoriaVolverMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -58,22 +59,26 @@
             this.panel1.Controls.Add(this.btnModificarCategoria);
             this.panel1.Controls.Add(this.btnAgregarCategoria);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(16, 15);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(466, 288);
+            this.panel1.Size = new System.Drawing.Size(621, 354);
             this.panel1.TabIndex = 4;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // dataGridCategorias
             // 
             this.dataGridCategorias.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dataGridCategorias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridCategorias.ColumnHeadersHeight = 29;
             this.dataGridCategorias.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridCategorias.Location = new System.Drawing.Point(20, 51);
+            this.dataGridCategorias.Location = new System.Drawing.Point(27, 63);
+            this.dataGridCategorias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridCategorias.MultiSelect = false;
             this.dataGridCategorias.Name = "dataGridCategorias";
             this.dataGridCategorias.ReadOnly = true;
             this.dataGridCategorias.RowHeadersWidth = 20;
-            this.dataGridCategorias.Size = new System.Drawing.Size(427, 189);
+            this.dataGridCategorias.Size = new System.Drawing.Size(569, 233);
             this.dataGridCategorias.TabIndex = 5;
             this.dataGridCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -84,17 +89,19 @@
             this.lblListadoCategoria.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblListadoCategoria.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblListadoCategoria.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoCategoria.Location = new System.Drawing.Point(15, 7);
+            this.lblListadoCategoria.Location = new System.Drawing.Point(20, 9);
+            this.lblListadoCategoria.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblListadoCategoria.Name = "lblListadoCategoria";
-            this.lblListadoCategoria.Size = new System.Drawing.Size(208, 26);
+            this.lblListadoCategoria.Size = new System.Drawing.Size(263, 33);
             this.lblListadoCategoria.TabIndex = 4;
             this.lblListadoCategoria.Text = "Listado de Categorías";
             // 
             // btnModificarCategoria
             // 
-            this.btnModificarCategoria.Location = new System.Drawing.Point(372, 262);
+            this.btnModificarCategoria.Location = new System.Drawing.Point(496, 322);
+            this.btnModificarCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificarCategoria.Name = "btnModificarCategoria";
-            this.btnModificarCategoria.Size = new System.Drawing.Size(75, 23);
+            this.btnModificarCategoria.Size = new System.Drawing.Size(100, 28);
             this.btnModificarCategoria.TabIndex = 3;
             this.btnModificarCategoria.Text = "Modificar";
             this.btnModificarCategoria.UseVisualStyleBackColor = true;
@@ -102,9 +109,10 @@
             // 
             // btnAgregarCategoria
             // 
-            this.btnAgregarCategoria.Location = new System.Drawing.Point(288, 262);
+            this.btnAgregarCategoria.Location = new System.Drawing.Point(384, 322);
+            this.btnAgregarCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregarCategoria.Name = "btnAgregarCategoria";
-            this.btnAgregarCategoria.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarCategoria.Size = new System.Drawing.Size(100, 28);
             this.btnAgregarCategoria.TabIndex = 2;
             this.btnAgregarCategoria.Text = "Agregar";
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
@@ -113,19 +121,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 16);
+            this.label1.Location = new System.Drawing.Point(23, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 0;
             // 
             // InterfazCategorias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(653, 420);
             this.Controls.Add(this.btnCategoriaVolverMenu);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categorías";

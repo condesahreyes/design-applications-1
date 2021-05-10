@@ -281,5 +281,11 @@ namespace OblDiseño1
             return this.Categoria.Nombre.CompareTo(otraDupla.Categoria.Nombre);
         }
 
+        public override bool Equals(object obj)
+        {
+            Dupla_UsuarioContrasenia duplaAComparar = (Dupla_UsuarioContrasenia)obj;
+            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
+        }
+
     }
 }

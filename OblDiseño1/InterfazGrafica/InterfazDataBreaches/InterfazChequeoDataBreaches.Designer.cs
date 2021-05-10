@@ -45,23 +45,26 @@
             // 
             this.dataGridTarjetas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridTarjetas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTarjetas.Location = new System.Drawing.Point(286, 83);
+            this.dataGridTarjetas.Location = new System.Drawing.Point(381, 102);
+            this.dataGridTarjetas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridTarjetas.MultiSelect = false;
             this.dataGridTarjetas.Name = "dataGridTarjetas";
             this.dataGridTarjetas.ReadOnly = true;
             this.dataGridTarjetas.RowHeadersVisible = false;
             this.dataGridTarjetas.RowHeadersWidth = 4;
             this.dataGridTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridTarjetas.Size = new System.Drawing.Size(339, 148);
+            this.dataGridTarjetas.Size = new System.Drawing.Size(452, 182);
             this.dataGridTarjetas.TabIndex = 0;
             // 
             // TextBoxDatosDataBreaches
             // 
-            this.TextBoxDatosDataBreaches.Location = new System.Drawing.Point(28, 137);
+            this.TextBoxDatosDataBreaches.Location = new System.Drawing.Point(37, 169);
+            this.TextBoxDatosDataBreaches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TextBoxDatosDataBreaches.Name = "TextBoxDatosDataBreaches";
-            this.TextBoxDatosDataBreaches.Size = new System.Drawing.Size(221, 245);
+            this.TextBoxDatosDataBreaches.Size = new System.Drawing.Size(293, 301);
             this.TextBoxDatosDataBreaches.TabIndex = 1;
             this.TextBoxDatosDataBreaches.Text = "";
+            this.TextBoxDatosDataBreaches.TextChanged += new System.EventHandler(this.TextBoxDatosDataBreaches_TextChanged);
             // 
             // lblListadoTarjetas
             // 
@@ -70,17 +73,19 @@
             this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblListadoTarjetas.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoTarjetas.Location = new System.Drawing.Point(222, 9);
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(296, 11);
+            this.lblListadoTarjetas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
-            this.lblListadoTarjetas.Size = new System.Drawing.Size(256, 26);
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(323, 33);
             this.lblListadoTarjetas.TabIndex = 11;
             this.lblListadoTarjetas.Text = "Chequeo de Data Breaches";
             // 
             // btnContraseniaVolverMenu
             // 
-            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(28, 417);
+            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(37, 513);
+            this.btnContraseniaVolverMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnContraseniaVolverMenu.Name = "btnContraseniaVolverMenu";
-            this.btnContraseniaVolverMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnContraseniaVolverMenu.Size = new System.Drawing.Size(100, 28);
             this.btnContraseniaVolverMenu.TabIndex = 26;
             this.btnContraseniaVolverMenu.Text = "Volver";
             this.btnContraseniaVolverMenu.UseVisualStyleBackColor = true;
@@ -88,9 +93,10 @@
             // 
             // btnChequear
             // 
-            this.btnChequear.Location = new System.Drawing.Point(174, 388);
+            this.btnChequear.Location = new System.Drawing.Point(232, 478);
+            this.btnChequear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnChequear.Name = "btnChequear";
-            this.btnChequear.Size = new System.Drawing.Size(75, 23);
+            this.btnChequear.Size = new System.Drawing.Size(100, 28);
             this.btnChequear.TabIndex = 27;
             this.btnChequear.Text = "Chequear";
             this.btnChequear.UseVisualStyleBackColor = true;
@@ -102,9 +108,10 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label2.Location = new System.Drawing.Point(339, 47);
+            this.label2.Location = new System.Drawing.Point(452, 58);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(184, 22);
+            this.label2.Size = new System.Drawing.Size(231, 28);
             this.label2.TabIndex = 29;
             this.label2.Text = "Tarjetas Vulneradas";
             // 
@@ -112,13 +119,15 @@
             // 
             this.dataGridContrasenias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridContrasenias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridContrasenias.Location = new System.Drawing.Point(286, 263);
+            this.dataGridContrasenias.Location = new System.Drawing.Point(381, 324);
+            this.dataGridContrasenias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridContrasenias.MultiSelect = false;
             this.dataGridContrasenias.Name = "dataGridContrasenias";
             this.dataGridContrasenias.ReadOnly = true;
             this.dataGridContrasenias.RowHeadersVisible = false;
+            this.dataGridContrasenias.RowHeadersWidth = 51;
             this.dataGridContrasenias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridContrasenias.Size = new System.Drawing.Size(339, 148);
+            this.dataGridContrasenias.Size = new System.Drawing.Size(452, 182);
             this.dataGridContrasenias.TabIndex = 30;
             // 
             // label3
@@ -127,17 +136,19 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label3.Location = new System.Drawing.Point(309, 238);
+            this.label3.Location = new System.Drawing.Point(412, 293);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(230, 22);
+            this.label3.Size = new System.Drawing.Size(291, 28);
             this.label3.TabIndex = 31;
             this.label3.Text = "Contraseñas vulnderadas";
             // 
             // btnModificarDupla
             // 
-            this.btnModificarDupla.Location = new System.Drawing.Point(487, 417);
+            this.btnModificarDupla.Location = new System.Drawing.Point(649, 513);
+            this.btnModificarDupla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificarDupla.Name = "btnModificarDupla";
-            this.btnModificarDupla.Size = new System.Drawing.Size(125, 23);
+            this.btnModificarDupla.Size = new System.Drawing.Size(167, 28);
             this.btnModificarDupla.TabIndex = 32;
             this.btnModificarDupla.Text = "Modificar contraseña";
             this.btnModificarDupla.UseVisualStyleBackColor = true;
@@ -145,10 +156,10 @@
             // 
             // InterfazChequeoDataBreaches
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(669, 459);
+            this.ClientSize = new System.Drawing.Size(892, 565);
             this.Controls.Add(this.btnModificarDupla);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridContrasenias);
@@ -158,6 +169,7 @@
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.TextBoxDatosDataBreaches);
             this.Controls.Add(this.dataGridTarjetas);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazChequeoDataBreaches";
             this.Text = "Data Breaches";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTarjetas)).EndInit();

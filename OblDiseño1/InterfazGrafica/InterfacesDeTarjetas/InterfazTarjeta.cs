@@ -107,5 +107,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         }
 
+        private void dataGridTarjetas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -46,9 +46,10 @@
             // 
             // btnCancelarCategoria
             // 
-            this.btnCancelarCategoria.Location = new System.Drawing.Point(319, 289);
+            this.btnCancelarCategoria.Location = new System.Drawing.Point(425, 356);
+            this.btnCancelarCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelarCategoria.Name = "btnCancelarCategoria";
-            this.btnCancelarCategoria.Size = new System.Drawing.Size(91, 23);
+            this.btnCancelarCategoria.Size = new System.Drawing.Size(121, 28);
             this.btnCancelarCategoria.TabIndex = 13;
             this.btnCancelarCategoria.Text = "Cancelar";
             this.btnCancelarCategoria.UseVisualStyleBackColor = true;
@@ -56,12 +57,15 @@
             // 
             // btn_AgregarContrasenia
             // 
-            this.btn_AgregarContrasenia.Location = new System.Drawing.Point(192, 289);
+            this.btn_AgregarContrasenia.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn_AgregarContrasenia.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_AgregarContrasenia.Location = new System.Drawing.Point(256, 356);
+            this.btn_AgregarContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.btn_AgregarContrasenia.Name = "btn_AgregarContrasenia";
-            this.btn_AgregarContrasenia.Size = new System.Drawing.Size(91, 23);
+            this.btn_AgregarContrasenia.Size = new System.Drawing.Size(121, 28);
             this.btn_AgregarContrasenia.TabIndex = 12;
             this.btn_AgregarContrasenia.Text = "Agregar";
-            this.btn_AgregarContrasenia.UseVisualStyleBackColor = true;
+            this.btn_AgregarContrasenia.UseVisualStyleBackColor = false;
             this.btn_AgregarContrasenia.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
             // 
             // label1
@@ -70,9 +74,10 @@
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label1.Location = new System.Drawing.Point(87, 64);
+            this.label1.Location = new System.Drawing.Point(116, 79);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 22);
+            this.label1.Size = new System.Drawing.Size(101, 28);
             this.label1.TabIndex = 11;
             this.label1.Text = "Nombre";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -84,17 +89,19 @@
             this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
             this.lblListadoTarjetas.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoTarjetas.Location = new System.Drawing.Point(187, 18);
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(266, 21);
+            this.lblListadoTarjetas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
-            this.lblListadoTarjetas.Size = new System.Drawing.Size(177, 26);
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(225, 33);
             this.lblListadoTarjetas.TabIndex = 10;
             this.lblListadoTarjetas.Text = "Nueva Contraseña";
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(204, 64);
+            this.textBoxNombre.Location = new System.Drawing.Point(272, 79);
+            this.textBoxNombre.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNombre.Name = "textBoxNombre";
-            this.textBoxNombre.Size = new System.Drawing.Size(178, 20);
+            this.textBoxNombre.Size = new System.Drawing.Size(236, 22);
             this.textBoxNombre.TabIndex = 9;
             // 
             // label2
@@ -103,17 +110,19 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label2.Location = new System.Drawing.Point(59, 100);
+            this.label2.Location = new System.Drawing.Point(79, 123);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 22);
+            this.label2.Size = new System.Drawing.Size(138, 28);
             this.label2.TabIndex = 15;
             this.label2.Text = "Contraseña";
             // 
             // textBoxContrasenia
             // 
-            this.textBoxContrasenia.Location = new System.Drawing.Point(204, 100);
+            this.textBoxContrasenia.Location = new System.Drawing.Point(272, 123);
+            this.textBoxContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxContrasenia.Name = "textBoxContrasenia";
-            this.textBoxContrasenia.Size = new System.Drawing.Size(178, 20);
+            this.textBoxContrasenia.Size = new System.Drawing.Size(236, 22);
             this.textBoxContrasenia.TabIndex = 14;
             // 
             // label3
@@ -122,17 +131,19 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label3.Location = new System.Drawing.Point(16, 137);
+            this.label3.Location = new System.Drawing.Point(21, 169);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 22);
+            this.label3.Size = new System.Drawing.Size(192, 28);
             this.label3.TabIndex = 17;
             this.label3.Text = "Nombre De Sitio";
             // 
             // textBoxNombreSitioApp
             // 
-            this.textBoxNombreSitioApp.Location = new System.Drawing.Point(204, 137);
+            this.textBoxNombreSitioApp.Location = new System.Drawing.Point(272, 169);
+            this.textBoxNombreSitioApp.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNombreSitioApp.Name = "textBoxNombreSitioApp";
-            this.textBoxNombreSitioApp.Size = new System.Drawing.Size(178, 20);
+            this.textBoxNombreSitioApp.Size = new System.Drawing.Size(236, 22);
             this.textBoxNombreSitioApp.TabIndex = 16;
             // 
             // label4
@@ -141,19 +152,21 @@
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label4.Location = new System.Drawing.Point(117, 209);
+            this.label4.Location = new System.Drawing.Point(156, 257);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 22);
+            this.label4.Size = new System.Drawing.Size(64, 28);
             this.label4.TabIndex = 19;
             this.label4.Text = "Nota";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // textBoxNota
             // 
-            this.textBoxNota.Location = new System.Drawing.Point(204, 209);
+            this.textBoxNota.Location = new System.Drawing.Point(272, 257);
+            this.textBoxNota.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNota.Multiline = true;
             this.textBoxNota.Name = "textBoxNota";
-            this.textBoxNota.Size = new System.Drawing.Size(178, 59);
+            this.textBoxNota.Size = new System.Drawing.Size(236, 72);
             this.textBoxNota.TabIndex = 18;
             // 
             // label5
@@ -162,9 +175,10 @@
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label5.Location = new System.Drawing.Point(74, 173);
+            this.label5.Location = new System.Drawing.Point(99, 213);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 22);
+            this.label5.Size = new System.Drawing.Size(119, 28);
             this.label5.TabIndex = 20;
             this.label5.Text = "Categoría";
             // 
@@ -172,17 +186,19 @@
             // 
             this.comboBoxCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategoria.FormattingEnabled = true;
-            this.comboBoxCategoria.Location = new System.Drawing.Point(204, 173);
+            this.comboBoxCategoria.Location = new System.Drawing.Point(272, 213);
+            this.comboBoxCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxCategoria.Name = "comboBoxCategoria";
-            this.comboBoxCategoria.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxCategoria.Size = new System.Drawing.Size(236, 24);
             this.comboBoxCategoria.TabIndex = 21;
             this.comboBoxCategoria.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategoria_SelectedIndexChanged);
             // 
             // butto_GenerarContrasenia
             // 
-            this.butto_GenerarContrasenia.Location = new System.Drawing.Point(412, 100);
+            this.butto_GenerarContrasenia.Location = new System.Drawing.Point(549, 123);
+            this.butto_GenerarContrasenia.Margin = new System.Windows.Forms.Padding(4);
             this.butto_GenerarContrasenia.Name = "butto_GenerarContrasenia";
-            this.butto_GenerarContrasenia.Size = new System.Drawing.Size(66, 20);
+            this.butto_GenerarContrasenia.Size = new System.Drawing.Size(88, 25);
             this.butto_GenerarContrasenia.TabIndex = 22;
             this.butto_GenerarContrasenia.Text = "Generar";
             this.butto_GenerarContrasenia.UseVisualStyleBackColor = true;
@@ -190,10 +206,10 @@
             // 
             // InterfazAgregarContrasenia
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(490, 341);
+            this.ClientSize = new System.Drawing.Size(653, 420);
             this.Controls.Add(this.butto_GenerarContrasenia);
             this.Controls.Add(this.comboBoxCategoria);
             this.Controls.Add(this.label5);
@@ -208,6 +224,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.textBoxNombre);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "InterfazAgregarContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Contraseña";
