@@ -24,11 +24,18 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.sistema = sistema;
             this.tarjeta = tarjeta;
             List<string> categorias = usuario.ListarCategorias();
+
             for (int i = 0; i < categorias.Count; i++)
             {
                 string categoriaMostrar = categorias[i];
                 comboBoxCategorias.Items.Add(categoriaMostrar);
             }
+
+            CargarDatosViejos();
+        }
+
+        private void CargarDatosViejos()
+        {
             textBoxNombre.Text = tarjeta.Nombre;
             textBoxTipo.Text = tarjeta.Tipo;
             textBoxNumeroTarjeta.Text = tarjeta.Numero.ToString();
@@ -45,28 +52,38 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
-            string nombreTarjeta = textBoxNombre.Text;
-            string tipoTarjeta = textBoxTipo.Text;
-            string numeroTarjeta = textBoxNumeroTarjeta.Text;
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
-            DateTime fecha = dateTimePicker1.Value;
             string nombreCategoria = comboBoxCategorias.Text;
-            string notaOpcional = textBoxNotaOpcional.Text;
 
-            int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
             Categoria categoria = new Categoria(nombreCategoria);
 
-            this.tarjeta.Nombre = textBoxNombre.Text;
-            this.tarjeta.Tipo = tipoTarjeta;
-            this.tarjeta.Numero = numeroTarjeta;
-            this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
-            this.tarjeta.FechaVencimiento = fecha;
-            this.tarjeta.Categoria = categoria;
-            this.tarjeta.NotaOpcional = notaOpcional;
+            try
+            {
+                int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+                this.tarjeta.Nombre = textBoxNombre.Text;
+                this.tarjeta.Tipo = textBoxTipo.Text;
+                this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
+                this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
+                this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
+                this.tarjeta.Categoria = categoria;
+                this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
 
-            this.Close();
-            IrAInterfazTarjeta();
-
+                this.Close();
+                IrAInterfazTarjeta();
+            }
+            catch (Exception TarjetaIncorrectaException)
+            {
+                MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
+                                "debe cumplir con el siguiente formato: " +
+                                "\n\n" +
+                                "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                "> Número: Enteros de 16 dígitos\n\n" +
+                                "> Código: Enteros de 3 o 4 dígitos\n\n" +
+                                "> Fecha: No vacía\n\n" +
+                                "> Nota: Como máximo 250 caracteress\n\n" +
+                                "> Categoría: Se selecciona de las disponibles en el sistema");
+            }
         }
 
         private void IrAInterfazTarjeta()

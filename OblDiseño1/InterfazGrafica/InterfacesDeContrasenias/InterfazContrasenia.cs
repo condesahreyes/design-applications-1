@@ -86,13 +86,21 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void btnEliminarContrasenia_Click(object sender, System.EventArgs e)
         {
-            if (0 < dataGridView_ListaDuplas.RowCount)
+            if (0 < dataGridView_ListaDuplas.RowCount && ConfirmarEliminacion())
             {
                 Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
                 usuario.RemoverDupla(duplaSeleccionada);
                 MessageBox.Show("Se elimino correctamente");
                 CargarDuplas();
             }
+        }
+
+        private bool ConfirmarEliminacion()
+        {
+            DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "", MessageBoxButtons.YesNoCancel, 
+                MessageBoxIcon.Exclamation);
+
+            return (resultado==DialogResult.Yes)? true : false;
         }
     }
 }

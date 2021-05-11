@@ -34,6 +34,7 @@
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.textBoxModificarCategoria = new System.Windows.Forms.TextBox();
             this.button_RevertirCambios = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancelarModCategoria
@@ -62,7 +63,7 @@
             this.btnModificarCategoria.Name = "btnModificarCategoria";
             this.btnModificarCategoria.Size = new System.Drawing.Size(145, 27);
             this.btnModificarCategoria.TabIndex = 17;
-            this.btnModificarCategoria.Text = "Modificar";
+            this.btnModificarCategoria.Text = "Confirmar";
             this.btnModificarCategoria.UseVisualStyleBackColor = false;
             this.btnModificarCategoria.Click += new System.EventHandler(this.btnModificarCategoria_Click_1);
             // 
@@ -72,7 +73,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(172)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(199, 157);
+            this.label1.Location = new System.Drawing.Point(188, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 16;
@@ -113,12 +114,25 @@
             this.button_RevertirCambios.UseVisualStyleBackColor = false;
             this.button_RevertirCambios.Click += new System.EventHandler(this.button_RevertirCambios_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            this.label8.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(263, 157);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 22);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "*";
+            // 
             // InterfazModificarCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.button_RevertirCambios);
             this.Controls.Add(this.btnCancelarModCategoria);
             this.Controls.Add(this.btnModificarCategoria);
@@ -141,5 +155,6 @@
         private System.Windows.Forms.Label lblListadoTarjetas;
         private System.Windows.Forms.TextBox textBoxModificarCategoria;
         private System.Windows.Forms.Button button_RevertirCambios;
+        private System.Windows.Forms.Label label8;
     }
 }

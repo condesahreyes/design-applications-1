@@ -40,11 +40,32 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
             
-            int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+            
             Categoria categoria = new Categoria(nombreCategoria);
-            Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
-            usuario.AgregarTarjeta(nuevaTarjeta);
-            IrAInterfazTarjeta();
+            try
+            {
+                int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+                Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
+                usuario.AgregarTarjeta(nuevaTarjeta);
+                IrAInterfazTarjeta();
+
+
+            }
+            catch (Exception TarjetaIncorrectaException)
+            {
+                MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
+                                "debe cumplir con el siguiente formato: " +
+                                "\n\n" +
+                                "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                "> Número: Enteros de 16 dígitos\n\n" +
+                                "> Código: Enteros de 3 o 4 dígitos\n\n" +
+                                "> Fecha: No vacía\n\n" +
+                                "> Nota: Como máximo 250 caracteress\n\n" +
+                                "> Categoría: Se selecciona de las disponibles en el sistema");
+            }
+            
+
         }
 
         private void IrAInterfazTarjeta()
@@ -59,22 +80,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         }
 
-        private void textBoxCategoria_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBoxNombre_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancelarTarjeta_Click(object sender, EventArgs e)
         {
 
         }

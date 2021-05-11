@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.btnCancelarCategoria = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxNombreCategoria
@@ -61,7 +62,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(172)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(203, 169);
+            this.label1.Location = new System.Drawing.Point(192, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 6;
@@ -97,12 +98,25 @@
             this.btnCancelarCategoria.UseVisualStyleBackColor = false;
             this.btnCancelarCategoria.Click += new System.EventHandler(this.btnCancelarCategoria_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            this.label8.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(267, 169);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 22);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "*";
+            // 
             // InterfazAgregarCategoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnCancelarCategoria);
             this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.label1);
@@ -122,5 +136,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregarCategoria;
         private System.Windows.Forms.Button btnCancelarCategoria;
+        private System.Windows.Forms.Label label8;
     }
 }

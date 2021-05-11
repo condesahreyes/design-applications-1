@@ -49,5 +49,20 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             this.Close();
         }
+
+        private void checkBox_Especiales_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown_cantCaracteres_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

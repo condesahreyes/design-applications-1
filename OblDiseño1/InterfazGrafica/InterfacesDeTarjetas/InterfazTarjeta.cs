@@ -30,12 +30,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
         }
 
-
-        private void InterfazTarjeta_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnTarjetasVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -45,13 +39,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void btnAgregarTarjeta_Click(object sender, EventArgs e)
         {
-            
                 this.Close();
                 InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
                 interfazAgregar.Show();
         }
-
-
 
         private void btnModificarTarjeta_Click(object sender, EventArgs e)
         {
@@ -85,17 +76,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 else
                 {
 
-
-                    //Posible solucion, pero tira un error 
-                    //MessageBoxButtons botones = MessageBoxButtons.YesNo;
-                    //DialogResult dr = MessageBox.Show("¿Estas seguro que deseas eliminar esta Tarjeta?","", botones, MessageBoxIcon.Exclamation);
-
-                    //if (dr == DialogResult.Yes)
-                    //{
-                    //    this.usuario.EliminarTarjeta(tarjetaSeleccionada);
-                    //}
-                    //CargarListaTarjetas(ref usuario, ref sistema);
-
                     InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
                         (ref sistema, ref usuario, ref tarjetaSeleccionada);
                     this.Close();
@@ -104,11 +84,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             }
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
-
-        }
-
-        private void dataGridTarjetas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
     }

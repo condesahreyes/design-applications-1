@@ -47,7 +47,7 @@
             this.btnContraseniaVolverMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContraseniaVolverMenu.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnContraseniaVolverMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(3, 308);
+            this.btnContraseniaVolverMenu.Location = new System.Drawing.Point(3, 323);
             this.btnContraseniaVolverMenu.Name = "btnContraseniaVolverMenu";
             this.btnContraseniaVolverMenu.Size = new System.Drawing.Size(81, 27);
             this.btnContraseniaVolverMenu.TabIndex = 9;
@@ -67,7 +67,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(539, 338);
+            this.panel1.Size = new System.Drawing.Size(539, 362);
             this.panel1.TabIndex = 8;
             // 
             // dataGridView_ListaDuplas
@@ -83,7 +83,7 @@
             this.dataGridView_ListaDuplas.MultiSelect = false;
             this.dataGridView_ListaDuplas.Name = "dataGridView_ListaDuplas";
             this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(464, 225);
+            this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(464, 232);
             this.dataGridView_ListaDuplas.TabIndex = 6;
             this.dataGridView_ListaDuplas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ListaDuplas_CellContentClick);
             // 
@@ -94,7 +94,7 @@
             this.btnEliminarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnEliminarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnEliminarContrasenia.Location = new System.Drawing.Point(421, 289);
+            this.btnEliminarContrasenia.Location = new System.Drawing.Point(421, 300);
             this.btnEliminarContrasenia.Name = "btnEliminarContrasenia";
             this.btnEliminarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnEliminarContrasenia.TabIndex = 5;
@@ -122,7 +122,7 @@
             this.btnModificarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnModificarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnModificarContrasenia.Location = new System.Drawing.Point(325, 289);
+            this.btnModificarContrasenia.Location = new System.Drawing.Point(325, 300);
             this.btnModificarContrasenia.Name = "btnModificarContrasenia";
             this.btnModificarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnModificarContrasenia.TabIndex = 3;
@@ -137,7 +137,7 @@
             this.btnAgregarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnAgregarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnAgregarContrasenia.Location = new System.Drawing.Point(229, 289);
+            this.btnAgregarContrasenia.Location = new System.Drawing.Point(229, 300);
             this.btnAgregarContrasenia.Name = "btnAgregarContrasenia";
             this.btnAgregarContrasenia.Size = new System.Drawing.Size(81, 27);
             this.btnAgregarContrasenia.TabIndex = 2;
@@ -158,7 +158,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
-            this.ClientSize = new System.Drawing.Size(563, 362);
+            this.ClientSize = new System.Drawing.Size(563, 386);
             this.Controls.Add(this.panel1);
             this.Name = "InterfazContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

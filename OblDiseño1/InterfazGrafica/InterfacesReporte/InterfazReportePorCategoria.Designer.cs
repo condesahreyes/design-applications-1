@@ -36,40 +36,47 @@ namespace InterfazGrafica.InterfacesReporte
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label_Titulo = new System.Windows.Forms.Label();
             this.button_Volver = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lblListadoTarjetas = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // button_Volver
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label_Titulo, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.60997F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.39003F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(653, 378);
-            this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            this.button_Volver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.button_Volver.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_Volver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_Volver.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.button_Volver.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.button_Volver.Location = new System.Drawing.Point(9, 346);
+            this.button_Volver.Margin = new System.Windows.Forms.Padding(0);
+            this.button_Volver.Name = "button_Volver";
+            this.button_Volver.Size = new System.Drawing.Size(75, 31);
+            this.button_Volver.TabIndex = 1;
+            this.button_Volver.Text = "Volver";
+            this.button_Volver.UseVisualStyleBackColor = false;
+            this.button_Volver.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.chart1);
+            this.panel1.Location = new System.Drawing.Point(70, 70);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(431, 257);
+            this.panel1.TabIndex = 2;
             // 
             // chart1
             // 
             chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(0, 47);
+            this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Margin = new System.Windows.Forms.Padding(0);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
@@ -103,57 +110,47 @@ namespace InterfazGrafica.InterfacesReporte
             this.chart1.Series.Add(series3);
             this.chart1.Series.Add(series4);
             this.chart1.Series.Add(series5);
-            this.chart1.Size = new System.Drawing.Size(653, 331);
-            this.chart1.TabIndex = 2;
+            this.chart1.Size = new System.Drawing.Size(431, 257);
+            this.chart1.TabIndex = 3;
             this.chart1.Text = "chart1";
             // 
-            // label_Titulo
+            // lblListadoTarjetas
             // 
-            this.label_Titulo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_Titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Titulo.Location = new System.Drawing.Point(4, 0);
-            this.label_Titulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_Titulo.Name = "label_Titulo";
-            this.label_Titulo.Size = new System.Drawing.Size(645, 47);
-            this.label_Titulo.TabIndex = 1;
-            this.label_Titulo.Text = "Cantidad de Contrasenias por Categoria/Grupo";
-            this.label_Titulo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label_Titulo.Click += new System.EventHandler(this.label_Titulo_Click);
-            // 
-            // button_Volver
-            // 
-            this.button_Volver.Location = new System.Drawing.Point(549, 378);
-            this.button_Volver.Margin = new System.Windows.Forms.Padding(0);
-            this.button_Volver.Name = "button_Volver";
-            this.button_Volver.Size = new System.Drawing.Size(100, 38);
-            this.button_Volver.TabIndex = 1;
-            this.button_Volver.Text = "Volver";
-            this.button_Volver.UseVisualStyleBackColor = true;
-            this.button_Volver.Click += new System.EventHandler(this.button1_Click);
+            this.lblListadoTarjetas.AutoSize = true;
+            this.lblListadoTarjetas.BackColor = System.Drawing.Color.Transparent;
+            this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblListadoTarjetas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(179, 23);
+            this.lblListadoTarjetas.Name = "lblListadoTarjetas";
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(372, 26);
+            this.lblListadoTarjetas.TabIndex = 12;
+            this.lblListadoTarjetas.Text = "Reporte de Contraseñas Por Categorías";
             // 
             // InterfazReportePorCategoria
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 420);
+            this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
+            this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.lblListadoTarjetas);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button_Volver);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazReportePorCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazReportePorCategoria";
+            this.Text = "Reporte de Contraseñas Por Categorías";
             this.Load += new System.EventHandler(this.InterfazReportePorCategoria_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label label_Titulo;
         private System.Windows.Forms.Button button_Volver;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label lblListadoTarjetas;
     }
 }
