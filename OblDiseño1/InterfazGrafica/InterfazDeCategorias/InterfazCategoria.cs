@@ -80,10 +80,5 @@ namespace InterfazGrafica.InterfazCategoria
                 (ref sistema, ref usuario, ref aModificar);
             modificarCategoria.Show();
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
