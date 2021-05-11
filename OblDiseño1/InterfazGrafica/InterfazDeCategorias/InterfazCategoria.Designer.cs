@@ -65,12 +65,10 @@
             this.panel1.Controls.Add(this.btnModificarCategoria);
             this.panel1.Controls.Add(this.btnAgregarCategoria);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(16, 15);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(539, 345);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // dataGridCategorias
             // 
@@ -98,7 +96,7 @@
             this.lblListadoCategoria.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblListadoCategoria.Location = new System.Drawing.Point(293, 7);
             this.lblListadoCategoria.Name = "lblListadoCategoria";
-            this.lblListadoCategoria.Size = new System.Drawing.Size(263, 33);
+            this.lblListadoCategoria.Size = new System.Drawing.Size(208, 26);
             this.lblListadoCategoria.TabIndex = 4;
             this.lblListadoCategoria.Text = "Listado de Categorías";
             // 
@@ -137,20 +135,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(17, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 17);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
             // 
             // InterfazCategorias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 362);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categorías";

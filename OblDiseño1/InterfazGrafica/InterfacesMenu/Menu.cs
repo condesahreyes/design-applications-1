@@ -120,9 +120,7 @@ namespace InterfazGrafica.InterfacesMenu
 
          private void btnCompartirContrasenia_Click(object sender, EventArgs e)
         {
-            this.Close();
-            InterfazContraseñasCompartidas interfazContraseñas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
-            interfazContraseñas.Show();
+            
         }
         
         //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
@@ -168,6 +166,13 @@ namespace InterfazGrafica.InterfacesMenu
             this.usuario.AgregarDupla(contra11);
             this.usuario.AgregarDupla(contra12);
             this.usuario.AgregarDupla(contra13);
+        }
+
+        private void btnCompartirContrasenia_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazContraseñasCompartidas interfazContraseñas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
+            interfazContraseñas.Show();
         }
     }
 }

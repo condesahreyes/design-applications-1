@@ -59,10 +59,10 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             if (listaDuplasCompartidasConmigo.Count > 0)
             {
                 this.dataGridContraseñasCompartidasConmigo.DataSource = biso2;
-                this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
+                this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
+                this.dataGridContraseñasCompartidasConmigo.Columns["Nota"].Visible = false;
+                this.dataGridContraseñasCompartidasConmigo.Columns["NivelSeguridadContrasenia"].Visible = false;
+                this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
             }
            
 

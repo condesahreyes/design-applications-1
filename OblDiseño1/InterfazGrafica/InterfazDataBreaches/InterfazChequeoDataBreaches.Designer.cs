@@ -64,7 +64,6 @@
             this.TextBoxDatosDataBreaches.Size = new System.Drawing.Size(221, 211);
             this.TextBoxDatosDataBreaches.TabIndex = 1;
             this.TextBoxDatosDataBreaches.Text = "";
-            this.TextBoxDatosDataBreaches.TextChanged += new System.EventHandler(this.TextBoxDatosDataBreaches_TextChanged);
             // 
             // lblListadoTarjetas
             // 
@@ -75,7 +74,7 @@
             this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lblListadoTarjetas.Location = new System.Drawing.Point(295, 9);
             this.lblListadoTarjetas.Name = "lblListadoTarjetas";
-            this.lblListadoTarjetas.Size = new System.Drawing.Size(323, 33);
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(256, 26);
             this.lblListadoTarjetas.TabIndex = 11;
             this.lblListadoTarjetas.Text = "Chequeo de Data Breaches";
             // 
@@ -117,7 +116,7 @@
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label2.Location = new System.Drawing.Point(265, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 28);
+            this.label2.Size = new System.Drawing.Size(184, 22);
             this.label2.TabIndex = 29;
             this.label2.Text = "Tarjetas Vulneradas";
             // 
@@ -131,7 +130,6 @@
             this.dataGridContrasenias.Name = "dataGridContrasenias";
             this.dataGridContrasenias.ReadOnly = true;
             this.dataGridContrasenias.RowHeadersVisible = false;
-            this.dataGridContrasenias.RowHeadersWidth = 51;
             this.dataGridContrasenias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContrasenias.Size = new System.Drawing.Size(282, 106);
             this.dataGridContrasenias.TabIndex = 30;
@@ -144,7 +142,7 @@
             this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label3.Location = new System.Drawing.Point(265, 206);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(291, 28);
+            this.label3.Size = new System.Drawing.Size(230, 22);
             this.label3.TabIndex = 31;
             this.label3.Text = "Contraseñas vulnderadas";
             // 
@@ -177,7 +175,7 @@
             // 
             // InterfazChequeoDataBreaches
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
@@ -191,7 +189,6 @@
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.TextBoxDatosDataBreaches);
             this.Controls.Add(this.dataGridTarjetas);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "InterfazChequeoDataBreaches";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Breaches";

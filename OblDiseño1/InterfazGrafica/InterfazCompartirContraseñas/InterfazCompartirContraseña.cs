@@ -55,29 +55,35 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             string usuarioSeleccionado = comboBoxUsuarios.Text;
             Usuario usuarioACompartir = new Usuario();
 
-            foreach (var iteradorUsuario in this.sistema.ObtenerUsuarios())
+            if (usuarioSeleccionado.Length == 0)
+                MessageBox.Show("Debe seleccionar un usuario para compartir");
+            else
             {
-                usuarioACompartir = iteradorUsuario;
-                if (usuarioACompartir.Nombre == usuarioSeleccionado)
-                    break;
-            }
-
-            foreach (var iterador in this.usuario.ObtenerDuplas())
-            {
-                if ((iterador.NombreSitioApp == nomSitioSeleccionado) && (iterador.NombreUsuario == nomUsuarioSeleccionado))
+                foreach (var iteradorUsuario in this.sistema.ObtenerUsuarios())
                 {
-                    Dupla_UsuarioContrasenia duplaACompartir = iterador;
-                    try
+                    usuarioACompartir = iteradorUsuario;
+                    if (usuarioACompartir.Nombre == usuarioSeleccionado)
+                        break;
+                }
+
+                foreach (var iterador in this.usuario.ObtenerDuplas())
+                {
+                    if ((iterador.NombreSitioApp == nomSitioSeleccionado) && (iterador.NombreUsuario == nomUsuarioSeleccionado))
                     {
-                        this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);
-                        IrAInterfazContraseñasCompartidas();
+                        Dupla_UsuarioContrasenia duplaACompartir = iterador;
+                        try
+                        {
+                            this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);
+                            MessageBox.Show("Se compartio la contraseña correctamente");
+                            IrAInterfazContraseñasCompartidas();
+                        }
+                        catch (Exception InvalidUsuarioDataException)
+                        {
+                            MessageBox.Show("Ya se compartio esta contraseña con el usuario");
+
+                        }
+                        break;
                     }
-                    catch (Exception InvalidUsuarioDataException)
-                    {
-                        MessageBox.Show("Ya se compartio esta contraseña con el usuario");
-                        
-                    }
-                    break;
                 }
             }
          }
@@ -91,6 +97,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void InterfazCompartirContraseña_Load(object sender, EventArgs e)
         {
 
         }
