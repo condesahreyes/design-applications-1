@@ -29,8 +29,8 @@ namespace Pruebas
         private static string[] tiposTarjetas = {"Visa gold",
             "Itau volar", "BBVA credito", "HSBC debito"};
 
-        private static long[] numTarjetas = { 1234567891234567, 
-            7894561234567894, 9876543219876543, 5462134567896543};
+        private static string[] numTarjetas = { "1234567891234567", 
+            "7894561234567894", "9876543219876543", "5462134567896543"};
 
         private static int[] codigosTarjetas = { 123, 321, 456, 789};
 
@@ -239,7 +239,7 @@ namespace Pruebas
             {
                 Categoria unaCategoria = new Categoria(nombresCategorias[i]);
                 usuario.AgregarCategoria(unaCategoria);
-                listaCategorias.Add("Nombre : " + unaCategoria.Nombre);
+                listaCategorias.Add("" + unaCategoria.Nombre);
             }
 
             listarCategoriasPorMetodo = usuario.ListarCategorias();
@@ -316,7 +316,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConListaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
         }
 
 
@@ -341,7 +341,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueLeCompartenContrasenia.ConvertirDiccionarioAListaString(usuarioAlQueLeCompartenContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueLeCompartenContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueLeCompartenContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
 
@@ -365,10 +365,9 @@ namespace Pruebas
             usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
             usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
 
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConListaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
-        }
+            
+            Assert.IsFalse(usuarioQueComparteContrasenia.EstaSiendoCompartidaLaContraseniaConElUsuario(primerdupla, usuarioAlQueCompartoContrasenia));
+         }
 
         [TestMethod]
         public void UsuarioQueLeDejanDeCompartirContrasenia()
@@ -391,7 +390,7 @@ namespace Pruebas
             usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirDiccionarioAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
 
@@ -418,7 +417,7 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirDiccionarioConListaAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
         }
 
         [TestMethod]
@@ -442,7 +441,7 @@ namespace Pruebas
             segundadupla.ActualizarContrasenia("otraPassword");
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirDiccionarioAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
         }
 
     }

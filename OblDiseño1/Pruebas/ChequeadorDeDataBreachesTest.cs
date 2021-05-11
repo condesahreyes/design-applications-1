@@ -21,6 +21,8 @@ namespace Pruebas
 
         private ChequeadorDeDataBreaches chequeador;
 
+        private const int numTarjeta = 0; 
+        private const int numDupla = 1; 
         [TestInitialize]
         public void Setup()
         {
@@ -36,10 +38,10 @@ namespace Pruebas
             string tipoTarjeta_3 = "MasterCard";
             string tipoTarjeta_4 = "McDonalds";
 
-            long numeroTarjeta_1 = 1234567812345678;
-            long numeroTarjeta_2 = 7676767676767676;
-            long numeroTarjeta_3 = 9999888877776666;
-            long numeroTarjeta_4 = 1000999988887777;
+            string numeroTarjeta_1 = "1234567812345678";
+            string numeroTarjeta_2 = "7676767676767676";
+            string numeroTarjeta_3 = "9999888877776666";
+            string numeroTarjeta_4 = "1000999988887777";
 
             int codigoSeguridadTargeta_1 = 123;
             int codigoSeguridadTargeta_2 = 888;
@@ -152,7 +154,8 @@ namespace Pruebas
         public void VerificarVulneradosVacio()
         {
             int elementosBreacheados = 0;
-            List <Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio);
+            List <Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio)[numTarjeta];
+            entidadesBreachadas.AddRange(chequeador.ObtenerEntidadesVulneradas(breachVacio)[numDupla]);
 
             Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
         }
@@ -160,7 +163,7 @@ namespace Pruebas
         [TestMethod]
         public void VerificarVulneradosTarjeta()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(numeroTagetaBreachada);
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(numeroTagetaBreachada)[numTarjeta];
 
             CollectionAssert.AreEqual(entidadesBreachadas, tarjetaBreachada);
         }
@@ -168,7 +171,7 @@ namespace Pruebas
         [TestMethod]
         public void VerificarVulneradosDupla()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(contraseniaDeDuplaBreachada);
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(contraseniaDeDuplaBreachada)[numDupla];
 
             CollectionAssert.AreEqual(entidadesBreachadas, duplaBreachada);
         }
@@ -176,7 +179,8 @@ namespace Pruebas
         [TestMethod]
         public void VerificarVulnerados()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(infoBreacheada);
+            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(infoBreacheada)[numDupla];
+            entidadesBreachadas.AddRange(chequeador.ObtenerEntidadesVulneradas(infoBreacheada)[numTarjeta]);
 
             CollectionAssert.AreEquivalent(entidadesBreachadas, entidadesVulneradas);
         }

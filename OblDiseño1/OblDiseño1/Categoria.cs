@@ -1,6 +1,8 @@
-﻿namespace OblDiseño1
+﻿using System;
+
+namespace OblDiseño1
 {
-    public class Categoria
+    public class Categoria : IComparable<Categoria>
     {
         private string nombre;
         public Categoria(string nombre)
@@ -22,8 +24,12 @@
 
         public override string ToString()
         {
-            return "Nombre : " + this.Nombre;
+            return "" + this.Nombre;
         }
 
+        public int CompareTo(Categoria otraDupla)
+        {
+            return this.Nombre.CompareTo(otraDupla.Nombre);
+        }
     }
 }

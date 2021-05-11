@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
 
@@ -47,16 +48,6 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExepcionObjetosRepetidos))]
-        public void IntentarAgregarUsuariosRepetidos()
-        {
-            string nombreAux = nombres[0];
-
-            sistema.AgregarUsuario(nombres[0], contrasenias[0]);
-            sistema.AgregarUsuario(nombreAux, contrasenias[1]);
-        }
-
-        [TestMethod]
         public void DevolverUnUsuario()
         {
             Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]); ;
@@ -65,12 +56,11 @@ namespace Pruebas
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void NoExisteUsuario()
         {
             Usuario usuarioQueQuiero = new Usuario("Un nombre", "unaContrasenia");
             Usuario usuariosObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
-
-            Assert.AreNotEqual(usuarioQueQuiero, usuariosObtenido);
         }
 
         [TestMethod]
@@ -98,11 +88,10 @@ namespace Pruebas
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
         public void NoIngresarNombreUsuarioIncorrecto()
         {
             bool puedoIngresar = sistema.PuedoIngresarAlSistema("Diego", contrasenias[0]);
-
-            Assert.AreEqual(false, puedoIngresar);
         }
 
     }

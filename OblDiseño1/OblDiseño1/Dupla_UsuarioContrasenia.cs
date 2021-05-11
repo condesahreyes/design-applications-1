@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace OblDiseño1
 {
-    public class Dupla_UsuarioContrasenia
+    public class Dupla_UsuarioContrasenia : IComparable<Dupla_UsuarioContrasenia>
     {
 
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value);}
@@ -43,6 +43,7 @@ namespace OblDiseño1
         private int nivelSeguridadContrasenia;
         private string nombreSitioApp;
         private string nota;
+        private static Random numRandom = new Random();
 
         private static string[] caracteresPorPosicion = { caracteresMayusculas, 
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
@@ -60,6 +61,11 @@ namespace OblDiseño1
             DataBrench = false;
         }
 
+        private void ActualizarUltimaFechaModificacion()
+        {
+            FechaUltimaModificacion = DateTime.Today;
+        }
+
         public void ActualizarNota(string unaNota)
         {
             int largoNota = unaNota.Length;
@@ -68,7 +74,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"La nota debe contener " +
                     $"como maximo {NOTA_LARGO_MAX} caracteres");
             else
+            {
                 nota = unaNota;
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public void ActualizarNombreSitioApp(string unNombreSitioApp)
@@ -79,7 +88,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {SITIO_LARGO_MIN} y {SITIO_LARGO_MAX} caracteres");
             else
+            {
                 nombreSitioApp = unNombreSitioApp;
+                ActualizarUltimaFechaModificacion();
+            }  
         }
 
         public void ActualizarNombreUsuario(string unNombreUsuario)
@@ -90,7 +102,10 @@ namespace OblDiseño1
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {NOMBRE_LARGO_MIN} y {NOMBRE_LARGO_MAX} caracteres");
             else
+            {
                 nombreUsuario = unNombreUsuario;
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public void ActualizarContrasenia(string unaContrasenia)
@@ -100,10 +115,13 @@ namespace OblDiseño1
             if (EsLargoInvalidoContrasenia(largo) && largo != 0)
                 throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
                     $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
+            else
+            {
+                contrasenia = unaContrasenia;
 
-            contrasenia = unaContrasenia;
-
-            nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+                nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
+                ActualizarUltimaFechaModificacion();
+            }
         }
 
         public static int CalcularSeguridad(string unaContrasenia)
@@ -177,7 +195,7 @@ namespace OblDiseño1
 
         private static int GenerarNumAlazar(int numMin, int numMax)
         {
-            Random numRandom = new Random();
+            //Random numRandom = new Random();
             int num = numRandom.Next(numMin, numMax);
 
             return num;
@@ -256,6 +274,17 @@ namespace OblDiseño1
             return ("Nombre : " + this.NombreUsuario + " Contraseña: " + this.Contrasenia +
                 " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria +
                 " Nivel de seguridad: " + this.NivelSeguridadContrasenia);
+        }
+
+        public int CompareTo(Dupla_UsuarioContrasenia otraDupla)
+        {
+            return this.Categoria.Nombre.CompareTo(otraDupla.Categoria.Nombre);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Dupla_UsuarioContrasenia duplaAComparar = (Dupla_UsuarioContrasenia)obj;
+            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
         }
 
     }
