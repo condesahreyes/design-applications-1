@@ -62,7 +62,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         }
 
 
-
         private void IrAContraseñas()
         {
             InterfazContrasenia interfazContrasenia = new InterfazContrasenia(ref usuario, ref sistema);
@@ -70,30 +69,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.Close();
         }
 
-        private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            
-        }
-
         private void btnCancelarCategoria_Click(object sender, EventArgs e)
         {
             IrAContraseñas();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InterfazAgregarContrasenia_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void butto_GenerarContrasenia_Click(object sender, EventArgs e)

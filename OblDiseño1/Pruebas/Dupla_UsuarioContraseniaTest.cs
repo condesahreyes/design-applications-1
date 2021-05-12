@@ -118,10 +118,10 @@ namespace Pruebas
         public void ModificacionNivelSeguridad()
         {
             string unaContrasenia = "aaaaa";
-            int newNivelSeguridad = 1;
+            int nuevoNivelSeguridad = 1;
             unaDupla.Contrasenia = unaContrasenia;
 
-            Assert.AreEqual(newNivelSeguridad, unaDupla.NivelSeguridadContrasenia);
+            Assert.AreEqual(nuevoNivelSeguridad, unaDupla.NivelSeguridadContrasenia);
         }
 
         [TestMethod]

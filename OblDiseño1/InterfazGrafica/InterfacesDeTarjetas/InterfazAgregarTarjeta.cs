@@ -39,11 +39,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             DateTime fecha = dateTimePicker1.Value;
             string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
-            
-            
-            Categoria categoria = new Categoria(nombreCategoria);
+
+
+
             try
             {
+                Categoria categoria = new Categoria(nombreCategoria);
                 int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
                 Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
                 usuario.AgregarTarjeta(nuevaTarjeta);
@@ -51,7 +52,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
 
             }
-            catch (Exception TarjetaIncorrectaException)
+            
+            catch (Exepcion_ObjetosRepetidos)
+            {
+                MessageBox.Show("Ya existe una tarjeta con el mismo numero");
+            }
+            catch (TarjetaIncorrectaException)
             {
                 MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
                                 "debe cumplir con el siguiente formato: " +
@@ -64,6 +70,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                                 "> Nota: Como máximo 250 caracteress\n\n" +
                                 "> Categoría: Se selecciona de las disponibles en el sistema");
             }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
+            }
+            catch (Exepcion_InvalidCategoriaData)
+            {
+                MessageBox.Show("Debe seleccionar una categoria");
+            }
+            
             
 
         }
@@ -75,40 +90,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             interfazTarjeta.Show();
         }
 
-            private void textBoxCodigoSeguridad_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
+          
         private void Cancelar_Click(object sender, EventArgs e)
         {
             IrAInterfazTarjeta();
         }
 
-        private void InterfazAgregarTarjeta_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxNumeroTarjeta_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

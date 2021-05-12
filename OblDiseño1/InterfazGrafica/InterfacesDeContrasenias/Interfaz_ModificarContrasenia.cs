@@ -62,46 +62,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         }
 
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label_Categoria_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label_Categoria_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel8_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button_RevertirUsuario_Click(object sender, EventArgs e)
         {
             this.textBox_Usuario.Text = dupla.NombreUsuario;
@@ -255,21 +215,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 nuevaContra = genContra.ObtenerNuevaContrasenia();
             }
             this.textBox_Contrasenia.Text = nuevaContra;
-        }
-
-        private void label_Usuario_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-            
-        }
-       
-        private void comboBox_Categoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

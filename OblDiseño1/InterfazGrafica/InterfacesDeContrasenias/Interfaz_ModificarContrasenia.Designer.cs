@@ -198,7 +198,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.comboBox_Categoria.Name = "comboBox_Categoria";
             this.comboBox_Categoria.Size = new System.Drawing.Size(178, 21);
             this.comboBox_Categoria.TabIndex = 0;
-            this.comboBox_Categoria.SelectedIndexChanged += new System.EventHandler(this.comboBox_Categoria_SelectedIndexChanged);
+            
             // 
             // richTextBox_Nota
             // 

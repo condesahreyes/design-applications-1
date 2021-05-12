@@ -45,46 +45,52 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             textBoxNotaOpcional.Text = tarjeta.NotaOpcional;
         }
 
-        private void InterfazModificarTarjeta_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
+            string nombreTarjeta = textBoxNombre.Text;
+            string tipoTarjeta = textBoxTipo.Text;
+            string numeroTarjeta = textBoxNumeroTarjeta.Text;
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
+            DateTime fechaVencimiento = dateTimePicker1.Value;
             string nombreCategoria = comboBoxCategorias.Text;
-
-            Categoria categoria = new Categoria(nombreCategoria);
-
-            try
-            {
-                int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-                this.tarjeta.Nombre = textBoxNombre.Text;
-                this.tarjeta.Tipo = textBoxTipo.Text;
-                this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
-                this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
-                this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
-                this.tarjeta.Categoria = categoria;
-                this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
-
-                this.Close();
-                IrAInterfazTarjeta();
-            }
-            catch (Exception TarjetaIncorrectaException)
-            {
-                MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
-                                "debe cumplir con el siguiente formato: " +
-                                "\n\n" +
-                                "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                "> Número: Enteros de 16 dígitos\n\n" +
-                                "> Código: Enteros de 3 o 4 dígitos\n\n" +
-                                "> Fecha: No vacía\n\n" +
-                                "> Nota: Como máximo 250 caracteress\n\n" +
-                                "> Categoría: Se selecciona de las disponibles en el sistema");
-            }
+            string notaOpcional = textBoxNotaOpcional.Text;
+            
+               try
+               {
+                    Categoria categoria = new Categoria(nombreCategoria);
+                    int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+                    Tarjeta tarjetaAuxiliar = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fechaVencimiento, categoria, notaOpcional);
+                    this.tarjeta.Nombre = textBoxNombre.Text;
+                    this.tarjeta.Tipo = textBoxTipo.Text;
+                    this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
+                    this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
+                    this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
+                    this.tarjeta.Categoria = categoria;
+                    this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
+                    MessageBox.Show("Se modifico correctamente la tarjeta");
+                    this.Close();
+                    IrAInterfazTarjeta();
+               }
+                catch (TarjetaIncorrectaException)
+                {
+                    MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
+                                    "debe cumplir con el siguiente formato: " +
+                                    "\n\n" +
+                                    "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                    "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
+                                    "> Número: Enteros de 16 dígitos\n\n" +
+                                    "> Código: Enteros de 3 o 4 dígitos\n\n" +
+                                    "> Fecha: No vacía\n\n" +
+                                    "> Nota: Como máximo 250 caracteress\n\n" +
+                                    "> Categoría: Se selecciona de las disponibles en el sistema");
+                }
+                catch (System.FormatException)
+                {
+                    MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
+                }
         }
+
 
         private void IrAInterfazTarjeta()
         {
@@ -93,10 +99,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             interfazTarjeta.Show();
         }
 
-        private void textBoxNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
@@ -105,9 +107,5 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             interfazTarjeta.Show();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -133,7 +133,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.checkBox_Especiales.TabIndex = 0;
             this.checkBox_Especiales.Text = "Incluir Caracteres Especiales";
             this.checkBox_Especiales.UseVisualStyleBackColor = false;
-            this.checkBox_Especiales.CheckedChanged += new System.EventHandler(this.checkBox_Especiales_CheckedChanged);
+            
             // 
             // numericUpDown_cantCaracteres
             // 
@@ -156,7 +156,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             0,
             0,
             0});
-            this.numericUpDown_cantCaracteres.ValueChanged += new System.EventHandler(this.numericUpDown_cantCaracteres_ValueChanged);
+            
             // 
             // label1
             // 
@@ -169,7 +169,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.label1.Size = new System.Drawing.Size(210, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "Cantidad de Caracteres";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // panel1
             // 

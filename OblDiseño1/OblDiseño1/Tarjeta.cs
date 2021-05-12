@@ -4,13 +4,15 @@ namespace OblDiseño1
 
     public class Tarjeta : IComparable<Tarjeta>
     {
-        const int anio_MIN = 1960;
-        const int anio_MAX = 2090;
-        const int dia_MIN = 1;
-        const int dia_MAX = 31;
-        const int mes_MIN = 1;
-        const int mes_MAX = 12;
-        const int largo_valido_de_numero_tarjeta = 16;
+        private const int anio_MIN = 1960;
+        private const int anio_MAX = 2090;
+        private const int dia_MIN = 1;
+        private const int dia_MAX = 31;
+        private const int mes_MIN = 1;
+        private const int mes_MAX = 12;
+        private const int largo_valido_de_numero_tarjeta = 16;
+        private const int largo_MAX = 25;
+        private const int largo_MIN = 3;
 
         private string nombre;
         private string tipo;
@@ -76,6 +78,7 @@ namespace OblDiseño1
                     this.fechaVencimiento = value;
             }
         }
+
         public Categoria Categoria {
             get => categoria;
             set {
@@ -86,28 +89,18 @@ namespace OblDiseño1
             }
         }
 
-        private void SetNombre(string unNombre)
-        {
-            if (unNombre != null)
-                this.nombre = unNombre;
-            else
-            {
-                throw new TarjetaIncorrectaException("El campo no puede ser vacio");
-            }
-        }
-
-        private void SetTipo(string unTipo)
-        {
-            if (unTipo != null)
-                this.tipo = unTipo;
-            else
-                throw new TarjetaIncorrectaException("El campo no puede ser vacio");
-        }
-
         public void BorrarTarjeta(Tarjeta tarjeta)
         {
             tarjeta = null;
             GC.Collect();
+        }
+
+        private void SetNombre(string unNombre)
+        {
+            if ((unNombre != null) && (unNombre.Length >= largo_MIN) && (unNombre.Length <= largo_MAX))
+                this.nombre = unNombre;
+            else
+                throw new TarjetaIncorrectaException("El campo no puede ser vacio");
         }
 
         public static bool ValidarLargoNumeroDeTarjeta(string posibleNumeroDeTarjeta)
@@ -115,6 +108,13 @@ namespace OblDiseño1
             return (posibleNumeroDeTarjeta.Length == largo_valido_de_numero_tarjeta) ? true : false;
         }
 
+        private void SetTipo(string unTipo)
+        {
+            if ((unTipo != null) && (unTipo.Length >= largo_MIN) && (unTipo.Length <= largo_MAX))
+                this.tipo = unTipo;
+            else
+                throw new TarjetaIncorrectaException("El campo no puede ser vacio");
+        }
 
         public override bool Equals(object obj)
         {

@@ -110,6 +110,9 @@ namespace OblDiseño1
 
         public void AgregarTarjeta(Tarjeta tarjeta)
         {
+            if (this.ObtenerTarjetas().Contains(tarjeta))
+                throw new Exepcion_ObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
+            else
             this.tarjetas.Add(tarjeta);
         }
 

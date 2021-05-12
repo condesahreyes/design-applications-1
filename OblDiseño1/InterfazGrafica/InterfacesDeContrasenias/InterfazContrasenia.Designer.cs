@@ -85,7 +85,7 @@
             this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(464, 232);
             this.dataGridView_ListaDuplas.TabIndex = 6;
-            this.dataGridView_ListaDuplas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ListaDuplas_CellContentClick);
+            
             // 
             // btnEliminarContrasenia
             // 
