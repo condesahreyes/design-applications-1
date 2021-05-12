@@ -14,6 +14,8 @@ namespace Pruebas
         private static string nombreLargo;
         private static string contraseniaCorta;
         private static string contraseniaLarga;
+        private static string contraseniaNoPresenteEnListaDuplas;
+        private static string numeroDeTarjetaNoPresenteEnListaTarjetas;
 
         private static string[] contrasenias = {"contrasenia123", 
             "1234Contrasenia", "laContraseña"};
@@ -48,7 +50,10 @@ namespace Pruebas
         {
             contraseniaCorta = "1234";
             contraseniaLarga = "contrasenia123456789012345";
+            contraseniaNoPresenteEnListaDuplas = "ContraseniaNoPrsente";
+            numeroDeTarjetaNoPresenteEnListaTarjetas = "2000200020002000";
             nombreLargo = "Este es un nombre muy largo";
+            
 
             duplas = new List<Dupla_UsuarioContrasenia>();
             tarjetas = new List<Tarjeta>();
@@ -82,28 +87,28 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void AltaUsuarioNombreVacio()
         {
             Usuario unUsuario = new Usuario("", contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void AltaUsuarioNombreLargo()
         {
             Usuario unUsuario = new Usuario(nombreLargo, contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void AltaUsuarioContraseniaCorta()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void AltaUsuarioContraseniaLarga()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaLarga);
@@ -118,14 +123,14 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void CambiarContraseniaCorta()
         {
             usuario.ActualizarContrasenia(contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUsuarioDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void CambiarContraseniaLarga()
         {
             usuario.ActualizarContrasenia(contraseniaLarga);
@@ -242,7 +247,7 @@ namespace Pruebas
                 listaCategorias.Add("" + unaCategoria.Nombre);
             }
 
-            listarCategoriasPorMetodo = usuario.ListarCategorias();
+            listarCategoriasPorMetodo = usuario.ListarToStringDeMisCategorias();
 
             CollectionAssert.AreEquivalent(listaCategorias, listarCategoriasPorMetodo);
         }
@@ -269,7 +274,7 @@ namespace Pruebas
 
             }
 
-            listarTarjetasPorMetodo = usuario.ListarTarjetas();
+            listarTarjetasPorMetodo = usuario.ListarToStringDeMisTarjetas();
 
             CollectionAssert.AreEquivalent(listaCategorias, listarTarjetasPorMetodo);
         }
@@ -292,10 +297,74 @@ namespace Pruebas
                 " Nivel de seguridad: " + unaDupla.NivelSeguridadContrasenia);
             }
 
-            listarDuplasPorMetodo = usuario.ListarDuplas();
+            listarDuplasPorMetodo = usuario.ListarToStringDeMisDuplas();
 
             CollectionAssert.AreEquivalent(listaDuplas, listarDuplasPorMetodo);
         }
+
+        [TestMethod]
+        public void RevisarSiLaTarjetaEsMiaTest()
+        {
+            usuario.AgregarTarjeta(tarjeta);
+            Assert.IsTrue(usuario.RevisarSiLaTarjetaEsMia(tarjeta.Numero));
+        }
+
+        [TestMethod]
+        public void RevisarSiLaTarjetaNOEsMiaTest()
+        {
+            usuario.AgregarTarjeta(tarjeta);
+            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(numeroDeTarjetaNoPresenteEnListaTarjetas));
+        }
+
+        [TestMethod]
+        public void ObtenerTarjetaDeNumeroPresenteTest()
+        {
+            usuario.AgregarTarjeta(tarjeta);
+            Tarjeta tarjetaEjemplo = tarjeta;
+            Tarjeta tarjetaDeUsuario = usuario.ObtenerTarjetaDeNumero(tarjetaEjemplo.Numero);
+            Assert.AreSame(tarjetaEjemplo, tarjetaDeUsuario);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exepcion_IntentoDeObtencionDeObjetoInexistente))]
+        public void ObtenerTarjetaDeNumeroNOPresenteTest()
+        {
+            usuario.AgregarTarjeta(tarjeta);
+            usuario.ObtenerTarjetaDeNumero(numeroDeTarjetaNoPresenteEnListaTarjetas);
+        }
+
+        [TestMethod]
+        public void RevisarSiLaContraseniaEsMiaTest()
+        {
+            usuario.AgregarDupla(dupla);
+            Assert.IsTrue(usuario.RevisarSiLaContraseniaEsMia(contrasenias[0]));
+        }
+
+        [TestMethod]
+        public void RevisarSiLaContraseniaNOEsMiaTest()
+        {
+            usuario.AgregarDupla(dupla);
+            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(contraseniaNoPresenteEnListaDuplas));
+        }
+
+        [TestMethod]
+        public void ObtenerDuplasConLaContraseniaTest()
+        {
+            usuario.AgregarDupla(dupla);
+            duplas.Add(dupla);
+            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contrasenia);
+            CollectionAssert.AreEquivalent(duplas, listaDuplas);
+        }
+
+        [TestMethod]
+        public void ObtenerDuplasConContraseniaNOPresenteTest()
+        {
+            usuario.AgregarDupla(dupla);
+            List<Dupla_UsuarioContrasenia> duplasConContraseniaNoPresente = new List<Dupla_UsuarioContrasenia>();
+            List<Dupla_UsuarioContrasenia> duplasUsuario = usuario.ObtenerDuplasConLaContrasenia(contraseniaNoPresenteEnListaDuplas);
+            CollectionAssert.AreEquivalent(duplasConContraseniaNoPresente, duplasUsuario);
+        }
+
 
         [TestMethod]
         public void ListarContraseñasQueComparto()
@@ -366,7 +435,7 @@ namespace Pruebas
             usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
 
             
-            Assert.IsFalse(usuarioQueComparteContrasenia.EstaSiendoCompartidaLaContraseniaConElUsuario(primerdupla, usuarioAlQueCompartoContrasenia));
+            Assert.IsFalse(usuarioQueComparteContrasenia.VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(primerdupla, usuarioAlQueCompartoContrasenia));
          }
 
         [TestMethod]

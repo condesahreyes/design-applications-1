@@ -48,7 +48,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             {
                 categoria = new Categoria(nomCategoria);
             }
-            catch(InvalidCategoriaDataException)
+            catch(Exepcion_InvalidCategoriaData)
             {
                 MessageBox.Show("Error el nombre de la categoría debe contener entre 3 a 15 caracteres.");
             }

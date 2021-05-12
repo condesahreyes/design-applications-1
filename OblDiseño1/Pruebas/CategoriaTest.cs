@@ -31,28 +31,28 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void AltaCategoriaNombreLargo()
         {
                 Categoria nombreLargoCat = new Categoria(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void AltaCategoriaNombreCorto()
         {
             Categoria nombreCortoCat = new Categoria(nombreCorto);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void ModificacionCategoriaNombreLargo()
         {
             categoria.ActualizarNombre(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void ModificacionCategoriaNombreCorto()
         {
             categoria.ActualizarNombre(nombreCorto);

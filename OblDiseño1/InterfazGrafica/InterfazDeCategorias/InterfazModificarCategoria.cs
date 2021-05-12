@@ -35,7 +35,7 @@ namespace InterfazGrafica.InterfazDeCategorias
                 MessageBox.Show(modificadoCorrectamente);
                 IrACategoria();
             }
-            catch (InvalidCategoriaDataException)
+            catch (Exepcion_InvalidCategoriaData)
             {
                 MessageBox.Show(validacionNombre);
             }

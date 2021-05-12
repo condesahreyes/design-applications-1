@@ -23,7 +23,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             this.tarjeta = tarjeta;
-            List<string> categorias = usuario.ListarCategorias();
+            List<string> categorias = usuario.ListarToStringDeMisCategorias();
 
             for (int i = 0; i < categorias.Count; i++)
             {

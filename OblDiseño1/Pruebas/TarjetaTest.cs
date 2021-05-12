@@ -8,6 +8,7 @@ namespace Pruebas
     public class TarjetaTest
     {
         private string numero;
+        private string numeroDeLargpIncorrecto;
         private string tipo;
         private string nota;
         private string nombre;
@@ -30,6 +31,7 @@ namespace Pruebas
             codigoSeguridad = 241;
             codigoSeguridadCorto = 2;
             numero = "1876322167154328";
+            numeroDeLargpIncorrecto = "123";
             codigoSeguridadLargo = 23834;
             numeroIncorrecto = "8371635461";
             categoria = new Categoria("Personal");
@@ -69,6 +71,18 @@ namespace Pruebas
             Tarjeta tarjetaABorrar = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
             tarjetaABorrar.BorrarTarjeta(tarjetaABorrar);
             Assert.IsNotNull(tarjetaABorrar);
+        }
+
+        [TestMethod]
+        public void Verificacion_Largo_Correcto_NumeroTarjeta()
+        {
+            Assert.IsTrue(Tarjeta.ValidarLargoNumeroDeTarjeta(numero));
+        }
+
+        [TestMethod]
+        public void Verificacion_Largo_Incorrecto_NumeroTarjeta()
+        {
+            Assert.IsFalse(Tarjeta.ValidarLargoNumeroDeTarjeta(numeroDeLargpIncorrecto));
         }
 
         [TestMethod]
