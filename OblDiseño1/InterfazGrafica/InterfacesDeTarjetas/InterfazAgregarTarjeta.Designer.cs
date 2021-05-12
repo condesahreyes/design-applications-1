@@ -98,7 +98,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxNumeroTarjeta.Name = "textBoxNumeroTarjeta";
             this.textBoxNumeroTarjeta.Size = new System.Drawing.Size(160, 20);
             this.textBoxNumeroTarjeta.TabIndex = 29;
-            this.textBoxNumeroTarjeta.TextChanged += new System.EventHandler(this.textBoxNumeroTarjeta_TextChanged);
+            
             // 
             // label2
             // 
@@ -151,7 +151,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombre.TabIndex = 22;
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.textBoxNombre_TextChanged);
+            
             // 
             // label7
             // 
@@ -192,7 +192,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxCodigoSeguridad.Name = "textBoxCodigoSeguridad";
             this.textBoxCodigoSeguridad.Size = new System.Drawing.Size(160, 20);
             this.textBoxCodigoSeguridad.TabIndex = 40;
-            this.textBoxCodigoSeguridad.TextChanged += new System.EventHandler(this.textBoxCodigoSeguridad_TextChanged);
+            
             // 
             // Agregar
             // 
@@ -218,7 +218,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(160, 20);
             this.dateTimePicker1.TabIndex = 42;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            
             // 
             // Cancelar
             // 
@@ -245,7 +245,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(160, 21);
             this.comboBoxCategorias.TabIndex = 45;
-            this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            
             // 
             // label8
             // 
@@ -354,7 +354,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Name = "InterfazAgregarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazAgregarTarjeta";
-            this.Load += new System.EventHandler(this.InterfazAgregarTarjeta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

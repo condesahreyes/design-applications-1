@@ -89,7 +89,7 @@
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 11;
             this.label1.Text = "Nombre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // lblListadoTarjetas
             // 
@@ -160,7 +160,7 @@
             this.label4.Size = new System.Drawing.Size(51, 22);
             this.label4.TabIndex = 19;
             this.label4.Text = "Nota";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            
             // 
             // textBoxNota
             // 
@@ -190,7 +190,7 @@
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(178, 21);
             this.comboBoxCategoria.TabIndex = 21;
-            this.comboBoxCategoria.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategoria_SelectedIndexChanged);
+            
             // 
             // butto_GenerarContrasenia
             // 
@@ -282,7 +282,7 @@
             this.Name = "InterfazAgregarContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Contraseña";
-            this.Load += new System.EventHandler(this.InterfazAgregarContrasenia_Load);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 

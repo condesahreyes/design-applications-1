@@ -12,6 +12,8 @@ namespace OblDiseño1
     const int dia_MAX = 31;
     const int mes_MIN = 1;
     const int mes_MAX = 12;
+    const int largo_MAX = 25;
+    const int largo_MIN = 3;
 
     private string nombre;
     private string tipo;
@@ -55,10 +57,8 @@ namespace OblDiseño1
         get => codigoSeguridad;
         set {
             string codigoAString = "" + value;
-            if (this.Tipo == "American Express" && codigoAString.Length != 4)
+            if ((codigoAString.Length > 4) || (codigoAString.Length < 3))
                 throw new TarjetaIncorrectaException("El codigo de seguridad debe contener 4 digitos");
-            else if (codigoAString.Length != 3)
-                throw new TarjetaIncorrectaException("El codigo de seguridad debe contener 3 digitos");
             else
                 this.codigoSeguridad = value;
         }
@@ -88,7 +88,7 @@ namespace OblDiseño1
 
     private void SetNombre(string unNombre)
     {
-        if (unNombre != null)
+        if ((unNombre != null) && (unNombre.Length >= largo_MIN) && (unNombre.Length <= largo_MAX))
             this.nombre = unNombre;
         else
         {
@@ -98,7 +98,7 @@ namespace OblDiseño1
 
     private void SetTipo(string unTipo)
     {
-        if (unTipo != null)
+        if ((unTipo != null) && (unTipo.Length >= largo_MIN) && (unTipo.Length <= largo_MAX))
             this.tipo = unTipo;
         else
             throw new TarjetaIncorrectaException("El campo no puede ser vacio");

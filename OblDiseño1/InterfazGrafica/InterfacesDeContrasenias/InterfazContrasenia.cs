@@ -74,15 +74,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
         }
 
-        private void listaCategorias_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void dataGridView_ListaDuplas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void btnEliminarContrasenia_Click(object sender, System.EventArgs e)
         {
