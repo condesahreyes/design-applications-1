@@ -200,10 +200,6 @@ namespace OblDiseño1
             return contrasenia;
         }
 
-       
-
-        
-
         private static int GenerarNumAlazar(int numMin, int numMax)
         {
             int num = numRandom.Next(numMin, numMax);
@@ -252,8 +248,8 @@ namespace OblDiseño1
             return cantidadDeTrues;
         }
 
-        private static string ConstruirStringPorLetra(bool[] esCaracteresRequeridos, ref bool[] esCaracteresFaltantes,
-    string aSeguirGenerando)
+        private static string ConstruirStringPorLetra(bool[] esCaracteresRequeridos, 
+            ref bool[] esCaracteresFaltantes, string aSeguirGenerando)
         {
             bool generoUnCaracter = false;
             int numAlazaro = 0;
@@ -293,7 +289,8 @@ namespace OblDiseño1
         public override bool Equals(object obj)
         {
             Dupla_UsuarioContrasenia duplaAComparar = (Dupla_UsuarioContrasenia)obj;
-            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
+            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && 
+                (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
         }
 
     }

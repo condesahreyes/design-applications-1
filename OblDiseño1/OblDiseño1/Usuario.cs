@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace OblDiseño1
 {
@@ -185,7 +184,6 @@ namespace OblDiseño1
             return duplasString;
         }
 
-
         public void CompartirContrasenia(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
         {
             if (VerificarQueLaDuplaEsMia(duplaACompartir))
@@ -195,22 +193,29 @@ namespace OblDiseño1
                         usuarioACompartir.Nombre);
                 else
                 {
-                    if (VerificarQueEstoyCompartiendoLaContraseniaConAlguien(duplaACompartir))
-                        this.ObtenerContraseniasCompartidasPorMi()[duplaACompartir].Add(usuarioACompartir);
-                    else
-                        CompartirContraseniaPorPrimeraVez(duplaACompartir, usuarioACompartir);
-                    
-                    if (usuarioACompartir.VerificarQueElUsuarioMeEstaCompartiendoAlgunaContrasenia(this))
-                        usuarioACompartir.ObtenerContraseniasCompartidasConmigo()[this].Add(duplaACompartir);
-                    else
-                    {
-                        usuarioACompartir.MeCompartenLaContraseniaPorPrimeraVez(this, duplaACompartir);
-                    }
+                    GuardarLaContraseniaACompartir(duplaACompartir, usuarioACompartir);
+                    CompartirContraseniaAUsuario(duplaACompartir, usuarioACompartir);
                 }
             }
             else
                 throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
                     duplaACompartir.Contrasenia + "para este usuario");
+        }
+
+        private void GuardarLaContraseniaACompartir(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
+        {
+            if (VerificarQueEstoyCompartiendoLaContraseniaConAlguien(duplaACompartir))
+                this.ObtenerContraseniasCompartidasPorMi()[duplaACompartir].Add(usuarioACompartir);
+            else
+                CompartirContraseniaPorPrimeraVez(duplaACompartir, usuarioACompartir);
+        }
+
+        private void CompartirContraseniaAUsuario(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
+        {
+            if (usuarioACompartir.VerificarQueElUsuarioMeEstaCompartiendoAlgunaContrasenia(this))
+                usuarioACompartir.ObtenerContraseniasCompartidasConmigo()[this].Add(duplaACompartir);
+            else
+                usuarioACompartir.MeCompartenLaContraseniaPorPrimeraVez(this, duplaACompartir);
         }
 
         public bool VerificarQueLaDuplaEsMia(Dupla_UsuarioContrasenia dupla)
@@ -262,15 +267,16 @@ namespace OblDiseño1
                 }
                 else
                 {
-                    throw new Exepcion_InvalidUsuarioData("Esta contraseña no ha sido compartida anteriormente con el usuario"
-                        + usuarioAlQueDejoDeCompartir.Nombre);
+                    throw new Exepcion_InvalidUsuarioData("Esta contraseña no ha sido compartida " +
+                        "anteriormente con el usuario" + usuarioAlQueDejoDeCompartir.Nombre);
                 }
             else
                 throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
                     duplaADejarDeCompartir.Contrasenia + "para este usuario");
         }
 
-        public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, Usuario usuario)
+        public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, 
+            Usuario usuario)
         {
             if (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
                 return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));
@@ -284,7 +290,8 @@ namespace OblDiseño1
         }
 
        
-        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contrasenias)
+        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia, 
+            List<Usuario>> contrasenias)
         {
             List<string> resultado = new List<string>();
             foreach (var iterador in contrasenias)
@@ -326,27 +333,23 @@ namespace OblDiseño1
                 misPares[nivelSeguridad].cantidad++;
             }
             reporte miReporte = new reporte(misPares, categoria);
+
             return miReporte;
         }
-
 
         public void RemoverDupla(Dupla_UsuarioContrasenia duplaARemover)
         {
             if (this.duplas.Contains(duplaARemover))
-            {
                 this.duplas.Remove(duplaARemover);
-            }
         }
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
         {
-            bool esMia = false;
-
             foreach (Dupla_UsuarioContrasenia unaDupla in this.duplas)
                 if (unaDupla.Contrasenia == unaContrasenia)
-                    esMia = true;
+                    return true;
 
-            return esMia;
+            return false;
         }
 
         public List<Dupla_UsuarioContrasenia> ObtenerDuplasConLaContrasenia(string laContrasenia)
@@ -362,13 +365,11 @@ namespace OblDiseño1
 
         public bool RevisarSiLaTarjetaEsMia(string numeroTarjeta)
         {
-            bool esMia = false;
-
             foreach(Tarjeta unaTarjeta in this.tarjetas)
                 if (unaTarjeta.Numero == numeroTarjeta)
-                    esMia = true;
+                    return true;
 
-            return esMia;
+            return false;
         }
 
         public Tarjeta ObtenerTarjetaDeNumero(string numeroTarjeta)
@@ -390,10 +391,7 @@ namespace OblDiseño1
         public override bool Equals(object obj)
         {
             Usuario usuarioAComparar = (Usuario)obj;
-            if (Nombre.Equals(usuarioAComparar.Nombre))
-                return true;
-            else
-                return false;
+            return (Nombre.Equals(usuarioAComparar.Nombre)) ? true : false;
         }
 
         public override string ToString()

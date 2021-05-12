@@ -16,14 +16,15 @@ namespace OblDiseño1
 
         private string nombre;
         private string tipo;
-        private int codigoSeguridad;
         private string numero;
+
+        private int codigoSeguridad;
 
         private DateTime fechaVencimiento;
         private Categoria categoria;
 
-
-        public Tarjeta(string unNombre, string unTipo, string unNumero, int unCodigoseguridad, DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
+        public Tarjeta(string unNombre, string unTipo, string unNumero, int unCodigoseguridad
+            , DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
         {
             Nombre = unNombre;
             Tipo = unTipo;
@@ -72,7 +73,8 @@ namespace OblDiseño1
                 int year = value.Year;
                 int month = value.Month;
                 int day = value.Day;
-                if ((year < anio_MIN || year > anio_MAX) || (month < mes_MIN || month > mes_MAX) || (day < dia_MIN || day > dia_MAX))
+                if ((year < anio_MIN || year > anio_MAX) || (month < mes_MIN || month > mes_MAX) 
+                    || (day < dia_MIN || day > dia_MAX))
                     throw new TarjetaIncorrectaException("No puede ingresar un campo vacio");
                 else
                     this.fechaVencimiento = value;
@@ -133,7 +135,6 @@ namespace OblDiseño1
                 this.FechaVencimiento + "Categoria: " + this.Categoria +
                 "Nota: " + this.NotaOpcional);
         }
-
 
         public int CompareTo(Tarjeta unaTarjeta)
         {
