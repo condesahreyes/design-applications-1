@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 
 namespace OblDiseño1
@@ -19,7 +18,7 @@ namespace OblDiseño1
         }
         //1* HASTA HACA
 
-        List<Usuario> usuarios = new List<Usuario>();
+        private List<Usuario> usuarios = new List<Usuario>();
         
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
@@ -35,15 +34,6 @@ namespace OblDiseño1
             return this.usuarios;
         }
 
-        public Usuario DevolverUsuario(string nombreUsuario)
-        {
-            foreach (Usuario us in usuarios)
-                if (us.Nombre.Equals(nombreUsuario))
-                    return us;
-            
-                throw new ObjectNotFoundException();
-        }
-
         public bool PuedoIngresarAlSistema(string unNombreUsuario, string unaContrasenia)
         {
             Usuario unUsuario = DevolverUsuario(unNombreUsuario);
@@ -57,6 +47,15 @@ namespace OblDiseño1
                 return false;
 
             return true;
+        }
+
+        public Usuario DevolverUsuario(string nombreUsuario)
+        {
+            foreach (Usuario us in usuarios)
+                if (us.Nombre.Equals(nombreUsuario))
+                    return us;
+
+            throw new ObjectNotFoundException();
         }
 
         public List<object>[] ObtenerDataBreaches(ref Usuario usuario, List<string> datosDataBreaches)

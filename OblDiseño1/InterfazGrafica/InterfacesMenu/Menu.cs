@@ -14,14 +14,19 @@ namespace InterfazGrafica.InterfacesMenu
 {
     public partial class Menu : Form
     {
-        Sistema sistema;
-        Usuario usuario;
-    
+        private Sistema sistema;
+        private Usuario usuario;
+
+        private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
+            "se debe registrar una Categoría para acceder a esta opción.";
+
+
         public Menu(ref Sistema sistema, ref Usuario usuario)
         {
             this.usuario = usuario;
             this.sistema = sistema;
-            //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
+            //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR FIjarse Linea 103
+            //Fijarese linea 103
             if (sistema.getHayQueCrearDatosDePrueba())
             {
                 CargarTarjetasDeEjemplo();
@@ -49,7 +54,7 @@ namespace InterfazGrafica.InterfacesMenu
                 contrasenias.Show();
             }
             else
-                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
+                MessageBox.Show(msgErrorDebeCrearCategoria);
         }
 
         private void btnTarjetas_Click(object sender, EventArgs e)
@@ -57,7 +62,7 @@ namespace InterfazGrafica.InterfacesMenu
             if (usuario.ObtenerCategorias().Count > 0)
                 IrAPantallaTarjetas();
             else
-                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
+                MessageBox.Show(msgErrorDebeCrearCategoria);
         }
 
         private void IrAPantallaTarjetas()
@@ -116,11 +121,6 @@ namespace InterfazGrafica.InterfacesMenu
             usuario.AgregarTarjeta(tercerTarjeta);
             usuario.AgregarTarjeta(cuartaTarjeta);
 
-        }
-
-         private void btnCompartirContrasenia_Click(object sender, EventArgs e)
-        {
-            
         }
         
         //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR

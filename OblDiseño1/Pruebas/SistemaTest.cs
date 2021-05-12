@@ -52,6 +52,7 @@ namespace Pruebas
         {
             Usuario usuarioQueQuiero = new Usuario(nombres[0], contrasenias[0]); ;
             Usuario usuarioObtenido = sistema.DevolverUsuario(usuarioQueQuiero.Nombre);
+
             Assert.AreEqual(usuarioQueQuiero, usuarioObtenido);
         }
 
@@ -93,6 +94,5 @@ namespace Pruebas
         {
             bool puedoIngresar = sistema.PuedoIngresarAlSistema("Diego", contrasenias[0]);
         }
-
     }
 }

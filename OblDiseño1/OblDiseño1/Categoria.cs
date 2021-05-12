@@ -4,27 +4,35 @@ namespace OblDiseño1
 {
     public class Categoria : IComparable<Categoria>
     {
+        public string Nombre { get => nombre; private set => ActualizarNombre(value); }
+
         private string nombre;
+        private readonly string msgErrorNombre = "El nombre debe tener entre 3 y 15 caracteres";
+
         public Categoria(string nombre)
         {
-            if (nombre.Length > 15 || nombre.Length < 3)
-                throw new InvalidCategoriaDataException("El nombre debe tener entre 3 y 15 caracteres");
+            if (!EsNombreValido(nombre))
+                throw new InvalidCategoriaDataException(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
-        public string Nombre { get => nombre; private set => setNombre(value);}
         
-        public void setNombre(string nombre)
+        public void ActualizarNombre(string nombre)
         {
-            if (nombre.Length > 15 || nombre.Length < 3)
-                throw new InvalidCategoriaDataException("El nombre debe tener entre 3 y 15 caracteres");
+            if (!EsNombreValido(nombre))
+                throw new InvalidCategoriaDataException(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
 
+        private bool EsNombreValido(string unNombre)
+        {
+            return (unNombre.Length > 15 || unNombre.Length < 3) ? false : true;
+        }
+
         public override string ToString()
         {
-            return "" + this.Nombre;
+            return this.Nombre;
         }
 
         public int CompareTo(Categoria otraDupla)

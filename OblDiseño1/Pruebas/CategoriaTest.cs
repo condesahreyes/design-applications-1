@@ -26,7 +26,7 @@ namespace Pruebas
         [TestMethod]
         public void ModificacionCategoriaTest()
         {
-            categoria.setNombre(nombre2);
+            categoria.ActualizarNombre(nombre2);
             Assert.AreEqual(nombre2, categoria.Nombre);
         }
 
@@ -48,14 +48,14 @@ namespace Pruebas
         [ExpectedException(typeof(InvalidCategoriaDataException))]
         public void ModificacionCategoriaNombreLargo()
         {
-            categoria.setNombre(nombreLargo);
+            categoria.ActualizarNombre(nombreLargo);
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidCategoriaDataException))]
         public void ModificacionCategoriaNombreCorto()
         {
-            categoria.setNombre(nombreCorto);
+            categoria.ActualizarNombre(nombreCorto);
         }
     }
 }
