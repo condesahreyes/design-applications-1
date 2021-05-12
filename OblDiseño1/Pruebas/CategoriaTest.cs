@@ -16,6 +16,7 @@ namespace Pruebas
         private readonly string mensajeNombreIncorrecto = "El nombre debe tener entre 3 y 15 caracteres";
 
         Categoria categoria = new Categoria(nombre1);
+        Categoria otraCategoria = new Categoria(nombre2);
 
         [TestMethod]
         public void AltaCategoriaTest()
@@ -56,6 +57,12 @@ namespace Pruebas
         public void ModificacionCategoriaNombreCorto()
         {
             categoria.ActualizarNombre(nombreCorto);
+        }
+
+        [TestMethod]
+        public void CompararCategoriaPorOrdenAlfabetico()
+        {
+            Assert.AreEqual(-1, categoria.CompareTo(otraCategoria));
         }
     }
 }

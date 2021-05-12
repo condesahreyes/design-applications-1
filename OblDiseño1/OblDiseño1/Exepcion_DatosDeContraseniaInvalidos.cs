@@ -13,9 +13,5 @@ namespace OblDiseño1
 
         }
 
-        public Exepcion_DatosDeContraseniaInvalidos(string message, Exception innerExeption)
-        {
-
-        }
     }
 }

@@ -4,7 +4,7 @@ namespace OblDiseño1
 {
     public class Categoria : IComparable<Categoria>
     {
-        public string Nombre { get => nombre; private set => ActualizarNombre(value); }
+        public string Nombre { get => nombre;  set => ActualizarNombre(value); }
 
         private string nombre;
         private readonly string msgErrorNombre = "El nombre debe tener entre 3 y 15 caracteres";

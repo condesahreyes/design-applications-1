@@ -25,17 +25,10 @@ namespace InterfazGrafica.InterfacesMenu
         {
             this.usuario = usuario;
             this.sistema = sistema;
-            //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR FIjarse Linea 103
-            //Fijarese linea 103
-            if (sistema.getHayQueCrearDatosDePrueba())
-            {
-                CargarTarjetasDeEjemplo();
-                CargarDatosDeEjemplo();
-                 sistema.yaSeCrearonDatosDePruva();
-
-            }
-
-             InitializeComponent();
+           
+                //CargarTarjetasDeEjemplo();
+                //CargarDatosDeEjemplo();
+                InitializeComponent();
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)

@@ -25,9 +25,7 @@ namespace OblDiseño1
         private List<Categoria> categorias;
         private Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> contraseniasCompartidasConmigo;
         private Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contraseniasCompartidasPorMi;
-        private List<Usuario> usuariosQueYoComparto;
-        private List<Dupla_UsuarioContrasenia> duplasQueMeComparten;
-
+        
         public string Nombre { get => nombre; set => ActualizarNombre(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
@@ -43,8 +41,6 @@ namespace OblDiseño1
             this.duplas = new List<Dupla_UsuarioContrasenia>();
             this.contraseniasCompartidasConmigo = new Dictionary<Usuario, List<Dupla_UsuarioContrasenia>>();
             this.contraseniasCompartidasPorMi = new Dictionary<Dupla_UsuarioContrasenia, List<Usuario>>();
-            this.usuariosQueYoComparto = new List<Usuario>();
-            this.duplasQueMeComparten = new List<Dupla_UsuarioContrasenia>();
         }
 
         public List<Tarjeta> ObtenerTarjetas()
@@ -62,10 +58,6 @@ namespace OblDiseño1
             return this.categorias;
         }
 
-        public List<Dupla_UsuarioContrasenia> ObtenerDuplasQueMeComparten()
-        {
-            return this.duplasQueMeComparten;
-        }
         
         public Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> ObtenerContraseniasCompartidasConmigo()
         {
@@ -149,15 +141,7 @@ namespace OblDiseño1
             this.categorias.Remove(categoria);
         }
 
-        public Categoria DevolverCategoria(string nombreCategoria)
-        {
-
-            foreach (Categoria cat in categorias)
-                if (cat.Nombre == nombreCategoria)
-                    return cat;
-            return null;
-        }
-
+       
         public List<string> ListarTarjetas()
         {
             List<string> tarjetasString = new List<string>();

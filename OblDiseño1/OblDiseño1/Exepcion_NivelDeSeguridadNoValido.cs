@@ -11,9 +11,5 @@ namespace OblDiseño1
 
         }
 
-        public Exepcion_NivelDeSeguridadNoValido(string message, Exception innerExeption)
-        {
-
-        }
     }
 }

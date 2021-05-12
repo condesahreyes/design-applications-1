@@ -106,5 +106,21 @@ namespace Pruebas
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, categoria, nota);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        public void Tarjeta_CategoriaNula_Test()
+        {
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, null, nota);
+        }
+        
+        [TestMethod]
+        public void Comparar2TarjetasPorCategoria()
+        {
+            Tarjeta primerTarjeta = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, fechaVencimiento, categoria, nota);
+            Tarjeta segundaTarjeta = new Tarjeta("Facundo", "MasterCard", "2222111133334444", 745, fechaVencimiento, new Categoria("Trabajo"),"");
+
+            Assert.AreEqual(-1, primerTarjeta.CompareTo(segundaTarjeta));
+        }
+
     }
 }
