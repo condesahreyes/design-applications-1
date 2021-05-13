@@ -24,20 +24,19 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.tarjeta = tarjeta;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             usuario.EliminarTarjeta(tarjeta);
-            this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
-            interfazTarjeta.Show();
+            IrAInterfazTarjeta();
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            IrAInterfazTarjeta();
+        }
+
+        private void IrAInterfazTarjeta()
         {
             this.Close();
             InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);

@@ -16,6 +16,7 @@ namespace Pruebas
         private readonly string mensajeNombreIncorrecto = "El nombre debe tener entre 3 y 15 caracteres";
 
         Categoria categoria = new Categoria(nombre1);
+        Categoria otraCategoria = new Categoria(nombre2);
 
         [TestMethod]
         public void AltaCategoriaTest()
@@ -26,36 +27,42 @@ namespace Pruebas
         [TestMethod]
         public void ModificacionCategoriaTest()
         {
-            categoria.setNombre(nombre2);
+            categoria.ActualizarNombre(nombre2);
             Assert.AreEqual(nombre2, categoria.Nombre);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void AltaCategoriaNombreLargo()
         {
                 Categoria nombreLargoCat = new Categoria(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void AltaCategoriaNombreCorto()
         {
             Categoria nombreCortoCat = new Categoria(nombreCorto);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void ModificacionCategoriaNombreLargo()
         {
-            categoria.setNombre(nombreLargo);
+            categoria.ActualizarNombre(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidCategoriaDataException))]
+        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
         public void ModificacionCategoriaNombreCorto()
         {
-            categoria.setNombre(nombreCorto);
+            categoria.ActualizarNombre(nombreCorto);
+        }
+
+        [TestMethod]
+        public void CompararCategoriaPorOrdenAlfabetico()
+        {
+            Assert.AreEqual(-1, categoria.CompareTo(otraCategoria));
         }
     }
 }

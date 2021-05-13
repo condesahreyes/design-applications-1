@@ -14,23 +14,21 @@ namespace InterfazGrafica.InterfacesMenu
 {
     public partial class Menu : Form
     {
-        Sistema sistema;
-        Usuario usuario;
-    
+        private Sistema sistema;
+        private Usuario usuario;
+
+        private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
+            "se debe registrar una Categoría para acceder a esta opción.";
+
+
         public Menu(ref Sistema sistema, ref Usuario usuario)
         {
             this.usuario = usuario;
             this.sistema = sistema;
-            //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR
-            if (sistema.getHayQueCrearDatosDePrueba())
-            {
-                CargarTarjetasDeEjemplo();
-                CargarDatosDeEjemplo();
-                 sistema.yaSeCrearonDatosDePruva();
-
-            }
-
-             InitializeComponent();
+           
+                //CargarTarjetasDeEjemplo();
+                //CargarDatosDeEjemplo();
+                InitializeComponent();
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
@@ -49,7 +47,7 @@ namespace InterfazGrafica.InterfacesMenu
                 contrasenias.Show();
             }
             else
-                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
+                MessageBox.Show(msgErrorDebeCrearCategoria);
         }
 
         private void btnTarjetas_Click(object sender, EventArgs e)
@@ -57,7 +55,7 @@ namespace InterfazGrafica.InterfacesMenu
             if (usuario.ObtenerCategorias().Count > 0)
                 IrAPantallaTarjetas();
             else
-                MessageBox.Show("Error, primero se debe registrar una Categoría para acceder a esta opción.");
+                MessageBox.Show(msgErrorDebeCrearCategoria);
         }
 
         private void IrAPantallaTarjetas()
@@ -106,6 +104,7 @@ namespace InterfazGrafica.InterfacesMenu
             Tarjeta segundaTarjeta = new Tarjeta("Tarjeta ITAU", "MASTERCARD", "6726534165445561", 966, new DateTime(2028,03,15), segundaCategoria, "");
             Tarjeta tercerTarjeta = new Tarjeta("Black Brou", "MASTERCARD", "9347272233351211", 666, new DateTime(2031,02,09), primerCategoria, "Sin mucho que decir");
             Tarjeta cuartaTarjeta = new Tarjeta("HSBC Credito", "AMERICAN EXPRESS", "8888999936544567",255, new DateTime(2026,11,25), tercerCategoria,"");
+            Tarjeta quintaTarjeta = new Tarjeta("afdqwcqwcwcd", "qwewcqwce", "1111222211112222", 111, new DateTime(2022, 09, 17), primerCategoria, "123123123212321232132342");
 
             usuario.AgregarCategoria(primerCategoria);
             usuario.AgregarCategoria(segundaCategoria);
@@ -115,12 +114,8 @@ namespace InterfazGrafica.InterfacesMenu
             usuario.AgregarTarjeta(segundaTarjeta);
             usuario.AgregarTarjeta(tercerTarjeta);
             usuario.AgregarTarjeta(cuartaTarjeta);
+            usuario.AgregarTarjeta(quintaTarjeta);
 
-        }
-
-         private void btnCompartirContrasenia_Click(object sender, EventArgs e)
-        {
-            
         }
         
         //1* ESTO ES PARA TESTEAR LA INTERFAZ, SACAR ANTES DE ENTREGAR

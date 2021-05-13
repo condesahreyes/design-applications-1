@@ -6,56 +6,45 @@ namespace OblDiseño1
     public class ChequeadorDeDataBreaches
     {
 
-        public Usuario Usuario { get; set; }
+        public Usuario usuario { get; set; }
 
-        private const int asciNumericoDesde = 48;
-        private const int asciNumericoHasta = 57;
-        private const int cantTiposObjetosVulnerables = 2;
+        private const int cant_caracteres_en_numero_tarjeta = 16;
+        private const int cant_tipos_de_entidades_vulneradas = 2;
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
-            Usuario = unUsuario;
+            usuario = unUsuario;
         }
 
         public List<Object>[] ObtenerEntidadesVulneradas(List<string> datosDelDataBreach)
         {
-            List<object>[] datosVulnerados = new List<object>[cantTiposObjetosVulnerables];
-            
-            datosVulnerados[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
-            datosVulnerados[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
+            List<object>[] entidadesVulneradas = new List<object>[cant_tipos_de_entidades_vulneradas];
 
-            return datosVulnerados;
-        }
+            entidadesVulneradas[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
+            entidadesVulneradas[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
 
-        private List<Object> ObtenerDuplasVulneradas(List<string> datosDelDataBreach)
-        {
-            List<Object> duplasVulneradas = new List<Object>();
-
-            foreach(string dato in datosDelDataBreach)
-                foreach (Dupla_UsuarioContrasenia dupla in Usuario.ObtenerDuplas())
-                    if (dato.Equals(dupla.Contrasenia))
-                        duplasVulneradas.Add(dupla);
-
-            return duplasVulneradas;
+            return entidadesVulneradas;
         }
 
         private List<Object> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
         {
             List<Object> tarjetasVulneradas = new List<Object>();
 
-            foreach (string dato in datosDelDataBreach)
-                if (EsNumeroDeTarjetaValido(dato))
-                    foreach (Tarjeta tarjeta in Usuario.ObtenerTarjetas())
-                        if (dato == tarjeta.Numero)
-                            tarjetasVulneradas.Add(tarjeta);
+            foreach (string dato in datosDelDataBreach) 
+                if (Tarjeta.ValidarLargoNumeroDeTarjeta(dato) && this.usuario.RevisarSiLaTarjetaEsMia(dato))
+                    tarjetasVulneradas.Add(this.usuario.ObtenerTarjetaDeNumero(dato));
 
             return tarjetasVulneradas;
         }
 
-
-        private bool EsNumeroDeTarjetaValido(string posibleNumeroDeTarjeta)
+        private List<Object> ObtenerDuplasVulneradas(List<string> datosDelDataBreach)
         {
-            return (posibleNumeroDeTarjeta.Length == 16) ? true : false;
-        }
+            List<Object> duplasVulneradas = new List<Object>();
 
+            foreach (string dato in datosDelDataBreach)
+                if (this.usuario.RevisarSiLaContraseniaEsMia(dato))
+                    duplasVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
+
+            return duplasVulneradas;
+        }
     }
 }

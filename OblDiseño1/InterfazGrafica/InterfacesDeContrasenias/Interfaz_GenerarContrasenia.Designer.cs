@@ -92,7 +92,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.checkBox_Minusculas.Name = "checkBox_Minusculas";
             this.checkBox_Minusculas.Size = new System.Drawing.Size(207, 44);
             this.checkBox_Minusculas.TabIndex = 0;
-            this.checkBox_Minusculas.Text = "Incluir Minusculas";
+            this.checkBox_Minusculas.Text = "Incluir Minúsculas";
             this.checkBox_Minusculas.UseVisualStyleBackColor = false;
             // 
             // checkBox_Mayusculas
@@ -105,7 +105,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.checkBox_Mayusculas.Name = "checkBox_Mayusculas";
             this.checkBox_Mayusculas.Size = new System.Drawing.Size(206, 44);
             this.checkBox_Mayusculas.TabIndex = 0;
-            this.checkBox_Mayusculas.Text = "Incluir Mayusculas";
+            this.checkBox_Mayusculas.Text = "Incluir Mayúsculas";
             this.checkBox_Mayusculas.UseVisualStyleBackColor = false;
             // 
             // checkBox_Numeros
@@ -118,7 +118,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.checkBox_Numeros.Name = "checkBox_Numeros";
             this.checkBox_Numeros.Size = new System.Drawing.Size(206, 44);
             this.checkBox_Numeros.TabIndex = 0;
-            this.checkBox_Numeros.Text = "Incluir Numeros";
+            this.checkBox_Numeros.Text = "Incluir Números";
             this.checkBox_Numeros.UseVisualStyleBackColor = false;
             // 
             // checkBox_Especiales
@@ -133,7 +133,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.checkBox_Especiales.TabIndex = 0;
             this.checkBox_Especiales.Text = "Incluir Caracteres Especiales";
             this.checkBox_Especiales.UseVisualStyleBackColor = false;
-            this.checkBox_Especiales.CheckedChanged += new System.EventHandler(this.checkBox_Especiales_CheckedChanged);
             // 
             // numericUpDown_cantCaracteres
             // 
@@ -156,7 +155,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             0,
             0,
             0});
-            this.numericUpDown_cantCaracteres.ValueChanged += new System.EventHandler(this.numericUpDown_cantCaracteres_ValueChanged);
             // 
             // label1
             // 
@@ -169,7 +167,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.label1.Size = new System.Drawing.Size(210, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "Cantidad de Caracteres";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel1
             // 

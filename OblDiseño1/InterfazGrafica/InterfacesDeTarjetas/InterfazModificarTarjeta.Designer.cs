@@ -92,7 +92,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Aceptar.Name = "Aceptar";
             this.Aceptar.Size = new System.Drawing.Size(145, 27);
             this.Aceptar.TabIndex = 59;
-            this.Aceptar.Text = "Aceptar";
+            this.Aceptar.Text = "Confirmar";
             this.Aceptar.UseVisualStyleBackColor = false;
             this.Aceptar.Click += new System.EventHandler(this.Aceptar_Click);
             // 
@@ -145,7 +145,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombre.TabIndex = 45;
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.textBoxNombre_TextChanged);
             // 
             // label8
             // 
@@ -169,7 +168,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(160, 21);
             this.comboBoxCategorias.TabIndex = 63;
-            this.comboBoxCategorias.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label13
             // 
@@ -265,7 +263,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(94, 22);
             this.label7.TabIndex = 69;
-            this.label7.Text = "Categoria";
+            this.label7.Text = "Categoría";
             // 
             // label5
             // 
@@ -277,7 +275,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(187, 22);
             this.label5.TabIndex = 68;
-            this.label5.Text = "Codigo de Seguridad";
+            this.label5.Text = "Código de Seguridad";
             // 
             // label4
             // 
@@ -301,7 +299,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 22);
             this.label3.TabIndex = 66;
-            this.label3.Text = "Numero";
+            this.label3.Text = "Número";
             // 
             // label2
             // 
@@ -361,7 +359,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Name = "InterfazModificarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazModificarTarjeta";
-            this.Load += new System.EventHandler(this.InterfazModificarTarjeta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

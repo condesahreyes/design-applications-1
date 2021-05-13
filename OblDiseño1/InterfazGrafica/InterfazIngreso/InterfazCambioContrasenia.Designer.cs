@@ -110,7 +110,7 @@
             this.btnCancelarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCancelarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnCancelarContrasenia.Location = new System.Drawing.Point(89, 272);
+            this.btnCancelarContrasenia.Location = new System.Drawing.Point(285, 273);
             this.btnCancelarContrasenia.Name = "btnCancelarContrasenia";
             this.btnCancelarContrasenia.Size = new System.Drawing.Size(130, 27);
             this.btnCancelarContrasenia.TabIndex = 26;
@@ -126,7 +126,7 @@
             this.btnModificarContrasenia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificarContrasenia.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnModificarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnModificarContrasenia.Location = new System.Drawing.Point(280, 272);
+            this.btnModificarContrasenia.Location = new System.Drawing.Point(98, 273);
             this.btnModificarContrasenia.Name = "btnModificarContrasenia";
             this.btnModificarContrasenia.Size = new System.Drawing.Size(130, 27);
             this.btnModificarContrasenia.TabIndex = 25;

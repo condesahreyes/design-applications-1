@@ -55,12 +55,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                                 "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
                                 "> Categoría: Se selecciona de las disponibles en el sistema");
             }
-            catch (InvalidUsuarioDataException)
+            catch (Exepcion_InvalidUsuarioData)
             {
                 MessageBox.Show("Error: este usuario ya esta registado para este sitio en el sistema");
             }
         }
-
 
 
         private void IrAContraseñas()
@@ -70,30 +69,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.Close();
         }
 
-        private void comboBoxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            
-        }
-
         private void btnCancelarCategoria_Click(object sender, EventArgs e)
         {
             IrAContraseñas();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InterfazAgregarContrasenia_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void butto_GenerarContrasenia_Click(object sender, EventArgs e)

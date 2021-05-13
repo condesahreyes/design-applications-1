@@ -7,28 +7,24 @@ namespace OblDiseño1
     public class Dupla_UsuarioContrasenia : IComparable<Dupla_UsuarioContrasenia>
     {
 
-        public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value);}
+        public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
 
-        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value);}
+        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-        public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value);}
+        public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value); }
 
-        public string TipoSitioOApp { get; set;}
+        public string TipoSitioOApp { get; set; }
 
-        public string Nota { get => nota; set => ActualizarNota(value);}
+        public string Nota { get => nota; set => ActualizarNota(value); }
 
-        public Categoria Categoria { get; set;}
+        public Categoria Categoria { get; set; }
 
-        public DateTime FechaUltimaModificacion { get; set;}
+        public DateTime FechaUltimaModificacion { get; set; }
 
-        public int NivelSeguridadContrasenia { get => nivelSeguridadContrasenia;}
+        public int NivelSeguridadContrasenia { get => nivelSeguridadContrasenia; }
 
-        public bool DataBrench { get; set;}
+        public bool DataBrench { get; set; }
 
-        private const string caracteresNumericos = "0123456789";
-        private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
-        private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
         private string contrasenia;
         private string nombreUsuario;
@@ -45,10 +41,16 @@ namespace OblDiseño1
         private string nota;
         private static Random numRandom = new Random();
 
-        private static string[] caracteresPorPosicion = { caracteresMayusculas, 
+        private const string caracteresNumericos = "0123456789";
+        private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+
+        private static string[] caracteresPorPosicion = { caracteresMayusculas,
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
 
-        public Dupla_UsuarioContrasenia(string unNombreUsuario, string unaContrasenia, 
+
+        public Dupla_UsuarioContrasenia(string unNombreUsuario, string unaContrasenia,
             string unSitio, string laNota, Categoria laCategoria)
         {
             NombreUsuario = unNombreUsuario;
@@ -68,9 +70,7 @@ namespace OblDiseño1
 
         public void ActualizarNota(string unaNota)
         {
-            int largoNota = unaNota.Length;
-
-            if (largoNota > NOTA_LARGO_MAX)
+            if (EsNotaMuylarga(unaNota.Length))
                 throw new Exepcion_DatosDeContraseniaInvalidos($"La nota debe contener " +
                     $"como maximo {NOTA_LARGO_MAX} caracteres");
             else
@@ -80,11 +80,14 @@ namespace OblDiseño1
             }
         }
 
+        private bool EsNotaMuylarga(int largoDeLaNota)
+        {
+            return (largoDeLaNota > NOTA_LARGO_MAX);
+        }
+
         public void ActualizarNombreSitioApp(string unNombreSitioApp)
         {
-            int largoNombre = unNombreSitioApp.Length;
-
-            if (largoNombre < SITIO_LARGO_MIN || largoNombre > SITIO_LARGO_MAX)
+            if (EsNombreSitioAppLargoValido(unNombreSitioApp.Length))
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {SITIO_LARGO_MIN} y {SITIO_LARGO_MAX} caracteres");
             else
@@ -94,11 +97,14 @@ namespace OblDiseño1
             }  
         }
 
+        private bool EsNombreSitioAppLargoValido(int largoNombre)
+        {
+            return (largoNombre < SITIO_LARGO_MIN || largoNombre > SITIO_LARGO_MAX);
+        }
+
         public void ActualizarNombreUsuario(string unNombreUsuario)
         {
-            int largoNombre = unNombreUsuario.Length;
-
-            if (largoNombre < NOMBRE_LARGO_MIN || largoNombre > NOMBRE_LARGO_MAX)
+            if (EsNombreUsuarioValido(unNombreUsuario.Length))
                 throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {NOMBRE_LARGO_MIN} y {NOMBRE_LARGO_MAX} caracteres");
             else
@@ -108,20 +114,29 @@ namespace OblDiseño1
             }
         }
 
+        private bool EsNombreUsuarioValido(int largoNombre)
+        {
+            return (largoNombre < NOMBRE_LARGO_MIN || largoNombre > NOMBRE_LARGO_MAX);
+        }
+
         public void ActualizarContrasenia(string unaContrasenia)
         {
             int largo = unaContrasenia.Length;
 
-            if (EsLargoInvalidoContrasenia(largo) && largo != 0)
+            if (EsLargoInvalidoContrasenia(largo))
                 throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
                     $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
             else
             {
                 contrasenia = unaContrasenia;
-
                 nivelSeguridadContrasenia = CalcularSeguridad(contrasenia);
                 ActualizarUltimaFechaModificacion();
             }
+        }
+
+        private static bool EsLargoInvalidoContrasenia(int largo)
+        {
+            return largo < CONTRASENIA_LARGO_MIN || largo > CONTRASENIA_LARGO_MAX;
         }
 
         public static int CalcularSeguridad(string unaContrasenia)
@@ -156,7 +171,6 @@ namespace OblDiseño1
 
                 if (tipoCaracter != -1)
                     tiposDeCaracteres[tipoCaracter] = true;
-
             }
 
             return tiposDeCaracteres;
@@ -186,18 +200,9 @@ namespace OblDiseño1
             return contrasenia;
         }
 
-       
-
-        private static bool EsLargoInvalidoContrasenia(int largo)
-        {
-            return largo < CONTRASENIA_LARGO_MIN || largo > CONTRASENIA_LARGO_MAX;
-        }
-
         private static int GenerarNumAlazar(int numMin, int numMax)
         {
-            //Random numRandom = new Random();
             int num = numRandom.Next(numMin, numMax);
-
             return num;
         }
 
@@ -243,8 +248,8 @@ namespace OblDiseño1
             return cantidadDeTrues;
         }
 
-        private static string ConstruirStringPorLetra(bool[] esCaracteresRequeridos, ref bool[] esCaracteresFaltantes,
-    string aSeguirGenerando)
+        private static string ConstruirStringPorLetra(bool[] esCaracteresRequeridos, 
+            ref bool[] esCaracteresFaltantes, string aSeguirGenerando)
         {
             bool generoUnCaracter = false;
             int numAlazaro = 0;
@@ -284,7 +289,8 @@ namespace OblDiseño1
         public override bool Equals(object obj)
         {
             Dupla_UsuarioContrasenia duplaAComparar = (Dupla_UsuarioContrasenia)obj;
-            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
+            return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && 
+                (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
         }
 
     }

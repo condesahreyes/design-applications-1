@@ -62,7 +62,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label1.Size = new System.Drawing.Size(304, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "¿Esta seguro que desea eliminar esta Tarjeta?";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // InterfazEliminarTarjeta
             // 

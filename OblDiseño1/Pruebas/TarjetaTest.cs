@@ -8,6 +8,7 @@ namespace Pruebas
     public class TarjetaTest
     {
         private string numero;
+        private string numeroDeLargpIncorrecto;
         private string tipo;
         private string nota;
         private string nombre;
@@ -30,6 +31,7 @@ namespace Pruebas
             codigoSeguridad = 241;
             codigoSeguridadCorto = 2;
             numero = "1876322167154328";
+            numeroDeLargpIncorrecto = "123";
             codigoSeguridadLargo = 23834;
             numeroIncorrecto = "8371635461";
             categoria = new Categoria("Personal");
@@ -72,6 +74,18 @@ namespace Pruebas
         }
 
         [TestMethod]
+        public void Verificacion_Largo_Correcto_NumeroTarjeta()
+        {
+            Assert.IsTrue(Tarjeta.ValidarLargoNumeroDeTarjeta(numero));
+        }
+
+        [TestMethod]
+        public void Verificacion_Largo_Incorrecto_NumeroTarjeta()
+        {
+            Assert.IsFalse(Tarjeta.ValidarLargoNumeroDeTarjeta(numeroDeLargpIncorrecto));
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(TarjetaIncorrectaException))]
         public void Tarjeta_CodigoSeguridadLargo_Test()
         {
@@ -104,6 +118,22 @@ namespace Pruebas
         public void Tarjeta_fechaVencimientoInvalida_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, categoria, nota);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        public void Tarjeta_CategoriaNula_Test()
+        {
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, null, nota);
+        }
+        
+        [TestMethod]
+        public void Comparar2TarjetasPorCategoria()
+        {
+            Tarjeta primerTarjeta = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, fechaVencimiento, categoria, nota);
+            Tarjeta segundaTarjeta = new Tarjeta("Facundo", "MasterCard", "2222111133334444", 745, fechaVencimiento, new Categoria("Trabajo"),"");
+
+            Assert.AreEqual(-1, primerTarjeta.CompareTo(segundaTarjeta));
         }
 
     }

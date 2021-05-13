@@ -31,11 +31,11 @@ namespace InterfazGrafica.InterfazDeCategorias
 
             try
             {
-                this.categoria.setNombre(nuevoNombre);
+                this.categoria.ActualizarNombre(nuevoNombre);
                 MessageBox.Show(modificadoCorrectamente);
                 IrACategoria();
             }
-            catch (InvalidCategoriaDataException)
+            catch (Exepcion_InvalidCategoriaData)
             {
                 MessageBox.Show(validacionNombre);
             }
