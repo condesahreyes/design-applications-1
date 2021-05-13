@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OblDiseño1;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using InterfazReportePorCategoria = InterfazGrafica.InterfacesReporte.InterfazReportePorCategoria;
 
 namespace InterfazGrafica.InterfacesReporte
 {

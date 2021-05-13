@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazDataBreaches;
@@ -107,7 +100,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 {
                     if (ModificarContrasenia())
                     {
-                        MessageBox.Show("La contrasenia se guardo correctamente");
+                        MessageBox.Show("La contraseña se modifico correctamente");
                         CerrarVentana();
                     }
                 }

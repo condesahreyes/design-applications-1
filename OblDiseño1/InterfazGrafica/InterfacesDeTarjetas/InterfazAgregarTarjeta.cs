@@ -42,6 +42,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
 
                 usuario.AgregarTarjeta(nuevaTarjeta);
+                MessageBox.Show("Se ha dado de alta la Tarjeta con éxito");
                 IrAInterfazTarjeta();
             }
             
@@ -49,7 +50,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 MessageBox.Show("Ya existe una tarjeta con el mismo numero");
             }
-            catch (TarjetaIncorrectaException)
+            catch (Exception_TarjetaIncorrecta)
             {
                 MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
                                 "debe cumplir con el siguiente formato: " +

@@ -1,12 +1,5 @@
 ﻿using OblDiseño1;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
@@ -43,6 +36,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
                 Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contrasenia, nombreSitio, nota, categoria);
                 usuario.AgregarDupla(dupla);
+                MessageBox.Show("Se ha agregado la contraseña con éxito");
                 IrAContraseñas();
             }
             catch (Exepcion_DatosDeContraseniaInvalidos)

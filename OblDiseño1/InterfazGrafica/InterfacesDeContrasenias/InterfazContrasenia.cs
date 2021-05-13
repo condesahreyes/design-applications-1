@@ -1,14 +1,15 @@
 ﻿using OblDiseño1;
 using System.Windows.Forms;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using System.Collections.Generic;
+using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
+    
     public partial class InterfazContrasenia : Form
     {
-        Usuario usuario;
-        Sistema sistema;
+        private Usuario usuario;
+        private Sistema sistema;
         public InterfazContrasenia(ref Usuario usuario, ref Sistema sistema)
         {
             InitializeComponent();
@@ -51,14 +52,14 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void btnContraseniaVolverMenu_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
         }
 
         private void btnAgregarContrasenia_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
+            this.Close();
             InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref sistema, ref usuario);
             agregarContrasenia.Show();
         }
@@ -72,8 +73,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 intModiContra.Show();
                 this.Close();
             }
+            else
+                MessageBox.Show("No hay contraseñas para modificar");
         }
-
 
         private void btnEliminarContrasenia_Click(object sender, System.EventArgs e)
         {
@@ -83,7 +85,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 usuario.RemoverDupla(duplaSeleccionada);
                 MessageBox.Show("Se elimino correctamente");
                 CargarDuplas();
+                
             }
+            else if (0 == dataGridView_ListaDuplas.RowCount)
+                MessageBox.Show("No hay contraseñas para eliminar");
         }
 
         private bool ConfirmarEliminacion()

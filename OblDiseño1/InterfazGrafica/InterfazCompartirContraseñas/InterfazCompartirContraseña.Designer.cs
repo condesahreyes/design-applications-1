@@ -160,7 +160,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(439, 237);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // lblListadoTarjetas
             // 
@@ -189,7 +188,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.Name = "InterfazCompartirContraseña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Compartir contraseña";
-            this.Load += new System.EventHandler(this.InterfazCompartirContraseña_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

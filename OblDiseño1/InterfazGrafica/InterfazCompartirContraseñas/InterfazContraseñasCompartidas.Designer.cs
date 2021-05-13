@@ -55,7 +55,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridContraseñasCompartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContraseñasCompartidas.Size = new System.Drawing.Size(492, 117);
             this.dataGridContraseñasCompartidas.TabIndex = 0;
-            this.dataGridContraseñasCompartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridContraseñasCompartidas_CellContentClick);
             // 
             // buttonCompartir
             // 
@@ -122,7 +121,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridContraseñasCompartidasConmigo.Size = new System.Drawing.Size(492, 117);
             this.dataGridContraseñasCompartidasConmigo.TabIndex = 7;
             this.dataGridContraseñasCompartidasConmigo.TabStop = false;
-            this.dataGridContraseñasCompartidasConmigo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridContraseñasCompartidasConmigo_CellContentClick);
             // 
             // lblListadoContrasenias
             // 
@@ -149,7 +147,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.label1.Size = new System.Drawing.Size(332, 26);
             this.label1.TabIndex = 11;
             this.label1.Text = "Contraseñas Compartidas Conmigo";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // InterfazContraseñasCompartidas
             // 
