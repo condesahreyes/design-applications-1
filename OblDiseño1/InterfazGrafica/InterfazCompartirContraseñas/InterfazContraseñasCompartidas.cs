@@ -1,12 +1,6 @@
 ﻿using OblDiseño1;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
 
@@ -68,19 +62,12 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         }
 
-
-
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)
         {
             if (this.dataGridContraseñasCompartidasConmigo.Rows.Count > 0)
                 this.dataGridContraseñasCompartidasConmigo.ClearSelection();
             if (this.dataGridContraseñasCompartidas.Rows.Count > 0)
                 this.dataGridContraseñasCompartidas.ClearSelection();
-        }
-
-        private void dataGridContraseñasCompartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void buttonCompartir_Click(object sender, EventArgs e)
@@ -95,18 +82,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
-        }
-
-       
-
-        private void listUsuario_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridUsuariosCompartidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void buttonVerUsuariosCompartidos_Click(object sender, EventArgs e)
@@ -126,16 +101,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 }
             }
             
-        }
-
-        private void dataGridContraseñasCompartidasConmigo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

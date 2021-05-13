@@ -1,12 +1,6 @@
 ﻿using OblDiseño1;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
@@ -30,16 +24,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 dataGridUsuariosCompartidos.DataSource = usuariosCompartidosPorDupla;
                 dataGridUsuariosCompartidos.Columns["Contrasenia"].Visible = false;
             }
-        }
-
-        private void InterfazDejarDeCompartirContrasenia_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridUsuariosCompartidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void buttonDejarDeCompartir_Click(object sender, EventArgs e)

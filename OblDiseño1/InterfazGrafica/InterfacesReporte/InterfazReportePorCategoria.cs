@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OblDiseño1;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using InterfazReporte = InterfazGrafica.InterfacesReporte.InterfazReporte;
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -54,26 +45,11 @@ namespace InterfazGrafica.InterfacesReporte
 
         }
 
-        private void InterfazReportePorCategoria_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             InterfazReporte ventanaReporte = new InterfazReporte(ref usuario, ref sistema);
             ventanaReporte.Show();
             this.Close();
-        }
-
-        private void label_Titulo_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

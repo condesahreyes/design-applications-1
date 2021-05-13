@@ -50,7 +50,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 MessageBox.Show("Ya existe una tarjeta con el mismo numero");
             }
-            catch (TarjetaIncorrectaException)
+            catch (Exception_TarjetaIncorrecta)
             {
                 MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
                                 "debe cumplir con el siguiente formato: " +

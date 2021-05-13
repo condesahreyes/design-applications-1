@@ -50,7 +50,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridUsuariosCompartidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridUsuariosCompartidos.Size = new System.Drawing.Size(301, 218);
             this.dataGridUsuariosCompartidos.TabIndex = 0;
-            this.dataGridUsuariosCompartidos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridUsuariosCompartidos_CellContentClick);
             // 
             // buttonDejarDeCompartir
             // 
@@ -111,7 +110,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.Name = "InterfazDejarDeCompartirContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dejar De Compartir Contraseñas";
-            this.Load += new System.EventHandler(this.InterfazDejarDeCompartirContrasenia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridUsuariosCompartidos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

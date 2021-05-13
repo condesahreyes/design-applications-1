@@ -139,7 +139,6 @@ namespace InterfazGrafica.InterfacesReporte
             this.Name = "InterfazReportePorCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Contraseñas Por Categorías";
-            this.Load += new System.EventHandler(this.InterfazReportePorCategoria_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);

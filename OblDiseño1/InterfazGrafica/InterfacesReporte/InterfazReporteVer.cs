@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OblDiseño1;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using InterfazGrafica.InterfacesReporte;
 using Interfaz_ModificarContrasenia = InterfazGrafica.InterfacesDeContrasenias.Interfaz_ModificarContrasenia;
-using System.ComponentModel;
-
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -35,15 +25,9 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void ActualizarDatosALaTabla()
         {
-            /*BindingListView<Customer> view = new BindingListView<Customer>(customers);
-            dataGridView1.DataSource = view;*/
-
-
             this.dataGridView_Contrasenias.Columns.Clear();
             this.dataGridView_Contrasenias.DataSource = null;
 
-            /*  BindingListView<Dupla_UsuarioContrasenia> view = new BindingListView<Dupla_UsuarioContrasenia>(reporte.duplasPorSeguridad[nivelDeSeguridad].unaListaDuplas);
-   */
             List<string> unaLista = new List<string>();
             unaLista.Sort();
 
@@ -71,12 +55,6 @@ namespace InterfazGrafica.InterfacesReporte
             this.dataGridView_Contrasenias.Columns["Categoria"].ReadOnly = true;
 
             this.dataGridView_Contrasenias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-
-            //this.dataGridView_Contrasenias.Sort("Categoria", ListSortDirection.Descending);
-            //this.dataGridView_Contrasenias.Columns["Categoria"].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            //this.dataGridView_Contrasenias.Sort(dataGridView_Contrasenias.Columns["Categoria"] , System.ComponentModel.ListSortDirection.Descending);
         }
 
 
@@ -105,21 +83,6 @@ namespace InterfazGrafica.InterfacesReporte
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InterfazReporteVer_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel_ListaDeContrasenias_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button_Volver_Click(object sender, EventArgs e)
         {
             InterfazReporte interReporte = new InterfazReporte(ref usuario, ref sistema);
@@ -128,21 +91,6 @@ namespace InterfazGrafica.InterfacesReporte
         }
 
         private void dataGridView_Contrasenias_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_Titulo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

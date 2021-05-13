@@ -1,14 +1,6 @@
 ﻿using OblDiseño1;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -30,7 +22,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 comboBoxSitios.Items.Add(iterador.NombreSitioApp);
         }
 
-        
         private void comboBoxSitios_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxUsuariosSitios.Items.Clear();
@@ -47,7 +38,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             IrAInterfazContraseñasCompartidas();
         }
 
-     
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             string nomSitioSeleccionado = comboBoxSitios.Text;
@@ -88,22 +78,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             }
          }
 
-        
         private void IrAInterfazContraseñasCompartidas()
         {
             this.Close();
             InterfazContraseñasCompartidas interfazContraseñasCompartidas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
             interfazContraseñasCompartidas.Show();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void InterfazCompartirContraseña_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

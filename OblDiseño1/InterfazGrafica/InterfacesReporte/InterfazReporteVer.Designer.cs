@@ -131,7 +131,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.Name = "InterfazReporteVer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte Por Niveles";
-            this.Load += new System.EventHandler(this.InterfazReporteVer_Load);
+            //this.Load += new System.EventHandler(this.InterfazReporteVer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contrasenias)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

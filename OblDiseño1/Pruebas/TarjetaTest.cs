@@ -59,7 +59,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_NumeroIncorrecto_Test()
         {
             Tarjeta tarjetaNumeroIncoreccto = new Tarjeta(nombre, tipo, numeroIncorrecto, codigoSeguridad, fechaVencimiento, categoria, nota);
@@ -86,42 +86,42 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_CodigoSeguridadLargo_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadLargo, fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_CodigoSeguridadCorto_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadCorto, fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_NombreNulo_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(null, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_TipoNulo_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, null, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_fechaVencimientoInvalida_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, categoria, nota);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TarjetaIncorrectaException))]
+        [ExpectedException(typeof(Exception_TarjetaIncorrecta))]
         public void Tarjeta_CategoriaNula_Test()
         {
             Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, null, nota);
