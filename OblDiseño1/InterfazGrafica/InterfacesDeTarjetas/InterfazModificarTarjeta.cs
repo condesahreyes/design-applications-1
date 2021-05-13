@@ -51,11 +51,19 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
             string nombreCategoria = comboBoxCategorias.Text;
             Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
+            string nuevoNumeroTarjeta = textBoxNumeroTarjeta.Text;
 
-            try
-               {
+            if (nuevoNumeroTarjeta != this.tarjeta.Numero &&
+                usuario.RevisarSiLaTarjetaEsMia(nuevoNumeroTarjeta))
+            {
+                MessageBox.Show("Ya hay una tarjeta registrada con ese numero en el sistema");
+            }
+            else
+            {
+                try
+                {
                     int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-                    
+
                     this.tarjeta.Nombre = textBoxNombre.Text;
                     this.tarjeta.Tipo = textBoxTipo.Text;
                     this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
@@ -63,12 +71,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
                     this.tarjeta.Categoria = categoria;
                     this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
-                    
+
                     MessageBox.Show("Se modifico correctamente la tarjeta");
 
                     this.Close();
                     IrAInterfazTarjeta();
-               }
+                }
                 catch (TarjetaIncorrectaException)
                 {
                     MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
@@ -86,6 +94,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 {
                     MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
                 }
+            }
         }
 
         private void IrAInterfazTarjeta()
