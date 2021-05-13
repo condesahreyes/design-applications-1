@@ -30,7 +30,6 @@ namespace OblDiseño1
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-
         public Usuario() { }
         
         public Usuario(string nombre, string contrasenia)

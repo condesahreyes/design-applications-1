@@ -50,7 +50,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.buttonAceptar.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.buttonAceptar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
             this.buttonAceptar.Location = new System.Drawing.Point(131, 276);
-            this.buttonAceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAceptar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAceptar.Name = "buttonAceptar";
             this.buttonAceptar.Size = new System.Drawing.Size(145, 27);
             this.buttonAceptar.TabIndex = 1;
@@ -67,7 +67,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.buttonCancelar.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.buttonCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
             this.buttonCancelar.Location = new System.Drawing.Point(318, 276);
-            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(145, 27);
             this.buttonCancelar.TabIndex = 2;
@@ -185,10 +185,10 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonAceptar);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InterfazCompartirContraseña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazCompartirContraseña";
+            this.Text = "Compartir contraseña";
             this.Load += new System.EventHandler(this.InterfazCompartirContraseña_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
