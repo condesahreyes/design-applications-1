@@ -1,6 +1,5 @@
 ﻿using InterfazGrafica.InterfazCategoria;
 using OblDiseño1;
-
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazDeCategorias
@@ -28,17 +27,28 @@ namespace InterfazGrafica.InterfazDeCategorias
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)
         {
             string nuevoNombre = textBoxModificarCategoria.Text;
+            if (YaExisteOtraCategoriaConEseNombre(nuevoNombre) || categoria.Nombre==nuevoNombre) 
+                try
+                {
+                    this.categoria.ActualizarNombre(nuevoNombre);
+                    MessageBox.Show(modificadoCorrectamente);
+                    IrACategoria();
+                }
+                catch (Exepcion_InvalidCategoriaData)
+                {
+                    MessageBox.Show(validacionNombre);
+                }
+            else
+                MessageBox.Show("Ya existe una categoría con este nombre.");
 
-            try
-            {
-                this.categoria.ActualizarNombre(nuevoNombre);
-                MessageBox.Show(modificadoCorrectamente);
-                IrACategoria();
-            }
-            catch (Exepcion_InvalidCategoriaData)
-            {
-                MessageBox.Show(validacionNombre);
-            }
+        }
+
+        private bool YaExisteOtraCategoriaConEseNombre(string nuevoNombreCategoria)
+        {
+            foreach (Categoria cat in usuario.ObtenerCategorias())
+                if (cat.Nombre.ToLower() == nuevoNombreCategoria.ToLower())
+                    return false;
+            return true;
         }
 
         private void IrACategoria()

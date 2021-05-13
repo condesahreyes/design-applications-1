@@ -9,7 +9,9 @@ namespace Pruebas
     [TestClass]
     public class UsuarioTest
     {
-
+        private static string notaDupla;
+        private static string nombreSitioDupla;
+        private static string nombresitioDuplaQueNoEsta;
         private static string nombreLargo;
         private static string contraseniaCorta;
         private static string contraseniaLarga;
@@ -47,6 +49,9 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
+            notaDupla = "";
+            nombreSitioDupla = "Instagram";
+            nombresitioDuplaQueNoEsta = "Twitter";
             contraseniaCorta = "1234";
             contraseniaLarga = "contrasenia123456789012345";
             contraseniaNoPresenteEnListaDuplas = "ContraseniaNoPrsente";
@@ -63,8 +68,7 @@ namespace Pruebas
             tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
                 codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
             dupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[0],
-                "Instagram", "", categoria);
-
+                nombreSitioDupla, notaDupla, categoria);
         }
 
         [TestMethod]
@@ -598,6 +602,22 @@ namespace Pruebas
                 codigosTarjetas[1], new DateTime(2021, 12, 15), categoria, null);
             usuario.AgregarTarjeta(tarjeta);
             usuario.AgregarTarjeta(tarjetaConMismoNumero);
+        }
+
+        [TestMethod]
+        public void VerificarQUeCombinacionNombreSitioEsata()
+        {
+            usuario.AgregarCategoria(categoria);
+            usuario.AgregarDupla(dupla);
+            Assert.IsTrue(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[1], nombreSitioDupla));
+        }
+
+        [TestMethod]
+        public void VerificarQUeCombinacionNombreSitioNOEsata()
+        {
+            usuario.AgregarCategoria(categoria);
+            usuario.AgregarDupla(dupla);
+            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], nombresitioDuplaQueNoEsta));
         }
 
     }

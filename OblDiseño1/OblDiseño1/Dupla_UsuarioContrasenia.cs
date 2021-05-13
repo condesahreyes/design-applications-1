@@ -25,7 +25,6 @@ namespace OblDiseño1
 
         public bool DataBrench { get; set; }
 
-
         private string contrasenia;
         private string nombreUsuario;
 
@@ -48,7 +47,6 @@ namespace OblDiseño1
 
         private static string[] caracteresPorPosicion = { caracteresMayusculas,
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
-
 
         public Dupla_UsuarioContrasenia(string unNombreUsuario, string unaContrasenia,
             string unSitio, string laNota, Categoria laCategoria)
@@ -292,6 +290,5 @@ namespace OblDiseño1
             return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && 
                 (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
         }
-
     }
 }

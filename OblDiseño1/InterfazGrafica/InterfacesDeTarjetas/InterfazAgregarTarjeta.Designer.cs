@@ -95,10 +95,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // textBoxNumeroTarjeta
             // 
             this.textBoxNumeroTarjeta.Location = new System.Drawing.Point(295, 135);
+            this.textBoxNumeroTarjeta.MaxLength = 16;
             this.textBoxNumeroTarjeta.Name = "textBoxNumeroTarjeta";
             this.textBoxNumeroTarjeta.Size = new System.Drawing.Size(160, 20);
             this.textBoxNumeroTarjeta.TabIndex = 29;
-            
             // 
             // label2
             // 
@@ -151,7 +151,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombre.TabIndex = 22;
-            
             // 
             // label7
             // 
@@ -180,6 +179,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // textBoxNotaOpcional
             // 
             this.textBoxNotaOpcional.Location = new System.Drawing.Point(295, 274);
+            this.textBoxNotaOpcional.MaxLength = 250;
             this.textBoxNotaOpcional.Multiline = true;
             this.textBoxNotaOpcional.Name = "textBoxNotaOpcional";
             this.textBoxNotaOpcional.Size = new System.Drawing.Size(160, 52);
@@ -189,10 +189,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // 
             this.textBoxCodigoSeguridad.Location = new System.Drawing.Point(295, 172);
             this.textBoxCodigoSeguridad.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCodigoSeguridad.MaxLength = 4;
             this.textBoxCodigoSeguridad.Name = "textBoxCodigoSeguridad";
             this.textBoxCodigoSeguridad.Size = new System.Drawing.Size(160, 20);
             this.textBoxCodigoSeguridad.TabIndex = 40;
-            
             // 
             // Agregar
             // 
@@ -218,7 +218,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(160, 20);
             this.dateTimePicker1.TabIndex = 42;
-            
             // 
             // Cancelar
             // 
@@ -245,7 +244,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(160, 21);
             this.comboBoxCategorias.TabIndex = 45;
-            
             // 
             // label8
             // 
