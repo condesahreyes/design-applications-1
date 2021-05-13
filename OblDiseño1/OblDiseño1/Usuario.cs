@@ -373,6 +373,13 @@ namespace OblDiseño1
             return laTarjetaQueMePidieron;
         }
 
+        public bool VerificarQueTengoCombinacionNombreSitio(string nombreDupla, string sitioDupla)
+        {
+            foreach (Dupla_UsuarioContrasenia dupla in duplas)
+                if (nombreDupla == dupla.NombreUsuario && sitioDupla == dupla.NombreSitioApp)
+                    return true;
+            return false;
+        }
 
         public override bool Equals(object obj)
         {

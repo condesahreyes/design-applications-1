@@ -96,10 +96,20 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (HuboCambios())
             {
-                if (ModificarContrasenia())
+                string nuevoNombreUsuario = this.textBox_Usuario.Text;
+                string nuevoNombreSitio = this.textBox_Sitio.Text;
+                if(usuario.VerificarQueTengoCombinacionNombreSitio(nuevoNombreUsuario, nuevoNombreSitio) &&
+                    (nuevoNombreUsuario != this.dupla.NombreUsuario || nuevoNombreSitio != this.dupla.NombreSitioApp))
                 {
-                    MessageBox.Show("La contrasenia se guardo correctamente");
-                    CerrarVentana();
+                    MessageBox.Show("Error: ese Nombre de Uusario ya esta registrado para ese Sitio en el sistema");
+                }
+                else
+                {
+                    if (ModificarContrasenia())
+                    {
+                        MessageBox.Show("La contrasenia se guardo correctamente");
+                        CerrarVentana();
+                    }
                 }
             }
             else
