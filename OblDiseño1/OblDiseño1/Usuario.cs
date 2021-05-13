@@ -140,16 +140,6 @@ namespace OblDiseño1
             this.categorias.Remove(categoria);
         }
 
-       
-        public List<string> ListarTarjetas()
-        {
-            List<string> tarjetasString = new List<string>();
-            for (int i = 0; i < this.ObtenerTarjetas().Count; i++)
-                tarjetasString.Add(this.ObtenerTarjetas()[i].ToString());
-
-            return tarjetasString;
-        }
-
         public List<string> ListarToStringDeMisCategorias()
         {
             List<string> categoriasString = new List<string>();

@@ -1,6 +1,5 @@
 ﻿using InterfazGrafica.InterfazCategoria;
 using OblDiseño1;
-
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazDeCategorias
@@ -28,7 +27,7 @@ namespace InterfazGrafica.InterfazDeCategorias
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)
         {
             string nuevoNombre = textBoxModificarCategoria.Text;
-            if (YaExisteOtraCategoriaConEseNombre(nuevoNombre)) 
+            if (YaExisteOtraCategoriaConEseNombre(nuevoNombre) || categoria.Nombre==nuevoNombre) 
                 try
                 {
                     this.categoria.ActualizarNombre(nuevoNombre);
