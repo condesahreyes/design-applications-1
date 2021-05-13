@@ -2,11 +2,28 @@
 using System.Windows.Forms;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Collections.Generic;
+using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
+    
     public partial class InterfazContrasenia : Form
     {
+
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            timer.Dispose();
+            this.Close();
+            MessageBox.Show("Se ha agotado el tiempo que puede visualizar las contraseñas almacenadas");
+            timer.Stop();
+            timer.Dispose();
+            Menu menu = new Menu(ref sistema, ref usuario);
+            menu.Show();
+
+        }
+
         Usuario usuario;
         Sistema sistema;
         public InterfazContrasenia(ref Usuario usuario, ref Sistema sistema)
@@ -51,14 +68,18 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void btnContraseniaVolverMenu_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
+            this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
+            timer.Stop();
+            timer.Dispose();
         }
 
         private void btnAgregarContrasenia_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
+            timer.Stop();
+            timer.Dispose();
+            this.Close();
             InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref sistema, ref usuario);
             agregarContrasenia.Show();
         }
@@ -71,7 +92,17 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 Interfaz_ModificarContrasenia intModiContra = new Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazContrasenia");
                 intModiContra.Show();
                 this.Close();
+                timer.Stop();
+                timer.Dispose();
             }
+            else
+            {
+                timer.Stop();
+                timer.Start();
+                MessageBox.Show("No hay contraseñas para modificar");
+            }
+          
+           
         }
 
 
@@ -83,15 +114,31 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 usuario.RemoverDupla(duplaSeleccionada);
                 MessageBox.Show("Se elimino correctamente");
                 CargarDuplas();
+                
             }
+            else if (0 == dataGridView_ListaDuplas.RowCount)
+            {
+                MessageBox.Show("No hay contraseñas para eliminar");
+            }
+
+            timer.Stop();
+            timer.Start();
         }
 
         private bool ConfirmarEliminacion()
         {
+            timer.Stop();
             DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "", MessageBoxButtons.YesNoCancel, 
                 MessageBoxIcon.Exclamation);
 
             return (resultado==DialogResult.Yes)? true : false;
+        }
+
+        private void InterfazContrasenia_Load(object sender, EventArgs e)
+        {
+            timer.Interval = 5000;
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
         }
     }
 }
