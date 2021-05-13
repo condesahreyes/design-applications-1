@@ -43,6 +43,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
                 Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contrasenia, nombreSitio, nota, categoria);
                 usuario.AgregarDupla(dupla);
+                MessageBox.Show("Se ha agregado la contraseña con éxito");
                 IrAContraseñas();
             }
             catch (Exepcion_DatosDeContraseniaInvalidos)

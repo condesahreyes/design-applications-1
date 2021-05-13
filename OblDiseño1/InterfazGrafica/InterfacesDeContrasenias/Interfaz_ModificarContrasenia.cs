@@ -107,7 +107,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 {
                     if (ModificarContrasenia())
                     {
-                        MessageBox.Show("La contrasenia se guardo correctamente");
+                        MessageBox.Show("La contraseña se modifico correctamente");
                         CerrarVentana();
                     }
                 }

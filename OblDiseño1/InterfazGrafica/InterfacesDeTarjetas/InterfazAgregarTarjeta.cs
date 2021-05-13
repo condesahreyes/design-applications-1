@@ -42,6 +42,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
 
                 usuario.AgregarTarjeta(nuevaTarjeta);
+                MessageBox.Show("Se ha dado de alta la Tarjeta con éxito");
                 IrAInterfazTarjeta();
             }
             
