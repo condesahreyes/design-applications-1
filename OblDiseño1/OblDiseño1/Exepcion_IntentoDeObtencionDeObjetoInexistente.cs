@@ -13,9 +13,5 @@ namespace OblDiseño1
 
         }
 
-        public Exepcion_IntentoDeObtencionDeObjetoInexistente(string message, Exception innerExeption)
-        {
-
-        }
     }
 }
