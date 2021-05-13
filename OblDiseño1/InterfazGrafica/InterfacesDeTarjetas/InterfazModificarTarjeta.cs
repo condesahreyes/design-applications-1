@@ -63,7 +63,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
                     this.tarjeta.Categoria = categoria;
                     this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
-
+                    
                     MessageBox.Show("Se modifico correctamente la tarjeta");
 
                     this.Close();

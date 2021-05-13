@@ -1,12 +1,6 @@
 ﻿using OblDiseño1;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
@@ -28,8 +22,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             }
         }
 
-        
-
         private void Agregar_Click(object sender, EventArgs e)
         {
             string nombreTarjeta = textBoxNombre.Text;
@@ -40,17 +32,17 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
 
+            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
 
 
             try
             {
-                Categoria categoria = new Categoria(nombreCategoria);
                 int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-                Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
+                Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, 
+                    numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
+
                 usuario.AgregarTarjeta(nuevaTarjeta);
                 IrAInterfazTarjeta();
-
-
             }
             
             catch (Exepcion_ObjetosRepetidos)
@@ -78,9 +70,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 MessageBox.Show("Debe seleccionar una categoria");
             }
-            
-            
-
         }
 
         private void IrAInterfazTarjeta()
