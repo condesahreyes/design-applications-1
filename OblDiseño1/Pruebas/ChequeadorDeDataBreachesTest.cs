@@ -147,7 +147,7 @@ namespace Pruebas
         [TestMethod]
         public void VerificarUsuario()
         {
-            Assert.AreSame(usuario, chequeador.Usuario);
+            Assert.AreSame(usuario, chequeador.usuario);
         }
         
         [TestMethod]

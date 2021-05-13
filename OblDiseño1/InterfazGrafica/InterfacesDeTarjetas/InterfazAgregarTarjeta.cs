@@ -20,7 +20,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            List<string> categorias = usuario.ListarCategorias();
+            List<string> categorias = usuario.ListarToStringDeMisCategorias();
             for (int i = 0; i < categorias.Count; i++)
             {
                 string categoriaMostrar = categorias[i];
@@ -53,7 +53,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
             }
             
-            catch (ExepcionObjetosRepetidos)
+            catch (Exepcion_ObjetosRepetidos)
             {
                 MessageBox.Show("Ya existe una tarjeta con el mismo numero");
             }
@@ -74,7 +74,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
             }
-            catch (InvalidCategoriaDataException)
+            catch (Exepcion_InvalidCategoriaData)
             {
                 MessageBox.Show("Debe seleccionar una categoria");
             }

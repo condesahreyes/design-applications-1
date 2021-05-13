@@ -55,7 +55,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                                 "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
                                 "> Categoría: Se selecciona de las disponibles en el sistema");
             }
-            catch (InvalidUsuarioDataException)
+            catch (Exepcion_InvalidUsuarioData)
             {
                 MessageBox.Show("Error: este usuario ya esta registado para este sitio en el sistema");
             }

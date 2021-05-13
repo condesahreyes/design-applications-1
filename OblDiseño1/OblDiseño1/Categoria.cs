@@ -12,7 +12,7 @@ namespace OblDiseño1
         public Categoria(string nombre)
         {
             if (!EsNombreValido(nombre))
-                throw new InvalidCategoriaDataException(msgErrorNombre);
+                throw new Exepcion_InvalidCategoriaData(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
@@ -20,7 +20,7 @@ namespace OblDiseño1
         public void ActualizarNombre(string nombre)
         {
             if (!EsNombreValido(nombre))
-                throw new InvalidCategoriaDataException(msgErrorNombre);
+                throw new Exepcion_InvalidCategoriaData(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
