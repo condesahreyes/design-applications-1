@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace OblDiseño1
@@ -26,7 +27,9 @@ namespace OblDiseño1
         private List<Categoria> categorias;
         private Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> contraseniasCompartidasConmigo;
         private Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contraseniasCompartidasPorMi;
-        
+
+        [Key]
+        public int usuarioId { get; set; }
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 

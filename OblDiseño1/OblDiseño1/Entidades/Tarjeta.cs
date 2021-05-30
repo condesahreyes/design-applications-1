@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OblDiseño1
 {
@@ -36,6 +37,8 @@ namespace OblDiseño1
             NotaOpcional = unaNota;
         }
 
+        [Key]
+        public int TarjetaId { get; set; }
         public string NotaOpcional { set; get; }
 
         public string Nombre { get => nombre; set => SetNombre(value); }
