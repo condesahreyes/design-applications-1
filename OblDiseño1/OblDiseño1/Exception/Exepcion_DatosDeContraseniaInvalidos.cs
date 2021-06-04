@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1
 {
-    public class Exepcion_DatosDeContraseniaInvalidos : Exception
+    public class Exepcion_DatosDeContraseniaInvalidos : SystemException
     {
         public Exepcion_DatosDeContraseniaInvalidos(string message) : base(message)
         {

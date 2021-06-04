@@ -1,0 +1,68 @@
+﻿using System.Collections.Generic;
+
+namespace OblDiseño1.Entidades
+{
+    public class FuncionalidadReporte
+    {
+
+        private Usuario usuario;
+
+        public FuncionalidadReporte(Usuario usuario)
+        {
+            this.usuario = usuario;
+
+        }
+
+        public reporte ObtenerReporteSeguridadContrasenias()
+        {
+            List<Categoria> misCategorias = usuario.ObtenerCategorias();
+            List<Dupla_UsuarioContrasenia> misDuplas = usuario.ObtenerDuplas();
+
+            paresSeguridad[] misPares = new paresSeguridad[6];
+            Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
+            foreach (Categoria cat in misCategorias)
+                categoria.Add(cat.Nombre, new int[6]);
+
+            for (int i = 0; i < 6; i++)
+                misPares[i] = new paresSeguridad(0, null);
+
+            foreach (Dupla_UsuarioContrasenia dupla in misDuplas)
+            {
+
+                string nombreCategoria = dupla.Categoria.Nombre;
+                int nivelSeguridad = dupla.NivelSeguridadContrasenia;
+                categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
+                misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
+                misPares[nivelSeguridad].cantidad++;
+            }
+
+            reporte miReporte = new reporte(misPares, categoria);
+
+            return miReporte;
+        }
+    }
+
+    public struct reporte
+    {
+        public paresSeguridad[] duplasPorSeguridad;
+        public Dictionary<string, int[]> duplasPorCategoria;
+
+        public reporte(paresSeguridad[] pares, Dictionary<string, int[]> dicionrio)
+        {
+            duplasPorSeguridad = pares;
+            duplasPorCategoria = dicionrio;
+        }
+    }
+
+    public struct paresSeguridad
+    {
+        public int cantidad;
+        public List<Dupla_UsuarioContrasenia> unaListaDuplas;
+
+        public paresSeguridad(int cant, List<Dupla_UsuarioContrasenia> dupla)
+        {
+            cantidad = cant;
+            unaListaDuplas = new List<Dupla_UsuarioContrasenia>();
+        }
+    }
+}

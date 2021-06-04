@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 using Interfaz_ModificarContrasenia = InterfazGrafica.InterfacesDeContrasenias.Interfaz_ModificarContrasenia;
 
 namespace InterfazGrafica.InterfacesReporte
@@ -58,7 +59,7 @@ namespace InterfazGrafica.InterfacesReporte
         }
 
 
-        private void ActualizarLabel(int nivelSeguridad) 
+        private void ActualizarLabel(int nivelSeguridad)
         {
             switch (nivelDeSeguridad)
             {
@@ -90,12 +91,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.Close();
         }
 
-        private void dataGridView_Contrasenias_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnModificarContrasenia_Click(object sender, EventArgs e)
         {
             if (0 < dataGridView_Contrasenias.RowCount)
             {

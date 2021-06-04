@@ -1,4 +1,5 @@
 ﻿using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -22,33 +23,35 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void CargarContraseñasCompartidas()
         {
             BindingSource biso = new BindingSource();
-            biso.DataSource = this.usuario.ObtenerContraseniasCompartidasPorMi().Keys;
-            
-            if (this.usuario.ObtenerContraseniasCompartidasPorMi().Count == 0)
+            GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
+            biso.DataSource = miGestor.ObtenerContraseniasCompartidasPorMi().Keys;
+
+            if (miGestor.ObtenerContraseniasCompartidasPorMi().Count == 0)
             {
                 this.dataGridContraseñasCompartidas.Visible = true;
             }
             else
             {
-                 this.dataGridContraseñasCompartidas.DataSource = biso;
-                 this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
-                 this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
-                 this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
-                 this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
+                this.dataGridContraseñasCompartidas.DataSource = biso;
+                this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
+                this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
+                this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
+                this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
             }
         }
-
 
         private void CargarContraseñasCompartidasConmigo()
         {
             BindingSource biso2 = new BindingSource();
+            GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
             List<Dupla_UsuarioContrasenia> listaDuplasCompartidasConmigo = new List<Dupla_UsuarioContrasenia>();
-            foreach (var iterador in this.usuario.ObtenerContraseniasCompartidasConmigo())
+
+            foreach (var iterador in miGestor.ObtenerContraseniasCompartidasConmigo())
             {
                 foreach (var iteradorAuxiliar in iterador.Value)
                     listaDuplasCompartidasConmigo.Add(iteradorAuxiliar);
             }
-            
+
             biso2.DataSource = listaDuplasCompartidasConmigo;
             if (listaDuplasCompartidasConmigo.Count > 0)
             {
@@ -58,14 +61,13 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 this.dataGridContraseñasCompartidasConmigo.Columns["NivelSeguridadContrasenia"].Visible = false;
                 this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
             }
-           
-
         }
 
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)
         {
             if (this.dataGridContraseñasCompartidasConmigo.Rows.Count > 0)
                 this.dataGridContraseñasCompartidasConmigo.ClearSelection();
+
             if (this.dataGridContraseñasCompartidas.Rows.Count > 0)
                 this.dataGridContraseñasCompartidas.ClearSelection();
         }
@@ -86,7 +88,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonVerUsuariosCompartidos_Click(object sender, EventArgs e)
         {
-            if (this.usuario.ObtenerContraseniasCompartidasPorMi().Count == 0)
+            GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
+            if (miGestor.ObtenerContraseniasCompartidasPorMi().Count == 0)
                 MessageBox.Show("Error: No hay contraseñas compartidas aun");
             else
             {
@@ -100,7 +103,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                     interfazDejarDeCompartirContrasenias.Show();
                 }
             }
-            
+
         }
     }
 }

@@ -36,7 +36,7 @@ namespace InterfazGrafica.InterfacesReporte
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.button_Volver = new System.Windows.Forms.Button();
+            this.btnVolverAMenu = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
@@ -44,21 +44,21 @@ namespace InterfazGrafica.InterfacesReporte
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button_Volver
+            // btnVolverAMenu
             // 
-            this.button_Volver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
-            this.button_Volver.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_Volver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Volver.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
-            this.button_Volver.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.button_Volver.Location = new System.Drawing.Point(9, 346);
-            this.button_Volver.Margin = new System.Windows.Forms.Padding(0);
-            this.button_Volver.Name = "button_Volver";
-            this.button_Volver.Size = new System.Drawing.Size(75, 31);
-            this.button_Volver.TabIndex = 1;
-            this.button_Volver.Text = "Volver";
-            this.button_Volver.UseVisualStyleBackColor = false;
-            this.button_Volver.Click += new System.EventHandler(this.button1_Click);
+            this.btnVolverAMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnVolverAMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVolverAMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVolverAMenu.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.btnVolverAMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnVolverAMenu.Location = new System.Drawing.Point(9, 346);
+            this.btnVolverAMenu.Margin = new System.Windows.Forms.Padding(0);
+            this.btnVolverAMenu.Name = "btnVolverAMenu";
+            this.btnVolverAMenu.Size = new System.Drawing.Size(75, 31);
+            this.btnVolverAMenu.TabIndex = 1;
+            this.btnVolverAMenu.Text = "Volver";
+            this.btnVolverAMenu.UseVisualStyleBackColor = false;
+            this.btnVolverAMenu.Click += new System.EventHandler(this.btnVolverAMenu_Click);
             // 
             // panel1
             // 
@@ -135,7 +135,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.ClientSize = new System.Drawing.Size(563, 386);
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button_Volver);
+            this.Controls.Add(this.btnVolverAMenu);
             this.Name = "InterfazReportePorCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Contraseñas Por Categorías";
@@ -147,7 +147,7 @@ namespace InterfazGrafica.InterfacesReporte
         }
 
         #endregion
-        private System.Windows.Forms.Button button_Volver;
+        private System.Windows.Forms.Button btnVolverAMenu;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label lblListadoTarjetas;

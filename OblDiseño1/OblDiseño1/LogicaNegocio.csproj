@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Categoria.cs" />
+    <Compile Include="Entidades\FuncionalidadReporte.cs" />
+    <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
+    <Compile Include="Exception\Exception_EliminacionDeContraseniaCompartida.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Dupla_UsuarioContrasenia.cs" />
     <Compile Include="Exception\Exepcion_ObjetosRepetidos.cs" />

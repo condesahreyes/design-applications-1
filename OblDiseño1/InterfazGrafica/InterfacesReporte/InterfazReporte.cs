@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 using Menu = InterfazGrafica.InterfacesMenu.Menu;
 
 namespace InterfazGrafica.InterfacesReporte
@@ -12,6 +13,8 @@ namespace InterfazGrafica.InterfacesReporte
         private Sistema sistema;
         private reporte reporte;
 
+        FuncionalidadReporte manejadorDeDatosReporte;
+
         const int nivelSeguridadRojo = 1;
         const int nivelSeguridadNaranja = 2;
         const int nivelSeguridadAmarillo = 3;
@@ -22,15 +25,15 @@ namespace InterfazGrafica.InterfacesReporte
         {
             this.usuario = usuario;
             this.sistema = sistema;
-            this.reporte = usuario.ObtenerReporteSeguridadContrasenias();
+            manejadorDeDatosReporte = new FuncionalidadReporte(usuario);
+            this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
 
             InitializeComponent();
             ActualizarLables();
         }
 
-        public void ActualizarLables() 
+        public void ActualizarLables()
         {
-            // 1->Rojo, 2->Naranja, 3->Amarillo, 4->VerdeClaro, 5->VerdeOscuro
             this.label_CantidadRojo.Text = "" + reporte.duplasPorSeguridad[1].cantidad;
             this.label_CantidadNaranja.Text = "" + reporte.duplasPorSeguridad[2].cantidad;
             this.label_CantidadAmarillo.Text = "" + reporte.duplasPorSeguridad[3].cantidad;
@@ -44,7 +47,7 @@ namespace InterfazGrafica.InterfacesReporte
             reporVer.Show();
             this.Close();
         }
-        
+
         private void button_VerNaranja_Click_1(object sender, EventArgs e)
         {
             InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadNaranja);
@@ -73,7 +76,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.Close();
         }
 
-        private void button_Aceptar_Click_1(object sender, EventArgs e)
+        private void button_VolverAMenu_Click_1(object sender, EventArgs e)
         {
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();

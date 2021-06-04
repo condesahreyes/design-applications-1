@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazDataBreaches;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
@@ -91,7 +92,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 string nuevoNombreUsuario = this.textBox_Usuario.Text;
                 string nuevoNombreSitio = this.textBox_Sitio.Text;
-                if(usuario.VerificarQueTengoCombinacionNombreSitio(nuevoNombreUsuario, nuevoNombreSitio) &&
+                if (usuario.VerificarQueTengoCombinacionNombreSitio(nuevoNombreUsuario, nuevoNombreSitio) &&
                     (nuevoNombreUsuario != this.dupla.NombreUsuario || nuevoNombreSitio != this.dupla.NombreSitioApp))
                 {
                     MessageBox.Show("Error: ese Nombre de Uusario ya esta registrado para ese Sitio en el sistema");
@@ -117,7 +118,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             switch (this.interfazPadre)
             {
                 case "InterfazReporteVer":
-                    InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, ref sistema, usuario.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
+                    FuncionalidadReporte funcionalidad = new FuncionalidadReporte(usuario);
+                    InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
                     interfazVer.Show();
                     this.Close();
                     break;

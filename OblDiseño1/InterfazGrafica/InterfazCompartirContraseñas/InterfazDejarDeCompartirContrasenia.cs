@@ -1,4 +1,5 @@
 ﻿using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private Sistema sistema;
         private Usuario usuario;
         private Dupla_UsuarioContrasenia dupla;
+        private GestorContraseniasCompartidas miGestor;
 
         public InterfazDejarDeCompartirContrasenia(ref Sistema sistema, ref Usuario usuario, ref Dupla_UsuarioContrasenia dupla)
         {
@@ -18,18 +20,21 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.sistema = sistema;
             this.dupla = dupla;
 
-            if(this.usuario.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
+            miGestor = usuario.GestorCompartirContrasenia;
+
+            if (miGestor.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
             {
-                List<Usuario> usuariosCompartidosPorDupla = this.usuario.ObtenerContraseniasCompartidasPorMi()[dupla];
+                List<Usuario> usuariosCompartidosPorDupla = miGestor.ObtenerContraseniasCompartidasPorMi()[dupla];
                 dataGridUsuariosCompartidos.DataSource = usuariosCompartidosPorDupla;
                 dataGridUsuariosCompartidos.Columns["Contrasenia"].Visible = false;
+                dataGridUsuariosCompartidos.Columns["GestorCompartirContrasenia"].Visible = false;
             }
         }
 
         private void buttonDejarDeCompartir_Click(object sender, EventArgs e)
         {
-            Usuario usuarioSeleccionado = (Usuario) dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-            this.usuario.DejarDeCompartirContrasenia(this.dupla, usuarioSeleccionado);
+            Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
+            usuario.DejarDeCompartirContrasenia(this.dupla, usuarioSeleccionado);
             IrAInterfazContraseñasCompartidas();
         }
 

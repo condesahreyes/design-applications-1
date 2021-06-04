@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -45,7 +46,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVolverAMenu_Click(object sender, EventArgs e)
         {
             InterfazReporte ventanaReporte = new InterfazReporte(ref usuario, ref sistema);
             ventanaReporte.Show();
