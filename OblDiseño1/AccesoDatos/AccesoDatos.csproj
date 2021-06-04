@@ -51,7 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICategoria_Repositorio.cs" />
     <Compile Include="Contexto.cs" />
+    <Compile Include="IDupla_UsuarioContrasenia_Repositorio.cs" />
+    <Compile Include="Entidades_Datos\Entidad_Categoria.cs" />
+    <Compile Include="Entidades_Datos\Entidad_DuplaUsuarioContrasenia.cs" />
+    <Compile Include="Entidades_Datos\Entidad_Tarjeta.cs" />
+    <Compile Include="Entidades_Datos\Entidad_Usuario.cs" />
+    <Compile Include="ITarjeta_Repositorio.cs" />
+    <Compile Include="IUsuario_Repositorio.cs" />
+    <Compile Include="Mapper.cs" />
+    <Compile Include="Migrations\202106021935549_BddD1.cs" />
+    <Compile Include="Migrations\202106021935549_BddD1.designer.cs">
+      <DependentUpon>202106021935549_BddD1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +77,11 @@
       <Project>{A10C0FE5-5672-40C8-9F8B-9F741C3C1DD2}</Project>
       <Name>LogicaNegocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106021935549_BddD1.resx">
+      <DependentUpon>202106021935549_BddD1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

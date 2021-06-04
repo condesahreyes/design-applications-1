@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Categoria.cs" />
+    <Compile Include="IRepositorio.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Dupla_UsuarioContrasenia.cs" />
     <Compile Include="Exception\Exepcion_ObjetosRepetidos.cs" />

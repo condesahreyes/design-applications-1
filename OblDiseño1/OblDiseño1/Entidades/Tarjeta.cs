@@ -37,14 +37,15 @@ namespace OblDiseño1
             NotaOpcional = unaNota;
         }
 
-        [Key]
-        public int TarjetaId { get; set; }
+
+        
         public string NotaOpcional { set; get; }
 
         public string Nombre { get => nombre; set => SetNombre(value); }
 
         public string Tipo { get => tipo; set => SetTipo(value); }
 
+        [Key]
         public string Numero {
 
             get => numero;

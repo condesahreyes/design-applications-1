@@ -7,8 +7,7 @@ namespace OblDiseño1
 {
     public class Dupla_UsuarioContrasenia : IComparable<Dupla_UsuarioContrasenia>
     {
-        [Key]
-        public int duplaId { get; set; }
+        
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
 
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace OblDiseño1
@@ -14,7 +13,7 @@ namespace OblDiseño1
                                                     " 1 y 25 caracteres";
         private const string mnsjContraseniaError = "La contraseña debe tener entre 5 y" +
                                                     " 25 caracteres";
-        private const string mnsjDuplaYaPresenteError = "Se intento agregar una Dupla que ya" + 
+        private const string mnsjDuplaYaPresenteError = "Se intento agregar una Dupla que ya" +
                                                     " pertenecia al Usuario";
 
         private const int LARGO_NOMBRE_MIN = 1;
@@ -28,13 +27,13 @@ namespace OblDiseño1
         private Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> contraseniasCompartidasConmigo;
         private Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contraseniasCompartidasPorMi;
 
-        [Key]
-        public int usuarioId { get; set; }
+
+      
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
         public Usuario() { }
-        
+
         public Usuario(string nombre, string contrasenia)
         {
             Nombre = nombre;
@@ -61,7 +60,7 @@ namespace OblDiseño1
             return this.categorias;
         }
 
-        
+
         public Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> ObtenerContraseniasCompartidasConmigo()
         {
             return this.contraseniasCompartidasConmigo;
@@ -108,7 +107,7 @@ namespace OblDiseño1
             if (this.ObtenerTarjetas().Contains(tarjeta))
                 throw new Exepcion_ObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
             else
-            this.tarjetas.Add(tarjeta);
+                this.tarjetas.Add(tarjeta);
         }
 
         public void EliminarTarjeta(Tarjeta tarjeta)
@@ -120,7 +119,7 @@ namespace OblDiseño1
         {
             if (this.duplas.Contains(dupla))
                 throw new Exepcion_InvalidUsuarioData(mnsjDuplaYaPresenteError);
-            else 
+            else
                 this.duplas.Add(dupla);
         }
 
@@ -132,7 +131,7 @@ namespace OblDiseño1
         public void AgregarCategoria(Categoria categoria)
         {
             foreach (Categoria cat in categorias)
-                if(cat.Nombre.ToLower() == categoria.Nombre.ToLower())
+                if (cat.Nombre.ToLower() == categoria.Nombre.ToLower())
                     throw new DuplicateNameException();
 
             this.categorias.Add(categoria);
@@ -254,7 +253,7 @@ namespace OblDiseño1
                     duplaADejarDeCompartir.Contrasenia + "para este usuario");
         }
 
-        public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, 
+        public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla,
             Usuario usuario)
         {
             if (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
@@ -268,8 +267,8 @@ namespace OblDiseño1
             return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Count == 0);
         }
 
-       
-        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia, 
+
+        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia,
             List<Usuario>> contrasenias)
         {
             List<string> resultado = new List<string>();
@@ -280,7 +279,7 @@ namespace OblDiseño1
             return resultado;
         }
 
-        public List<string> ConvertirContraseñasCompartidasConmigoAListaString(Dictionary<Usuario, 
+        public List<string> ConvertirContraseñasCompartidasConmigoAListaString(Dictionary<Usuario,
             List<Dupla_UsuarioContrasenia>> contrasenias)
         {
             List<string> resultado = new List<string>();
@@ -344,7 +343,7 @@ namespace OblDiseño1
 
         public bool RevisarSiLaTarjetaEsMia(string numeroTarjeta)
         {
-            foreach(Tarjeta unaTarjeta in this.tarjetas)
+            foreach (Tarjeta unaTarjeta in this.tarjetas)
                 if (unaTarjeta.Numero == numeroTarjeta)
                     return true;
 
@@ -355,7 +354,7 @@ namespace OblDiseño1
         {
             Tarjeta laTarjetaQueMePidieron = null;
 
-            foreach(Tarjeta unaTarjeta in this.tarjetas)
+            foreach (Tarjeta unaTarjeta in this.tarjetas)
                 if (unaTarjeta.Numero == numeroTarjeta)
                     laTarjetaQueMePidieron = unaTarjeta;
 
