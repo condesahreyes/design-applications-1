@@ -46,6 +46,7 @@ namespace Pruebas
         private Tarjeta tarjeta;
         private Categoria categoria;
         private Dupla_UsuarioContrasenia dupla;
+        private Contraseña contraseña;
 
 
         [TestInitialize]
@@ -69,7 +70,8 @@ namespace Pruebas
             categoria = new Categoria(nombresCategorias[0]);
             tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
                 codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
-            dupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[0],
+            contraseña = new Contraseña(contrasenias[0]);
+            dupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña,
                 nombreSitioDupla, notaDupla, categoria);
         }
 
@@ -230,8 +232,9 @@ namespace Pruebas
 
             for (int i = 0; i < nombres.Length; i++)
             {
+                Contraseña contra = new Contraseña(contrasenias[i]);
                 Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
-                    contrasenias[i], "Instagram", "", categoria);
+                    contra, "Instagram", "", categoria);
                 duplas.Add(unaDupla);
                 usuario.AgregarDupla(unaDupla);
             }
@@ -292,14 +295,15 @@ namespace Pruebas
 
             for (int i = 0; i < nombres.Length; i++)
             {
+                Contraseña contra = new Contraseña(contrasenias[i]);
                 Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
-                    contrasenias[i], "Instagram", "", categoria);
+                    contra, "Instagram", "", categoria);
 
                 usuario.AgregarDupla(unaDupla);
 
-                listaDuplas.Add("Nombre : " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contrasenia +
+                listaDuplas.Add("Nombre : " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contraseña.Contrasenia +
                 " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria +
-                " Nivel de seguridad: " + unaDupla.NivelSeguridadContrasenia);
+                " Nivel de seguridad: " + unaDupla.Contraseña.NivelSeguridadContrasenia);
             }
 
             listarDuplasPorMetodo = usuario.ListarToStringDeMisDuplas();
@@ -357,7 +361,7 @@ namespace Pruebas
         {
             usuario.AgregarDupla(dupla);
             duplas.Add(dupla);
-            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contrasenia);
+            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contraseña.Contrasenia);
             CollectionAssert.AreEquivalent(duplas, listaDuplas);
         }
 
@@ -376,9 +380,12 @@ namespace Pruebas
         [TestMethod]
         public void RemoverDuplaExistente()
         {
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Contraseña contraseña1 = new Contraseña(contrasenias[0]);
+            Contraseña contraseña2 = new Contraseña(contrasenias[0]);
+
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contrasenias[1],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contraseña2,
               "Facebook", "", categoria);
             usuario.AgregarDupla(primerdupla);
             usuario.AgregarDupla(segundadupla);
@@ -393,7 +400,8 @@ namespace Pruebas
         [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
         public void AgregarDuplaExistente()
         {
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Contraseña contraseña1 = new Contraseña(contrasenias[0]);
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
             usuario.AgregarDupla(primerdupla);
             usuario.AgregarDupla(primerdupla);

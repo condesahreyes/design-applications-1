@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 
 namespace Pruebas
 {
@@ -22,13 +23,13 @@ namespace Pruebas
         private ChequeadorDeDataBreaches chequeador;
 
         private const int numTarjeta = 0; 
-        private const int numDupla = 1; 
+        private const int numDupla = 1;
         [TestInitialize]
         public void Setup()
         {
             string nombreCategoria = "SuperCategoria";
             Categoria categoriaEjemplo = new Categoria(nombreCategoria);
-            
+
             string nombreTargeta_1 = "Tarjeta_1";
             string nombreTargeta_2 = "Tarjeta_2";
             string nombreTargeta_3 = "Tarjeta_3";
@@ -58,19 +59,19 @@ namespace Pruebas
             String notaTarjeta_3 = "Esta tambien es otra tafjeta para rests";
             String notaTarjeta_4 = "Esta es una tarjeta muy seria";
 
-            Tarjeta tarjetaEjemplo_1 = new Tarjeta(nombreTargeta_1, tipoTarjeta_1, 
-                numeroTarjeta_1, codigoSeguridadTargeta_1, fechaVencimientoTargeta_1, 
+            Tarjeta tarjetaEjemplo_1 = new Tarjeta(nombreTargeta_1, tipoTarjeta_1,
+                numeroTarjeta_1, codigoSeguridadTargeta_1, fechaVencimientoTargeta_1,
                 categoriaEjemplo, notaTarjeta_1);
 
-            Tarjeta tarjetaEjemplo_2 = new Tarjeta(nombreTargeta_2, tipoTarjeta_2, 
-                numeroTarjeta_2, codigoSeguridadTargeta_2, fechaVencimientoTargeta_2, 
+            Tarjeta tarjetaEjemplo_2 = new Tarjeta(nombreTargeta_2, tipoTarjeta_2,
+                numeroTarjeta_2, codigoSeguridadTargeta_2, fechaVencimientoTargeta_2,
                 categoriaEjemplo, notaTarjeta_2);
 
-            Tarjeta tarjetaEjemplo_3 = new Tarjeta(nombreTargeta_3, tipoTarjeta_3, 
-                numeroTarjeta_3, codigoSeguridadTargeta_3, fechaVencimientoTargeta_3, 
+            Tarjeta tarjetaEjemplo_3 = new Tarjeta(nombreTargeta_3, tipoTarjeta_3,
+                numeroTarjeta_3, codigoSeguridadTargeta_3, fechaVencimientoTargeta_3,
                 categoriaEjemplo, notaTarjeta_3);
 
-            Tarjeta tarjetaEjemplo_4 = new Tarjeta(nombreTargeta_4, tipoTarjeta_4, 
+            Tarjeta tarjetaEjemplo_4 = new Tarjeta(nombreTargeta_4, tipoTarjeta_4,
                 numeroTarjeta_4, codigoSeguridadTargeta_4, fechaVencimientoTargeta_4,
                 categoriaEjemplo, notaTarjeta_4);
 
@@ -95,20 +96,26 @@ namespace Pruebas
             string notaDupla_4 = "Hice esta porque me suspendieron la otra";
             string notaDupla_5 = "Hice esta porque me suspendieron la de respuesto";
 
+            Contraseña contraseña1 = new Contraseña(passwordDupla_1);
+            Contraseña contraseña2 = new Contraseña(passwordDupla_2);
+            Contraseña contraseña3 = new Contraseña(passwordDupla_3);
+            Contraseña contraseña4 = new Contraseña(passwordDupla_4);
+            Contraseña contraseña5 = new Contraseña(passwordDupla_5);
+
             Dupla_UsuarioContrasenia duplaEjemplo_1 = new Dupla_UsuarioContrasenia(userNameDupla_1,
-                passwordDupla_1, sitioDupla_1, notaDupla_1, categoriaEjemplo);
+                contraseña1, sitioDupla_1, notaDupla_1, categoriaEjemplo);
 
             Dupla_UsuarioContrasenia duplaEjemplo_2 = new Dupla_UsuarioContrasenia(userNameDupla_2,
-                passwordDupla_2, sitioDupla_2, notaDupla_2, categoriaEjemplo);
+                contraseña2, sitioDupla_2, notaDupla_2, categoriaEjemplo);
 
-            Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(userNameDupla_3, 
-                passwordDupla_3, sitioDupla_3, notaDupla_3, categoriaEjemplo);
+            Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(userNameDupla_3,
+                contraseña3, sitioDupla_3, notaDupla_3, categoriaEjemplo);
 
-            Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(userNameDupla_4, 
-                passwordDupla_4, sitioDupla_4, notaDupla_4, categoriaEjemplo);
+            Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(userNameDupla_4,
+                contraseña4, sitioDupla_4, notaDupla_4, categoriaEjemplo);
 
-            Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(userNameDupla_5, 
-                passwordDupla_5, sitioDupla_5, notaDupla_5, categoriaEjemplo);
+            Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(userNameDupla_5,
+                contraseña5, sitioDupla_5, notaDupla_5, categoriaEjemplo);
 
             string nombreUsuario = "JuanEjemplez";
             string contraseniaUsuario = "aaaaaa";

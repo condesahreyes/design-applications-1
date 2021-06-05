@@ -75,44 +75,58 @@ namespace Pruebas
                 "Ojala me dieran un punto en Disenio de Aplicacion por cada cuenta que me suspendieron",
                 "Otra mas", "La ultima, lo juro"};
 
+            Contraseña contraseña1 = new Contraseña(contrasenias[0]);
+            Contraseña contraseña2 = new Contraseña(contrasenias[1]);
+            Contraseña contraseña3 = new Contraseña(contrasenias[2]);
+            Contraseña contraseña4 = new Contraseña(contrasenias[3]);
+            Contraseña contraseña5 = new Contraseña(contrasenias[4]);
+            Contraseña contraseña6 = new Contraseña(contrasenias[5]);
+            Contraseña contraseña7 = new Contraseña(contrasenias[6]);
+            Contraseña contraseña8 = new Contraseña(contrasenias[7]);
+            Contraseña contraseña9 = new Contraseña(contrasenias[8]);
+            Contraseña contraseña10 = new Contraseña(contrasenias[9]);
+            Contraseña contraseña11 = new Contraseña(contrasenias[10]);
+            Contraseña contraseña12 = new Contraseña(contrasenias[11]);
+            Contraseña contraseña13 = new Contraseña(contrasenias[12]);
+
             Dupla_UsuarioContrasenia duplaEjemplo_1 = new Dupla_UsuarioContrasenia(nombreUsuarios[0],
-                contrasenias[0], sitios[0], notas[0], categoria_SuperCategoria);
+                contraseña1, sitios[0], notas[0], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_2 = new Dupla_UsuarioContrasenia(nombreUsuarios[1],
-                contrasenias[1], sitios[1], notas[1], categoria_SuperCategoria);
+                contraseña2, sitios[1], notas[1], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(nombreUsuarios[2],
-                contrasenias[2], sitios[2], notas[2], categoria_SuperCategoria);
+                contraseña3, sitios[2], notas[2], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(nombreUsuarios[3],
-                contrasenias[3], sitios[3], notas[3], categoria_UltraCategoria);
+                contraseña4, sitios[3], notas[3], categoria_UltraCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(nombreUsuarios[4],
-                contrasenias[4], sitios[4], notas[4], categoria_SuperCategoria);
+                contraseña5, sitios[4], notas[4], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_6 = new Dupla_UsuarioContrasenia(nombreUsuarios[5],
-                contrasenias[5], sitios[5], notas[5], categoria_SuperCategoria);
+                contraseña6, sitios[5], notas[5], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_7 = new Dupla_UsuarioContrasenia(nombreUsuarios[6],
-                contrasenias[6], sitios[6], notas[6], categoria_SuperCategoria);
+                contraseña7, sitios[6], notas[6], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_8 = new Dupla_UsuarioContrasenia(nombreUsuarios[7],
-                contrasenias[7], sitios[7], notas[7], categoria_UltraCategoria);
+                contraseña8, sitios[7], notas[7], categoria_UltraCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_9 = new Dupla_UsuarioContrasenia(nombreUsuarios[8],
-                contrasenias[8], sitios[8], notas[8], categoria_UltraCategoria);
+                contraseña9, sitios[8], notas[8], categoria_UltraCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_10 = new Dupla_UsuarioContrasenia(nombreUsuarios[9],
-                contrasenias[9], sitios[9], notas[9], categoria_SuperCategoria);
+                contraseña10, sitios[9], notas[9], categoria_SuperCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_11 = new Dupla_UsuarioContrasenia(nombreUsuarios[10],
-                contrasenias[10], sitios[10], notas[10], categoria_UltraCategoria);
+                contraseña11, sitios[10], notas[10], categoria_UltraCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_12 = new Dupla_UsuarioContrasenia(nombreUsuarios[11],
-                contrasenias[11], sitios[11], notas[11], categoria_UltraCategoria);
+                contraseña12, sitios[11], notas[11], categoria_UltraCategoria);
 
             Dupla_UsuarioContrasenia duplaEjemplo_13 = new Dupla_UsuarioContrasenia(nombreUsuarios[12],
-                contrasenias[12], sitios[12], notas[12], categoria_UltraCategoria);
+                contraseña13, sitios[12], notas[12], categoria_UltraCategoria);
 
             string nombreUsuario = "JuanEjemplez";
             string contraseniaUsuario = "aaaaaa";

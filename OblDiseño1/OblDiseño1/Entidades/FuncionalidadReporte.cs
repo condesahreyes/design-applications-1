@@ -30,7 +30,7 @@ namespace OblDiseño1.Entidades
             {
 
                 string nombreCategoria = dupla.Categoria.Nombre;
-                int nivelSeguridad = dupla.NivelSeguridadContrasenia;
+                int nivelSeguridad = dupla.Contraseña.NivelSeguridadContrasenia;
                 categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
                 misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
                 misPares[nivelSeguridad].cantidad++;

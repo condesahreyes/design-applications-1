@@ -31,10 +31,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.dataGridView_ListaDuplas.DataSource = biso;
 
             this.dataGridView_ListaDuplas.Columns["TipoSitioOApp"].Visible = false;
-            this.dataGridView_ListaDuplas.Columns["NivelSeguridadContrasenia"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["DataBrench"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["Nota"].Visible = false;
-            this.dataGridView_ListaDuplas.Columns["Contrasenia"].Visible = false;
+            this.dataGridView_ListaDuplas.Columns["Contraseña"].Visible = false;
 
             this.dataGridView_ListaDuplas.Columns["NombreUsuario"].HeaderText = "Usuario";
             this.dataGridView_ListaDuplas.Columns["NombreSitioApp"].HeaderText = "Sitio";

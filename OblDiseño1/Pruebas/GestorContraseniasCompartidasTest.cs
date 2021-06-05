@@ -22,6 +22,9 @@ namespace Pruebas
 
         private Categoria categoria;
         private Dupla_UsuarioContrasenia dupla;
+        Contraseña contraseña1;
+        Contraseña contraseña2;
+        Contraseña contraseña3;
         private GestorContraseniasCompartidas miGestor;
 
         [TestInitialize]
@@ -29,7 +32,11 @@ namespace Pruebas
         {
             notaDupla = "";
             nombreSitioDupla = "Instagram";
-            dupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[0],
+            contraseña1 = new Contraseña(contrasenias[0]);
+            contraseña2 = new Contraseña(contrasenias[1]);
+            contraseña3 = new Contraseña(contrasenias[2]);
+
+            dupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña1,
                 nombreSitioDupla, notaDupla, categoria);
         }
 
@@ -39,9 +46,9 @@ namespace Pruebas
 
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contrasenias[1],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contraseña2,
               "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
@@ -64,9 +71,9 @@ namespace Pruebas
             Usuario usuarioQueQueMeComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
             Usuario usuarioAlQueLeCompartenContrasenia = new Usuario(nombres[1], "olapapu");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contraseña1,
               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña2,
               "Facebook", "", categoria);
 
             usuarioQueQueMeComparteContrasenia.AgregarDupla(primerdupla);
@@ -91,9 +98,9 @@ namespace Pruebas
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contraseña2,
               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña3,
               "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
@@ -116,9 +123,9 @@ namespace Pruebas
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contraseña2,
               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña3,
               "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
@@ -144,9 +151,9 @@ namespace Pruebas
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contraseña2,
               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña3,
               "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
@@ -157,7 +164,7 @@ namespace Pruebas
 
             miGestor.funcionCompartir(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
             miGestor.funcionCompartir(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            primerdupla.ActualizarContrasenia("nuevaPassword");
+            primerdupla.Contraseña.ActualizarContrasenia("nuevaPassword");
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
@@ -172,9 +179,9 @@ namespace Pruebas
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contraseña2,
               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña3,
               "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
@@ -186,7 +193,7 @@ namespace Pruebas
 
             miGestor.funcionCompartir(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
             miGestor.funcionCompartir(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            segundadupla.ActualizarContrasenia("otraPassword");
+            segundadupla.Contraseña.ActualizarContrasenia("otraPassword");
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
             CollectionAssert.AreEquivalent(listaEsperada, gestorAux.ConvertirContraseñasCompartidasConmigoAListaString(gestorAux.ObtenerContraseniasCompartidasConmigo()));
@@ -198,7 +205,7 @@ namespace Pruebas
         {
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
 
             miGestor = usuarioQueComparteContrasenia.GestorCompartirContrasenia;
@@ -217,7 +224,7 @@ namespace Pruebas
         {
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
 
             miGestor = usuarioQueComparteContrasenia.GestorCompartirContrasenia;
@@ -232,7 +239,7 @@ namespace Pruebas
             Usuario primerUsuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
             Usuario segundaUsuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "kondacabron");
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
 
             miGestor = usuarioQueComparteContrasenia.GestorCompartirContrasenia;

@@ -22,7 +22,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.sistema = sistema;
             this.dupla = dupla;
             this.interfazPadre = padre;
-            this.nivelSeguridadContrasenia = dupla.NivelSeguridadContrasenia;
+            this.nivelSeguridadContrasenia = dupla.Contraseña.NivelSeguridadContrasenia;
 
             InitializeComponent();
             ColocarDatosEnLosCampos();
@@ -31,7 +31,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void ColocarDatosEnLosCampos()
         {
             this.textBox_Usuario.Text = dupla.NombreUsuario;
-            this.textBox_Contrasenia.Text = dupla.Contrasenia;
+            this.textBox_Contrasenia.Text = dupla.Contraseña.Contrasenia;
             this.textBox_Sitio.Text = dupla.NombreSitioApp;
             var bindingSource = new BindingSource();
             bindingSource.DataSource = usuario.ObtenerCategorias();
@@ -63,7 +63,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void button_RevertirContrasenia_Click(object sender, EventArgs e)
         {
-            this.textBox_Contrasenia.Text = dupla.Contrasenia;
+            this.textBox_Contrasenia.Text = dupla.Contraseña.Contrasenia;
         }
 
         private void button_RevertirSitio_Click(object sender, EventArgs e)
@@ -143,7 +143,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 seRealizaronCambios = true;
             }
-            if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
+            if (!this.dupla.Contraseña.Contrasenia.Equals(this.textBox_Contrasenia.Text))
             {
                 seRealizaronCambios = true;
             }
@@ -173,9 +173,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     this.dupla.NombreUsuario = this.textBox_Usuario.Text;
                     seModificoCorrectamente = true;
                 }
-                if (!this.dupla.Contrasenia.Equals(this.textBox_Contrasenia.Text))
+                if (!this.dupla.Contraseña.Contrasenia.Equals(this.textBox_Contrasenia.Text))
                 {
-                    this.dupla.Contrasenia = this.textBox_Contrasenia.Text;
+                    this.dupla.Contraseña.Contrasenia = this.textBox_Contrasenia.Text;
                     seModificoCorrectamente = true;
                 }
                 if (!this.dupla.NombreSitioApp.Equals(this.textBox_Sitio.Text))

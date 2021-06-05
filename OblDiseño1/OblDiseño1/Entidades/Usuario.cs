@@ -161,7 +161,7 @@ namespace OblDiseño1
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
         {
             foreach (Dupla_UsuarioContrasenia unaDupla in this.duplas)
-                if (unaDupla.Contrasenia == unaContrasenia)
+                if (unaDupla.Contraseña.Contrasenia == unaContrasenia)
                     return true;
 
             return false;
@@ -172,7 +172,7 @@ namespace OblDiseño1
             List<Dupla_UsuarioContrasenia> lasDuplasQueMePidieron = new List<Dupla_UsuarioContrasenia>();
 
             foreach (Dupla_UsuarioContrasenia unaDupla in this.duplas)
-                if (unaDupla.Contrasenia == laContrasenia)
+                if (unaDupla.Contraseña.Contrasenia == laContrasenia)
                     lasDuplasQueMePidieron.Add(unaDupla);
 
             return lasDuplasQueMePidieron;

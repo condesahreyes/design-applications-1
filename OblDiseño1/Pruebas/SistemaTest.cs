@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 
 namespace Pruebas
 {
@@ -43,7 +44,8 @@ namespace Pruebas
             contraseniaDupla = "ContraSuperSegura123!!!";
             notaDupla = "Una nota muy importante";
             stioDupla = "www.ejemplo.com.uy";
-            Dupla_UsuarioContrasenia dupla1 = new Dupla_UsuarioContrasenia(nombeUsuarioDupla, contraseniaDupla,
+            Contraseña contraseña = new Contraseña(nombeUsuarioDupla);
+            Dupla_UsuarioContrasenia dupla1 = new Dupla_UsuarioContrasenia(nombeUsuarioDupla, contraseña,
                                                 stioDupla, notaDupla, categoria1); 
             
             nombreTarjeta = "La VIZA";

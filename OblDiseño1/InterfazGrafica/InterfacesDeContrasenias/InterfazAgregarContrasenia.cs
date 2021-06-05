@@ -1,4 +1,5 @@
 ﻿using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 using System.Windows.Forms;
 
@@ -34,7 +35,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 string nombreSitio = textBoxNombreSitioApp.Text;
                 string nota = textBoxNota.Text;
                 Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
-                Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contrasenia, nombreSitio, nota, categoria);
+                Contraseña contraseña = new Contraseña(contrasenia);
+                Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contraseña, nombreSitio, nota, categoria);
                 usuario.AgregarDupla(dupla);
                 MessageBox.Show("Se ha agregado la contraseña con éxito");
                 IrAContraseñas();

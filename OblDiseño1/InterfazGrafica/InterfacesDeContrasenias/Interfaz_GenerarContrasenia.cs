@@ -1,4 +1,5 @@
 ﻿using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +37,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 bool[] caracteresReqeuridos = { checkBox_Mayusculas.Checked, checkBox_Minusculas.Checked, 
                                                 checkBox_Numeros.Checked, checkBox_Especiales.Checked};
-                this.contrasenia = Dupla_UsuarioContrasenia.GenerarContrasenia((int)numericUpDown_cantCaracteres.Value, caracteresReqeuridos);
+                this.contrasenia = Contraseña.GenerarContrasenia((int)numericUpDown_cantCaracteres.Value, caracteresReqeuridos);
                 this.Close();
             }
             else

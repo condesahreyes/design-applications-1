@@ -40,7 +40,7 @@ namespace OblDiseño1.Entidades
             }
             else
                 throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
-                    duplaACompartir.Contrasenia + "para este usuario");
+                    duplaACompartir.Contraseña.Contrasenia + "para este usuario");
         }
 
         private void GuardarLaContraseniaACompartir(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
@@ -108,7 +108,7 @@ namespace OblDiseño1.Entidades
                 }
             else
                 throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
-                    duplaADejarDeCompartir.Contrasenia + "para este usuario");
+                    duplaADejarDeCompartir.Contraseña.Contrasenia + "para este usuario");
         }
 
         public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla,
