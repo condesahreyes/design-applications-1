@@ -18,8 +18,6 @@ namespace Pruebas
 
         private static string[] nombres = { "Hernán", "Santiago", "Rodrigo" };
 
-        string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
         private Categoria categoria;
         private Dupla_UsuarioContrasenia dupla;
         private GestorContraseniasCompartidas miGestor;
@@ -36,13 +34,12 @@ namespace Pruebas
         [TestMethod]
         public void ListarContraseñasQueComparto()
         {
-
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
             Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
-               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contrasenias[1],
-              "Facebook", "", categoria);
+            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", 
+                contrasenias[0], "Instagram", "", categoria);
+            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", 
+                contrasenias[1], "Facebook", "", categoria);
 
             usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
             usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
@@ -54,7 +51,8 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, miGestor.ConvertirContraseñasCompartidasPorMiAListaString(miGestor.ObtenerContraseniasCompartidasPorMi()));
+            CollectionAssert.AreEquivalent(listaEsperada, miGestor.
+                ConvertirContraseñasCompartidasPorMiAListaString(miGestor.ObtenerContraseniasCompartidasPorMi()));
         }
 
         [TestMethod]
@@ -81,7 +79,8 @@ namespace Pruebas
 
             List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
 
-            CollectionAssert.AreEquivalent(listaEsperada, miGestor.ConvertirContraseñasCompartidasConmigoAListaString(gestorAux.ObtenerContraseniasCompartidasConmigo()));
+            CollectionAssert.AreEquivalent(listaEsperada, miGestor.
+                ConvertirContraseñasCompartidasConmigoAListaString(gestorAux.ObtenerContraseniasCompartidasConmigo()));
         }
 
         [TestMethod]

@@ -46,18 +46,18 @@
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\FuncionalidadReporte.cs" />
     <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
-    <Compile Include="Exception\Exception_EliminacionDeContraseniaCompartida.cs" />
+    <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
+    <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />
+    <Compile Include="Exception\ExepcionIntentoDeObtencionDeObjetoInexistente.cs" />
+    <Compile Include="Exception\ExepcionInvalidCategoriaData.cs" />
+    <Compile Include="Exception\ExepcionInvalidUsuarioData.cs" />
+    <Compile Include="Exception\ExepcionNivelDeSeguridadNoValido.cs" />
+    <Compile Include="Exception\ExepcionObjetosRepetidos.cs" />
+    <Compile Include="Exception\ExepcionTarjetaIncorrecta.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Dupla_UsuarioContrasenia.cs" />
-    <Compile Include="Exception\Exepcion_ObjetosRepetidos.cs" />
-    <Compile Include="Exception\Exepcion_IntentoDeObtencionDeObjetoInexistente.cs" />
-    <Compile Include="Exception\Exepcion_NivelDeSeguridadNoValido.cs" />
-    <Compile Include="Exception\Exepcion_InvalidCategoriaData.cs" />
-    <Compile Include="Exception\Exepcion_DatosDeContraseniaInvalidos.cs" />
-    <Compile Include="Exception\Exepcion_InvalidUsuarioData.cs" />
     <Compile Include="Manejadores\Sistema.cs" />
     <Compile Include="Entidades\Tarjeta.cs" />
-    <Compile Include="Exception\Exception_TarjetaIncorrecta.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
