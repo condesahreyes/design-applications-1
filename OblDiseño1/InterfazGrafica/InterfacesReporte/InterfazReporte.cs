@@ -34,11 +34,11 @@ namespace InterfazGrafica.InterfacesReporte
 
         public void ActualizarLables()
         {
-            this.label_CantidadRojo.Text = "" + reporte.duplasPorSeguridad[1].cantidad;
-            this.label_CantidadNaranja.Text = "" + reporte.duplasPorSeguridad[2].cantidad;
-            this.label_CantidadAmarillo.Text = "" + reporte.duplasPorSeguridad[3].cantidad;
-            this.label_CantidadVerdeClaro.Text = "" + reporte.duplasPorSeguridad[4].cantidad;
-            this.label_CantidadVerdeOscuro.Text = "" + reporte.duplasPorSeguridad[5].cantidad;
+            this.label_CantidadRojo.Text = "" + reporte.duplasPorSeguridad[nivelSeguridadRojo].cantidad;
+            this.label_CantidadNaranja.Text = "" + reporte.duplasPorSeguridad[nivelSeguridadNaranja].cantidad;
+            this.label_CantidadAmarillo.Text = "" + reporte.duplasPorSeguridad[nivelSeguridadAmarillo].cantidad;
+            this.label_CantidadVerdeClaro.Text = "" + reporte.duplasPorSeguridad[nivelSeguridadVerdeClaro].cantidad;
+            this.label_CantidadVerdeOscuro.Text = "" + reporte.duplasPorSeguridad[nivelSeguridadVerdeOscuro].cantidad;
         }
 
         private void button_VerRojo_Click_1(object sender, EventArgs e)

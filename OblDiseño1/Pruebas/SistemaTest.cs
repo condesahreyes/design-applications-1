@@ -142,18 +142,18 @@ namespace Pruebas
         public void ObtenerDuplasVulneradasTest()
         {
             Usuario usu = sistema.ObtenerUsuarios()[0];
-            List<Object>[] entidesVulneradas = sistema.ObtenerDataBreaches(ref usu, infoBreachada);
+            List<Dupla_UsuarioContrasenia> credencialesVulneradas = sistema.ObtenerDataBreachesCredenciales(ref usu, infoBreachada);
 
-            CollectionAssert.AreEquivalent(duplasVulneradas, entidesVulneradas[1]);
+            CollectionAssert.AreEquivalent(duplasVulneradas, credencialesVulneradas);
         }
 
         [TestMethod]
         public void ObtenerTarjetasVulneradasTest()
         {
             Usuario usu = sistema.ObtenerUsuarios()[0];
-            List<Object>[] entidesVulneradas = sistema.ObtenerDataBreaches(ref usu, infoBreachada);
+            List<Tarjeta> entidesVulneradas = sistema.ObtenerDataBreachesTarjetas(ref usu, infoBreachada);
 
-            CollectionAssert.AreEquivalent(tarjetasVulneradas, entidesVulneradas[0]);
+            CollectionAssert.AreEquivalent(tarjetasVulneradas, entidesVulneradas);
         }
     }
 }

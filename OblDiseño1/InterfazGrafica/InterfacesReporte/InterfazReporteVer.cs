@@ -13,6 +13,13 @@ namespace InterfazGrafica.InterfacesReporte
         Sistema sistema;
         reporte reporte;
         int nivelDeSeguridad;
+
+        const int nivelSeguridadRojo = 1;
+        const int nivelSeguridadNaranja = 2;
+        const int nivelSeguridadAmarillo = 3;
+        const int nivelSeguridadVerdeClaro = 4;
+        const int nivelSeguridadVerdeOscuro = 5;
+
         public InterfazReporteVer(ref Usuario usuario, ref Sistema sistema, reporte reporte, int nivelDeSeguridad)
         {
             this.usuario = usuario;
@@ -63,23 +70,23 @@ namespace InterfazGrafica.InterfacesReporte
         {
             switch (nivelDeSeguridad)
             {
-                case 1:
+                case nivelSeguridadRojo:
                     this.label_Titulo.Text = "Contraseñas nivel Rojo";
                     break;
-                case 2:
+                case nivelSeguridadNaranja:
                     this.label_Titulo.Text = "Contraseñas nivel Naranja";
                     break;
-                case 3:
+                case nivelSeguridadAmarillo:
                     this.label_Titulo.Text = "Contraseñas nivel Amarillo";
                     break;
-                case 4:
+                case nivelSeguridadVerdeClaro:
                     this.label_Titulo.Text = "Contraseñas nivel Verde Claro";
                     break;
-                case 5:
+                case nivelSeguridadVerdeOscuro:
                     this.label_Titulo.Text = "Contraseñas nivel Verde Oscuro";
                     break;
                 default:
-                    throw new Exepcion_NivelDeSeguridadNoValido("La ventana IntrvazReporteVer recibio como parametro un nivel de seguridad no valido");
+                    throw new ExepcionNivelDeSeguridadNoValido("La ventana IntrvazReporteVer recibio como parametro un nivel de seguridad no valido");
                     break;
             }
         }

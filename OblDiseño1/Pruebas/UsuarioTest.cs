@@ -94,28 +94,28 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioNombreVacio()
         {
             Usuario unUsuario = new Usuario("", contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioNombreLargo()
         {
             Usuario unUsuario = new Usuario(nombreLargo, contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioContraseniaCorta()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioContraseniaLarga()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaLarga);
@@ -130,14 +130,14 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CambiarContraseniaCorta()
         {
             usuario.ActualizarContrasenia(contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CambiarContraseniaLarga()
         {
             usuario.ActualizarContrasenia(contraseniaLarga);
@@ -335,7 +335,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_IntentoDeObtencionDeObjetoInexistente))]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
         public void ObtenerTarjetaDeNumeroNOPresenteTest()
         {
             usuario.AgregarTarjeta(tarjeta);
@@ -397,7 +397,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AgregarDuplaExistente()
         {
             Contraseña contraseña1 = new Contraseña(contrasenias[0]);
@@ -408,7 +408,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_ObjetosRepetidos))]
+        [ExpectedException(typeof(ExepcionObjetosRepetidos))]
         public void AgregarTarjetaRepetida()
         {
             Tarjeta tarjetaConMismoNumero = new Tarjeta(nombresTarjetas[1], tiposTarjetas[1], numTarjetas[0],

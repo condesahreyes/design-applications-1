@@ -68,7 +68,7 @@ namespace OblDiseño1
         public void ActualizarNombreUsuario(string unNombre)
         {
             if (ValidarNombreUsuario(unNombre))
-                throw new Exepcion_InvalidUsuarioData(mnsjNombreUsuarioError);
+                throw new ExepcionInvalidUsuarioData(mnsjNombreUsuarioError);
             else
                 this.nombre = unNombre;
         }
@@ -85,7 +85,7 @@ namespace OblDiseño1
         public void ActualizarContrasenia(string unaContrasenia)
         {
             if (ValidarContrasenia(unaContrasenia))
-                throw new Exepcion_InvalidUsuarioData(mnsjContraseniaError);
+                throw new ExepcionInvalidUsuarioData(mnsjContraseniaError);
             else
                 this.contrasenia = unaContrasenia;
         }
@@ -93,7 +93,7 @@ namespace OblDiseño1
         public void AgregarTarjeta(Tarjeta tarjeta)
         {
             if (this.ObtenerTarjetas().Contains(tarjeta))
-                throw new Exepcion_ObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
+                throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
             else
                 this.tarjetas.Add(tarjeta);
         }
@@ -106,7 +106,7 @@ namespace OblDiseño1
         public void AgregarDupla(Dupla_UsuarioContrasenia dupla)
         {
             if (this.duplas.Contains(dupla))
-                throw new Exepcion_InvalidUsuarioData(mnsjDuplaYaPresenteError);
+                throw new ExepcionInvalidUsuarioData(mnsjDuplaYaPresenteError);
             else
                 this.duplas.Add(dupla);
         }
@@ -155,7 +155,7 @@ namespace OblDiseño1
             if (this.duplas.Contains(duplaARemover) && !this.GestorCompartirContrasenia.VerificarQueEstoyCompartiendoLaContraseniaConAlguien(duplaARemover))
                 this.duplas.Remove(duplaARemover);
             else
-                throw new Exception_EliminacionDeContraseniaCompartida("No se puede eliminar una contraseña compartida");
+                throw new ExepcionEliminacionDeContraseniaCompartida("No se puede eliminar una contraseña compartida");
         }
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
@@ -196,7 +196,7 @@ namespace OblDiseño1
                     laTarjetaQueMePidieron = unaTarjeta;
 
             if (laTarjetaQueMePidieron == null)
-                throw new Exepcion_IntentoDeObtencionDeObjetoInexistente("Se intento obtener una " +
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente("Se intento obtener una " +
                                         "tarjeta que no le pertenecia al Usuario");
 
             return laTarjetaQueMePidieron;

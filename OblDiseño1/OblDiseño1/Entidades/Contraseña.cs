@@ -39,7 +39,7 @@ namespace OblDiseño1.Entidades
             int largo = unaContrasenia.Length;
 
             if (EsLargoInvalidoContrasenia(largo))
-                throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
+                throw new ExepcionDatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe" +
                     $" contener entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
             else
             {
@@ -113,10 +113,10 @@ namespace OblDiseño1.Entidades
             string contrasenia;
 
             if (EsLargoInvalidoContrasenia(largo))
-                throw new Exepcion_DatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe contener " +
+                throw new ExepcionDatosDeContraseniaInvalidos($"Largo invalido: la contraseña debe contener " +
                     $"entre {CONTRASENIA_LARGO_MIN} y {CONTRASENIA_LARGO_MAX} caracteres");
             else if (ContarCantidadDeCaracteresFaltantes(caracteresRequeridos) == 0)
-                throw new Exepcion_DatosDeContraseniaInvalidos("Debe seleccionar al menos un caracter");
+                throw new ExepcionDatosDeContraseniaInvalidos("Debe seleccionar al menos un caracter");
 
             contrasenia = GenerarString(largo, caracteresRequeridos);
 

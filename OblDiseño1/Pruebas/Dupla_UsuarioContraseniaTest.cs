@@ -185,7 +185,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreUsuarioCorto()
         {
             string nombreUsuarioCorto = "Juan";
@@ -193,7 +193,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreUsuarioLargo()
         {
             string nombreUsuarioLargo = "HELENE GERMAINE JOSEPHE MARIE";
@@ -201,7 +201,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionContraseniaCorta()
         {
             string contraseniaCorta = "1234";
@@ -209,7 +209,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionContraseniaLarga()
         {
             string contraseniaLarga = "12345678912345678912345678";
@@ -217,7 +217,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreSitioAppCorto()
         {
             string nombreSitioAppCorto = "12";
@@ -225,7 +225,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreSitioAppLargo()
         {
             string nombreSitioAppLargo = "12345678912345678912345678";
@@ -233,7 +233,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNotaLarga()
         {
             string notaLarga = "";
@@ -252,7 +252,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaMuyCorta()
         {
             int largoIncorrecto = 4;
@@ -260,7 +260,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaMuyLarga()
         {
             int largoIncorrecto = 26;
@@ -268,7 +268,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaNinguTipoDeCaracter()
         {
             bool[] caracteres = { false, false, false, false };
@@ -276,7 +276,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaLargoContraseniaCorta()
         {
             int largoInvalido = 4;

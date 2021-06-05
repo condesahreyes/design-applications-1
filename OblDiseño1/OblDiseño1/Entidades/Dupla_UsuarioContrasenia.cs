@@ -61,7 +61,7 @@ namespace OblDiseño1
         public void ActualizarNota(string unaNota)
         {
             if (EsNotaMuylarga(unaNota.Length))
-                throw new Exepcion_DatosDeContraseniaInvalidos($"La nota debe contener " +
+                throw new ExepcionDatosDeContraseniaInvalidos($"La nota debe contener " +
                     $"como maximo {NOTA_LARGO_MAX} caracteres");
             else
             {
@@ -78,7 +78,7 @@ namespace OblDiseño1
         public void ActualizarNombreSitioApp(string unNombreSitioApp)
         {
             if (EsNombreSitioAppLargoValido(unNombreSitioApp.Length))
-                throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
+                throw new ExepcionDatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {SITIO_LARGO_MIN} y {SITIO_LARGO_MAX} caracteres");
             else
             {
@@ -95,7 +95,7 @@ namespace OblDiseño1
         public void ActualizarNombreUsuario(string unNombreUsuario)
         {
             if (EsNombreUsuarioValido(unNombreUsuario.Length))
-                throw new Exepcion_DatosDeContraseniaInvalidos($"El nombre de usuario debe " +
+                throw new ExepcionDatosDeContraseniaInvalidos($"El nombre de usuario debe " +
                     $"contener entre {NOMBRE_LARGO_MIN} y {NOMBRE_LARGO_MAX} caracteres");
             else
             {
@@ -109,7 +109,8 @@ namespace OblDiseño1
             return (largoNombre < NOMBRE_LARGO_MIN || largoNombre > NOMBRE_LARGO_MAX);
         }
 
-       
+        
+
         public override string ToString()
         {
             return ("Nombre : " + this.NombreUsuario + " Contraseña: " + this.Contraseña.ToString() +

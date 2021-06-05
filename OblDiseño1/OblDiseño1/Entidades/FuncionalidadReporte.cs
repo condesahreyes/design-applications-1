@@ -4,7 +4,7 @@ namespace OblDiseño1.Entidades
 {
     public class FuncionalidadReporte
     {
-
+        private const int cantidadDeCategoriasSeguridadContraseniaMasUno = 6;
         private Usuario usuario;
 
         public FuncionalidadReporte(Usuario usuario)
@@ -18,12 +18,12 @@ namespace OblDiseño1.Entidades
             List<Categoria> misCategorias = usuario.ObtenerCategorias();
             List<Dupla_UsuarioContrasenia> misDuplas = usuario.ObtenerDuplas();
 
-            paresSeguridad[] misPares = new paresSeguridad[6];
+            paresSeguridad[] misPares = new paresSeguridad[cantidadDeCategoriasSeguridadContraseniaMasUno];
             Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
             foreach (Categoria cat in misCategorias)
-                categoria.Add(cat.Nombre, new int[6]);
+                categoria.Add(cat.Nombre, new int[cantidadDeCategoriasSeguridadContraseniaMasUno]);
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < cantidadDeCategoriasSeguridadContraseniaMasUno; i++)
                 misPares[i] = new paresSeguridad(0, null);
 
             foreach (Dupla_UsuarioContrasenia dupla in misDuplas)
