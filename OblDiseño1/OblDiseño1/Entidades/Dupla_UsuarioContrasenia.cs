@@ -150,11 +150,12 @@ namespace OblDiseño1
                 return 5;
             else if (tiposDeCaracteres[0] && tiposDeCaracteres[1])
                 return 4;
-            else if (tiposDeCaracteres[0] || tiposDeCaracteres[1])
+            else if (tiposDeCaracteres[0] || tiposDeCaracteres[1] || tiposDeCaracteres[2] || tiposDeCaracteres[3])
                 return 3;
 
             return -1;
         }
+
 
         public static bool[] ObtenerTiposCaracteresContenidos(string str)
         {

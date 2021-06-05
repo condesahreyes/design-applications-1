@@ -55,10 +55,9 @@ namespace InterfazGrafica.InterfazDataBreaches
             string datos = TextBoxDatosDataBreaches.Text;
 
             List<string> listaDatos = datos.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<object>[] datosVulnerados = sistema.ObtenerDataBreaches(ref usuario, listaDatos);
 
-            List<Dupla_UsuarioContrasenia> duplasVulnderadas = datosVulnerados[1].Cast<Dupla_UsuarioContrasenia>().ToList();
-            List<Tarjeta> tarjetasVulneradas = datosVulnerados[0].Cast<Tarjeta>().ToList();
+            List<Dupla_UsuarioContrasenia> duplasVulnderadas = sistema.ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
+            List<Tarjeta> tarjetasVulneradas = sistema.ObtenerDataBreachesTarjetas(ref usuario, listaDatos);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridDuplas(duplasVulnderadas);

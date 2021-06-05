@@ -15,9 +15,10 @@ namespace Pruebas
         private List<string> contraseniaDeDuplaBreachada;
         private List<string> numeroTagetaBreachada;
         private List<string> breachVacio;
-        private List<Object> duplaBreachada;
-        private List<Object> tarjetaBreachada;
-        private List<Object> entidadesVulneradas;
+        private List<Dupla_UsuarioContrasenia> duplaBreachada;
+        private List<Dupla_UsuarioContrasenia> duplasBreachadas;
+        private List<Tarjeta> tarjetaBreachada;
+        private List<Tarjeta> tarjetasBreachadas;
 
         private ChequeadorDeDataBreaches chequeador;
 
@@ -26,6 +27,9 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
+            duplasBreachadas = new List<Dupla_UsuarioContrasenia>();
+            tarjetasBreachadas = new List<Tarjeta>();
+
             string nombreCategoria = "SuperCategoria";
             Categoria categoriaEjemplo = new Categoria(nombreCategoria);
             
@@ -74,66 +78,48 @@ namespace Pruebas
                 numeroTarjeta_4, codigoSeguridadTargeta_4, fechaVencimientoTargeta_4,
                 categoriaEjemplo, notaTarjeta_4);
 
-            string userNameDupla_1 = "JuanJuanJuan";
-            string userNameDupla_2 = "JuanFacebook";
-            string userNameDupla_3 = "JuanTwitter";
-            string userNameDupla_4 = "JuanTwitter2";
-            string userNameDupla_5 = "JuanTwitter3";
-            string passwordDupla_1 = "Contracontra123.";
-            string passwordDupla_2 = "Contracontra123.";
-            string passwordDupla_3 = "ContraTwitter23.";
-            string passwordDupla_4 = "1234567812345678";
-            string passwordDupla_5 = "ContraTwitter45.";
-            string sitioDupla_1 = "ejemplo.ej.edu.uy";
-            string sitioDupla_2 = "facebook.com";
-            string sitioDupla_3 = "twitter.com";
-            string sitioDupla_4 = "twitter.com";
-            string sitioDupla_5 = "twitter.com";
-            string notaDupla_1 = "Esta es una dupla de ejemplo";
-            string notaDupla_2 = "Tengo que esperar 90 dias para que se borre";
-            string notaDupla_3 = "Hacer una cuenta aca fue el peor error de mi vida";
-            string notaDupla_4 = "Hice esta porque me suspendieron la otra";
-            string notaDupla_5 = "Hice esta porque me suspendieron la de respuesto";
-
-            Dupla_UsuarioContrasenia duplaEjemplo_1 = new Dupla_UsuarioContrasenia(userNameDupla_1,
-                passwordDupla_1, sitioDupla_1, notaDupla_1, categoriaEjemplo);
-
-            Dupla_UsuarioContrasenia duplaEjemplo_2 = new Dupla_UsuarioContrasenia(userNameDupla_2,
-                passwordDupla_2, sitioDupla_2, notaDupla_2, categoriaEjemplo);
-
-            Dupla_UsuarioContrasenia duplaEjemplo_3 = new Dupla_UsuarioContrasenia(userNameDupla_3, 
-                passwordDupla_3, sitioDupla_3, notaDupla_3, categoriaEjemplo);
-
-            Dupla_UsuarioContrasenia duplaEjemplo_4 = new Dupla_UsuarioContrasenia(userNameDupla_4, 
-                passwordDupla_4, sitioDupla_4, notaDupla_4, categoriaEjemplo);
-
-            Dupla_UsuarioContrasenia duplaEjemplo_5 = new Dupla_UsuarioContrasenia(userNameDupla_5, 
-                passwordDupla_5, sitioDupla_5, notaDupla_5, categoriaEjemplo);
+            string[] nombresUsuarios = { "JuanJuanJuan", "JuanFacebook",
+                "JuanTwitter", "JuanTwitter2", "JuanTwitter3" };
+            string[] contrasenias = { "Contracontra123.", "Contracontra123..",
+                "ContraTwitter23.", "ContraTwitter45.", "1234567812345678"};
+            string[] sitios = { "aulas.ort.edu.uy", "facebook.com", "twitter.com",
+                "instagram.com", "tiktok.com" };
+            string[] notas = { "Esta es una credencial de ejemplo", "Contraseña de facebook",
+                "Contraseña de twitter", "Contraseña de instagram", "Cuenta secundaria"};
 
             string nombreUsuario = "JuanEjemplez";
             string contraseniaUsuario = "aaaaaa";
+
             usuario = new Usuario(nombreUsuario, contraseniaUsuario);
             usuario.AgregarCategoria(categoriaEjemplo);
-            usuario.AgregarDupla(duplaEjemplo_1);
-            usuario.AgregarDupla(duplaEjemplo_2);
-            usuario.AgregarDupla(duplaEjemplo_3);
-            usuario.AgregarDupla(duplaEjemplo_4);
-            usuario.AgregarDupla(duplaEjemplo_5);
+
+            for (int i = 0; i < nombresUsuarios.Length; i++)
+            {
+                Dupla_UsuarioContrasenia credencial = new Dupla_UsuarioContrasenia(nombresUsuarios[i],
+                    contrasenias[i], sitios[i], notas[i], categoriaEjemplo);
+                if (i == 2)
+                    duplaBreachada = new List<Dupla_UsuarioContrasenia> { credencial };
+                else if (i % 2 == 0 || i==0)
+                    duplasBreachadas.Add(credencial);
+
+                usuario.AgregarDupla(credencial);
+            }
+
             usuario.AgregarTarjeta(tarjetaEjemplo_1);
             usuario.AgregarTarjeta(tarjetaEjemplo_2);
             usuario.AgregarTarjeta(tarjetaEjemplo_3);
             usuario.AgregarTarjeta(tarjetaEjemplo_4);
 
+            tarjetasBreachadas.Add(tarjetaEjemplo_1);
+            tarjetasBreachadas.Add(tarjetaEjemplo_3);
 
             breachVacio = new List<string>{ };
             infoBreacheada = new List<string> { "Contracontra123.", "aadsfsafas", "abcdefghijklm, " +
-                "lolololo", "1234567812345678", "9999888877776666" };
+                "lolololo", "1234567812345678", "9999888877776666"};
             numeroTagetaBreachada = new List<string> { "9999888877776666" };
             contraseniaDeDuplaBreachada = new List<string> { "ContraTwitter23." };
-            duplaBreachada = new List<Object> { duplaEjemplo_3 };
-            tarjetaBreachada = new List<Object> { tarjetaEjemplo_3 };
-            entidadesVulneradas = new List<Object> { duplaEjemplo_1, duplaEjemplo_2, duplaEjemplo_4, 
-                tarjetaEjemplo_1, tarjetaEjemplo_3 };
+
+            tarjetaBreachada = new List<Tarjeta> { tarjetaEjemplo_3 };
 
             chequeador = new ChequeadorDeDataBreaches(usuario);
         }
@@ -151,39 +137,55 @@ namespace Pruebas
         }
         
         [TestMethod]
-        public void VerificarVulneradosVacio()
+        public void VerificarVulneradosVacioTarjeta()
         {
             int elementosBreacheados = 0;
-            List <Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(breachVacio)[numTarjeta];
-            entidadesBreachadas.AddRange(chequeador.ObtenerEntidadesVulneradas(breachVacio)[numDupla]);
+            List <Tarjeta> entidadesBreachadas = chequeador.ObtenerTarjetasVulneradas(breachVacio);
 
             Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
         }
 
         [TestMethod]
-        public void VerificarVulneradosTarjeta()
+        public void VerificarVulneradosVacioCredencial()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(numeroTagetaBreachada)[numTarjeta];
+            int elementosBreacheados = 0;
+            List<Dupla_UsuarioContrasenia> entidadesBreachadas = chequeador.ObtenerCredencialesVulneradas(breachVacio);
+
+            Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
+        }
+
+        [TestMethod]
+        public void VerificarVulneradoTarjeta()
+        {
+            List<Tarjeta> entidadesBreachadas = chequeador.ObtenerTarjetasVulneradas(numeroTagetaBreachada);
 
             CollectionAssert.AreEqual(entidadesBreachadas, tarjetaBreachada);
         }
 
         [TestMethod]
-        public void VerificarVulneradosDupla()
+        public void VerificarVulneradoDupla()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(contraseniaDeDuplaBreachada)[numDupla];
+            List<Dupla_UsuarioContrasenia> entidadesBreachadas = chequeador.ObtenerCredencialesVulneradas(contraseniaDeDuplaBreachada);
 
             CollectionAssert.AreEqual(entidadesBreachadas, duplaBreachada);
         }
 
         [TestMethod]
-        public void VerificarVulnerados()
+        public void VerificarVulneradosTarjeta()
         {
-            List<Object> entidadesBreachadas = chequeador.ObtenerEntidadesVulneradas(infoBreacheada)[numDupla];
-            entidadesBreachadas.AddRange(chequeador.ObtenerEntidadesVulneradas(infoBreacheada)[numTarjeta]);
+            List<Tarjeta> entidadesBreachadas = chequeador.ObtenerTarjetasVulneradas(infoBreacheada);
 
-            CollectionAssert.AreEquivalent(entidadesBreachadas, entidadesVulneradas);
+            CollectionAssert.AreEqual(entidadesBreachadas, tarjetasBreachadas);
         }
+
+        [TestMethod]
+        public void VerificarVulneradosDupla()
+        {
+            List<Dupla_UsuarioContrasenia> entidadesBreachadas = chequeador.ObtenerCredencialesVulneradas(infoBreacheada);
+
+            CollectionAssert.AreEqual(entidadesBreachadas, duplasBreachadas);
+        }
+
     }
 }
 
