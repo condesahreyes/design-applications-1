@@ -15,6 +15,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private string interfazPadre;
         private int nivelSeguridadContrasenia;
 
+        const string posibleInterfazPadre_ReporteVer = "InterfazReporteVer";
+        const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
+        const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
 
         public Interfaz_ModificarContrasenia(ref Usuario usuario, ref Sistema sistema, Dupla_UsuarioContrasenia dupla, string padre)
         {
@@ -117,18 +120,18 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             switch (this.interfazPadre)
             {
-                case "InterfazReporteVer":
+                case posibleInterfazPadre_ReporteVer:
                     FuncionalidadReporte funcionalidad = new FuncionalidadReporte(usuario);
                     InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
                     interfazVer.Show();
                     this.Close();
                     break;
-                case "InterfazContrasenia":
+                case posibleInterfazPadre_Contrasenia:
                     InterfazContrasenia interfazContra = new InterfazContrasenia(ref usuario, ref sistema);
                     interfazContra.Show();
                     this.Close();
                     break;
-                case "InterfazChequeoDataBreaches":
+                case posibleInterfazPadre_ChequeoDataBreaches:
                     InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
                     interfazDataBreaches.Show();
                     this.Close();
@@ -194,7 +197,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     seModificoCorrectamente = true;
                 }
             }
-            catch (Exepcion_DatosDeContraseniaInvalidos)
+            catch (ExepcionDatosDeContraseniaInvalidos)
             {
                 seModificoCorrectamente = false;
                 MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
@@ -212,7 +215,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void button_GenerarContrasenia_Click(object sender, EventArgs e)
         {
             string nuevaContra = this.textBox_Contrasenia.Text;
-            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref usuario, ref sistema);
+            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref sistema);
             genContra.ShowDialog();
             string posibleNuevaContra = genContra.ObtenerNuevaContrasenia();
             if (!posibleNuevaContra.Equals(""))

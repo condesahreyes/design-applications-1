@@ -30,7 +30,7 @@ namespace OblDiseño1.Entidades
             if (VerificarQueLaDuplaEsMia(duplaACompartir))
             {
                 if (VerificarQueYaSeCompartioLaContraseniaConElUsuario(duplaACompartir, usuarioACompartir))
-                    throw new Exepcion_InvalidUsuarioData("Ya se compartio esta contraseña con el usuario" +
+                    throw new ExepcionInvalidUsuarioData("Ya se compartio esta contraseña con el usuario" +
                         usuarioACompartir.Nombre);
                 else
                 {
@@ -39,7 +39,7 @@ namespace OblDiseño1.Entidades
                 }
             }
             else
-                throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
+                throw new ExepcionInvalidUsuarioData("No existe una contraseña asociada a " +
                     duplaACompartir.Contrasenia + "para este usuario");
         }
 
@@ -103,11 +103,11 @@ namespace OblDiseño1.Entidades
                 }
                 else
                 {
-                    throw new Exepcion_InvalidUsuarioData("Esta contraseña no ha sido compartida " +
+                    throw new ExepcionInvalidUsuarioData("Esta contraseña no ha sido compartida " +
                         "anteriormente con el usuario" + usuarioAlQueDejoDeCompartir.Nombre);
                 }
             else
-                throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
+                throw new ExepcionInvalidUsuarioData("No existe una contraseña asociada a " +
                     duplaADejarDeCompartir.Contrasenia + "para este usuario");
         }
 

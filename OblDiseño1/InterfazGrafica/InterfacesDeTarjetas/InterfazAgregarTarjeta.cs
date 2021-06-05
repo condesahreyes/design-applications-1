@@ -46,11 +46,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 IrAInterfazTarjeta();
             }
             
-            catch (Exepcion_ObjetosRepetidos)
+            catch (ExepcionObjetosRepetidos)
             {
                 MessageBox.Show("Ya existe una tarjeta con el mismo numero");
             }
-            catch (Exception_TarjetaIncorrecta)
+            catch (ExepcionTarjetaIncorrecta)
             {
                 MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
                                 "debe cumplir con el siguiente formato: " +
@@ -67,7 +67,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
             }
-            catch (Exepcion_InvalidCategoriaData)
+            catch (ExepcionInvalidCategoriaData)
             {
                 MessageBox.Show("Debe seleccionar una categoria");
             }

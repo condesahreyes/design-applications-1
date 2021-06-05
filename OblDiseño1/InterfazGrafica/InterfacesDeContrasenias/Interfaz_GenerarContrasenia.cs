@@ -13,13 +13,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 {
     public partial class Interfaz_GenerarContrasenia : Form
     {
-        private Usuario usuario;
         private Sistema sistema;
         private string contrasenia = "";
-        public Interfaz_GenerarContrasenia(ref Usuario usu, ref Sistema sist)
+        public Interfaz_GenerarContrasenia(ref Sistema sistema)
         {
-            this.usuario = usu;
-            this.sistema = sist;
+            this.sistema = sistema;
             InitializeComponent();
         }
 

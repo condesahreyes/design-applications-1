@@ -23,45 +23,60 @@ namespace Pruebas
         private ChequeadorDeDataBreaches chequeador;
 
         private const int numTarjeta = 0; 
-        private const int numDupla = 1; 
+        private const int numDupla = 1;
+
+        private string nombreCategoria = "SuperCategoria";
+
+        private string nombreTargeta_1 = "Tarjeta_1";
+        private string nombreTargeta_2 = "Tarjeta_2";
+        private string nombreTargeta_3 = "Tarjeta_3";
+        private string nombreTargeta_4 = "Tarjeta_4";
+        private string tipoTarjeta_1 = "Visa";
+        private string tipoTarjeta_2 = "OCA";
+        private string tipoTarjeta_3 = "MasterCard";
+        private string tipoTarjeta_4 = "McDonalds";
+
+        private string numeroTarjeta_1 = "1234567812345678";
+        private string numeroTarjeta_2 = "7676767676767676";
+        private string numeroTarjeta_3 = "9999888877776666";
+        private string numeroTarjeta_4 = "1000999988887777";
+
+        private int codigoSeguridadTargeta_1 = 123;
+        private int codigoSeguridadTargeta_2 = 888;
+        private int codigoSeguridadTargeta_3 = 369;
+        private int codigoSeguridadTargeta_4 = 198;
+
+        private DateTime fechaVencimientoTargeta_1 = new DateTime(2030, 04, 20);
+        private DateTime fechaVencimientoTargeta_2 = new DateTime(2025, 07, 17);
+        private DateTime fechaVencimientoTargeta_3 = new DateTime(2030, 04, 20);
+        private DateTime fechaVencimientoTargeta_4 = new DateTime(2029, 05, 25);
+
+        private String notaTarjeta_1 = "Esta es una tarjeta para tests";
+        private String notaTarjeta_2 = "Esta tambien es una tarjeta para tests";
+        private String notaTarjeta_3 = "Esta tambien es otra tafjeta para rests";
+        private String notaTarjeta_4 = "Esta es una tarjeta muy seria";
+
+        private string[] nombresUsuarios = { "JuanJuanJuan", "JuanFacebook",
+                "JuanTwitter", "JuanTwitter2", "JuanTwitter3" };
+        private string[] contrasenias = { "Contracontra123.", "Contracontra123..",
+                "ContraTwitter23.", "ContraTwitter45.", "1234567812345678"};
+        private string[] sitios = { "aulas.ort.edu.uy", "facebook.com", "twitter.com",
+                "instagram.com", "tiktok.com" };
+        private string[] notas = { "Esta es una credencial de ejemplo", "Contraseña de facebook",
+                "Contraseña de twitter", "Contraseña de instagram", "Cuenta secundaria"};
+
+        private string nombreUsuario = "JuanEjemplez";
+        private string contraseniaUsuario = "aaaaaa";
+
         [TestInitialize]
         public void Setup()
         {
             duplasBreachadas = new List<Dupla_UsuarioContrasenia>();
             tarjetasBreachadas = new List<Tarjeta>();
 
-            string nombreCategoria = "SuperCategoria";
             Categoria categoriaEjemplo = new Categoria(nombreCategoria);
             
-            string nombreTargeta_1 = "Tarjeta_1";
-            string nombreTargeta_2 = "Tarjeta_2";
-            string nombreTargeta_3 = "Tarjeta_3";
-            string nombreTargeta_4 = "Tarjeta_4";
-            string tipoTarjeta_1 = "Visa";
-            string tipoTarjeta_2 = "OCA";
-            string tipoTarjeta_3 = "MasterCard";
-            string tipoTarjeta_4 = "McDonalds";
-
-            string numeroTarjeta_1 = "1234567812345678";
-            string numeroTarjeta_2 = "7676767676767676";
-            string numeroTarjeta_3 = "9999888877776666";
-            string numeroTarjeta_4 = "1000999988887777";
-
-            int codigoSeguridadTargeta_1 = 123;
-            int codigoSeguridadTargeta_2 = 888;
-            int codigoSeguridadTargeta_3 = 369;
-            int codigoSeguridadTargeta_4 = 198;
-
-            DateTime fechaVencimientoTargeta_1 = new DateTime(2030, 04, 20);
-            DateTime fechaVencimientoTargeta_2 = new DateTime(2025, 07, 17);
-            DateTime fechaVencimientoTargeta_3 = new DateTime(2030, 04, 20);
-            DateTime fechaVencimientoTargeta_4 = new DateTime(2029, 05, 25);
-
-            String notaTarjeta_1 = "Esta es una tarjeta para tests";
-            String notaTarjeta_2 = "Esta tambien es una tarjeta para tests";
-            String notaTarjeta_3 = "Esta tambien es otra tafjeta para rests";
-            String notaTarjeta_4 = "Esta es una tarjeta muy seria";
-
+            
             Tarjeta tarjetaEjemplo_1 = new Tarjeta(nombreTargeta_1, tipoTarjeta_1, 
                 numeroTarjeta_1, codigoSeguridadTargeta_1, fechaVencimientoTargeta_1, 
                 categoriaEjemplo, notaTarjeta_1);
@@ -78,17 +93,6 @@ namespace Pruebas
                 numeroTarjeta_4, codigoSeguridadTargeta_4, fechaVencimientoTargeta_4,
                 categoriaEjemplo, notaTarjeta_4);
 
-            string[] nombresUsuarios = { "JuanJuanJuan", "JuanFacebook",
-                "JuanTwitter", "JuanTwitter2", "JuanTwitter3" };
-            string[] contrasenias = { "Contracontra123.", "Contracontra123..",
-                "ContraTwitter23.", "ContraTwitter45.", "1234567812345678"};
-            string[] sitios = { "aulas.ort.edu.uy", "facebook.com", "twitter.com",
-                "instagram.com", "tiktok.com" };
-            string[] notas = { "Esta es una credencial de ejemplo", "Contraseña de facebook",
-                "Contraseña de twitter", "Contraseña de instagram", "Cuenta secundaria"};
-
-            string nombreUsuario = "JuanEjemplez";
-            string contraseniaUsuario = "aaaaaa";
 
             usuario = new Usuario(nombreUsuario, contraseniaUsuario);
             usuario.AgregarCategoria(categoriaEjemplo);

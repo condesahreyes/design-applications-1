@@ -39,7 +39,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 MessageBox.Show("Se ha agregado la contraseña con éxito");
                 IrAContraseñas();
             }
-            catch (Exepcion_DatosDeContraseniaInvalidos)
+            catch (ExepcionDatosDeContraseniaInvalidos)
             {
                 MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
                                 "debe cumplir con el siguiente formato: " +
@@ -49,7 +49,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                                 "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
                                 "> Categoría: Se selecciona de las disponibles en el sistema");
             }
-            catch (Exepcion_InvalidUsuarioData)
+            catch (ExepcionInvalidUsuarioData)
             {
                 MessageBox.Show("Error: este usuario ya esta registado para este sitio en el sistema");
             }
@@ -71,7 +71,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void butto_GenerarContrasenia_Click(object sender, EventArgs e)
         {
             string nuevaContra = "";
-            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref usuario, ref sistema);
+            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref sistema);
             genContra.ShowDialog();
             string posibleNuevaContra = genContra.ObtenerNuevaContrasenia();
             if (!posibleNuevaContra.Equals(""))

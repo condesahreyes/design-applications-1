@@ -77,7 +77,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                     this.Close();
                     IrAInterfazTarjeta();
                 }
-                catch (Exception_TarjetaIncorrecta)
+                catch (ExepcionTarjetaIncorrecta)
                 {
                     MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
                                     "debe cumplir con el siguiente formato: " +

@@ -193,7 +193,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CompartirLaMismaContraseniaConElMismoUsuario()
         {
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
@@ -212,7 +212,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CompartirUnaContraseniaQueNoTengoEnMiLista()
         {
             Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");

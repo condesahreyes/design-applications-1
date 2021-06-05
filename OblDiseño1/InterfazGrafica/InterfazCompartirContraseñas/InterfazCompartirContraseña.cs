@@ -67,7 +67,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                             MessageBox.Show("Se compartio la contraseña correctamente");
                             IrAInterfazContraseñasCompartidas();
                         }
-                        catch (Exception InvalidUsuarioDataException)
+                        catch (Exception Exepcion_InvalidUsuarioData)
                         {
                             MessageBox.Show("Ya se compartio esta contraseña con el usuario");
 
