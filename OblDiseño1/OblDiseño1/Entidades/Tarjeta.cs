@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace OblDiseño1
 {
@@ -48,8 +49,8 @@ namespace OblDiseño1
 
             set {
                 string numeroAString = "" + value;
-                if (numeroAString.Length != 16)
-                    throw new ExepcionTarjetaIncorrecta("El numero de la tarjeta debe contener 16 digitos");
+                if (numeroAString.Length != 16 || !numeroAString.All(char.IsDigit))
+                    throw new ExepcionTarjetaIncorrecta("El numero de la tarjeta debe contener 16 digitos númericos");
                 else
                     this.numero = value;
             }
@@ -59,9 +60,8 @@ namespace OblDiseño1
             get => codigoSeguridad;
             set {
                 string codigoAString = "" + value;
-                if (this.Tipo == "American Express" && codigoAString.Length != 4)
-                    throw new ExepcionTarjetaIncorrecta("El codigo de seguridad debe contener 4 digitos");
-                else if (codigoAString.Length != 3)
+
+                if (codigoAString.Length != 3 && codigoAString.Length != 4)
                     throw new ExepcionTarjetaIncorrecta("El codigo de seguridad debe contener 3 digitos");
                 else
                     this.codigoSeguridad = value;
