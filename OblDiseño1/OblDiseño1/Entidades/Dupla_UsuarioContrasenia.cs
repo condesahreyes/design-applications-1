@@ -109,13 +109,10 @@ namespace OblDiseño1
             return (largoNombre < NOMBRE_LARGO_MIN || largoNombre > NOMBRE_LARGO_MAX);
         }
 
-        
-
         public override string ToString()
         {
-            return ("Nombre : " + this.NombreUsuario + " Contraseña: " + this.Contraseña.ToString() +
-                " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria
-                );
+            return ("Nombre: " + this.NombreUsuario + " " + this.Contraseña.ToString() +
+                " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria);
         }
 
         public int CompareTo(Dupla_UsuarioContrasenia otraDupla)

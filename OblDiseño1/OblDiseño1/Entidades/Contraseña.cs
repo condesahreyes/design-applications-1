@@ -196,5 +196,10 @@ namespace OblDiseño1.Entidades
         {
             return cadena[GenerarNumAlazar(0, cadena.Length)].ToString();
         }
+
+        public override string ToString()
+        {
+            return ("Contraseña: " + this.contrasenia + " Nivel de seguridad: " +this.NivelSeguridadContrasenia);
+        }
     }
 }

@@ -301,9 +301,9 @@ namespace Pruebas
 
                 usuario.AgregarDupla(unaDupla);
 
-                listaDuplas.Add("Nombre : " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contraseña.Contrasenia +
-                " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria +
-                " Nivel de seguridad: " + unaDupla.Contraseña.NivelSeguridadContrasenia);
+                listaDuplas.Add("Nombre: " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contraseña.Contrasenia +
+                    " Nivel de seguridad: " + unaDupla.Contraseña.NivelSeguridadContrasenia +
+                    " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria);
             }
 
             listarDuplasPorMetodo = usuario.ListarToStringDeMisDuplas();

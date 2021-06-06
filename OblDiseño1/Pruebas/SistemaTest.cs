@@ -11,67 +11,76 @@ namespace Pruebas
     public class SistemaTest
     {
 
-        private Sistema sistema;
-
         private string nombreCategoria;
-        private string nombeUsuarioDupla;
-        private string contraseniaDupla;
-        private string notaDupla;
-        private string stioDupla;
-        private string nombreTarjeta;
-        private string tipoTarjeta;
-        private string numeroTarjeta;
-        private int codigoSeguriadadTarjeta;
-        private DateTime fechaVencimientoRTarjeta;
-        private string notaTarjeta;
-        private List<string> infoBreachada;
-        private List<Object> entidadesVulneradas;
-        private List<Object> duplasVulneradas;
-        private List<Object> tarjetasVulneradas;
+        private readonly string contraseniaDupla = "ContraSuperSegura123!!!";
+        private readonly string numeroTarjeta = "1234123412341234";
 
         private static string[] contraseniasUsuario = {"contrasenia123",
             "1234Contrasenia", "laContraseña"};
-
         private static string[] nombresUsuario = { "Hernán", "Santiago", "Rodrigo" };
+
+        private List<string> infoBreachada;
+
+        private List<Dupla_UsuarioContrasenia> duplasVulneradas;
+        private List<Tarjeta> tarjetasVulneradas;
+
+        private Categoria categoria1;
+
+        private Sistema sistema;
 
         [TestInitialize]
         public void Setup()
         {
             nombreCategoria = "unaCategoria";
-            Categoria categoria1 = new Categoria(nombreCategoria);
+            categoria1 = new Categoria(nombreCategoria);
 
-            nombeUsuarioDupla = "JuanEjemplez";
-            contraseniaDupla = "ContraSuperSegura123!!!";
-            notaDupla = "Una nota muy importante";
-            stioDupla = "www.ejemplo.com.uy";
-            Contraseña contraseña = new Contraseña(nombeUsuarioDupla);
-            Dupla_UsuarioContrasenia dupla1 = new Dupla_UsuarioContrasenia(nombeUsuarioDupla, contraseña,
-                                                stioDupla, notaDupla, categoria1); 
-            
-            nombreTarjeta = "La VIZA";
-            tipoTarjeta = "VIZA";
-            numeroTarjeta = "1234123412341234";
-            codigoSeguriadadTarjeta = 123;
-            fechaVencimientoRTarjeta = DateTime.Today;
-            notaTarjeta = "Una Tarjeta muy importnte";
-            Tarjeta tarjeta1 = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguriadadTarjeta,
-                                            fechaVencimientoRTarjeta, categoria1, notaTarjeta);
-
-            infoBreachada = new List<string>{ numeroTarjeta, contraseniaDupla };
-            entidadesVulneradas = new List<Object> { dupla1, tarjeta1};
-            duplasVulneradas = new List<Object> { dupla1 };
-            tarjetasVulneradas = new List<Object> { tarjeta1 };
+            Tarjeta tarjeta1 = CrearTarjeta();
+            Dupla_UsuarioContrasenia dupla1 = CrearCredencial();
 
             this.sistema = new Sistema();
 
+            AgregarUsuario();
+
+            sistema.ObtenerUsuarios()[0].AgregarDupla(dupla1);
+            sistema.ObtenerUsuarios()[0].AgregarTarjeta(tarjeta1);
+
+            infoBreachada = new List<string>{ numeroTarjeta, contraseniaDupla };
+            duplasVulneradas = new List<Dupla_UsuarioContrasenia> { dupla1 };
+            tarjetasVulneradas = new List<Tarjeta> { tarjeta1 };
+        }
+
+        private Dupla_UsuarioContrasenia CrearCredencial()
+        {
+            string nombeUsuarioDupla = "JuanEjemplez";
+            string notaDupla = "Una nota muy importante";
+            string stioDupla = "www.ejemplo.com.uy";
+
+            Contraseña contraseña = new Contraseña(contraseniaDupla);
+
+            return new Dupla_UsuarioContrasenia(nombeUsuarioDupla, contraseña,
+                                                stioDupla, notaDupla, categoria1);
+        }
+
+        private Tarjeta CrearTarjeta()
+        {
+            string nombreTarjeta = "La VIZA";
+            string tipoTarjeta = "VIZA";
+            int codigoSeguriadadTarjeta = 123;
+            DateTime fechaVencimientoRTarjeta = DateTime.Today;
+            string notaTarjeta = "Una Tarjeta muy importnte";
+
+            return new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, codigoSeguriadadTarjeta,
+                                            fechaVencimientoRTarjeta, categoria1, notaTarjeta);
+        }
+
+        private void AgregarUsuario()
+        {
             for (int i = 0; i < nombresUsuario.Length; i++)
             {
                 Usuario usuario = new Usuario(nombresUsuario[i], contraseniasUsuario[i]);
 
                 sistema.AgregarUsuario(nombresUsuario[i], contraseniasUsuario[i]);
             }
-            sistema.ObtenerUsuarios()[0].AgregarDupla(dupla1);
-            sistema.ObtenerUsuarios()[0].AgregarTarjeta(tarjeta1);
         }
 
         [TestMethod]

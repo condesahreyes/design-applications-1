@@ -44,22 +44,28 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
-            nombreUsuario = "JuanEjemplo";
-            usuarioContrasenia = "aSD0v89ha+sfunv/*av";
-            sitio = "sitio.ejemplo.uy";
-            nota = "Esto es una nota para el test";
             nivelSeguridad = 5;
-            nombreCategoria = "Categoria";
-            categoria = new Categoria(nombreCategoria);
-
 
             ultimaModificacion = DateTime.Today;
             nivelSeguridad = 5;
             dataBrench = false;
 
+            unaDupla = CrearCredencial();
+        }
+
+        private Dupla_UsuarioContrasenia CrearCredencial()
+        {
+            nombreUsuario = "JuanEjemplo";
+            usuarioContrasenia = "aSD0v89ha+sfunv/*av";
+            sitio = "sitio.ejemplo.uy";
+            nota = "Esto es una nota para el test";
+            nombreCategoria = "Categoria";
+
+            categoria = new Categoria(nombreCategoria);
+
             Contraseña contraseña = new Contraseña(usuarioContrasenia);
 
-            unaDupla = new Dupla_UsuarioContrasenia(nombreUsuario, contraseña, sitio, nota, categoria);
+            return new Dupla_UsuarioContrasenia(nombreUsuario, contraseña, sitio, nota, categoria);
         }
 
         [TestMethod]
@@ -313,7 +319,7 @@ namespace Pruebas
 
         [TestMethod]
         public void GeneracionDeContraseniaSeguiridadAmarilla()
-        {   //REVISAR FUNCION, aca supuestamente el primer string era una contraseña amarrilla
+        {
             string contraseniaAmarilla = "4ST0RAGREATSWORD";
             int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaAmarilla);
 
