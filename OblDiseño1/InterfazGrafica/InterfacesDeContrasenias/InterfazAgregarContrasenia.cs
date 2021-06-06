@@ -36,8 +36,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 string nota = textBoxNota.Text;
                 Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
                 Contraseña contraseña = new Contraseña(contrasenia);
-                Dupla_UsuarioContrasenia dupla = new Dupla_UsuarioContrasenia(nombreUsuario, contraseña, nombreSitio, nota, categoria);
-                usuario.AgregarDupla(dupla);
+                Credencial credencial = new Credencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
+                usuario.AgregarCredencial(credencial);
                 MessageBox.Show("Se ha agregado la contraseña con éxito");
                 IrAContraseñas();
             }

@@ -16,7 +16,7 @@ namespace OblDiseño1.Entidades
         public reporte ObtenerReporteSeguridadContrasenias()
         {
             List<Categoria> misCategorias = usuario.ObtenerCategorias();
-            List<Dupla_UsuarioContrasenia> misDuplas = usuario.ObtenerDuplas();
+            List<Credencial> misCredenciales = usuario.ObtenerCredenciales();
 
             paresSeguridad[] misPares = new paresSeguridad[cantidadDeCategoriasSeguridadContraseniaMasUno];
             Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
@@ -26,13 +26,13 @@ namespace OblDiseño1.Entidades
             for (int i = 0; i < cantidadDeCategoriasSeguridadContraseniaMasUno; i++)
                 misPares[i] = new paresSeguridad(0, null);
 
-            foreach (Dupla_UsuarioContrasenia dupla in misDuplas)
+            foreach (Credencial dupla in misCredenciales)
             {
 
                 string nombreCategoria = dupla.Categoria.Nombre;
                 int nivelSeguridad = dupla.Contraseña.NivelSeguridadContrasenia;
                 categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
-                misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
+                misPares[nivelSeguridad].unaListaCredenciales.Add(dupla);
                 misPares[nivelSeguridad].cantidad++;
             }
 
@@ -57,12 +57,12 @@ namespace OblDiseño1.Entidades
     public struct paresSeguridad
     {
         public int cantidad;
-        public List<Dupla_UsuarioContrasenia> unaListaDuplas;
+        public List<Credencial> unaListaCredenciales;
 
-        public paresSeguridad(int cant, List<Dupla_UsuarioContrasenia> dupla)
+        public paresSeguridad(int cant, List<Credencial> dupla)
         {
             cantidad = cant;
-            unaListaDuplas = new List<Dupla_UsuarioContrasenia>();
+            unaListaCredenciales = new List<Credencial>();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace OblDiseño1
             throw new ObjectNotFoundException();
         }
 
-        public List<Dupla_UsuarioContrasenia> ObtenerDataBreachesCredenciales(ref Usuario usuario, List<string> datosDataBreaches)
+        public List<Credencial> ObtenerDataBreachesCredenciales(ref Usuario usuario, List<string> datosDataBreaches)
         {
             ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
             

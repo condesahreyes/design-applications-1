@@ -10,13 +10,13 @@ namespace Pruebas
     [TestClass]
     public class UsuarioTest
     {
-        private static string notaDupla;
-        private static string nombreSitioDupla;
-        private static string nombresitioDuplaQueNoEsta;
+        private static string notaCredencial;
+        private static string nombreSitioCredencial;
+        private static string nombresitioCredencialQueNoEsta;
         private static string nombreLargo;
         private static string contraseniaCorta;
         private static string contraseniaLarga;
-        private static string contraseniaNoPresenteEnListaDuplas;
+        private static string contraseniaNoPresenteEnListaCredenciales;
         private static string numeroDeTarjetaNoPresenteEnListaTarjetas;
 
         private static string[] contrasenias = {"contrasenia123",
@@ -39,30 +39,30 @@ namespace Pruebas
         private static int[] codigosTarjetas = { 123, 321, 456, 789 };
 
         private List<Tarjeta> tarjetas;
-        private List<Dupla_UsuarioContrasenia> duplas;
+        private List<Credencial> credenciales;
         private List<Categoria> categorias;
 
         private Usuario usuario;
         private Tarjeta tarjeta;
         private Categoria categoria;
-        private Dupla_UsuarioContrasenia dupla;
+        private Credencial dupla;
         private Contraseña contraseña;
 
 
         [TestInitialize]
         public void Setup()
         {
-            notaDupla = "";
-            nombreSitioDupla = "Instagram";
-            nombresitioDuplaQueNoEsta = "Twitter";
+            notaCredencial = "";
+            nombreSitioCredencial = "Instagram";
+            nombresitioCredencialQueNoEsta = "Twitter";
             contraseniaCorta = "1234";
             contraseniaLarga = "contrasenia123456789012345";
-            contraseniaNoPresenteEnListaDuplas = "ContraseniaNoPrsente";
+            contraseniaNoPresenteEnListaCredenciales = "ContraseniaNoPrsente";
             numeroDeTarjetaNoPresenteEnListaTarjetas = "2000200020002000";
             nombreLargo = "Este es un nombre muy largo";
 
 
-            duplas = new List<Dupla_UsuarioContrasenia>();
+            credenciales = new List<Credencial>();
             tarjetas = new List<Tarjeta>();
             categorias = new List<Categoria>();
 
@@ -71,8 +71,8 @@ namespace Pruebas
             tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
                 codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
             contraseña = new Contraseña(contrasenias[0]);
-            dupla = new Dupla_UsuarioContrasenia(nombres[1], contraseña,
-                nombreSitioDupla, notaDupla, categoria);
+            dupla = new Credencial(nombres[1], contraseña,
+                nombreSitioCredencial, notaCredencial, categoria);
         }
 
         [TestMethod]
@@ -163,18 +163,18 @@ namespace Pruebas
         [TestMethod]
         public void AgregarDuplaPorPrimeraVez()
         {
-            usuario.AgregarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
 
-            Assert.AreEqual(1, usuario.ObtenerDuplas().Count);
+            Assert.AreEqual(1, usuario.ObtenerCredenciales().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaDupla()
         {
-            usuario.AgregarDupla(dupla);
-            usuario.EliminarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
+            usuario.EliminarCredencial(dupla);
 
-            Assert.AreEqual(0, usuario.ObtenerDuplas().Count);
+            Assert.AreEqual(0, usuario.ObtenerCredenciales().Count);
         }
 
         [TestMethod]
@@ -228,18 +228,18 @@ namespace Pruebas
         [TestMethod]
         public void ListarDuplas()
         {
-            List<Dupla_UsuarioContrasenia> duplas = new List<Dupla_UsuarioContrasenia>();
+            List<Credencial> duplas = new List<Credencial>();
 
             for (int i = 0; i < nombres.Length; i++)
             {
                 Contraseña contra = new Contraseña(contrasenias[i]);
-                Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
+                Credencial unaDupla = new Credencial(nombres[i],
                     contra, "Instagram", "", categoria);
                 duplas.Add(unaDupla);
-                usuario.AgregarDupla(unaDupla);
+                usuario.AgregarCredencial(unaDupla);
             }
 
-            CollectionAssert.AreEquivalent(duplas, usuario.ObtenerDuplas());
+            CollectionAssert.AreEquivalent(duplas, usuario.ObtenerCredenciales());
         }
 
         [TestMethod]
@@ -296,10 +296,10 @@ namespace Pruebas
             for (int i = 0; i < nombres.Length; i++)
             {
                 Contraseña contra = new Contraseña(contrasenias[i]);
-                Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
+                Credencial unaDupla = new Credencial(nombres[i],
                     contra, "Instagram", "", categoria);
 
-                usuario.AgregarDupla(unaDupla);
+                usuario.AgregarCredencial(unaDupla);
 
                 listaDuplas.Add("Nombre: " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contraseña.Contrasenia +
                     " Nivel de seguridad: " + unaDupla.Contraseña.NivelSeguridadContrasenia +
@@ -345,37 +345,34 @@ namespace Pruebas
         [TestMethod]
         public void RevisarSiLaContraseniaEsMiaTest()
         {
-            usuario.AgregarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
             Assert.IsTrue(usuario.RevisarSiLaContraseniaEsMia(contrasenias[0]));
         }
 
         [TestMethod]
         public void RevisarSiLaContraseniaNOEsMiaTest()
         {
-            usuario.AgregarDupla(dupla);
-            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(contraseniaNoPresenteEnListaDuplas));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(contraseniaNoPresenteEnListaCredenciales));
         }
 
         [TestMethod]
         public void ObtenerDuplasConLaContraseniaTest()
         {
-            usuario.AgregarDupla(dupla);
-            duplas.Add(dupla);
-            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contraseña.Contrasenia);
-            CollectionAssert.AreEquivalent(duplas, listaDuplas);
+            usuario.AgregarCredencial(dupla);
+            credenciales.Add(dupla);
+            List<Credencial> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contraseña.Contrasenia);
+            CollectionAssert.AreEquivalent(credenciales, listaDuplas);
         }
 
         [TestMethod]
         public void ObtenerDuplasConContraseniaNOPresenteTest()
         {
-            usuario.AgregarDupla(dupla);
-            List<Dupla_UsuarioContrasenia> duplasConContraseniaNoPresente = new List<Dupla_UsuarioContrasenia>();
-            List<Dupla_UsuarioContrasenia> duplasUsuario = usuario.ObtenerDuplasConLaContrasenia(contraseniaNoPresenteEnListaDuplas);
+            usuario.AgregarCredencial(dupla);
+            List<Credencial> duplasConContraseniaNoPresente = new List<Credencial>();
+            List<Credencial> duplasUsuario = usuario.ObtenerDuplasConLaContrasenia(contraseniaNoPresenteEnListaCredenciales);
             CollectionAssert.AreEquivalent(duplasConContraseniaNoPresente, duplasUsuario);
         }
-
-
-
 
         [TestMethod]
         public void RemoverDuplaExistente()
@@ -383,17 +380,17 @@ namespace Pruebas
             Contraseña contraseña1 = new Contraseña(contrasenias[0]);
             Contraseña contraseña2 = new Contraseña(contrasenias[0]);
 
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
+            Credencial primerdupla = new Credencial("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contraseña2,
+            Credencial segundadupla = new Credencial("soydeort@ort.com.uy", contraseña2,
               "Facebook", "", categoria);
-            usuario.AgregarDupla(primerdupla);
-            usuario.AgregarDupla(segundadupla);
+            usuario.AgregarCredencial(primerdupla);
+            usuario.AgregarCredencial(segundadupla);
             usuario.RemoverDupla(primerdupla);
 
-            List<Dupla_UsuarioContrasenia> listaEsperada = new List<Dupla_UsuarioContrasenia> { segundadupla };
+            List<Credencial> listaEsperada = new List<Credencial> { segundadupla };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuario.ObtenerDuplas());
+            CollectionAssert.AreEquivalent(listaEsperada, usuario.ObtenerCredenciales());
         }
 
         [TestMethod]
@@ -401,10 +398,10 @@ namespace Pruebas
         public void AgregarDuplaExistente()
         {
             Contraseña contraseña1 = new Contraseña(contrasenias[0]);
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contraseña1,
+            Credencial primerdupla = new Credencial("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            usuario.AgregarDupla(primerdupla);
-            usuario.AgregarDupla(primerdupla);
+            usuario.AgregarCredencial(primerdupla);
+            usuario.AgregarCredencial(primerdupla);
         }
 
         [TestMethod]
@@ -421,16 +418,16 @@ namespace Pruebas
         public void VerificarQUeCombinacionNombreSitioEsata()
         {
             usuario.AgregarCategoria(categoria);
-            usuario.AgregarDupla(dupla);
-            Assert.IsTrue(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[1], nombreSitioDupla));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsTrue(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[1], nombreSitioCredencial));
         }
 
         [TestMethod]
         public void VerificarQUeCombinacionNombreSitioNOEsata()
         {
             usuario.AgregarCategoria(categoria);
-            usuario.AgregarDupla(dupla);
-            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], nombresitioDuplaQueNoEsta));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], nombresitioCredencialQueNoEsta));
         }
 
     }

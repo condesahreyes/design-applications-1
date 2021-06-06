@@ -18,7 +18,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 if (iterador.Nombre != this.usuario.Nombre)
                 comboBoxUsuarios.Items.Add(iterador.Nombre);
             }
-            foreach (var iterador in usuario.ObtenerDuplas())
+            foreach (var iterador in usuario.ObtenerCredenciales())
                 comboBoxSitios.Items.Add(iterador.NombreSitioApp);
         }
 
@@ -26,7 +26,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         {
             comboBoxUsuariosSitios.Items.Clear();
             string sitio = comboBoxSitios.SelectedItem.ToString();
-            foreach (var iterador in usuario.ObtenerDuplas())
+            foreach (var iterador in usuario.ObtenerCredenciales())
             {
                 if (iterador.NombreSitioApp == sitio)
                     comboBoxUsuariosSitios.Items.Add(iterador.NombreUsuario);
@@ -43,6 +43,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             string nomSitioSeleccionado = comboBoxSitios.Text;
             string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
             string usuarioSeleccionado = comboBoxUsuarios.Text;
+
             Usuario usuarioACompartir = new Usuario();
 
             if (usuarioSeleccionado.Length == 0)
@@ -56,11 +57,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                         break;
                 }
 
-                foreach (var iterador in this.usuario.ObtenerDuplas())
+                foreach (var iterador in this.usuario.ObtenerCredenciales())
                 {
                     if ((iterador.NombreSitioApp == nomSitioSeleccionado) && (iterador.NombreUsuario == nomUsuarioSeleccionado))
                     {
-                        Dupla_UsuarioContrasenia duplaACompartir = iterador;
+                        Credencial duplaACompartir = iterador;
                         try
                         {
                             this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);

@@ -10,21 +10,21 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Sistema sistema;
         private Usuario usuario;
-        private Dupla_UsuarioContrasenia dupla;
+        private Credencial credencial;
         private GestorContraseniasCompartidas miGestor;
 
-        public InterfazDejarDeCompartirContrasenia(ref Sistema sistema, ref Usuario usuario, ref Dupla_UsuarioContrasenia dupla)
+        public InterfazDejarDeCompartirContrasenia(ref Sistema sistema, ref Usuario usuario, ref Credencial credencial)
         {
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            this.dupla = dupla;
+            this.credencial = credencial;
 
             miGestor = usuario.GestorCompartirContrasenia;
 
-            if (miGestor.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
+            if (miGestor.ObtenerContraseniasCompartidasPorMi().ContainsKey(credencial))
             {
-                List<Usuario> usuariosCompartidosPorDupla = miGestor.ObtenerContraseniasCompartidasPorMi()[dupla];
+                List<Usuario> usuariosCompartidosPorDupla = miGestor.ObtenerContraseniasCompartidasPorMi()[credencial];
                 dataGridUsuariosCompartidos.DataSource = usuariosCompartidosPorDupla;
                 dataGridUsuariosCompartidos.Columns["Contrasenia"].Visible = false;
                 dataGridUsuariosCompartidos.Columns["GestorCompartirContrasenia"].Visible = false;
@@ -34,7 +34,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void buttonDejarDeCompartir_Click(object sender, EventArgs e)
         {
             Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-            usuario.DejarDeCompartirContrasenia(this.dupla, usuarioSeleccionado);
+            usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
             IrAInterfazContraseñasCompartidas();
         }
 

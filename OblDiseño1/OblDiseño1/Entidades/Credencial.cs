@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Text;
-using System.Collections;
 using OblDiseño1.Entidades;
 
 namespace OblDiseño1
 {
-    public class Dupla_UsuarioContrasenia : IComparable<Dupla_UsuarioContrasenia>
+    public class Credencial : IComparable<Credencial>
     {
 
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
@@ -22,26 +20,19 @@ namespace OblDiseño1
 
         public DateTime FechaUltimaModificacion { get; set; }
 
-       
         public bool DataBrench { get; set; }
 
-        private string contrasenia;
         private string nombreUsuario;
+        private string nombreSitioApp;
+        private string nota;
 
-     
         private const int NOMBRE_LARGO_MIN = 5;
         private const int NOMBRE_LARGO_MAX = 25;
         private const int SITIO_LARGO_MIN = 3;
         private const int SITIO_LARGO_MAX = 25;
         private const int NOTA_LARGO_MAX = 250;
-        private int nivelSeguridadContrasenia;
-        private string nombreSitioApp;
-        private string nota;
-    
 
-        
-
-        public Dupla_UsuarioContrasenia(string unNombreUsuario, Contraseña unaContrasenia,
+        public Credencial(string unNombreUsuario, Contraseña unaContrasenia,
             string unSitio, string laNota, Categoria laCategoria)
         {
             NombreUsuario = unNombreUsuario;
@@ -115,14 +106,14 @@ namespace OblDiseño1
                 " Nombre sitio: " + this.NombreSitioApp + " Categoria: " + this.Categoria);
         }
 
-        public int CompareTo(Dupla_UsuarioContrasenia otraDupla)
+        public int CompareTo(Credencial otraDupla)
         {
             return this.Categoria.Nombre.CompareTo(otraDupla.Categoria.Nombre);
         }
 
         public override bool Equals(object obj)
         {
-            Dupla_UsuarioContrasenia duplaAComparar = (Dupla_UsuarioContrasenia)obj;
+            Credencial duplaAComparar = (Credencial)obj;
             return ((this.NombreUsuario == duplaAComparar.NombreUsuario) && 
                 (this.NombreSitioApp == duplaAComparar.NombreSitioApp));
         }

@@ -23,15 +23,15 @@ namespace OblDiseño1
             return tarjetasVulneradas;
         }
 
-        public List<Dupla_UsuarioContrasenia> ObtenerCredencialesVulneradas(List<string> datosDelDataBreach)
+        public List<Credencial> ObtenerCredencialesVulneradas(List<string> datosDelDataBreach)
         {
-            List<Dupla_UsuarioContrasenia> duplasVulneradas = new List<Dupla_UsuarioContrasenia>();
+            List<Credencial> credencialesVulneradas = new List<Credencial>();
 
             foreach (string dato in datosDelDataBreach)
                 if (this.usuario.RevisarSiLaContraseniaEsMia(dato))
-                    duplasVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
+                    credencialesVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
 
-            return duplasVulneradas;
+            return credencialesVulneradas;
         }
     }
 }

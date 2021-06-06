@@ -15,18 +15,18 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            CargarDuplas();
+            CargarCredenciales();
         }
 
 
-        private void CargarDuplas()
+        private void CargarCredenciales()
         {
             this.dataGridView_ListaDuplas.Columns.Clear();
             this.dataGridView_ListaDuplas.DataSource = null;
 
-            usuario.ObtenerDuplas().Sort();
+            usuario.ObtenerCredenciales().Sort();
             BindingSource biso = new BindingSource();
-            biso.DataSource = usuario.ObtenerDuplas();
+            biso.DataSource = usuario.ObtenerCredenciales();
 
             this.dataGridView_ListaDuplas.DataSource = biso;
 
@@ -67,7 +67,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
                 Interfaz_ModificarContrasenia intModiContra = new Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazContrasenia");
                 intModiContra.Show();
                 this.Close();
@@ -80,10 +80,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (0 < dataGridView_ListaDuplas.RowCount && ConfirmarEliminacion())
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
                 usuario.RemoverDupla(duplaSeleccionada);
                 MessageBox.Show("Se elimino correctamente");
-                CargarDuplas();
+                CargarCredenciales();
                 
             }
             else if (0 == dataGridView_ListaDuplas.RowCount)

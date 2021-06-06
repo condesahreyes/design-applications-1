@@ -21,7 +21,7 @@ namespace Pruebas
 
         private List<string> infoBreachada;
 
-        private List<Dupla_UsuarioContrasenia> duplasVulneradas;
+        private List<Credencial> duplasVulneradas;
         private List<Tarjeta> tarjetasVulneradas;
 
         private Categoria categoria1;
@@ -35,21 +35,21 @@ namespace Pruebas
             categoria1 = new Categoria(nombreCategoria);
 
             Tarjeta tarjeta1 = CrearTarjeta();
-            Dupla_UsuarioContrasenia dupla1 = CrearCredencial();
+            Credencial credencial1 = CrearCredencial();
 
             this.sistema = new Sistema();
 
             AgregarUsuario();
 
-            sistema.ObtenerUsuarios()[0].AgregarDupla(dupla1);
+            sistema.ObtenerUsuarios()[0].AgregarCredencial(credencial1);
             sistema.ObtenerUsuarios()[0].AgregarTarjeta(tarjeta1);
 
             infoBreachada = new List<string>{ numeroTarjeta, contraseniaDupla };
-            duplasVulneradas = new List<Dupla_UsuarioContrasenia> { dupla1 };
+            duplasVulneradas = new List<Credencial> { credencial1 };
             tarjetasVulneradas = new List<Tarjeta> { tarjeta1 };
         }
 
-        private Dupla_UsuarioContrasenia CrearCredencial()
+        private Credencial CrearCredencial()
         {
             string nombeUsuarioDupla = "JuanEjemplez";
             string notaDupla = "Una nota muy importante";
@@ -57,7 +57,7 @@ namespace Pruebas
 
             Contraseña contraseña = new Contraseña(contraseniaDupla);
 
-            return new Dupla_UsuarioContrasenia(nombeUsuarioDupla, contraseña,
+            return new Credencial(nombeUsuarioDupla, contraseña,
                                                 stioDupla, notaDupla, categoria1);
         }
 
@@ -151,7 +151,7 @@ namespace Pruebas
         public void ObtenerDuplasVulneradasTest()
         {
             Usuario usu = sistema.ObtenerUsuarios()[0];
-            List<Dupla_UsuarioContrasenia> credencialesVulneradas = sistema.ObtenerDataBreachesCredenciales(ref usu, infoBreachada);
+            List<Credencial> credencialesVulneradas = sistema.ObtenerDataBreachesCredenciales(ref usu, infoBreachada);
 
             CollectionAssert.AreEquivalent(duplasVulneradas, credencialesVulneradas);
         }

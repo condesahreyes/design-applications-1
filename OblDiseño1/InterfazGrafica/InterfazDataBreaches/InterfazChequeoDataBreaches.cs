@@ -19,13 +19,13 @@ namespace InterfazGrafica.InterfazDataBreaches
             this.usuario = usuario;
         }
 
-        private void CargarDataGridDuplas(List<Dupla_UsuarioContrasenia> duplasVulneradas)
+        private void CargarDataGridDuplas(List<Credencial> credencialesVulneradas)
         {
                 BindingSource biso = new BindingSource();
 
-                duplasVulneradas.Sort();
+                credencialesVulneradas.Sort();
 
-                biso.DataSource = duplasVulneradas;
+                biso.DataSource = credencialesVulneradas;
 
                 this.dataGridContrasenias.DataSource = biso;
                 this.dataGridContrasenias.Columns["TipoSitioOApp"].Visible = false;
@@ -56,20 +56,20 @@ namespace InterfazGrafica.InterfazDataBreaches
 
             List<string> listaDatos = datos.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            List<Dupla_UsuarioContrasenia> duplasVulnderadas = sistema.ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
+            List<Credencial> credencialesVulnderadas = sistema.ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
             List<Tarjeta> tarjetasVulneradas = sistema.ObtenerDataBreachesTarjetas(ref usuario, listaDatos);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
-            CargarDataGridDuplas(duplasVulnderadas);
+            CargarDataGridDuplas(credencialesVulnderadas);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (0 < dataGridContrasenias.RowCount)
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridContrasenias.CurrentRow.DataBoundItem;
+                Credencial credencialSeleccionada = (Credencial)dataGridContrasenias.CurrentRow.DataBoundItem;
                 Interfaz_ModificarContrasenia modContra = new 
-                    Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazChequeoDataBreaches");
+                    Interfaz_ModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, "InterfazChequeoDataBreaches");
                 
                 modContra.Show();
                 this.Close();

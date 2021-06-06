@@ -37,7 +37,7 @@ namespace Pruebas
 
         Categoria categoria;
 
-        Dupla_UsuarioContrasenia unaDupla;
+        Credencial unaCredencial;
 
         Contraseña contraseña;
 
@@ -50,10 +50,10 @@ namespace Pruebas
             nivelSeguridad = 5;
             dataBrench = false;
 
-            unaDupla = CrearCredencial();
+            unaCredencial = CrearCredencial();
         }
 
-        private Dupla_UsuarioContrasenia CrearCredencial()
+        private Credencial CrearCredencial()
         {
             nombreUsuario = "JuanEjemplo";
             usuarioContrasenia = "aSD0v89ha+sfunv/*av";
@@ -65,13 +65,13 @@ namespace Pruebas
 
             Contraseña contraseña = new Contraseña(usuarioContrasenia);
 
-            return new Dupla_UsuarioContrasenia(nombreUsuario, contraseña, sitio, nota, categoria);
+            return new Credencial(nombreUsuario, contraseña, sitio, nota, categoria);
         }
 
         [TestMethod]
         public void AltaDuplaUsuarioContrasenia()
         {
-            Dupla_UsuarioContrasenia nuevaDupla = new Dupla_UsuarioContrasenia(nombreUsuario, contraseña,
+            Credencial nuevaDupla = new Credencial(nombreUsuario, contraseña,
                 sitio, nota, categoria);
 
             Assert.IsNotNull(nuevaDupla);
@@ -80,49 +80,49 @@ namespace Pruebas
         [TestMethod]
         public void AltaVerificacionNombreUsuario()
         {
-            Assert.AreEqual(nombreUsuario, unaDupla.NombreUsuario);
+            Assert.AreEqual(nombreUsuario, unaCredencial.NombreUsuario);
         }
 
         [TestMethod]
         public void AltaVerificacionContrasenia()
         {
-            Assert.AreEqual(usuarioContrasenia, unaDupla.Contraseña.Contrasenia);
+            Assert.AreEqual(usuarioContrasenia, unaCredencial.Contraseña.Contrasenia);
         }
 
         [TestMethod]
         public void AltaVerificacionNombreSitioApp()
         {
-            Assert.AreEqual(sitio, unaDupla.NombreSitioApp);
+            Assert.AreEqual(sitio, unaCredencial.NombreSitioApp);
         }
 
         [TestMethod]
         public void AltaVerificacionNota()
         {
-            Assert.AreEqual(nota, unaDupla.Nota);
+            Assert.AreEqual(nota, unaCredencial.Nota);
         }
 
         [TestMethod]
         public void AltaVerificacionNivelDeSeguridad()
         {
-            Assert.AreEqual(nivelSeguridad, unaDupla.Contraseña.NivelSeguridadContrasenia);
+            Assert.AreEqual(nivelSeguridad, unaCredencial.Contraseña.NivelSeguridadContrasenia);
         }
 
         [TestMethod]
         public void AltaVerificacionDataBrench()
         {
-            Assert.AreEqual(dataBrench, unaDupla.DataBrench);
+            Assert.AreEqual(dataBrench, unaCredencial.DataBrench);
         }
 
         [TestMethod]
         public void AltaVerificacionFechaModificacion()
         {
-            Assert.AreEqual(ultimaModificacion, unaDupla.FechaUltimaModificacion);
+            Assert.AreEqual(ultimaModificacion, unaCredencial.FechaUltimaModificacion);
         }
 
         [TestMethod]
         public void AltaVerificacionCategoria()
         {
-            Assert.AreEqual(categoria, unaDupla.Categoria);
+            Assert.AreEqual(categoria, unaCredencial.Categoria);
         }
 
         [TestMethod]
@@ -130,18 +130,18 @@ namespace Pruebas
         {
             string unaContrasenia = "aaaaa";
             int nuevoNivelSeguridad = 1;
-            unaDupla.Contraseña.Contrasenia = unaContrasenia;
+            unaCredencial.Contraseña.Contrasenia = unaContrasenia;
 
-            Assert.AreEqual(nuevoNivelSeguridad, unaDupla.Contraseña.NivelSeguridadContrasenia);
+            Assert.AreEqual(nuevoNivelSeguridad, unaCredencial.Contraseña.NivelSeguridadContrasenia);
         }
 
         [TestMethod]
         public void ModificacionFechaUltimaModificacion()
         {
             DateTime unaUltimaModificacion = new DateTime(2021, 03, 29);
-            unaDupla.FechaUltimaModificacion = unaUltimaModificacion;
+            unaCredencial.FechaUltimaModificacion = unaUltimaModificacion;
 
-            Assert.AreEqual(unaUltimaModificacion, unaDupla.FechaUltimaModificacion);
+            Assert.AreEqual(unaUltimaModificacion, unaCredencial.FechaUltimaModificacion);
         }
 
         [TestMethod]
@@ -149,45 +149,45 @@ namespace Pruebas
         {
             string unNombreCategoria = "Personal";
             Categoria unaCategoria = new Categoria(unNombreCategoria);
-            unaDupla.Categoria = unaCategoria;
+            unaCredencial.Categoria = unaCategoria;
 
-            Assert.AreEqual(unaCategoria, unaDupla.Categoria);
+            Assert.AreEqual(unaCategoria, unaCredencial.Categoria);
         }
 
         [TestMethod]
         public void ModificacionNota()
         {
             string unaNota = "Una nueva nota";
-            unaDupla.Nota = unaNota;
+            unaCredencial.Nota = unaNota;
 
-            Assert.AreEqual(unaNota, unaDupla.Nota);
+            Assert.AreEqual(unaNota, unaCredencial.Nota);
         }
 
         [TestMethod]
         public void ModificacionSitioApp()
         {
             string unSitioApp = "otroStioDeEjemplo.edu.uy";
-            unaDupla.NombreSitioApp = unSitioApp;
+            unaCredencial.NombreSitioApp = unSitioApp;
 
-            Assert.AreEqual(unSitioApp, unaDupla.NombreSitioApp);
+            Assert.AreEqual(unSitioApp, unaCredencial.NombreSitioApp);
         }
 
         [TestMethod]
         public void ModificacionContrasenia()
         {
             string unaContrasenia = "aaaaa";
-            unaDupla.Contraseña.Contrasenia = unaContrasenia;
+            unaCredencial.Contraseña.Contrasenia = unaContrasenia;
 
-            Assert.AreEqual(unaContrasenia, unaDupla.Contraseña.Contrasenia);
+            Assert.AreEqual(unaContrasenia, unaCredencial.Contraseña.Contrasenia);
         }
 
         [TestMethod]
         public void ModificacionNombreUsuario()
         {
             string unNombreUsuario = "Hernán";
-            unaDupla.NombreUsuario = unNombreUsuario;
+            unaCredencial.NombreUsuario = unNombreUsuario;
 
-            Assert.AreEqual(unNombreUsuario, unaDupla.NombreUsuario);
+            Assert.AreEqual(unNombreUsuario, unaCredencial.NombreUsuario);
         }
 
         [TestMethod]
@@ -195,7 +195,7 @@ namespace Pruebas
         public void ModificacionNombreUsuarioCorto()
         {
             string nombreUsuarioCorto = "Juan";
-            unaDupla.NombreUsuario = nombreUsuarioCorto;
+            unaCredencial.NombreUsuario = nombreUsuarioCorto;
         }
 
         [TestMethod]
@@ -203,7 +203,7 @@ namespace Pruebas
         public void ModificacionNombreUsuarioLargo()
         {
             string nombreUsuarioLargo = "HELENE GERMAINE JOSEPHE MARIE";
-            unaDupla.NombreUsuario = nombreUsuarioLargo;
+            unaCredencial.NombreUsuario = nombreUsuarioLargo;
         }
 
         [TestMethod]
@@ -211,7 +211,7 @@ namespace Pruebas
         public void ModificacionContraseniaCorta()
         {
             string contraseniaCorta = "1234";
-            unaDupla.Contraseña.Contrasenia = contraseniaCorta;
+            unaCredencial.Contraseña.Contrasenia = contraseniaCorta;
         }
 
         [TestMethod]
@@ -219,7 +219,7 @@ namespace Pruebas
         public void ModificacionContraseniaLarga()
         {
             string contraseniaLarga = "12345678912345678912345678";
-            unaDupla.Contraseña.Contrasenia = contraseniaLarga;
+            unaCredencial.Contraseña.Contrasenia = contraseniaLarga;
         }
 
         [TestMethod]
@@ -227,7 +227,7 @@ namespace Pruebas
         public void ModificacionNombreSitioAppCorto()
         {
             string nombreSitioAppCorto = "12";
-            unaDupla.NombreSitioApp = nombreSitioAppCorto;
+            unaCredencial.NombreSitioApp = nombreSitioAppCorto;
         }
 
         [TestMethod]
@@ -235,7 +235,7 @@ namespace Pruebas
         public void ModificacionNombreSitioAppLargo()
         {
             string nombreSitioAppLargo = "12345678912345678912345678";
-            unaDupla.NombreSitioApp = nombreSitioAppLargo;
+            unaCredencial.NombreSitioApp = nombreSitioAppLargo;
         }
 
         [TestMethod]
@@ -247,7 +247,7 @@ namespace Pruebas
             for (int i = 0; i < 251; i++)
                 notaLarga += i;
 
-            unaDupla.Nota = notaLarga;
+            unaCredencial.Nota = notaLarga;
         }
 
         [TestMethod]
@@ -347,9 +347,9 @@ namespace Pruebas
         [TestMethod]
         public void BajaDuplaUsuarioContrasenia()
         {
-            unaDupla = null;
+            unaCredencial = null;
 
-            Assert.IsNull(unaDupla);
+            Assert.IsNull(unaCredencial);
         }
 
     }

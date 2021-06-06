@@ -39,9 +39,9 @@ namespace InterfazGrafica.InterfacesReporte
             List<string> unaLista = new List<string>();
             unaLista.Sort();
 
-            reporte.duplasPorSeguridad[nivelDeSeguridad].unaListaDuplas.Sort();
+            reporte.duplasPorSeguridad[nivelDeSeguridad].unaListaCredenciales.Sort();
             BindingSource biso = new BindingSource();
-            biso.DataSource = reporte.duplasPorSeguridad[nivelDeSeguridad].unaListaDuplas;
+            biso.DataSource = reporte.duplasPorSeguridad[nivelDeSeguridad].unaListaCredenciales;
 
             this.dataGridView_Contrasenias.DataSource = biso;
 
@@ -102,7 +102,7 @@ namespace InterfazGrafica.InterfacesReporte
         {
             if (0 < dataGridView_Contrasenias.RowCount)
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_Contrasenias.CurrentRow.DataBoundItem;
+                Credencial duplaSeleccionada = (Credencial)dataGridView_Contrasenias.CurrentRow.DataBoundItem;
                 Interfaz_ModificarContrasenia modContra = new Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazReporteVer");
                 modContra.Show();
                 this.Close();

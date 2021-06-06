@@ -18,11 +18,11 @@ namespace Pruebas
         private Categoria categoria_SuperCategoria;
         private Categoria categoria_UltraCategoria;
 
-        private List<Dupla_UsuarioContrasenia> contraseniasROJAS;
-        private List<Dupla_UsuarioContrasenia> contraseniasNARANJAS;
-        private List<Dupla_UsuarioContrasenia> contraseniasAMARILLAS;
-        private List<Dupla_UsuarioContrasenia> contraseniasVERDE_CLARAS;
-        private List<Dupla_UsuarioContrasenia> contraseniasVERDE_OSCURAS;
+        private List<Credencial> contraseniasROJAS;
+        private List<Credencial> contraseniasNARANJAS;
+        private List<Credencial> contraseniasAMARILLAS;
+        private List<Credencial> contraseniasVERDE_CLARAS;
+        private List<Credencial> contraseniasVERDE_OSCURAS;
 
         private readonly int nivelRojo = 1;
         private readonly int nivelNaranja = 2;
@@ -96,31 +96,31 @@ namespace Pruebas
         {
             for (int i = 0; i < nombreUsuarios.Length; i++)
             {
-                Dupla_UsuarioContrasenia unaCredencial;
+                Credencial unaCredencial;
 
                 Contraseña contraseña = new Contraseña(contrasenias[i]);
 
                 if(i%2==0)
-                    unaCredencial = new Dupla_UsuarioContrasenia(nombreUsuarios[i],
+                    unaCredencial = new Credencial(nombreUsuarios[i],
                         contraseña, sitios[i], notas[i], categoria_SuperCategoria);
                 else
-                    unaCredencial = new Dupla_UsuarioContrasenia(nombreUsuarios[i],
+                    unaCredencial = new Credencial(nombreUsuarios[i],
                          contraseña, sitios[i], notas[i], categoria_UltraCategoria);
 
-                usuario.AgregarDupla(unaCredencial);
+                usuario.AgregarCredencial(unaCredencial);
             }
         }
 
         private void CargarListasContraseniasPorNiveles()
         {
-            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplas();
+            List<Credencial> listaDuplas = usuario.ObtenerCredenciales();
 
-            contraseniasROJAS = new List<Dupla_UsuarioContrasenia> { listaDuplas[5], listaDuplas[11] };
-            contraseniasNARANJAS = new List<Dupla_UsuarioContrasenia> { listaDuplas[3], listaDuplas[6],
+            contraseniasROJAS = new List<Credencial> { listaDuplas[5], listaDuplas[11] };
+            contraseniasNARANJAS = new List<Credencial> { listaDuplas[3], listaDuplas[6],
                                                                         listaDuplas[7], listaDuplas[8]};
-            contraseniasAMARILLAS = new List<Dupla_UsuarioContrasenia> { };
-            contraseniasVERDE_CLARAS = new List<Dupla_UsuarioContrasenia> { listaDuplas[10], listaDuplas[12] };
-            contraseniasVERDE_OSCURAS = new List<Dupla_UsuarioContrasenia> { listaDuplas[0], listaDuplas[1],
+            contraseniasAMARILLAS = new List<Credencial> { };
+            contraseniasVERDE_CLARAS = new List<Credencial> { listaDuplas[10], listaDuplas[12] };
+            contraseniasVERDE_OSCURAS = new List<Credencial> { listaDuplas[0], listaDuplas[1],
                                                                              listaDuplas[2], listaDuplas[4],
                                                                              listaDuplas[9] };
         }
@@ -165,35 +165,35 @@ namespace Pruebas
         public void ListaContrasenias_ROJAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasROJAS, reporte.duplasPorSeguridad[nivelRojo].unaListaDuplas);
+            CollectionAssert.AreEquivalent(contraseniasROJAS, reporte.duplasPorSeguridad[nivelRojo].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_NARANJAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasNARANJAS, reporte.duplasPorSeguridad[nivelNaranja].unaListaDuplas);
+            CollectionAssert.AreEquivalent(contraseniasNARANJAS, reporte.duplasPorSeguridad[nivelNaranja].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_AMARILLAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasAMARILLAS, reporte.duplasPorSeguridad[nivelAmarrillo].unaListaDuplas);
+            CollectionAssert.AreEquivalent(contraseniasAMARILLAS, reporte.duplasPorSeguridad[nivelAmarrillo].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_CLARAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasVERDE_CLARAS, reporte.duplasPorSeguridad[nivelVerdeClaro].unaListaDuplas);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_CLARAS, reporte.duplasPorSeguridad[nivelVerdeClaro].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_OSCURAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasVERDE_OSCURAS, reporte.duplasPorSeguridad[nivelVerdeOscuro].unaListaDuplas);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_OSCURAS, reporte.duplasPorSeguridad[nivelVerdeOscuro].unaListaCredenciales);
         }
 
         [TestMethod]

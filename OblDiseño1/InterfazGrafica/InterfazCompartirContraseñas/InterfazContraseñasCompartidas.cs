@@ -14,8 +14,10 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         public InterfazContraseñasCompartidas(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
+
             this.usuario = usuario;
             this.sistema = sistema;
+
             CargarContraseñasCompartidas();
             CargarContraseñasCompartidasConmigo();
         }
@@ -44,16 +46,16 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         {
             BindingSource biso2 = new BindingSource();
             GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
-            List<Dupla_UsuarioContrasenia> listaDuplasCompartidasConmigo = new List<Dupla_UsuarioContrasenia>();
+            List<Credencial> listaCredencialesCompartidasConmigo = new List<Credencial>();
 
             foreach (var iterador in miGestor.ObtenerContraseniasCompartidasConmigo())
             {
                 foreach (var iteradorAuxiliar in iterador.Value)
-                    listaDuplasCompartidasConmigo.Add(iteradorAuxiliar);
+                    listaCredencialesCompartidasConmigo.Add(iteradorAuxiliar);
             }
 
-            biso2.DataSource = listaDuplasCompartidasConmigo;
-            if (listaDuplasCompartidasConmigo.Count > 0)
+            biso2.DataSource = listaCredencialesCompartidasConmigo;
+            if (listaCredencialesCompartidasConmigo.Count > 0)
             {
                 this.dataGridContraseñasCompartidasConmigo.DataSource = biso2;
                 this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
@@ -93,7 +95,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 MessageBox.Show("Error: No hay contraseñas compartidas aun");
             else
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridContraseñasCompartidas.CurrentRow.DataBoundItem;
+                Credencial duplaSeleccionada = (Credencial)dataGridContraseñasCompartidas.CurrentRow.DataBoundItem;
                 if (duplaSeleccionada == null)
                     MessageBox.Show("Error: debe seleccionar una contrasenia primero");
                 else

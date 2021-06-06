@@ -16,8 +16,8 @@ namespace Pruebas
         private List<string> contraseniaDeDuplaBreachada;
         private List<string> numeroTagetaBreachada;
         private List<string> breachVacio;
-        private List<Dupla_UsuarioContrasenia> duplaBreachada;
-        private List<Dupla_UsuarioContrasenia> duplasBreachadas;
+        private List<Credencial> credencialBracheada;
+        private List<Credencial> credencialesBracheadas;
         private List<Tarjeta> tarjetaBreachada;
         private List<Tarjeta> tarjetasBreachadas;
 
@@ -50,7 +50,7 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
-            duplasBreachadas = new List<Dupla_UsuarioContrasenia>();
+            credencialesBracheadas = new List<Credencial>();
             tarjetasBreachadas = new List<Tarjeta>();
 
             string nombreUsuario = "JuanEjemplez";
@@ -91,14 +91,14 @@ namespace Pruebas
             for (int i = 0; i < nombresUsuarios.Length; i++)
             {
                 Contraseña contraseña = new Contraseña(contrasenias[i]);
-                Dupla_UsuarioContrasenia credencial = new Dupla_UsuarioContrasenia(nombresUsuarios[i],
+                Credencial credencial = new Credencial(nombresUsuarios[i],
                     contraseña, sitios[i], notas[i], categoriaEjemplo);
                 if (i == 2)
-                    duplaBreachada = new List<Dupla_UsuarioContrasenia> { credencial };
+                    credencialBracheada = new List<Credencial> { credencial };
                 else if (i % 2 == 0 || i == 0)
-                    duplasBreachadas.Add(credencial);
+                    credencialesBracheadas.Add(credencial);
 
-                usuario.AgregarDupla(credencial);
+                usuario.AgregarCredencial(credencial);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Pruebas
         public void VerificarVulneradosVacioCredencial()
         {
             int elementosBreacheados = 0;
-            List<Dupla_UsuarioContrasenia> entidadesBreachadas = 
+            List<Credencial> entidadesBreachadas = 
                 chequeador.ObtenerCredencialesVulneradas(breachVacio);
 
             Assert.AreEqual(elementosBreacheados, entidadesBreachadas.Count);
@@ -142,12 +142,12 @@ namespace Pruebas
         }
 
         [TestMethod]
-        public void VerificarVulneradoDupla()
+        public void VerificarVulneradoCredencial()
         {
-            List<Dupla_UsuarioContrasenia> entidadesBreachadas = 
+            List<Credencial> entidadesBreachadas = 
                 chequeador.ObtenerCredencialesVulneradas(contraseniaDeDuplaBreachada);
 
-            CollectionAssert.AreEqual(entidadesBreachadas, duplaBreachada);
+            CollectionAssert.AreEqual(entidadesBreachadas, credencialBracheada);
         }
 
         [TestMethod]
@@ -161,10 +161,10 @@ namespace Pruebas
         [TestMethod]
         public void VerificarVulneradosDupla()
         {
-            List<Dupla_UsuarioContrasenia> entidadesBreachadas = 
+            List<Credencial> entidadesBreachadas = 
                 chequeador.ObtenerCredencialesVulneradas(infoBreacheada);
 
-            CollectionAssert.AreEqual(entidadesBreachadas, duplasBreachadas);
+            CollectionAssert.AreEqual(entidadesBreachadas, credencialesBracheadas);
         }
     }
 }
