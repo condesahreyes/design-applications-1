@@ -13,7 +13,7 @@ namespace Pruebas
 
         private Usuario usuario;
 
-        private FuncionalidadReporte funcionalidad;
+        private Reporte funcionalidad;
 
         private Categoria categoria_SuperCategoria;
         private Categoria categoria_UltraCategoria;
@@ -89,7 +89,7 @@ namespace Pruebas
             CrearCredenciales();
             CargarListasContraseniasPorNiveles();
 
-            funcionalidad = new FuncionalidadReporte(usuario);
+            funcionalidad = new Reporte(usuario);
         }
 
         private void CrearCredenciales()

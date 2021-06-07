@@ -1,14 +1,12 @@
-﻿using OblDiseño1.Entidades;
+﻿using System.Collections.Generic;
+using OblDiseño1.Entidades;
 using OblDiseño1.Exception;
-using System.Collections.Generic;
 using System.Data;
 
 namespace OblDiseño1
 {
     public class Usuario
     {
-        private string nombre;
-        private string contrasenia;
         private const string mnsjNombreUsuarioError = "El nombre de usuario debe tener entre" +
                                                     " 1 y 25 caracteres";
         private const string mnsjContraseniaError = "La contraseña debe tener entre 5 y" +
@@ -16,14 +14,17 @@ namespace OblDiseño1
         private const string mnsjDuplaYaPresenteError = "Se intento agregar una Dupla que ya" +
                                                     " pertenecia al Usuario";
 
-        private const int LARGO_NOMBRE_MIN = 1;
-        private const int LARGO_NOMBRE_MAX = 25;
-        private const int LARGO_CONTRASENIA_MIN = 5;
+        private string nombre;
+        private string contrasenia;
+
         private const int LARGO_CONTRASENIA_MAX = 25;
+        private const int LARGO_CONTRASENIA_MIN = 5;
+        private const int LARGO_NOMBRE_MAX = 25;
+        private const int LARGO_NOMBRE_MIN = 1;
 
         private List<Credencial> credenciales;
-        private List<Tarjeta> tarjetas;
         private List<Categoria> categorias;
+        private List<Tarjeta> tarjetas;
 
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
@@ -152,10 +153,12 @@ namespace OblDiseño1
 
         public void RemoverDupla(Credencial credencialARemover)
         {
-            if (this.credenciales.Contains(credencialARemover) && !this.GestorCompartirContrasenia.VerificarQueEstoyCompartiendoLaContraseniaConAlguien(credencialARemover))
+            if (this.credenciales.Contains(credencialARemover) && !this.GestorCompartirContrasenia.
+                VerificarQueEstoyCompartiendoLaContraseniaConAlguien(credencialARemover))
                 this.credenciales.Remove(credencialARemover);
             else
-                throw new ExepcionEliminacionDeContraseniaCompartida("No se puede eliminar una contraseña compartida");
+                throw new ExepcionEliminacionDeContraseniaCompartida("No se puede eliminar una " +
+                    "contraseña compartida");
         }
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)

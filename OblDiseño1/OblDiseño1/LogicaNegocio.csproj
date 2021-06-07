@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Contraseña.cs" />
-    <Compile Include="Entidades\FuncionalidadReporte.cs" />
+    <Compile Include="Entidades\Reporte.cs" />
     <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
     <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
     <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />

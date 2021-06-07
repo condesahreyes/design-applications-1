@@ -2,12 +2,12 @@
 
 namespace OblDiseño1.Entidades
 {
-    public class FuncionalidadReporte
+    public class Reporte
     {
         private const int cantidadDeCategoriasSeguridadContraseniaMasUno = 6;
         private Usuario usuario;
 
-        public FuncionalidadReporte(Usuario usuario)
+        public Reporte(Usuario usuario)
         {
             this.usuario = usuario;
 

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OblDiseño1
 {
     public class ChequeadorDeDataBreaches
     {
-
         public Usuario usuario { get; set; }
+
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;

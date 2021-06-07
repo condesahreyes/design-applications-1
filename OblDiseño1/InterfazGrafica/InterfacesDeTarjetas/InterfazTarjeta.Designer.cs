@@ -83,7 +83,6 @@
             this.dataGridTarjetas.Name = "dataGridTarjetas";
             this.dataGridTarjetas.ReadOnly = true;
             this.dataGridTarjetas.RowHeadersVisible = false;
-            this.dataGridTarjetas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridTarjetas.RowTemplate.Height = 24;
             this.dataGridTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridTarjetas.Size = new System.Drawing.Size(461, 232);

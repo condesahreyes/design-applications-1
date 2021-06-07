@@ -42,10 +42,12 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas()
         {
+            this.dataGridContraseñasCompartidas.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["ObtenerContraseña"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["Contraseña"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
         }
 
         private void CargarContraseñasCompartidasConmigo()
@@ -70,10 +72,12 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo()
         {
-            this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
-            this.dataGridContraseñasCompartidasConmigo.Columns["Nota"].Visible = false;
-            this.dataGridContraseñasCompartidasConmigo.Columns["NivelSeguridadContrasenia"].Visible = false;
-            this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["ObtenerContraseña"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["Contraseña"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
         }
 
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)

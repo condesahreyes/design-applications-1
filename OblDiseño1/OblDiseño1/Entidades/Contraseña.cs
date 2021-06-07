@@ -1,32 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OblDiseño1.Entidades
 {
     public class Contraseña
     {
+        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
+        public int NivelSeguridadContrasenia { set; get; }
 
-        private const int CONTRASENIA_LARGO_MIN = 5;
-        private const int CONTRASENIA_LARGO_MAX = 25;
-
-        private const string caracteresNumericos = "0123456789";
-        private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
-        private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string caracteresEspeciales = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        private const string caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        private const string caracteresNumericos = "0123456789";
 
         private static string[] caracteresPorPosicion = { caracteresMayusculas,
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
 
+        private const int CONTRASENIA_LARGO_MAX = 25;
+        private const int CONTRASENIA_LARGO_MIN = 5;
+
         private static Random numRandom = new Random();
 
         private string contrasenia;
-        
-        public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
-        public int NivelSeguridadContrasenia { set; get; } 
-
 
         public Contraseña(string unaContrasenia)
         {

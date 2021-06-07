@@ -1,5 +1,5 @@
-﻿using System;
-using OblDiseño1.Entidades;
+﻿using OblDiseño1.Entidades;
+using System;
 
 namespace OblDiseño1
 {
@@ -18,6 +18,10 @@ namespace OblDiseño1
 
         public Contraseña Contraseña { get; set; }
 
+        public string ObtenerContraseña { get => Contraseña.Contrasenia; }
+
+        public int ObtenerNivelSeguridad { get => Contraseña.NivelSeguridadContrasenia; }
+
         public DateTime FechaUltimaModificacion { get; set; }
 
         public bool DataBrench { get; set; }
@@ -26,10 +30,10 @@ namespace OblDiseño1
         private string nombreSitioApp;
         private string nota;
 
-        private const int NOMBRE_LARGO_MIN = 5;
         private const int NOMBRE_LARGO_MAX = 25;
-        private const int SITIO_LARGO_MIN = 3;
+        private const int NOMBRE_LARGO_MIN = 5;
         private const int SITIO_LARGO_MAX = 25;
+        private const int SITIO_LARGO_MIN = 3;
         private const int NOTA_LARGO_MAX = 250;
 
         public Credencial(string unNombreUsuario, Contraseña unaContrasenia,

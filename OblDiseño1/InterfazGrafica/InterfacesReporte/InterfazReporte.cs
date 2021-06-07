@@ -12,7 +12,7 @@ namespace InterfazGrafica.InterfacesReporte
         private Sistema sistema;
         private reporte reporte;
 
-        private FuncionalidadReporte manejadorDeDatosReporte;
+        private Reporte manejadorDeDatosReporte;
 
         private const int nivelSeguridadRojo = 1;
         private const int nivelSeguridadNaranja = 2;
@@ -26,7 +26,7 @@ namespace InterfazGrafica.InterfacesReporte
 
             this.usuario = usuario;
             this.sistema = sistema;
-            manejadorDeDatosReporte = new FuncionalidadReporte(usuario);
+            manejadorDeDatosReporte = new Reporte(usuario);
             this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
 
             ActualizarLables();

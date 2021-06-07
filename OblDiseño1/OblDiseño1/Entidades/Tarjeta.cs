@@ -1,24 +1,24 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System;
 
 namespace OblDiseño1
 {
 
     public class Tarjeta : IComparable<Tarjeta>
     {
+        private const int largo_valido_de_numero_tarjeta = 16;
         private const int anio_MIN = 1960;
         private const int anio_MAX = 2090;
-        private const int dia_MIN = 1;
-        private const int dia_MAX = 31;
-        private const int mes_MIN = 1;
-        private const int mes_MAX = 12;
-        private const int largo_valido_de_numero_tarjeta = 16;
         private const int largo_MAX = 25;
         private const int largo_MIN = 3;
+        private const int dia_MAX = 31;
+        private const int dia_MIN = 1;
+        private const int mes_MAX = 12;
+        private const int mes_MIN = 1;
 
         private string nombre;
-        private string tipo;
         private string numero;
+        private string tipo;
 
         private int codigoSeguridad;
 

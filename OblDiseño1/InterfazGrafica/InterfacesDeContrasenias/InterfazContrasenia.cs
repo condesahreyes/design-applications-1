@@ -41,10 +41,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void ModificarACamposNoVisibles()
         {
+            this.dataGridView_ListaDuplas.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridView_ListaDuplas.Columns["ObtenerContraseña"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["TipoSitioOApp"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["DataBrench"].Visible = false;
-            this.dataGridView_ListaDuplas.Columns["Nota"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["Contraseña"].Visible = false;
+            this.dataGridView_ListaDuplas.Columns["Nota"].Visible = false;
         }
 
         private void ModificarHeaderText()

@@ -123,7 +123,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             switch (this.interfazPadre)
             {
                 case posibleInterfazPadre_ReporteVer:
-                    FuncionalidadReporte funcionalidad = new FuncionalidadReporte(usuario);
+                    Reporte funcionalidad = new Reporte(usuario);
                     InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
                     interfazVer.Show();
                     this.Close();

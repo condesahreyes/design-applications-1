@@ -33,10 +33,11 @@ namespace InterfazGrafica.InterfazDataBreaches
 
         private void CambiarColumnasVisiblesDelDataGridCredenciales()
         {
-            this.dataGridContrasenias.Columns["TipoSitioOApp"].Visible = false;
-            //this.dataGridContrasenias.Columns["NivelSeguridadContrasenia"].Visible = false;
-            //this.dataGridContrasenias.Columns["NivelSeguridadContrasenia"].Visible = false;
             this.dataGridContrasenias.Columns["FechaUltimaModificacion"].Visible = false;
+            this.dataGridContrasenias.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridContrasenias.Columns["ObtenerContraseña"].Visible = false;
+            this.dataGridContrasenias.Columns["TipoSitioOApp"].Visible = false;
+            this.dataGridContrasenias.Columns["Contraseña"].Visible = false;
             this.dataGridContrasenias.Columns["DataBrench"].Visible = false;
             this.dataGridContrasenias.Columns["Nota"].Visible = false;
         }
