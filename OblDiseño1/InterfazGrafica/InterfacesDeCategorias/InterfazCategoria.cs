@@ -1,9 +1,9 @@
-﻿using OblDiseño1;
-using System;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using System.Windows.Forms;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using InterfazGrafica.InterfazDeCategorias;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfazCategoria
 {
@@ -42,7 +42,8 @@ namespace InterfazGrafica.InterfazCategoria
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazAgregarCategoria agregarCategoria = new InterfazAgregarCategoria(ref sistema, ref usuario);
+            InterfazAgregarCategoria agregarCategoria = new 
+                InterfazAgregarCategoria(ref sistema, ref usuario);
             agregarCategoria.Show();
         }
 

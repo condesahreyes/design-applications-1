@@ -1,0 +1,100 @@
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using InterfazGrafica.InterfacesDeContrasenias;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System.Linq;
+using OblDiseño1;
+using System;
+
+namespace InterfazGrafica.InterfazDataBreaches
+{
+    public partial class InterfazChequeoDataBreaches : Form
+    {
+        private Sistema sistema;
+        private Usuario usuario;
+
+        public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
+        {
+            InitializeComponent();
+            this.sistema = sistema;
+            this.usuario = usuario;
+        }
+
+        private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
+        {
+            BindingSource biso = new BindingSource();
+
+            credencialesVulneradas.Sort();
+            biso.DataSource = credencialesVulneradas;
+            this.dataGridContrasenias.DataSource = biso;
+
+            CambiarColumnasVisiblesDelDataGridCredenciales();
+        }
+
+        private void CambiarColumnasVisiblesDelDataGridCredenciales()
+        {
+            this.dataGridContrasenias.Columns["TipoSitioOApp"].Visible = false;
+            //this.dataGridContrasenias.Columns["NivelSeguridadContrasenia"].Visible = false;
+            //this.dataGridContrasenias.Columns["NivelSeguridadContrasenia"].Visible = false;
+            this.dataGridContrasenias.Columns["FechaUltimaModificacion"].Visible = false;
+            this.dataGridContrasenias.Columns["DataBrench"].Visible = false;
+            this.dataGridContrasenias.Columns["Nota"].Visible = false;
+        }
+
+        private void CargarDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
+        {
+            BindingSource biso = new BindingSource();
+
+            tarjetasVulneradas.Sort();
+            biso.DataSource = tarjetasVulneradas;
+
+            CambiarColumnasVisiblesDelDataGridTarjetas(tarjetasVulneradas);
+        }
+
+        private void CambiarColumnasVisiblesDelDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
+        {
+            dataGridTarjetas.DataSource = tarjetasVulneradas;
+            dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
+            dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+            dataGridTarjetas.Columns["fechaVencimiento"].Visible = false;
+            dataGridTarjetas.Columns["categoria"].Visible = false;
+        }
+
+        private void btnChequear_Click(object sender, EventArgs e)
+        {
+            string datos = TextBoxDatosDataBreaches.Text;
+
+            List<string> listaDatos = datos.Split(new[] { "\n" }, 
+                    StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            List<Credencial> credencialesVulnderadas = sistema.
+                ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
+            List<Tarjeta> tarjetasVulneradas = sistema.
+                ObtenerDataBreachesTarjetas(ref usuario, listaDatos);
+
+            CargarDataGridTarjetas(tarjetasVulneradas);
+            CargarDataGridCredenciales(credencialesVulnderadas);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (0 < dataGridContrasenias.RowCount)
+            {
+                Credencial credencialSeleccionada = (Credencial)dataGridContrasenias.CurrentRow.DataBoundItem;
+                InterfazDeModificarContrasenia interfazModificarContrasenia = new 
+                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, 
+                    "InterfazChequeoDataBreaches");
+
+                interfazModificarContrasenia.Show();
+                this.Close();
+            }
+        }
+
+        private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Menu menu = new Menu(ref sistema, ref usuario);
+            menu.Show();
+        }
+    }
+}

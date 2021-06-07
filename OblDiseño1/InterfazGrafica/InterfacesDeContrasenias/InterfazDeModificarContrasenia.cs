@@ -1,25 +1,28 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using InterfazGrafica.InterfazDataBreaches;
 using InterfazGrafica.InterfacesReporte;
-using InterfazGrafica.InterfazDataBreaches;
-using OblDiseño1;
 using OblDiseño1.Entidades;
+using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    public partial class Interfaz_ModificarContrasenia : Form
+    public partial class InterfazDeModificarContrasenia : Form
     {
+        private Credencial credencial;
         private Usuario usuario;
         private Sistema sistema;
-        private Credencial credencial;
-        private string interfazPadre;
+        
         private int nivelSeguridadContrasenia;
 
-        const string posibleInterfazPadre_ReporteVer = "InterfazReporteVer";
-        const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
-        const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
+        private string interfazPadre;
 
-        public Interfaz_ModificarContrasenia(ref Usuario usuario, ref Sistema sistema, Credencial credencial, string padre)
+        private const string posibleInterfazPadre_ReporteVer = "InterfazReporteVer";
+        private const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
+        private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
+
+        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema, 
+            Credencial credencial, string padre)
         {
             this.usuario = usuario;
             this.sistema = sistema;
@@ -36,13 +39,13 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.textBox_Usuario.Text = credencial.NombreUsuario;
             this.textBox_Contrasenia.Text = credencial.Contraseña.Contrasenia;
             this.textBox_Sitio.Text = credencial.NombreSitioApp;
+
             var bindingSource = new BindingSource();
             bindingSource.DataSource = usuario.ObtenerCategorias();
             this.comboBox_Categoria.DataSource = bindingSource.DataSource;
             SeleccionarCategoriaOriginal();
             this.richTextBox_Nota.Text = credencial.Nota;
         }
-
 
         private void SeleccionarCategoriaOriginal()
         {
@@ -57,7 +60,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
             this.comboBox_Categoria.SelectedIndex = indiceCatOriginal;
         }
-
 
         private void button_RevertirUsuario_Click(object sender, EventArgs e)
         {
@@ -165,7 +167,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             return seRealizaronCambios;
         }
 
-
         private bool ModificarContrasenia()
         {
             bool seModificoCorrectamente = false;
@@ -200,22 +201,27 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             catch (ExepcionDatosDeContraseniaInvalidos)
             {
                 seModificoCorrectamente = false;
-                MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
-                                "debe cumplir con el siguiente formato: " +
-                                "\n\n" +
-                                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
-                                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
-                                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
-                                "> Categoría: Se selecciona de las disponibles en el sistema"
-                                );
+                MostrarCualesSonLosDatosCorrector();
             }
             return seModificoCorrectamente;
+        }
+
+        private void MostrarCualesSonLosDatosCorrector()
+        {
+            MessageBox.Show("DATOS ERRONEOS. Por faver recuerde que la Contraseña " +
+                "debe cumplir con el siguiente formato: " +
+                "\n\n" +
+                "> Nombre de Usuario: Mínimo 5 caracteres y máximo 25\n\n" +
+                "> Contraseña: Mínimo 5 caracteres y máximo 25\n\n" +
+                "> Sitio: Mínimo 3 caracteres y máximo 25\n\n" +
+                "> Categoría: Se selecciona de las disponibles en el sistema"
+                );
         }
 
         private void button_GenerarContrasenia_Click(object sender, EventArgs e)
         {
             string nuevaContra = this.textBox_Contrasenia.Text;
-            Interfaz_GenerarContrasenia genContra = new Interfaz_GenerarContrasenia(ref sistema);
+            InterfazGenerarContrasenia genContra = new InterfazGenerarContrasenia();
             genContra.ShowDialog();
             string posibleNuevaContra = genContra.ObtenerNuevaContrasenia();
             if (!posibleNuevaContra.Equals(""))

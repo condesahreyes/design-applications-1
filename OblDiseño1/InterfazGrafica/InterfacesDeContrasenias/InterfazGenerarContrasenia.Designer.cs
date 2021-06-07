@@ -1,7 +1,7 @@
 ﻿
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    partial class Interfaz_GenerarContrasenia
+    partial class InterfazGenerarContrasenia
     {
         /// <summary>
         /// Required designer variable.

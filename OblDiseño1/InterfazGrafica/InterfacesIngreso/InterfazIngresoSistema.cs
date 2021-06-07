@@ -1,7 +1,7 @@
-﻿using OblDiseño1;
-using System;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfazIngreso
 {

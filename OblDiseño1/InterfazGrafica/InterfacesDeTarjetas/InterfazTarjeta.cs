@@ -1,8 +1,7 @@
-﻿using OblDiseño1;
-using System;
-using System.Collections.Generic;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
 {
@@ -17,7 +16,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             CargarListaTarjetas(ref usuario, ref sistema);
-
         }
 
         private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
@@ -47,44 +45,48 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void btnModificarTarjeta_Click(object sender, EventArgs e)
         {
             if (dataGridTarjetas.RowCount > 0)
-            {
-                Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
-                
-                if (tarjetaSeleccionada == null)
-                    MessageBox.Show("Error, debe seleccionar una tarjeta");
-                else
-                {
-                    
-                    this.Hide();
-                    InterfazModificarTarjeta modificarTarjeta = new InterfazModificarTarjeta
-                        (ref sistema, ref usuario, ref tarjetaSeleccionada);
-                    modificarTarjeta.Show();
-                }
-            }
+                AModificarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
+        }
+
+        private void AModificarTarjetaSeleccionada()
+        {
+            Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
+
+            if (tarjetaSeleccionada == null)
+                MessageBox.Show("Error, debe seleccionar una tarjeta");
+            else
+            {
+                this.Hide();
+                InterfazModificarTarjeta modificarTarjeta = new InterfazModificarTarjeta
+                    (ref sistema, ref usuario, ref tarjetaSeleccionada);
+                modificarTarjeta.Show();
+            }
         }
 
         private void btnEliminarTarjeta_Click(object sender, EventArgs e)
         {
             if (dataGridTarjetas.RowCount > 0)
-            {
-                Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
-                
-                if (tarjetaSeleccionada == null)
-                    MessageBox.Show("Error, debe seleccionar una tarjeta");
-                else
-                {
-
-                    InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
-                        (ref sistema, ref usuario, ref tarjetaSeleccionada);
-                    this.Close();
-                    eliminarTarjeta.Show();
-                }
-            }
+                EliminarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
-
         }
+
+        private void EliminarTarjetaSeleccionada()
+        {
+            Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
+
+            if (tarjetaSeleccionada == null)
+                MessageBox.Show("Error, debe seleccionar una tarjeta");
+            else
+            {
+                InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
+                    (ref sistema, ref usuario, ref tarjetaSeleccionada);
+                this.Close();
+                eliminarTarjeta.Show();
+            }
+        }
+
     }
 }

@@ -1,6 +1,6 @@
-﻿using OblDiseño1;
+﻿using System.Windows.Forms;
+using OblDiseño1;
 using System;
-using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -8,16 +8,26 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Sistema sistema;
         private Usuario usuario;
+
         public InterfazCompartirContraseña(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
             this.sistema = sistema;
             this.usuario = usuario;
+
+            CargarOpcionesDeUsuariosACompartir();
+            CargarOpcionesDeSitiosParaCompartir();
+        }
+
+        private void CargarOpcionesDeUsuariosACompartir()
+        {
             foreach (var iterador in sistema.ObtenerUsuarios())
-            {
                 if (iterador.Nombre != this.usuario.Nombre)
-                comboBoxUsuarios.Items.Add(iterador.Nombre);
-            }
+                    comboBoxUsuarios.Items.Add(iterador.Nombre);
+        }
+
+        private void CargarOpcionesDeSitiosParaCompartir()
+        {
             foreach (var iterador in usuario.ObtenerCredenciales())
                 comboBoxSitios.Items.Add(iterador.NombreSitioApp);
         }
@@ -40,44 +50,55 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            string nomSitioSeleccionado = comboBoxSitios.Text;
-            string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
+
             string usuarioSeleccionado = comboBoxUsuarios.Text;
 
-            Usuario usuarioACompartir = new Usuario();
+            Usuario usuarioACompartir;
 
             if (usuarioSeleccionado.Length == 0)
                 MessageBox.Show("Debe seleccionar un usuario para compartir");
             else
             {
-                foreach (var iteradorUsuario in this.sistema.ObtenerUsuarios())
-                {
-                    usuarioACompartir = iteradorUsuario;
-                    if (usuarioACompartir.Nombre == usuarioSeleccionado)
-                        break;
-                }
+                usuarioACompartir = ObtenerUsuarioACompartir(usuarioSeleccionado);
 
-                foreach (var iterador in this.usuario.ObtenerCredenciales())
-                {
-                    if ((iterador.NombreSitioApp == nomSitioSeleccionado) && (iterador.NombreUsuario == nomUsuarioSeleccionado))
-                    {
-                        Credencial duplaACompartir = iterador;
-                        try
-                        {
-                            this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);
-                            MessageBox.Show("Se compartio la contraseña correctamente");
-                            IrAInterfazContraseñasCompartidas();
-                        }
-                        catch (Exception Exepcion_InvalidUsuarioData)
-                        {
-                            MessageBox.Show("Ya se compartio esta contraseña con el usuario");
-
-                        }
-                        break;
-                    }
-                }
+                CompartirContraseña(ref usuarioACompartir);
             }
          }
+
+        private void CompartirContraseña(ref Usuario usuarioACompartir)
+        {
+            string nomSitioSeleccionado = comboBoxSitios.Text;
+            string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
+
+            foreach (var iterador in this.usuario.ObtenerCredenciales())
+            {
+                if ((iterador.NombreSitioApp == nomSitioSeleccionado) && 
+                    (iterador.NombreUsuario == nomUsuarioSeleccionado))
+                {
+                    Credencial duplaACompartir = iterador;
+                    try
+                    {
+                        this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);
+                        MessageBox.Show("Se compartio la contraseña correctamente");
+                        IrAInterfazContraseñasCompartidas();
+                    }
+                    catch (Exception Exepcion_InvalidUsuarioData)
+                    {
+                        MessageBox.Show("Ya se compartio esta contraseña con el usuario");
+
+                    }
+                    break;
+                }
+            }
+        }
+
+        private Usuario ObtenerUsuarioACompartir(String usuarioSeleccionado)
+        {
+            foreach (var iteradorUsuario in this.sistema.ObtenerUsuarios())
+                if (iteradorUsuario.Nombre == usuarioSeleccionado)
+                    return iteradorUsuario;
+            return null;
+        }
 
         private void IrAInterfazContraseñasCompartidas()
         {

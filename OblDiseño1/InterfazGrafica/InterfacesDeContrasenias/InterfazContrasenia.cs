@@ -1,7 +1,6 @@
-﻿using OblDiseño1;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using System;
+using OblDiseño1;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
@@ -10,14 +9,16 @@ namespace InterfazGrafica.InterfacesDeContrasenias
     {
         private Usuario usuario;
         private Sistema sistema;
+
         public InterfazContrasenia(ref Usuario usuario, ref Sistema sistema)
         {
             InitializeComponent();
+
             this.usuario = usuario;
             this.sistema = sistema;
+
             CargarCredenciales();
         }
-
 
         private void CargarCredenciales()
         {
@@ -30,23 +31,36 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             this.dataGridView_ListaDuplas.DataSource = biso;
 
+            ModificarACamposSoloLectura();
+            ModificarACamposNoVisibles();
+            ModificarHeaderText();
+
+            this.dataGridView_ListaDuplas.RowHeadersVisible = false;
+            this.dataGridView_ListaDuplas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void ModificarACamposNoVisibles()
+        {
             this.dataGridView_ListaDuplas.Columns["TipoSitioOApp"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["DataBrench"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["Nota"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["Contraseña"].Visible = false;
+        }
 
+        private void ModificarHeaderText()
+        {
             this.dataGridView_ListaDuplas.Columns["NombreUsuario"].HeaderText = "Usuario";
             this.dataGridView_ListaDuplas.Columns["NombreSitioApp"].HeaderText = "Sitio";
             this.dataGridView_ListaDuplas.Columns["FechaUltimaModificacion"].HeaderText = "Ultima Modificacion";
             this.dataGridView_ListaDuplas.Columns["Categoria"].HeaderText = "Categoria";
+        }
 
+        private void ModificarACamposSoloLectura()
+        {
             this.dataGridView_ListaDuplas.Columns["NombreUsuario"].ReadOnly = true;
             this.dataGridView_ListaDuplas.Columns["NombreSitioApp"].ReadOnly = true;
             this.dataGridView_ListaDuplas.Columns["FechaUltimaModificacion"].ReadOnly = true;
             this.dataGridView_ListaDuplas.Columns["Categoria"].ReadOnly = true;
-
-            this.dataGridView_ListaDuplas.RowHeadersVisible = false;
-            this.dataGridView_ListaDuplas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnContraseniaVolverMenu_Click(object sender, System.EventArgs e)
@@ -68,8 +82,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
                 Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                Interfaz_ModificarContrasenia intModiContra = new Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazContrasenia");
-                intModiContra.Show();
+
+                InterfazDeModificarContrasenia interfazModiicar = new 
+                    InterfazDeModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazContrasenia");
+
+                interfazModiicar.Show();
                 this.Close();
             }
             else
@@ -80,9 +97,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (0 < dataGridView_ListaDuplas.RowCount && ConfirmarEliminacion())
             {
-                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                usuario.RemoverDupla(duplaSeleccionada);
-                MessageBox.Show("Se elimino correctamente");
+                EliminarContrasenia();
                 CargarCredenciales();
                 
             }
@@ -90,10 +105,17 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 MessageBox.Show("No hay contraseñas para eliminar");
         }
 
+        private void EliminarContrasenia()
+        {
+            Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+            usuario.RemoverDupla(duplaSeleccionada);
+            MessageBox.Show("Se elimino correctamente");
+        }
+
         private bool ConfirmarEliminacion()
         {
-            DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "", MessageBoxButtons.YesNoCancel, 
-                MessageBoxIcon.Exclamation);
+            DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "", 
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
 
             return (resultado==DialogResult.Yes)? true : false;
         }

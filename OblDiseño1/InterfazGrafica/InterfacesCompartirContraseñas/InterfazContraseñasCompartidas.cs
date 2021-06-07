@@ -1,9 +1,10 @@
-﻿using OblDiseño1;
-using OblDiseño1.Entidades;
-using System;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Collections.Generic;
+using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1;
+using System;
+
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -35,11 +36,16 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             else
             {
                 this.dataGridContraseñasCompartidas.DataSource = biso;
-                this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
-                this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
+                HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas();
             }
+        }
+
+        private void HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas()
+        {
+            this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["NivelSeguridadContrasenia"].Visible = false;
+            this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
         }
 
         private void CargarContraseñasCompartidasConmigo()
@@ -58,11 +64,16 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             if (listaCredencialesCompartidasConmigo.Count > 0)
             {
                 this.dataGridContraseñasCompartidasConmigo.DataSource = biso2;
-                this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
-                this.dataGridContraseñasCompartidasConmigo.Columns["Nota"].Visible = false;
-                this.dataGridContraseñasCompartidasConmigo.Columns["NivelSeguridadContrasenia"].Visible = false;
-                this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
+                HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo();
             }
+        }
+
+        private void HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo()
+        {
+            this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["Nota"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["NivelSeguridadContrasenia"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
         }
 
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)
@@ -77,7 +88,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void buttonCompartir_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazCompartirContraseña interfazCompartirContraseña = new InterfazCompartirContraseña(ref sistema, ref usuario);
+            InterfazCompartirContraseña interfazCompartirContraseña = 
+                new InterfazCompartirContraseña(ref sistema, ref usuario);
             interfazCompartirContraseña.Show();
         }
 
@@ -95,17 +107,22 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 MessageBox.Show("Error: No hay contraseñas compartidas aun");
             else
             {
-                Credencial duplaSeleccionada = (Credencial)dataGridContraseñasCompartidas.CurrentRow.DataBoundItem;
-                if (duplaSeleccionada == null)
+                Credencial credencialSeleccionada = (Credencial)dataGridContraseñasCompartidas.
+                    CurrentRow.DataBoundItem;
+
+                if (credencialSeleccionada == null)
                     MessageBox.Show("Error: debe seleccionar una contrasenia primero");
                 else
-                {
-                    InterfazDejarDeCompartirContrasenia interfazDejarDeCompartirContrasenias = new InterfazDejarDeCompartirContrasenia(ref sistema, ref usuario, ref duplaSeleccionada);
-                    this.Close();
-                    interfazDejarDeCompartirContrasenias.Show();
-                }
+                    IrADejarDeCompartirContrasenia(ref credencialSeleccionada);
             }
+        }
 
+        private void IrADejarDeCompartirContrasenia(ref Credencial credencialSeleccionada)
+        {
+            InterfazDejarDeCompartirContrasenia interfazDejarDeCompartirContrasenias =
+                new InterfazDejarDeCompartirContrasenia(ref sistema, ref usuario, ref credencialSeleccionada);
+            this.Close();
+            interfazDejarDeCompartirContrasenias.Show();
         }
     }
 }

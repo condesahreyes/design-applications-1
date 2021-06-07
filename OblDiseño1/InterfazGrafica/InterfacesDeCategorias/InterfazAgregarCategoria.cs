@@ -1,8 +1,8 @@
 ﻿using InterfazGrafica.InterfazCategoria;
+using System.Windows.Forms;
+using System.Data;
 using OblDiseño1;
 using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -10,6 +10,7 @@ namespace InterfazGrafica.InterfazDeCategorias
     {
         private Sistema sistema;
         private Usuario usuario;
+
         public InterfazAgregarCategoria(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();

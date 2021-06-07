@@ -1,32 +1,37 @@
-﻿using System;
+﻿using InterfazDeModificarContrasenia = 
+    InterfazGrafica.InterfacesDeContrasenias.InterfazDeModificarContrasenia;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OblDiseño1;
 using OblDiseño1.Entidades;
-using Interfaz_ModificarContrasenia = InterfazGrafica.InterfacesDeContrasenias.Interfaz_ModificarContrasenia;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesReporte
 {
     public partial class InterfazReporteVer : Form
     {
-        Usuario usuario;
-        Sistema sistema;
-        reporte reporte;
-        int nivelDeSeguridad;
+        private Usuario usuario;
+        private Sistema sistema;
+        private reporte reporte;
 
-        const int nivelSeguridadRojo = 1;
-        const int nivelSeguridadNaranja = 2;
-        const int nivelSeguridadAmarillo = 3;
-        const int nivelSeguridadVerdeClaro = 4;
-        const int nivelSeguridadVerdeOscuro = 5;
+        private int nivelDeSeguridad;
 
-        public InterfazReporteVer(ref Usuario usuario, ref Sistema sistema, reporte reporte, int nivelDeSeguridad)
+        private const int nivelSeguridadVerdeOscuro = 5;
+        private const int nivelSeguridadVerdeClaro = 4;
+        private const int nivelSeguridadAmarillo = 3;
+        private const int nivelSeguridadNaranja = 2;
+        private const int nivelSeguridadRojo = 1;
+
+        public InterfazReporteVer(ref Usuario usuario, ref Sistema sistema, 
+            reporte reporte, int nivelDeSeguridad)
         {
+            InitializeComponent();
+
             this.usuario = usuario;
             this.sistema = sistema;
             this.reporte = reporte;
             this.nivelDeSeguridad = nivelDeSeguridad;
-            InitializeComponent();
+
             ActualizarLabel(nivelDeSeguridad);
             ActualizarDatosALaTabla();
         }
@@ -45,26 +50,39 @@ namespace InterfazGrafica.InterfacesReporte
 
             this.dataGridView_Contrasenias.DataSource = biso;
 
+            ModificarDatosVisibles();
+            ModificarCeldasReadonly();
+            ModificarNombreDeColumnas();
+
+            this.dataGridView_Contrasenias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void ModificarDatosVisibles()
+        {
             this.dataGridView_Contrasenias.Columns["TipoSitioOApp"].Visible = false;
             this.dataGridView_Contrasenias.Columns["NivelSeguridadContrasenia"].Visible = false;
             this.dataGridView_Contrasenias.Columns["DataBrench"].Visible = false;
             this.dataGridView_Contrasenias.Columns["Nota"].Visible = false;
+        }
 
+        private void ModificarNombreDeColumnas()
+        {
             this.dataGridView_Contrasenias.Columns["NombreUsuario"].HeaderText = "Usuario";
             this.dataGridView_Contrasenias.Columns["Contrasenia"].HeaderText = "Contraseña";
             this.dataGridView_Contrasenias.Columns["NombreSitioApp"].HeaderText = "Sitio";
-            this.dataGridView_Contrasenias.Columns["FechaUltimaModificacion"].HeaderText = "Ultima Modificacion";
+            this.dataGridView_Contrasenias.Columns["FechaUltimaModificacion"].HeaderText = 
+                "Ultima Modificacion";
             this.dataGridView_Contrasenias.Columns["Categoria"].HeaderText = "Categoria";
+        }
 
+        private void ModificarCeldasReadonly()
+        {
             this.dataGridView_Contrasenias.Columns["NombreUsuario"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["Contrasenia"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["NombreSitioApp"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["FechaUltimaModificacion"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["Categoria"].ReadOnly = true;
-
-            this.dataGridView_Contrasenias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
 
         private void ActualizarLabel(int nivelSeguridad)
         {
@@ -86,8 +104,8 @@ namespace InterfazGrafica.InterfacesReporte
                     this.label_Titulo.Text = "Contraseñas nivel Verde Oscuro";
                     break;
                 default:
-                    throw new ExepcionNivelDeSeguridadNoValido("La ventana IntrvazReporteVer recibio como parametro un nivel de seguridad no valido");
-                    break;
+                    throw new ExepcionNivelDeSeguridadNoValido("La ventana IntrvazReporteVer " +
+                        "recibio como parametro un nivel de seguridad no valido");
             }
         }
 
@@ -102,8 +120,10 @@ namespace InterfazGrafica.InterfacesReporte
         {
             if (0 < dataGridView_Contrasenias.RowCount)
             {
-                Credencial duplaSeleccionada = (Credencial)dataGridView_Contrasenias.CurrentRow.DataBoundItem;
-                Interfaz_ModificarContrasenia modContra = new Interfaz_ModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazReporteVer");
+                Credencial duplaSeleccionada = (Credencial)dataGridView_Contrasenias.CurrentRow.
+                    DataBoundItem;
+                InterfazDeModificarContrasenia modContra = new InterfazDeModificarContrasenia
+                    (ref usuario, ref sistema, duplaSeleccionada, "InterfazReporteVer");
                 modContra.Show();
                 this.Close();
             }

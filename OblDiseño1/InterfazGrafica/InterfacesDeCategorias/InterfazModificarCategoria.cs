@@ -1,6 +1,6 @@
 ﻿using InterfazGrafica.InterfazCategoria;
-using OblDiseño1;
 using System.Windows.Forms;
+using OblDiseño1;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
