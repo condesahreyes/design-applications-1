@@ -8,7 +8,17 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class Entidad_Categoria
     {
+   
         public int Id { set; get; }
         public string Nombre { set; get; }
+
+        public Entidad_Categoria() 
+        {
+        }
+
+        public Entidad_Categoria(string nombre)
+        {
+            this.Nombre = nombre;
+        }
     }
 }

@@ -49,6 +49,8 @@ namespace OblDiseño1
         private static string[] caracteresPorPosicion = { caracteresMayusculas,
             caracteresMinusculas, caracteresNumericos, caracteresEspeciales};
 
+
+        public Dupla_UsuarioContrasenia() { }
         public Dupla_UsuarioContrasenia(string unNombreUsuario, string unaContrasenia,
             string unSitio, string laNota, Categoria laCategoria)
         {

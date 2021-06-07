@@ -25,6 +25,7 @@ namespace OblDiseño1
         private DateTime fechaVencimiento;
         private Categoria categoria;
 
+        public Tarjeta() { }
         public Tarjeta(string unNombre, string unTipo, string unNumero, int unCodigoseguridad
             , DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
         {
@@ -38,14 +39,13 @@ namespace OblDiseño1
         }
 
 
-        
         public string NotaOpcional { set; get; }
 
         public string Nombre { get => nombre; set => SetNombre(value); }
 
         public string Tipo { get => tipo; set => SetTipo(value); }
 
-        [Key]
+     
         public string Numero {
 
             get => numero;
