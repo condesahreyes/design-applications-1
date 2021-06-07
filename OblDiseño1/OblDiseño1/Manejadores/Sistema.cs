@@ -46,11 +46,18 @@ namespace OblDiseño1
             throw new ObjectNotFoundException();
         }
 
-        public List<object>[] ObtenerDataBreaches(ref Usuario usuario, List<string> datosDataBreaches)
+        public List<Credencial> ObtenerDataBreachesCredenciales(ref Usuario usuario, List<string> datosDataBreaches)
         {
             ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
             
-            return dataBreaches.ObtenerEntidadesVulneradas(datosDataBreaches);
+            return dataBreaches.ObtenerCredencialesVulneradas(datosDataBreaches);
+        }
+
+        public List<Tarjeta> ObtenerDataBreachesTarjetas(ref Usuario usuario, List<string> datosDataBreaches)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+
+            return dataBreaches.ObtenerTarjetasVulneradas(datosDataBreaches);
         }
 
     }

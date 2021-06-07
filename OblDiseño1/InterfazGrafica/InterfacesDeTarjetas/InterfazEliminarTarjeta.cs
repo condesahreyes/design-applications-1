@@ -1,6 +1,6 @@
-﻿using OblDiseño1;
+﻿using System.Windows.Forms;
+using OblDiseño1;
 using System;
-using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
 {
@@ -9,6 +9,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Usuario usuario;
         private Sistema sistema;
         private Tarjeta tarjeta;
+
         public InterfazEliminarTarjeta(ref Sistema sistema, ref Usuario usuario, ref Tarjeta tarjeta)
         {
             InitializeComponent();
@@ -16,7 +17,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.sistema = sistema;
             this.tarjeta = tarjeta;
         }
-
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {

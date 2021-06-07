@@ -1,14 +1,13 @@
-﻿using OblDiseño1;
-using System;
-using System.Windows.Forms;
-using InterfazGrafica.InterfazCategoria;
-using InterfazGrafica.InterfacesDeTarjetas;
+﻿using InterfazGrafica.InterfazCompartirContraseñas;
 using InterfazGrafica.InterfacesDeContrasenias;
+using InterfazGrafica.InterfacesDeTarjetas;
+using InterfazGrafica.InterfazDataBreaches;
+using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazIngreso;
-using InterfazGrafica.InterfazDataBreaches;
-using InterfazGrafica.InterfazCompartirContraseñas;
-
+using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -19,7 +18,6 @@ namespace InterfazGrafica.InterfacesMenu
 
         private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
             "se debe registrar una Categoría para acceder a esta opción.";
-
 
         public Menu(ref Sistema sistema, ref Usuario usuario)
         {
@@ -94,7 +92,8 @@ namespace InterfazGrafica.InterfacesMenu
         private void btnCompartirContrasenia_Click_1(object sender, EventArgs e)
         {
             this.Close();
-            InterfazContraseñasCompartidas interfazContraseñas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
+            InterfazContraseñasCompartidas interfazContraseñas = new 
+                InterfazContraseñasCompartidas(ref sistema, ref usuario);
             interfazContraseñas.Show();
         }
     }

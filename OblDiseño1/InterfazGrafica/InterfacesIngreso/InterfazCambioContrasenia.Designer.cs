@@ -50,7 +50,6 @@
             this.label3.Size = new System.Drawing.Size(165, 22);
             this.label3.TabIndex = 24;
             this.label3.Text = "Nueva contraseña";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBoxNuevaContrasenia
             // 
@@ -58,7 +57,6 @@
             this.textBoxNuevaContrasenia.Name = "textBoxNuevaContrasenia";
             this.textBoxNuevaContrasenia.Size = new System.Drawing.Size(160, 20);
             this.textBoxNuevaContrasenia.TabIndex = 23;
-            this.textBoxNuevaContrasenia.TextChanged += new System.EventHandler(this.textBoxNombreSitioApp_TextChanged);
             // 
             // label2
             // 
@@ -71,7 +69,6 @@
             this.label2.Size = new System.Drawing.Size(109, 22);
             this.label2.TabIndex = 22;
             this.label2.Text = "Contraseña";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBoxContrasenia
             // 
@@ -79,7 +76,6 @@
             this.textBoxContrasenia.Name = "textBoxContrasenia";
             this.textBoxContrasenia.Size = new System.Drawing.Size(160, 20);
             this.textBoxContrasenia.TabIndex = 21;
-            this.textBoxContrasenia.TextChanged += new System.EventHandler(this.textBoxContrasenia_TextChanged);
             // 
             // label1
             // 
@@ -92,7 +88,6 @@
             this.label1.Size = new System.Drawing.Size(177, 22);
             this.label1.TabIndex = 20;
             this.label1.Text = "Nombre de usuario";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBoxNombre
             // 
@@ -100,7 +95,6 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(160, 20);
             this.textBoxNombre.TabIndex = 18;
-            this.textBoxNombre.TextChanged += new System.EventHandler(this.textBoxNombre_TextChanged);
             // 
             // btnCancelarContrasenia
             // 

@@ -15,7 +15,7 @@ namespace OblDiseño1
         public Categoria(string nombre)
         {
             if (!EsNombreValido(nombre))
-                throw new Exepcion_InvalidCategoriaData(msgErrorNombre);
+                throw new ExepcionInvalidCategoriaData(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
@@ -23,14 +23,18 @@ namespace OblDiseño1
         public void ActualizarNombre(string nombre)
         {
             if (!EsNombreValido(nombre))
-                throw new Exepcion_InvalidCategoriaData(msgErrorNombre);
+                throw new ExepcionInvalidCategoriaData(msgErrorNombre);
             else
                 this.nombre = nombre;
         }
 
         private bool EsNombreValido(string unNombre)
         {
-            return (unNombre.Length > 15 || unNombre.Length < 3) ? false : true;
+            if(unNombre.Length <= 15 && unNombre.Length >= 3)
+            {
+                return true;
+            }
+            return false;
         }
 
         public override string ToString()

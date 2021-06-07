@@ -88,17 +88,17 @@
     <Compile Include="InterfacesDeTarjetas\InterfazModificarTarjeta.Designer.cs">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.cs">
+    <Compile Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.Designer.cs">
-      <DependentUpon>Interfaz_GenerarContrasenia.cs</DependentUpon>
+    <Compile Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.Designer.cs">
+      <DependentUpon>InterfazGenerarContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.cs">
+    <Compile Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.Designer.cs">
-      <DependentUpon>Interfaz_ModificarContrasenia.cs</DependentUpon>
+    <Compile Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.Designer.cs">
+      <DependentUpon>InterfazDeModificarContrasenia.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.cs">
       <SubType>Form</SubType>
@@ -130,58 +130,58 @@
     <Compile Include="InterfacesReporte\InterfazReporteVer.Designer.cs">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.Designer.cs">
       <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.Designer.cs">
       <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.Designer.cs">
       <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
+    <Compile Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.Designer.cs">
+    <Compile Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.Designer.cs">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazAgregarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazAgregarCategoria.Designer.cs">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazCategoria.Designer.cs">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazModificarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazModificarCategoria.Designer.cs">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.cs">
+    <Compile Include="InterfacesIngreso\InterfazCambioContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.Designer.cs">
+    <Compile Include="InterfacesIngreso\InterfazCambioContrasenia.Designer.cs">
       <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazIngresoSistema.cs">
+    <Compile Include="InterfacesIngreso\InterfazIngresoSistema.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazIngresoSistema.Designer.cs">
+    <Compile Include="InterfacesIngreso\InterfazIngresoSistema.Designer.cs">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -201,11 +201,11 @@
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazModificarTarjeta.resx">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.resx">
-      <DependentUpon>Interfaz_GenerarContrasenia.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.resx">
+      <DependentUpon>InterfazGenerarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.resx">
-      <DependentUpon>Interfaz_ModificarContrasenia.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.resx">
+      <DependentUpon>InterfazDeModificarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazTarjeta.resx">
       <DependentUpon>InterfazTarjeta.cs</DependentUpon>
@@ -222,31 +222,31 @@
     <EmbeddedResource Include="InterfacesReporte\InterfazReporteVer.resx">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.resx">
       <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.resx">
       <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.resx">
       <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDataBreaches\InterfazChequeoDataBreaches.resx">
+    <EmbeddedResource Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.resx">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazAgregarCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazAgregarCategoria.resx">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazCategoria.resx">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazModificarCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazModificarCategoria.resx">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazIngreso\InterfazCambioContrasenia.resx">
+    <EmbeddedResource Include="InterfacesIngreso\InterfazCambioContrasenia.resx">
       <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazIngreso\InterfazIngresoSistema.resx">
+    <EmbeddedResource Include="InterfacesIngreso\InterfazIngresoSistema.resx">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

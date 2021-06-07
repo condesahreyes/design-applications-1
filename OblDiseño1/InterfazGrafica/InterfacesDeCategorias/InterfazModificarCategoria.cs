@@ -1,6 +1,6 @@
 ﻿using InterfazGrafica.InterfazCategoria;
-using OblDiseño1;
 using System.Windows.Forms;
+using OblDiseño1;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -34,7 +34,7 @@ namespace InterfazGrafica.InterfazDeCategorias
                     MessageBox.Show(modificadoCorrectamente);
                     IrACategoria();
                 }
-                catch (Exepcion_InvalidCategoriaData)
+                catch (ExepcionInvalidCategoriaData)
                 {
                     MessageBox.Show(validacionNombre);
                 }

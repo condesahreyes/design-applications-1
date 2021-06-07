@@ -13,7 +13,6 @@ namespace Pruebas
         private static readonly string nombre2 = "Trabajo";
         private static readonly string nombreLargo = "CategoriaTiempoLibre";
         private static readonly string nombreCorto = "Ro";
-        private readonly string mensajeNombreIncorrecto = "El nombre debe tener entre 3 y 15 caracteres";
 
         Categoria categoria = new Categoria(nombre1);
         Categoria otraCategoria = new Categoria(nombre2);
@@ -32,28 +31,28 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
+        [ExpectedException(typeof(ExepcionInvalidCategoriaData))]
         public void AltaCategoriaNombreLargo()
         {
                 Categoria nombreLargoCat = new Categoria(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
+        [ExpectedException(typeof(ExepcionInvalidCategoriaData))]
         public void AltaCategoriaNombreCorto()
         {
             Categoria nombreCortoCat = new Categoria(nombreCorto);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
+        [ExpectedException(typeof(ExepcionInvalidCategoriaData))]
         public void ModificacionCategoriaNombreLargo()
         {
             categoria.ActualizarNombre(nombreLargo);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidCategoriaData))]
+        [ExpectedException(typeof(ExepcionInvalidCategoriaData))]
         public void ModificacionCategoriaNombreCorto()
         {
             categoria.ActualizarNombre(nombreCorto);

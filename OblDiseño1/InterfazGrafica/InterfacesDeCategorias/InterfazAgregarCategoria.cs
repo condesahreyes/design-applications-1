@@ -1,8 +1,8 @@
 ﻿using InterfazGrafica.InterfazCategoria;
+using System.Windows.Forms;
+using System.Data;
 using OblDiseño1;
 using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -10,6 +10,7 @@ namespace InterfazGrafica.InterfazDeCategorias
     {
         private Sistema sistema;
         private Usuario usuario;
+
         public InterfazAgregarCategoria(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
@@ -48,7 +49,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             {
                 categoria = new Categoria(nomCategoria);
             }
-            catch(Exepcion_InvalidCategoriaData)
+            catch(ExepcionInvalidCategoriaData)
             {
                 MessageBox.Show("Error el nombre de la categoría debe contener entre 3 a 15 caracteres.");
             }
