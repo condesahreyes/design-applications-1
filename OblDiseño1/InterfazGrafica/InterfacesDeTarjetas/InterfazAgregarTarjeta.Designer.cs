@@ -66,7 +66,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(187, 22);
             this.label5.TabIndex = 33;
-            this.label5.Text = "Codigo de Seguridad";
+            this.label5.Text = "Código de Seguridad";
             // 
             // label4
             // 
@@ -90,7 +90,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 22);
             this.label3.TabIndex = 30;
-            this.label3.Text = "Numero";
+            this.label3.Text = "Número";
             // 
             // textBoxNumeroTarjeta
             // 
@@ -162,7 +162,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(94, 22);
             this.label7.TabIndex = 36;
-            this.label7.Text = "Categoria";
+            this.label7.Text = "Categoría";
             // 
             // label6
             // 
@@ -351,7 +351,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InterfazAgregarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazAgregarTarjeta";
+            this.Text = "Agregar Tarjeta";
             this.ResumeLayout(false);
             this.PerformLayout();
 

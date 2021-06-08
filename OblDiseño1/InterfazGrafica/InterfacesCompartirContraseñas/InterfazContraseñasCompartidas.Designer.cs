@@ -29,6 +29,10 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridContraseñasCompartidas = new System.Windows.Forms.DataGridView();
             this.buttonCompartir = new System.Windows.Forms.Button();
             this.buttonVolver = new System.Windows.Forms.Button();
@@ -43,14 +47,31 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             // dataGridContraseñasCompartidas
             // 
             this.dataGridContraseñasCompartidas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridContraseñasCompartidas.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridContraseñasCompartidas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridContraseñasCompartidas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridContraseñasCompartidas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridContraseñasCompartidas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridContraseñasCompartidas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridContraseñasCompartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridContraseñasCompartidas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridContraseñasCompartidas.EnableHeadersVisualStyles = false;
+            this.dataGridContraseñasCompartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.dataGridContraseñasCompartidas.Location = new System.Drawing.Point(37, 37);
             this.dataGridContraseñasCompartidas.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridContraseñasCompartidas.Name = "dataGridContraseñasCompartidas";
             this.dataGridContraseñasCompartidas.ReadOnly = true;
+            this.dataGridContraseñasCompartidas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridContraseñasCompartidas.RowHeadersVisible = false;
             this.dataGridContraseñasCompartidas.RowHeadersWidth = 51;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridContraseñasCompartidas.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridContraseñasCompartidas.RowTemplate.Height = 24;
             this.dataGridContraseñasCompartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContraseñasCompartidas.Size = new System.Drawing.Size(492, 117);
@@ -107,15 +128,32 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             // dataGridContraseñasCompartidasConmigo
             // 
             this.dataGridContraseñasCompartidasConmigo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridContraseñasCompartidasConmigo.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridContraseñasCompartidasConmigo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridContraseñasCompartidasConmigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridContraseñasCompartidasConmigo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridContraseñasCompartidasConmigo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridContraseñasCompartidasConmigo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridContraseñasCompartidasConmigo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridContraseñasCompartidasConmigo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dataGridContraseñasCompartidasConmigo.Enabled = false;
+            this.dataGridContraseñasCompartidasConmigo.EnableHeadersVisualStyles = false;
+            this.dataGridContraseñasCompartidasConmigo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.dataGridContraseñasCompartidasConmigo.Location = new System.Drawing.Point(37, 193);
             this.dataGridContraseñasCompartidasConmigo.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridContraseñasCompartidasConmigo.Name = "dataGridContraseñasCompartidasConmigo";
             this.dataGridContraseñasCompartidasConmigo.ReadOnly = true;
+            this.dataGridContraseñasCompartidasConmigo.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridContraseñasCompartidasConmigo.RowHeadersVisible = false;
             this.dataGridContraseñasCompartidasConmigo.RowHeadersWidth = 51;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridContraseñasCompartidasConmigo.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridContraseñasCompartidasConmigo.RowTemplate.Height = 24;
             this.dataGridContraseñasCompartidasConmigo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContraseñasCompartidasConmigo.Size = new System.Drawing.Size(492, 117);

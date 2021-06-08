@@ -60,6 +60,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void ModificarDatosVisibles()
         {
             this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].Visible = false;
             this.dataGridView_Contrasenias.Columns["ObtenerContraseña"].Visible = false;
             this.dataGridView_Contrasenias.Columns["TipoSitioOApp"].Visible = false;
             this.dataGridView_Contrasenias.Columns["DataBrench"].Visible = false;
@@ -72,16 +73,13 @@ namespace InterfazGrafica.InterfacesReporte
             this.dataGridView_Contrasenias.Columns["NombreUsuario"].HeaderText = "Usuario";
             this.dataGridView_Contrasenias.Columns["NombreSitioApp"].HeaderText = "Sitio";
             this.dataGridView_Contrasenias.Columns["FechaUltimaModificacion"].HeaderText = 
-                "Ultima Modificacion";
-            this.dataGridView_Contrasenias.Columns["Categoria"].HeaderText = "Categoria";
-            this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].HeaderText = 
-                "Nivel Seguridad";
+                "Ultima Modificación";
+            this.dataGridView_Contrasenias.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void ModificarCeldasReadonly()
         {
             this.dataGridView_Contrasenias.Columns["FechaUltimaModificacion"].ReadOnly = true;
-            this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["NombreSitioApp"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["NombreUsuario"].ReadOnly = true;
             this.dataGridView_Contrasenias.Columns["Categoria"].ReadOnly = true;

@@ -141,7 +141,7 @@
             this.Controls.Add(this.textBoxModificarCategoria);
             this.Name = "InterfazModificarCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazModificarCategoria";
+            this.Text = "Modificar Categoría";
             this.ResumeLayout(false);
             this.PerformLayout();
 

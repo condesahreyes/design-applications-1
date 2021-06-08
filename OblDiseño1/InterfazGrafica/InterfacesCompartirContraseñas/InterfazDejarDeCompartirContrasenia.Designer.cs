@@ -29,6 +29,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridUsuariosCompartidos = new System.Windows.Forms.DataGridView();
             this.buttonDejarDeCompartir = new System.Windows.Forms.Button();
             this.buttonVolver = new System.Windows.Forms.Button();
@@ -38,12 +40,37 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             // 
             // dataGridUsuariosCompartidos
             // 
-            this.dataGridUsuariosCompartidos.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridUsuariosCompartidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridUsuariosCompartidos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridUsuariosCompartidos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridUsuariosCompartidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridUsuariosCompartidos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridUsuariosCompartidos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUsuariosCompartidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridUsuariosCompartidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridUsuariosCompartidos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridUsuariosCompartidos.EnableHeadersVisualStyles = false;
+            this.dataGridUsuariosCompartidos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
             this.dataGridUsuariosCompartidos.Location = new System.Drawing.Point(143, 72);
             this.dataGridUsuariosCompartidos.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridUsuariosCompartidos.Name = "dataGridUsuariosCompartidos";
             this.dataGridUsuariosCompartidos.ReadOnly = true;
+            this.dataGridUsuariosCompartidos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridUsuariosCompartidos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridUsuariosCompartidos.RowHeadersVisible = false;
             this.dataGridUsuariosCompartidos.RowHeadersWidth = 51;
             this.dataGridUsuariosCompartidos.RowTemplate.Height = 24;

@@ -29,6 +29,7 @@ namespace InterfazGrafica.InterfazDataBreaches
             this.dataGridContrasenias.DataSource = biso;
 
             CambiarColumnasVisiblesDelDataGridCredenciales();
+            ModificarHeaderTextCredencial();
         }
 
         private void CambiarColumnasVisiblesDelDataGridCredenciales()
@@ -42,6 +43,13 @@ namespace InterfazGrafica.InterfazDataBreaches
             this.dataGridContrasenias.Columns["Nota"].Visible = false;
         }
 
+        private void ModificarHeaderTextCredencial()
+        {
+            this.dataGridContrasenias.Columns["NombreUsuario"].HeaderText = "Usuario";
+            this.dataGridContrasenias.Columns["NombreSitioApp"].HeaderText = "Sitio";
+            this.dataGridContrasenias.Columns["Categoria"].HeaderText = "Categoría";
+        }
+
         private void CargarDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
         {
             BindingSource biso = new BindingSource();
@@ -50,6 +58,7 @@ namespace InterfazGrafica.InterfazDataBreaches
             biso.DataSource = tarjetasVulneradas;
 
             CambiarColumnasVisiblesDelDataGridTarjetas(tarjetasVulneradas);
+            ModificarHeaderTextTarjeta();
         }
 
         private void CambiarColumnasVisiblesDelDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
@@ -59,6 +68,11 @@ namespace InterfazGrafica.InterfazDataBreaches
             dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
             dataGridTarjetas.Columns["fechaVencimiento"].Visible = false;
             dataGridTarjetas.Columns["categoria"].Visible = false;
+        }
+
+        private void ModificarHeaderTextTarjeta()
+        {
+            this.dataGridTarjetas.Columns["Numero"].HeaderText = "Número";
         }
 
         private void btnChequear_Click(object sender, EventArgs e)

@@ -53,8 +53,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             this.dataGridView_ListaDuplas.Columns["NombreUsuario"].HeaderText = "Usuario";
             this.dataGridView_ListaDuplas.Columns["NombreSitioApp"].HeaderText = "Sitio";
-            this.dataGridView_ListaDuplas.Columns["FechaUltimaModificacion"].HeaderText = "Ultima Modificacion";
-            this.dataGridView_ListaDuplas.Columns["Categoria"].HeaderText = "Categoria";
+            this.dataGridView_ListaDuplas.Columns["FechaUltimaModificacion"].HeaderText = "Ultima Modificación";
+            this.dataGridView_ListaDuplas.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void ModificarACamposSoloLectura()
