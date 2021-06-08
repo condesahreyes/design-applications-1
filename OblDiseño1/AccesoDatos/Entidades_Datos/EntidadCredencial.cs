@@ -1,50 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AccesoDatos.Entidades_Datos
 {
-    public class Entidad_DuplaUsuarioContrasenia
+    public class EntidadCredencial
     {
-        private static int ultimoIdAsignado = 0;
-
-        public int Id { set; get; }
+        public int Id { get; set; }
+        [Key]
         public string NombreUsuario { get; set; }
 
-        public string Contrasenia { get; set ; }
+        public EntidadContraseña Contrasenia { get; set ; }
 
+        [Key]
         public string NombreSitioApp { get; set ; }
 
         public string TipoSitioOApp { get; set; }
 
         public string Nota { get; set ; }
 
-        public Entidad_Categoria Categoria { get; set; }
+        public EntidadCategoria Categoria { get; set; }
 
         public DateTime FechaUltimaModificacion { get; set; }
 
-        public int NivelSeguridadContrasenia { get; set; }
-
-
-        public Entidad_DuplaUsuarioContrasenia() 
+        
+        public EntidadCredencial() 
         {
-            this.Id = ultimoIdAsignado++;
         }
 
 
-        public Entidad_DuplaUsuarioContrasenia(string unNombreUsuario, string unaContrasenia,
-            string unSitio, string laNota, Entidad_Categoria laCategoria, int nivelSeguridadContrasenia)
+        public EntidadCredencial(string unNombreUsuario, EntidadContraseña unaContrasenia,
+            string unSitio, string laNota, EntidadCategoria laCategoria)
         {
-            Id = ultimoIdAsignado++;
             NombreUsuario = unNombreUsuario;
             Contrasenia = unaContrasenia;
             NombreSitioApp = unSitio;
             Nota = laNota;
             Categoria = laCategoria;
             FechaUltimaModificacion = DateTime.Today;
-            this.NivelSeguridadContrasenia = nivelSeguridadContrasenia;
         }
     }
 }

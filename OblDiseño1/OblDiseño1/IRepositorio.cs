@@ -1,28 +1,25 @@
-﻿using OblDiseño1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccesoDatos
+namespace OblDiseño1
 {
-        public interface IRepositorio<T, K>
-        {
-            void Add(T dato);
+    public interface IRepositorio <T,K>
+    {
+        void Add(T elemento);
 
-            bool esVacio();
+        bool esVacio();
 
-            T Get(K id);
+        bool Existe(K id);
 
-            IEnumerable<T> GetAll();
+        T Get(K id);
 
-            void Delete(K id);
+        List<T> GetAll();
 
-            void Clear();
-        }
+        void Delete(K id);
 
-        //public interface ICategoria_Repositorio : IRepositorio<Categoria, int>;
-
-
+        void Clear();
+    }
 }

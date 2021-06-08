@@ -8,11 +8,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AccesoDatos.Entidades_Datos
 {
-    public class Entidad_Tarjeta
+    public class EntidadTarjeta
     {
        
 
-        public int Id { get; set; }
         public string NotaOpcional { set; get; }
         public string Nombre { get; set; }
         public string Tipo { get; set; }
@@ -21,13 +20,13 @@ namespace AccesoDatos.Entidades_Datos
         public int CodigoSeguridad { get; set; }
         public DateTime FechaVencimiento { get; set; }
 
-        public Entidad_Categoria Categoria { get; set; }
+        public EntidadCategoria Categoria { get; set; }
 
 
-        public Entidad_Tarjeta() 
+        public EntidadTarjeta() 
         {
         }
-        public Entidad_Tarjeta(string nota, string nombre, string tipo, int numero, int codigoSeguridad, DateTime fecha, Entidad_Categoria categoria)
+        public EntidadTarjeta(string nota, string nombre, string tipo, int numero, int codigoSeguridad, DateTime fecha, EntidadCategoria categoria)
         {
             this.Nombre = nombre;
             this.NotaOpcional = nota;

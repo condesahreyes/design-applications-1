@@ -6,10 +6,11 @@ namespace AccesoDatos
 {
     class Contexto : DbContext
     {
-        public DbSet<Entidad_Categoria> categorias { get; set; }
-        public DbSet<Entidad_DuplaUsuarioContrasenia> duplas { get; set; }
-        public DbSet<Entidad_Tarjeta> tarjetas { get; set; }
-        public DbSet<Entidad_Usuario> usuarios { get; set; }
+        public DbSet<EntidadCategoria> categorias { get; set; }
+        public DbSet<EntidadCredencial> credenciales { get; set; }
+        public DbSet<EntidadContraseña> contraseñas { set; get; }
+        public DbSet<EntidadTarjeta> tarjetas { get; set; }
+        public DbSet<EntidadUsuario> usuarios { get; set; }
         
 
         public Contexto() : base("BddD1")

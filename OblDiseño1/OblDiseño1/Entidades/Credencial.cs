@@ -5,7 +5,7 @@ namespace OblDiseño1
 {
     public class Credencial : IComparable<Credencial>
     {
-
+        public int Id { set; get; }
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
 
         public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value); }
@@ -36,6 +36,8 @@ namespace OblDiseño1
         private const int SITIO_LARGO_MIN = 3;
         private const int NOTA_LARGO_MAX = 250;
 
+
+        public Credencial() { }
         public Credencial(string unNombreUsuario, Contraseña unaContrasenia,
             string unSitio, string laNota, Categoria laCategoria)
         {

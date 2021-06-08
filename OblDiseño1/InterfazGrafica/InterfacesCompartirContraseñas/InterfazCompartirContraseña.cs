@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using System;
-
+using OblDiseño1;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {

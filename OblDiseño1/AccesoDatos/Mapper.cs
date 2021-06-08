@@ -1,5 +1,6 @@
 ﻿using AccesoDatos.Entidades_Datos;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,15 @@ namespace AccesoDatos
 {
     public class Mapper
     {
-        public Entidad_Categoria PasarAEntidad(Categoria categoriaDominio)
+        public EntidadCategoria PasarAEntidad(Categoria categoriaDominio)
         {
-            Entidad_Categoria categoriaDto = new Entidad_Categoria();
+            EntidadCategoria categoriaDto = new EntidadCategoria();
             categoriaDto.Nombre = categoriaDominio.Nombre;
 
             return categoriaDto;
         }
 
-        public Categoria PasarADominio(Entidad_Categoria categoriaEntidad)
+        public Categoria PasarADominio(EntidadCategoria categoriaEntidad)
         {
             Categoria categoriaDominio = new Categoria();
             categoriaDominio.Nombre = categoriaEntidad.Nombre;
@@ -26,30 +27,57 @@ namespace AccesoDatos
             return categoriaDominio;
         }
 
-        public Entidad_DuplaUsuarioContrasenia PasarAEntidad(Dupla_UsuarioContrasenia duplaDominio)
+        public EntidadContraseña PasarAEntidad(Contraseña contraseñaDominio)
         {
-            Entidad_DuplaUsuarioContrasenia duplaEntidad = new Entidad_DuplaUsuarioContrasenia();
-            duplaEntidad.Categoria = PasarAEntidad(duplaDominio.Categoria);
-            duplaEntidad.Contrasenia = duplaDominio.Contrasenia;
-            duplaEntidad.FechaUltimaModificacion = duplaDominio.FechaUltimaModificacion;
-            duplaEntidad.NivelSeguridadContrasenia = duplaDominio.NivelSeguridadContrasenia;
-            duplaEntidad.NombreSitioApp = duplaDominio.NombreSitioApp;
-            duplaEntidad.NombreUsuario = duplaDominio.NombreUsuario;
-            duplaEntidad.Nota = duplaDominio.Nota;
-            duplaEntidad.TipoSitioOApp = duplaDominio.TipoSitioOApp;
+            EntidadContraseña contraseñaEntidad = new EntidadContraseña();
+            contraseñaEntidad.Contrasenia = contraseñaDominio.Contrasenia;
+            contraseñaEntidad.NivelSeguridadContrasenia = contraseñaDominio.NivelSeguridadContrasenia;
 
-            return duplaEntidad;
+            return contraseñaEntidad;
         }
 
-        public Dupla_UsuarioContrasenia PasarADominio(Entidad_DuplaUsuarioContrasenia duplaEntidad)
+        public Contraseña PasarADominio(EntidadContraseña contraseñaEntidad)
         {
-            Dupla_UsuarioContrasenia duplaDominio = new Dupla_UsuarioContrasenia(duplaEntidad.NombreUsuario, duplaEntidad.Contrasenia, duplaEntidad.NombreSitioApp, duplaEntidad.Nota, PasarADominio(duplaEntidad.Categoria));
-            return duplaDominio;
+            Contraseña contraseñaDominio = new Contraseña();
+            contraseñaDominio.Contrasenia = contraseñaEntidad.Contrasenia;
+            contraseñaDominio.NivelSeguridadContrasenia = contraseñaEntidad.NivelSeguridadContrasenia;
+
+            return contraseñaDominio;
         }
 
-        public Entidad_Tarjeta PasarAEntidad(Tarjeta tarjetaDominio)
+
+        public EntidadCredencial PasarAEntidad(Credencial credencialDominio)
         {
-            Entidad_Tarjeta tarjetaEntidad= new Entidad_Tarjeta();
+            EntidadCredencial credencialEntidad = new EntidadCredencial();
+            credencialEntidad.Categoria = PasarAEntidad(credencialDominio.Categoria);
+            credencialEntidad.Contrasenia = PasarAEntidad(credencialDominio.Contraseña);
+            credencialEntidad.FechaUltimaModificacion = credencialDominio.FechaUltimaModificacion;
+            credencialEntidad.NombreSitioApp = credencialDominio.NombreSitioApp;
+            credencialEntidad.NombreUsuario = credencialDominio.NombreUsuario;
+            credencialEntidad.Nota = credencialDominio.Nota;
+            credencialEntidad.TipoSitioOApp = credencialDominio.TipoSitioOApp;
+
+            return credencialEntidad;
+        }
+
+        public Credencial PasarADominio(EntidadCredencial credencialEntidad)
+        {
+            Credencial credencialDominio = new Credencial();
+            credencialDominio.Categoria = PasarADominio(credencialEntidad.Categoria);
+            credencialDominio.Contraseña = PasarADominio(credencialEntidad.Contrasenia);
+            credencialDominio.FechaUltimaModificacion = credencialEntidad.FechaUltimaModificacion;
+            credencialDominio.NombreSitioApp = credencialEntidad.NombreSitioApp;
+            credencialDominio.NombreUsuario = credencialEntidad.NombreUsuario;
+            credencialDominio.Nota = credencialEntidad.Nota;
+            credencialDominio.TipoSitioOApp = credencialEntidad.TipoSitioOApp;
+            credencialDominio.Id = credencialEntidad.Id;
+
+            return credencialDominio;
+        }
+
+        public EntidadTarjeta PasarAEntidad(Tarjeta tarjetaDominio)
+        {
+            EntidadTarjeta tarjetaEntidad= new EntidadTarjeta();
             tarjetaEntidad.Categoria = PasarAEntidad(tarjetaDominio.Categoria);
             tarjetaEntidad.CodigoSeguridad = tarjetaDominio.CodigoSeguridad;
             tarjetaEntidad.FechaVencimiento = tarjetaDominio.FechaVencimiento;
@@ -61,7 +89,7 @@ namespace AccesoDatos
             return tarjetaEntidad;
         }
 
-        public Tarjeta PasarADominio(Entidad_Tarjeta tarjetaEntidad)
+        public Tarjeta PasarADominio(EntidadTarjeta tarjetaEntidad)
         {
             Tarjeta tarjetaDominio = new Tarjeta();
             tarjetaDominio.Categoria = PasarADominio(tarjetaEntidad.Categoria);
@@ -75,38 +103,48 @@ namespace AccesoDatos
             return tarjetaDominio;
         }
 
-        public Entidad_Usuario PasarAEntidad(Usuario usuarioDominio)
+        /*public EntidadGestorContraseñasCompartidas PasarAEntidad(GestorContraseniasCompartidas gestorDominio)
         {
-            Entidad_Usuario usuarioEntidad = new Entidad_Usuario();
+            EntidadGestorContraseñasCompartidas gestorEntidad = new EntidadGestorContraseñasCompartidas();
+            gestorEntidad.contraseniasCompartidasConmigo = gestorDominio.ObtenerContraseniasCompartidasConmigo();
+            
+        }*/
+
+        public EntidadUsuario PasarAEntidad(Usuario usuarioDominio)
+        {
+            EntidadUsuario usuarioEntidad = new EntidadUsuario();
             usuarioEntidad.Nombre = usuarioDominio.Nombre;
             usuarioEntidad.Contrasenia = usuarioDominio.Contrasenia;
-            foreach (var cat in usuarioDominio.ObtenerCategorias())
+            foreach (var categoriaDominio in usuarioDominio.ObtenerCategorias())
             {
-                Entidad_Categoria categoriaEntidad = PasarAEntidad(cat);
+                EntidadCategoria categoriaEntidad = PasarAEntidad(categoriaDominio);
                 usuarioEntidad.categorias.Add(categoriaEntidad);
             }
 
-            foreach (var tarjetas in usuarioDominio.ObtenerTarjetas())
+            foreach (var tarjetaDominio in usuarioDominio.ObtenerTarjetas())
             {
-                Entidad_Tarjeta tarjetaEntidad = PasarAEntidad(tarjetas);
+                EntidadTarjeta tarjetaEntidad = PasarAEntidad(tarjetaDominio);
                 usuarioEntidad.tarjetas.Add(tarjetaEntidad);
             }
 
-            foreach (var duplas in usuarioDominio.ObtenerDuplas())
+            foreach (var credencialDominio in usuarioDominio.ObtenerCredenciales())
             {
-                Entidad_DuplaUsuarioContrasenia duplasEntidad = PasarAEntidad(duplas);
-                usuarioEntidad.duplas.Add(duplasEntidad);
+                EntidadCredencial credencialEntidad = PasarAEntidad(credencialDominio);
+                usuarioEntidad.credenciales.Add(credencialEntidad);
             }
+
+            //usuarioEntidad.gestorContraseñas = PasarAEntidad(usuarioDominio.GestorCompartirContrasenia);
                 
             
             return usuarioEntidad;
         }
 
-        public Usuario PasarADominio(Entidad_Usuario usuarioEntidad)
+        public Usuario PasarADominio(EntidadUsuario usuarioEntidad)
         {
             Usuario usuarioDominio = new Usuario();
             usuarioDominio.Nombre = usuarioEntidad.Nombre;
             usuarioDominio.Contrasenia = usuarioEntidad.Contrasenia;
+            
 
             foreach (var categoriaEntidad in usuarioEntidad.categorias)
             {
@@ -114,10 +152,10 @@ namespace AccesoDatos
                 usuarioDominio.ObtenerCategorias().Add(categoriaDominio);
             }
 
-            foreach (var duplaEntidad in usuarioEntidad.duplas)
+            foreach (var credencialEntidad in usuarioEntidad.credenciales)
             {
-                Dupla_UsuarioContrasenia duplaDominio = PasarADominio(duplaEntidad);
-                usuarioDominio.ObtenerDuplas().Add(duplaDominio);
+                Credencial duplaDominio = PasarADominio(credencialEntidad);
+                usuarioDominio.ObtenerCredenciales().Add(duplaDominio);
             }
 
             foreach (var tarjetaEntidad in usuarioEntidad.tarjetas)
@@ -125,6 +163,8 @@ namespace AccesoDatos
                 Tarjeta tarjetaDominio = PasarADominio(tarjetaEntidad);
                 usuarioDominio.ObtenerTarjetas().Add(tarjetaDominio);
             }
+
+            //usuarioDominio.GestorCompartirContrasenia = PasarADominio(usuarioEntidad.gestorContraseñas);
 
             return usuarioDominio;
         }

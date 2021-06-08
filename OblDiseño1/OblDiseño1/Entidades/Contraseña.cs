@@ -25,6 +25,8 @@ namespace OblDiseño1.Entidades
 
         private string contrasenia;
 
+
+        public Contraseña() { } 
         public Contraseña(string unaContrasenia)
         {
             Contrasenia = unaContrasenia;

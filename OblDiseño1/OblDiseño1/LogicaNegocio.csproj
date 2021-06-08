@@ -58,6 +58,7 @@
     <Compile Include="Exception\ExepcionNivelDeSeguridadNoValido.cs" />
     <Compile Include="Exception\ExepcionObjetosRepetidos.cs" />
     <Compile Include="Exception\ExepcionTarjetaIncorrecta.cs" />
+    <Compile Include="IRepositorio.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Credencial.cs" />
     <Compile Include="Manejadores\Sistema.cs" />
