@@ -1,27 +1,27 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using OblDiseño1;
 using OblDiseño1.Entidades;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
     [TestClass]
     public class ChequeadorDeDataBreachesTest
     {
-
-        private Usuario usuario;
-
-        private List<string> infoBreacheada;
         private List<string> contraseniaDeDuplaBreachada;
         private List<string> numeroTagetaBreachada;
+        private List<string> infoBreacheada;
         private List<string> breachVacio;
-        private List<Credencial> credencialBracheada;
+
         private List<Credencial> credencialesBracheadas;
-        private List<Tarjeta> tarjetaBreachada;
+        private List<Credencial> credencialBracheada;
         private List<Tarjeta> tarjetasBreachadas;
+        private List<Tarjeta> tarjetaBreachada;
 
         private ChequeadorDeDataBreaches chequeador;
+
+        private Usuario usuario;
 
 
         private static string nombreCategoria = "SuperCategoria";

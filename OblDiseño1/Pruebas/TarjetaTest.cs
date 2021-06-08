@@ -37,38 +37,44 @@ namespace Pruebas
             categoria = new Categoria("Personal");
             fechaIncorrecta = new DateTime(1200, 04, 12);
             fechaVencimiento = new DateTime(2024, 10, 05);
-            tarjetaEsperada = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, fechaVencimiento, categoria, nota);
+            tarjetaEsperada = new Tarjeta("Rodri", "Visa", 
+                "1876322167154328", 241, fechaVencimiento, categoria, nota);
         }
         
         [TestMethod]
         public void Crear_Tarjeta_Test()
         {
-            Tarjeta tarjetaCreada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaCreada = new Tarjeta(nombre, tipo, numero, 
+                codigoSeguridad, fechaVencimiento, categoria, nota);
             Assert.IsNotNull(tarjetaCreada);
         }
 
         [TestMethod]
         public void Tarjetas_Iguales_Test()
         {
-            Assert.AreEqual(tarjetaEsperada, new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota));
+            Assert.AreEqual(tarjetaEsperada, new Tarjeta(nombre, tipo, numero,
+                codigoSeguridad, fechaVencimiento, categoria, nota));
         }
 
         public void Tarjetas_Diferentes_Test()
         {
-            Assert.AreNotEqual(tarjetaEsperada, new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota));
+            Assert.AreNotEqual(tarjetaEsperada, new Tarjeta(nombre, tipo, numero, 
+                codigoSeguridad, fechaVencimiento, categoria, nota));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_NumeroIncorrecto_Test()
         {
-            Tarjeta tarjetaNumeroIncoreccto = new Tarjeta(nombre, tipo, numeroIncorrecto, codigoSeguridad, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaNumeroIncoreccto = new Tarjeta(nombre, tipo, numeroIncorrecto, 
+                codigoSeguridad, fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
         public void Baja_Tarjeta_Test()
         {
-            Tarjeta tarjetaABorrar = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaABorrar = new Tarjeta(nombre, tipo, numero, codigoSeguridad, 
+                fechaVencimiento, categoria, nota);
             tarjetaABorrar.BorrarTarjeta(tarjetaABorrar);
             Assert.IsNotNull(tarjetaABorrar);
         }
@@ -89,52 +95,59 @@ namespace Pruebas
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_CodigoSeguridadLargo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadLargo, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadLargo,
+                fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_CodigoSeguridadCorto_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadCorto, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridadCorto,
+                fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_NombreNulo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(null, tipo, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(null, tipo, numero, codigoSeguridad,
+                fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_TipoNulo_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(nombre, null, numero, codigoSeguridad, fechaVencimiento, categoria, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, null, numero, codigoSeguridad, 
+                fechaVencimiento, categoria, nota);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_fechaVencimientoInvalida_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, categoria, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, 
+                fechaIncorrecta, categoria, nota);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExepcionTarjetaIncorrecta))]
         public void Tarjeta_CategoriaNula_Test()
         {
-            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, fechaIncorrecta, null, nota);
+            Tarjeta tarjetaEsperada = new Tarjeta(nombre, tipo, numero, codigoSeguridad, 
+                fechaIncorrecta, null, nota);
         }
         
         [TestMethod]
         public void Comparar2TarjetasPorCategoria()
         {
-            Tarjeta primerTarjeta = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, fechaVencimiento, categoria, nota);
-            Tarjeta segundaTarjeta = new Tarjeta("Facundo", "MasterCard", "2222111133334444", 745, fechaVencimiento, new Categoria("Trabajo"),"");
+            Tarjeta primerTarjeta = new Tarjeta("Rodri", "Visa", "1876322167154328", 241, 
+                fechaVencimiento, categoria, nota);
+            Tarjeta segundaTarjeta = new Tarjeta("Facundo", "MasterCard", "2222111133334444", 
+                745, fechaVencimiento, new Categoria("Trabajo"),"");
 
             Assert.AreEqual(-1, primerTarjeta.CompareTo(segundaTarjeta));
         }
-
     }
 }
