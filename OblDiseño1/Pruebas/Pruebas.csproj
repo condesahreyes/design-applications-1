@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dupla_UsuarioContraseniaTest.cs" />
+    <Compile Include="EncriptadorTest.cs" />
     <Compile Include="SistemaTest.cs" />
     <Compile Include="TarjetaTest.cs" />
     <Compile Include="CategoriaTest.cs" />
