@@ -2,12 +2,14 @@
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
+using AccesoDatos;
 
 namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazIngresoSistema : Form
     {
         private Sistema sistema;
+        UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
 
         public InterfazIngresoSistema(ref Sistema sistema)
         {
@@ -22,25 +24,38 @@ namespace InterfazGrafica.InterfazIngreso
 
             Usuario usuario = ObtenerUsuario(nombreUsuario, contrasenia);
 
-            if (usuario != null && sistema.PuedoIngresarAlSistema(nombreUsuario, contrasenia))
+            if (usuario != null && VerificarContraseñaCorrecta(nombreUsuario, contrasenia))
+            {
+                MessageBox.Show("Se ha ingresado correctamente.Bienvenido!");
                 IrAlMenu(ref usuario);
+            }
+                
             else if(usuario != null)
                 ContraseniaInvalida();
+        }
+
+        public bool VerificarContraseñaCorrecta(string nombreUsuario, string contrasenia)
+        {
+            Usuario usuarioIngresado = usuariosRepo.Get(nombreUsuario);
+            if (usuarioIngresado.Contrasenia == contrasenia)
+                return true;
+            else
+                return false;
         }
 
         private Usuario ObtenerUsuario(string nombreUsuario, string contrasenia)
         {
             Usuario usuario=null;
-
-            try
-            {
-                usuario = sistema.DevolverUsuario(nombreUsuario);
-            }
-            catch (Exception ObjectNotFoundException)
-            {
+                //usuario = sistema.DevolverUsuario(nombreUsuario);
                 
+                if (usuariosRepo.Existe(nombreUsuario))
+                {
+                    Usuario usuarioDominio =usuariosRepo.Get(nombreUsuario);
+                    return usuarioDominio;
+                }
+                else
                 usuario = CrearUsuario(nombreUsuario, contrasenia);
-            }
+            
 
             return usuario;
         }
@@ -50,8 +65,11 @@ namespace InterfazGrafica.InterfazIngreso
             try
             {
                 Usuario unUsuario=sistema.AgregarUsuario(nombreUsuario, contrasenia);
+                UsuarioRepositorio usuarioRepo = new UsuarioRepositorio();
+                Usuario usuarioAAgregar = new Usuario(nombreUsuario, contrasenia);
+                usuarioRepo.Add(usuarioAAgregar);
                 MessageBox.Show("Se lo ha registrado como nuevo usuario");
-                return unUsuario;
+                return usuarioAAgregar;
             }
             catch (Exception InvalidUsuarioDataException)
             {

@@ -11,6 +11,11 @@ namespace AccesoDatos
     public class CategoriaRepositorio : IRepositorio<Categoria, string > 
     {
         private readonly Mapper mapper = new Mapper();
+        public EntidadUsuario usuario;
+        public CategoriaRepositorio(Usuario usuarioDueñoDominio)
+        {
+            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+        }
         public void Add(Categoria categoriaDominio) 
         {
             using (Contexto contexto = new Contexto())
@@ -20,10 +25,10 @@ namespace AccesoDatos
                 else
                 {
                     EntidadCategoria categoriaAlAgregar = mapper.PasarAEntidad(categoriaDominio);
+                    categoriaAlAgregar.usuarioDueño = this.usuario;
                     contexto.categorias.Add(categoriaAlAgregar);
                     contexto.SaveChanges();
                 }
-                    
             }
         }
 
@@ -39,7 +44,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.categorias.Any(cat => cat.Nombre == nombre))
+                if (contexto.categorias.Any(cat => cat.NombreCategoria == nombre))
                     return true;
                 else
                     return false;

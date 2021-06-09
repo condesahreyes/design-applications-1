@@ -23,7 +23,7 @@ namespace AccesoDatos
                     EntidadCredencial entidadCredencialAAgregar = mapper.PasarAEntidad(credencialDominio);
                     contexto.credenciales.Add(entidadCredencialAAgregar);
                     contexto.SaveChanges();
-                    credencialDominio.Id = entidadCredencialAAgregar.Id;
+                    credencialDominio.Id = entidadCredencialAAgregar.CredencialId;
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => credencial.Id == id))
+                if (contexto.credenciales.Any(credencial => credencial.CredencialId == id))
                     return true;
                 else
                     return false;

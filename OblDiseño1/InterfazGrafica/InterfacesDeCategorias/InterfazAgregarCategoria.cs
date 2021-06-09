@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Data;
 using OblDiseño1;
 using System;
+using AccesoDatos;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -29,11 +30,13 @@ namespace InterfazGrafica.InterfazDeCategorias
             if (categoria != null)
                 try
                 {
-                    usuario.AgregarCategoria(categoria);
+                    //usuario.AgregarCategoria(categoria);
+                    CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
+                    categoriaRepositorio.Add(categoria);
                     MessageBox.Show("Categoria '" + categoria.Nombre + "' creada con exito");
                     IrACategoria();
                 }
-                catch (DuplicateNameException)
+                catch (ExepcionObjetosRepetidos)
                 {
                     MessageBox.Show("Ya existe una categoría con este nombre.");
                     textBoxNombreCategoria.Clear();

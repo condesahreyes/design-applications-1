@@ -14,7 +14,7 @@ namespace AccesoDatos
         public EntidadCategoria PasarAEntidad(Categoria categoriaDominio)
         {
             EntidadCategoria categoriaDto = new EntidadCategoria();
-            categoriaDto.Nombre = categoriaDominio.Nombre;
+            categoriaDto.NombreCategoria = categoriaDominio.Nombre;
 
             return categoriaDto;
         }
@@ -22,7 +22,7 @@ namespace AccesoDatos
         public Categoria PasarADominio(EntidadCategoria categoriaEntidad)
         {
             Categoria categoriaDominio = new Categoria();
-            categoriaDominio.Nombre = categoriaEntidad.Nombre;
+            categoriaDominio.Nombre = categoriaEntidad.NombreCategoria;
 
             return categoriaDominio;
         }
@@ -70,7 +70,7 @@ namespace AccesoDatos
             credencialDominio.NombreUsuario = credencialEntidad.NombreUsuario;
             credencialDominio.Nota = credencialEntidad.Nota;
             credencialDominio.TipoSitioOApp = credencialEntidad.TipoSitioOApp;
-            credencialDominio.Id = credencialEntidad.Id;
+            credencialDominio.Id = credencialEntidad.CredencialId;
 
             return credencialDominio;
         }
@@ -115,27 +115,35 @@ namespace AccesoDatos
             EntidadUsuario usuarioEntidad = new EntidadUsuario();
             usuarioEntidad.Nombre = usuarioDominio.Nombre;
             usuarioEntidad.Contrasenia = usuarioDominio.Contrasenia;
-            foreach (var categoriaDominio in usuarioDominio.ObtenerCategorias())
+            if (usuarioDominio.ObtenerCategorias().Count != 0)
             {
-                EntidadCategoria categoriaEntidad = PasarAEntidad(categoriaDominio);
-                usuarioEntidad.categorias.Add(categoriaEntidad);
+                foreach (var categoriaDominio in usuarioDominio.ObtenerCategorias())
+                {
+                    EntidadCategoria categoriaEntidad = PasarAEntidad(categoriaDominio);
+                    usuarioEntidad.categorias.Add(categoriaEntidad);
+                }
             }
 
-            foreach (var tarjetaDominio in usuarioDominio.ObtenerTarjetas())
+            if (usuarioDominio.ObtenerTarjetas().Count != 0)
             {
-                EntidadTarjeta tarjetaEntidad = PasarAEntidad(tarjetaDominio);
-                usuarioEntidad.tarjetas.Add(tarjetaEntidad);
+                foreach (var tarjetaDominio in usuarioDominio.ObtenerTarjetas())
+                {
+                    EntidadTarjeta tarjetaEntidad = PasarAEntidad(tarjetaDominio);
+                    usuarioEntidad.tarjetas.Add(tarjetaEntidad);
+                }
             }
 
-            foreach (var credencialDominio in usuarioDominio.ObtenerCredenciales())
+            if (usuarioDominio.ObtenerCredenciales().Count != 0)
             {
-                EntidadCredencial credencialEntidad = PasarAEntidad(credencialDominio);
-                usuarioEntidad.credenciales.Add(credencialEntidad);
+                foreach (var credencialDominio in usuarioDominio.ObtenerCredenciales())
+                {
+                    EntidadCredencial credencialEntidad = PasarAEntidad(credencialDominio);
+                    usuarioEntidad.credenciales.Add(credencialEntidad);
+                }
             }
+            
 
             //usuarioEntidad.gestorContraseñas = PasarAEntidad(usuarioDominio.GestorCompartirContrasenia);
-                
-            
             return usuarioEntidad;
         }
 

@@ -301,6 +301,10 @@
     <None Include="Resources\fondo31.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+      <Project>{cc2d428e-1873-4c52-9de7-8fc2e2e1d467}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OblDiseño1\LogicaNegocio.csproj">
       <Project>{a10c0fe5-5672-40c8-9f8b-9f741c3c1dd2}</Project>
       <Name>LogicaNegocio</Name>

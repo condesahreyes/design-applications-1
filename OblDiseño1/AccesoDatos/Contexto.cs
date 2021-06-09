@@ -15,10 +15,8 @@ namespace AccesoDatos
 
         public Contexto() : base("BddD1")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Contexto, AccesoDatos.Migrations.Configuration>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Contexto>());
         }
-
-    
 
     }
 }
