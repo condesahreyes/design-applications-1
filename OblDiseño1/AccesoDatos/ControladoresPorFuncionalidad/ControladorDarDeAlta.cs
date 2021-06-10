@@ -1,5 +1,4 @@
 ﻿using AccesoDatos;
-using AccesoDatos.Entidades_Datos;
 
 namespace OblDiseño1
 {
