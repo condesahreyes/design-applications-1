@@ -121,5 +121,15 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             return (resultado==DialogResult.Yes)? true : false;
         }
+
+        private void button_Mostrar_Click(object sender, EventArgs e)
+        {
+            if (0 < dataGridView_ListaDuplas.RowCount)
+            {
+                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                Interfaz_MostrarContrasenia mostratContra = new Interfaz_MostrarContrasenia(duplaSeleccionada);
+                mostratContra.Show();
+            }
+        }
     }
 }
