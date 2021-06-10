@@ -241,7 +241,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.lblListadoTarjetas.TabIndex = 16;
             this.lblListadoTarjetas.Text = "Generar Contraseña";
             // 
-            // Interfaz_GenerarContrasenia
+            // InterfazGenerarContrasenia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -255,9 +255,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button_Confirmar);
             this.Controls.Add(this.button_Cancelar);
-            this.Name = "Interfaz_GenerarContrasenia";
+            this.Name = "InterfazGenerarContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Interfaz_GenerarContrasenia";
+            this.Text = "Generar Contraseña";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_cantCaracteres)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

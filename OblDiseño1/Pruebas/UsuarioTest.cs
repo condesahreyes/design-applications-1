@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OblDiseño1;
-using System;
 using System.Collections.Generic;
 using OblDiseño1.Entidades;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
@@ -60,7 +60,6 @@ namespace Pruebas
             contraseniaNoPresenteEnListaCredenciales = "ContraseniaNoPrsente";
             numeroDeTarjetaNoPresenteEnListaTarjetas = "2000200020002000";
             nombreLargo = "Este es un nombre muy largo";
-
 
             credenciales = new List<Credencial>();
             tarjetas = new List<Tarjeta>();
@@ -301,9 +300,10 @@ namespace Pruebas
 
                 usuario.AgregarCredencial(unaDupla);
 
-                listaDuplas.Add("Nombre: " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contraseña.Contrasenia +
-                    " Nivel de seguridad: " + unaDupla.Contraseña.NivelSeguridadContrasenia +
-                    " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria);
+                listaDuplas.Add("Nombre: " + unaDupla.NombreUsuario + " Contraseña: " + 
+                    unaDupla.Contraseña.Contrasenia + " Nivel de seguridad: " + 
+                    unaDupla.Contraseña.NivelSeguridadContrasenia + " Nombre sitio: " + 
+                    unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria);
             }
 
             listarDuplasPorMetodo = usuario.ListarToStringDeMisDuplas();
@@ -427,7 +427,8 @@ namespace Pruebas
         {
             usuario.AgregarCategoria(categoria);
             usuario.AgregarCredencial(dupla);
-            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], nombresitioCredencialQueNoEsta));
+            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], 
+                nombresitioCredencialQueNoEsta));
         }
 
     }

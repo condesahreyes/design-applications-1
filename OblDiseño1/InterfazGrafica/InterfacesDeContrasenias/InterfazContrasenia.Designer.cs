@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnContraseniaVolverMenu = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView_ListaDuplas = new System.Windows.Forms.DataGridView();
@@ -78,13 +81,42 @@
             this.dataGridView_ListaDuplas.AllowUserToDeleteRows = false;
             this.dataGridView_ListaDuplas.AllowUserToResizeColumns = false;
             this.dataGridView_ListaDuplas.AllowUserToResizeRows = false;
-            this.dataGridView_ListaDuplas.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView_ListaDuplas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridView_ListaDuplas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView_ListaDuplas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridView_ListaDuplas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(124)))), ((int)(((byte)(156)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_ListaDuplas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_ListaDuplas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
             this.dataGridView_ListaDuplas.GridColor = System.Drawing.SystemColors.ControlLightLight;
+
+            this.dataGridView_ListaDuplas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridView_ListaDuplas.EnableHeadersVisualStyles = false;
+            this.dataGridView_ListaDuplas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+
             this.dataGridView_ListaDuplas.Location = new System.Drawing.Point(39, 49);
             this.dataGridView_ListaDuplas.MultiSelect = false;
             this.dataGridView_ListaDuplas.Name = "dataGridView_ListaDuplas";
+            this.dataGridView_ListaDuplas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_ListaDuplas.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView_ListaDuplas.RowHeadersVisible = false;
             this.dataGridView_ListaDuplas.RowHeadersWidth = 51;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.dataGridView_ListaDuplas.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_ListaDuplas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_ListaDuplas.Size = new System.Drawing.Size(464, 232);
             this.dataGridView_ListaDuplas.TabIndex = 6;

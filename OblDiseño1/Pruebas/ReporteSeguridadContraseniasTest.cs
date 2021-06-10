@@ -1,16 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using OblDiseño1;
 using OblDiseño1.Entidades;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
-
     [TestClass]
     public class ReporteSeguridadContraseniasTest
     {
-
         private Usuario usuario;
 
         private Reporte funcionalidad;
@@ -70,7 +68,6 @@ namespace Pruebas
                 "Ojala me dieran un punto en Disenio de Aplicacion por cada cuenta que me suspendieron",
                 "Otra mas", "La ultima, lo juro"};
 
-
         [TestInitialize]
         public void SetUp()
         {
@@ -125,7 +122,6 @@ namespace Pruebas
                                                                              listaDuplas[9] };
         }
 
-
         [TestMethod]
         public void CantidadContraseniasROJAS()
         {
@@ -137,63 +133,72 @@ namespace Pruebas
         public void CantidadContraseniasNARANJAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(cantidadContraseniasNARANJAS, reporte.duplasPorSeguridad[nivelNaranja].cantidad);
+            Assert.AreEqual(cantidadContraseniasNARANJAS, reporte.
+                duplasPorSeguridad[nivelNaranja].cantidad);
         }
 
         [TestMethod]
         public void CantidadContraseniasAMARILLAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(cantidadContraseniasAMARILLAS, reporte.duplasPorSeguridad[nivelAmarrillo].cantidad);
+            Assert.AreEqual(cantidadContraseniasAMARILLAS, reporte.
+                duplasPorSeguridad[nivelAmarrillo].cantidad);
         }
 
         [TestMethod]
         public void CantidadContraseniasVERDE_CLARAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(cantidadContraseniasVERDE_CLARAS, reporte.duplasPorSeguridad[nivelVerdeClaro].cantidad);
+            Assert.AreEqual(cantidadContraseniasVERDE_CLARAS, reporte.
+                duplasPorSeguridad[nivelVerdeClaro].cantidad);
         }
 
         [TestMethod]
         public void CantidadContraseniasVERDE_OSCURAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS, reporte.duplasPorSeguridad[nivelVerdeOscuro].cantidad);
+            Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS, reporte.
+                duplasPorSeguridad[nivelVerdeOscuro].cantidad);
         }
 
         [TestMethod]
         public void ListaContrasenias_ROJAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasROJAS, reporte.duplasPorSeguridad[nivelRojo].unaListaCredenciales);
+            CollectionAssert.AreEquivalent(contraseniasROJAS, reporte.
+                duplasPorSeguridad[nivelRojo].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_NARANJAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasNARANJAS, reporte.duplasPorSeguridad[nivelNaranja].unaListaCredenciales);
+            CollectionAssert.AreEquivalent(contraseniasNARANJAS, reporte.
+                duplasPorSeguridad[nivelNaranja].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_AMARILLAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasAMARILLAS, reporte.duplasPorSeguridad[nivelAmarrillo].unaListaCredenciales);
+            CollectionAssert.AreEquivalent(contraseniasAMARILLAS, reporte.
+                duplasPorSeguridad[nivelAmarrillo].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_CLARAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasVERDE_CLARAS, reporte.duplasPorSeguridad[nivelVerdeClaro].unaListaCredenciales);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_CLARAS, reporte.
+                duplasPorSeguridad[nivelVerdeClaro].unaListaCredenciales);
         }
 
         [TestMethod]
         public void ListaContrasenias_VERDE_OSCURAS()
         {
             reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
-            CollectionAssert.AreEquivalent(contraseniasVERDE_OSCURAS, reporte.duplasPorSeguridad[nivelVerdeOscuro].unaListaCredenciales);
+            CollectionAssert.AreEquivalent(contraseniasVERDE_OSCURAS, reporte.
+                duplasPorSeguridad[nivelVerdeOscuro].unaListaCredenciales);
         }
 
         [TestMethod]
@@ -275,6 +280,5 @@ namespace Pruebas
             Assert.AreEqual(cantidadContraseniasVERDE_OSCURAS_enUltraCategoria,
                 reporte.duplasPorCategoria[categoria_UltraCategoria.Nombre][nivelVerdeOscuro]);
         }
-
     }
 }

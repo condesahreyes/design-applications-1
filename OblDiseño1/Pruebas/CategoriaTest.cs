@@ -8,11 +8,10 @@ namespace Pruebas
     [TestClass]
     public class CategoriaTest
     {
-
-        private static readonly string nombre1 = "Personal";
-        private static readonly string nombre2 = "Trabajo";
         private static readonly string nombreLargo = "CategoriaTiempoLibre";
         private static readonly string nombreCorto = "Ro";
+        private static readonly string nombre1 = "Personal";
+        private static readonly string nombre2 = "Trabajo";
 
         Categoria categoria = new Categoria(nombre1);
         Categoria otraCategoria = new Categoria(nombre2);

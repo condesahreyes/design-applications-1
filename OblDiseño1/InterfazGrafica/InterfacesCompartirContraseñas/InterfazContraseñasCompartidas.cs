@@ -37,6 +37,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             {
                 this.dataGridContraseñasCompartidas.DataSource = biso;
                 HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas();
+                ModificarNombreDeColumnasDataGridContraseñasCompartidas();
             }
         }
 
@@ -48,6 +49,15 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["Contraseña"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
+        }
+
+        private void ModificarNombreDeColumnasDataGridContraseñasCompartidas()
+        {
+            this.dataGridContraseñasCompartidas.Columns["NombreUsuario"].HeaderText = "Usuario Nombre";
+            this.dataGridContraseñasCompartidas.Columns["NombreSitioApp"].HeaderText = "Sitio";
+            this.dataGridContraseñasCompartidas.Columns["FechaUltimaModificacion"].HeaderText =
+                "Ultima Modificación";
+            this.dataGridContraseñasCompartidas.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void CargarContraseñasCompartidasConmigo()
@@ -67,6 +77,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             {
                 this.dataGridContraseñasCompartidasConmigo.DataSource = biso2;
                 HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo();
+                ModificarNombreDeColumnasDataGridContraseñasCompartidasConmigo();
             }
         }
 
@@ -78,6 +89,15 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["Contraseña"].Visible = false;
             this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
+        }
+
+        private void ModificarNombreDeColumnasDataGridContraseñasCompartidasConmigo()
+        {
+            this.dataGridContraseñasCompartidas.Columns["NombreUsuario"].HeaderText = "Usuario Nombre";
+            this.dataGridContraseñasCompartidas.Columns["NombreSitioApp"].HeaderText = "Sitio";
+            this.dataGridContraseñasCompartidas.Columns["FechaUltimaModificacion"].HeaderText =
+                "Ultima Modificación";
+            this.dataGridContraseñasCompartidas.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)

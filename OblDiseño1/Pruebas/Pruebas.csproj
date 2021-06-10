@@ -51,7 +51,8 @@
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dupla_UsuarioContraseniaTest.cs" />
+    <Compile Include="ContraseñaTest.cs" />
+    <Compile Include="CredencialTest.cs" />
     <Compile Include="GestorContraseniasCompartidasTest.cs" />
     <Compile Include="SistemaTest.cs" />
     <Compile Include="TarjetaTest.cs" />

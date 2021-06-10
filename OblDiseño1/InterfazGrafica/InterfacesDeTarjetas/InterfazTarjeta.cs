@@ -16,6 +16,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             CargarListaTarjetas(ref usuario, ref sistema);
+            ModificarNombreDeColumnasDelDataGrid();
         }
 
         private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
@@ -26,6 +27,13 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
                 dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
                 dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+        }
+
+        private void ModificarNombreDeColumnasDelDataGrid()
+        {
+            dataGridTarjetas.Columns["FechaVencimiento"].HeaderText = "Fecha Vencimiento";
+            dataGridTarjetas.Columns["Numero"].HeaderText = "Número";
+            dataGridTarjetas.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void btnTarjetasVolverMenu_Click(object sender, EventArgs e)
