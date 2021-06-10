@@ -9,19 +9,23 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadCategoria
     {
-        [Key]
-        public int CategoriaId { set; get; }
         public string NombreCategoria { set; get; }
 
-        public EntidadUsuario usuarioDueño { set; get; }
+        //public String Usuario { set; get; }
+
+        public EntidadUsuario Usuario { set; get; }
+
+        public string UsuarioNombre { set; get; }
 
         public EntidadCategoria() 
-        {}
+        {
+        }
 
         public EntidadCategoria(string nombre, EntidadUsuario usuario)
         {
             this.NombreCategoria = nombre;
-            this.usuarioDueño = usuario;
+            this.UsuarioNombre = usuario.Nombre;
+            //this.Usuario = usuario;
         }
     }
 }

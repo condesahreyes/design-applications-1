@@ -1,20 +1,19 @@
-﻿using AccesoDatos.Entidades_Datos;
+﻿using AccesoDatos.Controladores;
+using AccesoDatos.Entidades_Datos;
 using OblDiseño1;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccesoDatos
 {
-    public class CategoriaRepositorio : IRepositorio<Categoria, string > 
+    public class CategoriaRepositorio : IRepositorio<Categoria, string>
     {
         private readonly Mapper mapper = new Mapper();
-        public EntidadUsuario usuario;
+        Usuario usuario;
         public CategoriaRepositorio(Usuario usuarioDueñoDominio)
         {
-            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            //this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            this.usuario = usuarioDueñoDominio;
         }
         public void Add(Categoria categoriaDominio) 
         {
@@ -24,8 +23,11 @@ namespace AccesoDatos
                     throw new ExepcionObjetosRepetidos("Ya existe una categoria con este nombre");
                 else
                 {
-                    EntidadCategoria categoriaAlAgregar = mapper.PasarAEntidad(categoriaDominio);
-                    categoriaAlAgregar.usuarioDueño = this.usuario;
+                    ControladorObtener obtener = new ControladorObtener(this.usuario);
+
+                    EntidadUsuario entidadUsuario= obtener.ObtenerUsuarioDto(this.usuario);
+                    EntidadCategoria categoriaAlAgregar = new EntidadCategoria(categoriaDominio.Nombre, entidadUsuario); 
+
                     contexto.categorias.Add(categoriaAlAgregar);
                     contexto.SaveChanges();
                 }
@@ -44,7 +46,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.categorias.Any(cat => cat.NombreCategoria == nombre))
+                if (contexto.categorias.Any(cat => cat.NombreCategoria == nombre) && contexto.categorias.Any(cat => cat.Usuario.Nombre == this.usuario.Nombre))
                     return true;
                 else
                     return false;
@@ -57,7 +59,7 @@ namespace AccesoDatos
             {
                 if (Existe(nombre))
                 {
-                    EntidadCategoria categoriaEntidad = contexto.categorias.Find(nombre);
+                    EntidadCategoria categoriaEntidad = contexto.categorias.Find(nombre, this.usuario);
                     Categoria categoriaDominio = mapper.PasarADominio(categoriaEntidad);
                     return categoriaDominio;
                 }
@@ -75,7 +77,8 @@ namespace AccesoDatos
                 foreach (var cat in contexto.categorias)
                 {
                     Categoria categoriaDominio = mapper.PasarADominio(cat);
-                    categoriasADevolver.Add(categoriaDominio);
+                    if(categoriaDominio.Nombre==this.usuario.Nombre)
+                        categoriasADevolver.Add(categoriaDominio);
                 }
 
                 return categoriasADevolver;
@@ -106,5 +109,9 @@ namespace AccesoDatos
             }
         }
 
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

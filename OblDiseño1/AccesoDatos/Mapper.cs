@@ -115,7 +115,7 @@ namespace AccesoDatos
             EntidadUsuario usuarioEntidad = new EntidadUsuario();
             usuarioEntidad.Nombre = usuarioDominio.Nombre;
             usuarioEntidad.Contrasenia = usuarioDominio.Contrasenia;
-            if (usuarioDominio.ObtenerCategorias().Count != 0)
+            if (usuarioDominio.ObtenerCategorias()!=null && usuarioDominio.ObtenerCategorias().Count != 0)
             {
                 foreach (var categoriaDominio in usuarioDominio.ObtenerCategorias())
                 {

@@ -51,11 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControladoresPorFuncionalidad\ControladorDarDeAlta.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\ControladorObtener.cs" />
     <Compile Include="Entidades_Datos\EntidadContraseña.cs" />
     <Compile Include="Entidades_Datos\EntidadGestorContraseñasCompartidas.cs" />
-    <Compile Include="Migrations\202106091951000_BddD1.cs" />
-    <Compile Include="Migrations\202106091951000_BddD1.designer.cs">
-      <DependentUpon>202106091951000_BddD1.cs</DependentUpon>
+    <Compile Include="Migrations\202106100343169_BddD1.cs" />
+    <Compile Include="Migrations\202106100343169_BddD1.designer.cs">
+      <DependentUpon>202106100343169_BddD1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
@@ -82,8 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106091951000_BddD1.resx">
-      <DependentUpon>202106091951000_BddD1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106100343169_BddD1.resx">
+      <DependentUpon>202106100343169_BddD1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

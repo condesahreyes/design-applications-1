@@ -9,10 +9,12 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadContraseña
     {
-        [Key]
+
         public int ContraseñaId { set; get; }
         public string Contrasenia { set; get; }
         public int NivelSeguridadContrasenia { set; get; }
+
+        public EntidadUsuario Usuario { set; get; }
 
         public EntidadContraseña() { }
 

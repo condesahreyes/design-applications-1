@@ -11,6 +11,12 @@ namespace AccesoDatos
     public class CredencialRepositorio : IRepositorio<Credencial, int>
     {
         private readonly Mapper mapper = new Mapper();
+        public EntidadUsuario usuario;
+        public CredencialRepositorio(Usuario usuarioDueñoDominio)
+        {
+            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+        }
+
         public void Add(Credencial credencialDominio) 
         {
             using (Contexto contexto = new Contexto())
@@ -21,6 +27,7 @@ namespace AccesoDatos
                 else
                 {
                     EntidadCredencial entidadCredencialAAgregar = mapper.PasarAEntidad(credencialDominio);
+                    entidadCredencialAAgregar.Usuario = this.usuario;
                     contexto.credenciales.Add(entidadCredencialAAgregar);
                     contexto.SaveChanges();
                     credencialDominio.Id = entidadCredencialAAgregar.CredencialId;
@@ -104,6 +111,9 @@ namespace AccesoDatos
             }
         }
 
-       
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

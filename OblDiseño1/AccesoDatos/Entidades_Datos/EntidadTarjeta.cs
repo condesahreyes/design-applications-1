@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadTarjeta
     {
-       
+        public int EntidadTarjetaId { get; set; }
+        public int Numero { get; set; }
 
+        public EntidadUsuario Usuario { set; get; }
         public string NotaOpcional { set; get; }
         public string Nombre { get; set; }
         public string Tipo { get; set; }
-        [Key]
-        public int Numero { get; set; }
+
         public int CodigoSeguridad { get; set; }
         public DateTime FechaVencimiento { get; set; }
 

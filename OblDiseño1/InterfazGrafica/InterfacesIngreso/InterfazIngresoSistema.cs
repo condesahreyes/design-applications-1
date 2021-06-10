@@ -64,10 +64,10 @@ namespace InterfazGrafica.InterfazIngreso
         {
             try
             {
-                Usuario unUsuario=sistema.AgregarUsuario(nombreUsuario, contrasenia);
-                UsuarioRepositorio usuarioRepo = new UsuarioRepositorio();
+                //Usuario unUsuario=sistema.AgregarUsuario(nombreUsuario, contrasenia);
                 Usuario usuarioAAgregar = new Usuario(nombreUsuario, contrasenia);
-                usuarioRepo.Add(usuarioAAgregar);
+                ControladorDarDeAlta controlador = new ControladorDarDeAlta(usuarioAAgregar);
+                controlador.AgregarUsuario(usuarioAAgregar);
                 MessageBox.Show("Se lo ha registrado como nuevo usuario");
                 return usuarioAAgregar;
             }

@@ -10,16 +10,16 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadCredencial
     {
-        [Key, Column(Order = 0)]
+
         public int CredencialId { get; set; }
 
-        [Key, Column(Order = 1)]
         public string NombreUsuario { get; set; }
 
         public EntidadContraseña Contrasenia { get; set ; }
 
-        [Key, Column(Order = 2)]
         public string NombreSitioApp { get; set ; }
+
+        public EntidadUsuario Usuario { set; get; }
 
         public string TipoSitioOApp { get; set; }
 

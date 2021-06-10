@@ -21,5 +21,9 @@ namespace OblDiseño1
         void Delete(K id);
 
         void Clear();
+
+        List<Categoria> ObtenerMisCategorias(string nombre);
+
+
     }
 }

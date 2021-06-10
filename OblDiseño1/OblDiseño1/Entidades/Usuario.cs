@@ -96,7 +96,9 @@ namespace OblDiseño1
             if (this.ObtenerTarjetas().Contains(tarjeta))
                 throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
             else
+            {
                 this.tarjetas.Add(tarjeta);
+            }
         }
 
         public void EliminarTarjeta(Tarjeta tarjeta)

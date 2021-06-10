@@ -49,6 +49,7 @@ namespace AccesoDatos
             }
         }
 
+
         public List<Usuario> GetAll() 
         {
             using (Contexto contexto = new Contexto()) 
@@ -102,6 +103,27 @@ namespace AccesoDatos
                     return false;
             }
         }
+
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(nombre))
+                {
+                    List<Categoria> categoriasADevolver = new List<Categoria>();
+                    foreach (var entidadCategoria in contexto.categorias)
+                    {
+                        Categoria categoriaDominio = mapper.PasarADominio(entidadCategoria);
+                        categoriasADevolver.Add(categoriaDominio);
+                    }
+                    return categoriasADevolver;
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
+            }
+        }
+
+
     }
 }
 

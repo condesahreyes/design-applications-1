@@ -1,9 +1,9 @@
 ﻿using InterfazGrafica.InterfazCategoria;
 using System.Windows.Forms;
-using System.Data;
 using OblDiseño1;
 using System;
 using AccesoDatos;
+using OblDiseño1.ControladoresPorEntidades;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -22,6 +22,13 @@ namespace InterfazGrafica.InterfazDeCategorias
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
             Categoria categoria = CrearCategoria();
+
+            CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
+
+            ControladorCategoria controladorCategoria = new ControladorCategoria(repositorioCategoria, this.usuario);
+
+            controladorCategoria.AgregarCategoria(categoria, repositorioUsuario);
             AgregarAMisCategorias(categoria);
         }
 
@@ -30,9 +37,6 @@ namespace InterfazGrafica.InterfazDeCategorias
             if (categoria != null)
                 try
                 {
-                    //usuario.AgregarCategoria(categoria);
-                    CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
-                    categoriaRepositorio.Add(categoria);
                     MessageBox.Show("Categoria '" + categoria.Nombre + "' creada con exito");
                     IrACategoria();
                 }
@@ -70,6 +74,11 @@ namespace InterfazGrafica.InterfazDeCategorias
             this.Close();
             InterfazCategorias categoria = new InterfazCategorias(ref usuario, ref sistema);
             categoria.Show();
+        }
+
+        private void InterfazAgregarCategoria_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

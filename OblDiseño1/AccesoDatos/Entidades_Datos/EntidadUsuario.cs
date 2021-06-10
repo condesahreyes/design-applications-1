@@ -9,7 +9,6 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadUsuario
     {
-        [Key]
         public string Nombre { get; set; }
         public string Contrasenia { get; set; }
 

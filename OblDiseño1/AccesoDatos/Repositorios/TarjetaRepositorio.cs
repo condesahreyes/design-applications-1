@@ -12,6 +12,11 @@ namespace AccesoDatos
     {
         private readonly Mapper mapper = new Mapper();
 
+        public EntidadUsuario usuario;
+        public TarjetaRepositorio(Usuario usuarioDueñoDominio)
+        {
+            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+        }
         public void Add(Tarjeta tarjetaDominio) 
         {
             using (Contexto contexto = new Contexto())
@@ -22,6 +27,7 @@ namespace AccesoDatos
                 else
                 {
                     EntidadTarjeta tarjetaEntidad = mapper.PasarAEntidad(tarjetaDominio);
+                    tarjetaEntidad.Usuario = this.usuario;
                     contexto.tarjetas.Add(tarjetaEntidad);
                     contexto.SaveChanges();
                 }
@@ -109,5 +115,9 @@ namespace AccesoDatos
             }
         }
 
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

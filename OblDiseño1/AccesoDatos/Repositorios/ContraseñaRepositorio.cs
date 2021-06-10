@@ -12,11 +12,18 @@ namespace AccesoDatos
     public class ContraseñaRepositorio : IRepositorio<Contraseña, string>
     {
         private readonly Mapper mapper = new Mapper();
+
+        public EntidadUsuario usuario;
+        public ContraseñaRepositorio(Usuario usuarioDueñoDominio)
+        {
+            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+        }
         public void Add(Contraseña contraseña)
         {
             using (Contexto contexto = new Contexto())
             {
                 EntidadContraseña contraseñaEntidad = mapper.PasarAEntidad(contraseña);
+                contraseñaEntidad.Usuario = this.usuario;
                 contexto.contraseñas.Add(contraseñaEntidad);
                 contexto.SaveChanges();
             }
@@ -90,6 +97,11 @@ namespace AccesoDatos
 
                 return contraseñasADevolver;
             }
+        }
+
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
         }
     }
 }
