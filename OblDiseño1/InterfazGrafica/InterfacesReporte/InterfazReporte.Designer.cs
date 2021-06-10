@@ -30,7 +30,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void InitializeComponent()
         {
             this.button_PorCategoria = new System.Windows.Forms.Button();
-            this.button_Aceptar = new System.Windows.Forms.Button();
+            this.btnVolverAMenu = new System.Windows.Forms.Button();
             this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -100,20 +100,20 @@ namespace InterfazGrafica.InterfacesReporte
             this.button_PorCategoria.UseVisualStyleBackColor = false;
             this.button_PorCategoria.Click += new System.EventHandler(this.button_PorCategoria_Click);
             // 
-            // button_Aceptar
+            // btnVolverAMenu
             // 
-            this.button_Aceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
-            this.button_Aceptar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Aceptar.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
-            this.button_Aceptar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.button_Aceptar.Location = new System.Drawing.Point(12, 346);
-            this.button_Aceptar.Name = "button_Aceptar";
-            this.button_Aceptar.Size = new System.Drawing.Size(81, 28);
-            this.button_Aceptar.TabIndex = 1;
-            this.button_Aceptar.Text = "Volver";
-            this.button_Aceptar.UseVisualStyleBackColor = false;
-            this.button_Aceptar.Click += new System.EventHandler(this.button_Aceptar_Click_1);
+            this.btnVolverAMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnVolverAMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnVolverAMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVolverAMenu.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.btnVolverAMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnVolverAMenu.Location = new System.Drawing.Point(12, 346);
+            this.btnVolverAMenu.Name = "btnVolverAMenu";
+            this.btnVolverAMenu.Size = new System.Drawing.Size(81, 28);
+            this.btnVolverAMenu.TabIndex = 1;
+            this.btnVolverAMenu.Text = "Volver";
+            this.btnVolverAMenu.UseVisualStyleBackColor = false;
+            this.btnVolverAMenu.Click += new System.EventHandler(this.button_VolverAMenu_Click_1);
             // 
             // lblListadoTarjetas
             // 
@@ -574,7 +574,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.ClientSize = new System.Drawing.Size(563, 386);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.button_PorCategoria);
-            this.Controls.Add(this.button_Aceptar);
+            this.Controls.Add(this.btnVolverAMenu);
             this.Controls.Add(this.lblListadoTarjetas);
             this.Name = "InterfazReporte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -603,7 +603,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         #endregion
         private System.Windows.Forms.Button button_PorCategoria;
-        private System.Windows.Forms.Button button_Aceptar;
+        private System.Windows.Forms.Button btnVolverAMenu;
         private System.Windows.Forms.Label lblListadoTarjetas;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel3;

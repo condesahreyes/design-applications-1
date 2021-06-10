@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -78,17 +88,17 @@
     <Compile Include="InterfacesDeTarjetas\InterfazModificarTarjeta.Designer.cs">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.cs">
+    <Compile Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.Designer.cs">
-      <DependentUpon>Interfaz_GenerarContrasenia.cs</DependentUpon>
+    <Compile Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.Designer.cs">
+      <DependentUpon>InterfazGenerarContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.cs">
+    <Compile Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.Designer.cs">
-      <DependentUpon>Interfaz_ModificarContrasenia.cs</DependentUpon>
+    <Compile Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.Designer.cs">
+      <DependentUpon>InterfazDeModificarContrasenia.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfacesDeTarjetas\InterfazTarjeta.cs">
       <SubType>Form</SubType>
@@ -120,58 +130,58 @@
     <Compile Include="InterfacesReporte\InterfazReporteVer.Designer.cs">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.Designer.cs">
       <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.Designer.cs">
       <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.Designer.cs">
+    <Compile Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.Designer.cs">
       <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.cs">
+    <Compile Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDataBreaches\InterfazChequeoDataBreaches.Designer.cs">
+    <Compile Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.Designer.cs">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazAgregarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazAgregarCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazAgregarCategoria.Designer.cs">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazCategoria.Designer.cs">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazModificarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazDeCategorias\InterfazModificarCategoria.Designer.cs">
+    <Compile Include="InterfacesDeCategorias\InterfazModificarCategoria.Designer.cs">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.cs">
+    <Compile Include="InterfacesIngreso\InterfazCambioContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazCambioContrasenia.Designer.cs">
+    <Compile Include="InterfacesIngreso\InterfazCambioContrasenia.Designer.cs">
       <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazIngresoSistema.cs">
+    <Compile Include="InterfacesIngreso\InterfazIngresoSistema.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfazIngreso\InterfazIngresoSistema.Designer.cs">
+    <Compile Include="InterfacesIngreso\InterfazIngresoSistema.Designer.cs">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -191,11 +201,11 @@
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazModificarTarjeta.resx">
       <DependentUpon>InterfazModificarTarjeta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesDeContrasenias\Interfaz_GenerarContrasenia.resx">
-      <DependentUpon>Interfaz_GenerarContrasenia.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazGenerarContrasenia.resx">
+      <DependentUpon>InterfazGenerarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesDeContrasenias\Interfaz_ModificarContrasenia.resx">
-      <DependentUpon>Interfaz_ModificarContrasenia.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesDeContrasenias\InterfazDeModificarContrasenia.resx">
+      <DependentUpon>InterfazDeModificarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeTarjetas\InterfazTarjeta.resx">
       <DependentUpon>InterfazTarjeta.cs</DependentUpon>
@@ -212,31 +222,31 @@
     <EmbeddedResource Include="InterfacesReporte\InterfazReporteVer.resx">
       <DependentUpon>InterfazReporteVer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazCompartirContraseña.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazCompartirContraseña.resx">
       <DependentUpon>InterfazCompartirContraseña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazContraseñasCompartidas.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazContraseñasCompartidas.resx">
       <DependentUpon>InterfazContraseñasCompartidas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazCompartirContraseñas\InterfazDejarDeCompartirContrasenia.resx">
+    <EmbeddedResource Include="InterfacesCompartirContraseñas\InterfazDejarDeCompartirContrasenia.resx">
       <DependentUpon>InterfazDejarDeCompartirContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDataBreaches\InterfazChequeoDataBreaches.resx">
+    <EmbeddedResource Include="InterfacesDataBreaches\InterfazChequeoDataBreaches.resx">
       <DependentUpon>InterfazChequeoDataBreaches.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazAgregarCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazAgregarCategoria.resx">
       <DependentUpon>InterfazAgregarCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazCategoria.resx">
       <DependentUpon>InterfazCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazDeCategorias\InterfazModificarCategoria.resx">
+    <EmbeddedResource Include="InterfacesDeCategorias\InterfazModificarCategoria.resx">
       <DependentUpon>InterfazModificarCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazIngreso\InterfazCambioContrasenia.resx">
+    <EmbeddedResource Include="InterfacesIngreso\InterfazCambioContrasenia.resx">
       <DependentUpon>InterfazCambioContrasenia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfazIngreso\InterfazIngresoSistema.resx">
+    <EmbeddedResource Include="InterfacesIngreso\InterfazIngresoSistema.resx">
       <DependentUpon>InterfazIngresoSistema.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -249,6 +259,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -290,11 +301,22 @@
     <None Include="Resources\fondo31.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+      <Project>{cc2d428e-1873-4c52-9de7-8fc2e2e1d467}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OblDiseño1\LogicaNegocio.csproj">
-      <Project>{A10C0FE5-5672-40C8-9F8B-9F741C3C1DD2}</Project>
+      <Project>{a10c0fe5-5672-40c8-9f8b-9f741c3c1dd2}</Project>
       <Name>LogicaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

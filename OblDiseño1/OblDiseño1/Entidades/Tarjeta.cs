@@ -1,29 +1,32 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+﻿using System.Linq;
 
 namespace OblDiseño1
 {
 
     public class Tarjeta : IComparable<Tarjeta>
     {
+        private const int largo_valido_de_numero_tarjeta = 16;
         private const int anio_MIN = 1960;
         private const int anio_MAX = 2090;
-        private const int dia_MIN = 1;
-        private const int dia_MAX = 31;
-        private const int mes_MIN = 1;
-        private const int mes_MAX = 12;
-        private const int largo_valido_de_numero_tarjeta = 16;
         private const int largo_MAX = 25;
         private const int largo_MIN = 3;
+        private const int dia_MAX = 31;
+        private const int dia_MIN = 1;
+        private const int mes_MAX = 12;
+        private const int mes_MIN = 1;
 
         private string nombre;
-        private string tipo;
         private string numero;
+        private string tipo;
 
         private int codigoSeguridad;
 
         private DateTime fechaVencimiento;
         private Categoria categoria;
 
+        public Tarjeta() { }
         public Tarjeta(string unNombre, string unTipo, string unNumero, int unCodigoseguridad
             , DateTime unaFechaVencimiento, Categoria unaCategoria, string unaNota)
         {
@@ -36,20 +39,22 @@ namespace OblDiseño1
             NotaOpcional = unaNota;
         }
 
+
         public string NotaOpcional { set; get; }
 
         public string Nombre { get => nombre; set => SetNombre(value); }
 
         public string Tipo { get => tipo; set => SetTipo(value); }
 
+     
         public string Numero {
 
             get => numero;
 
             set {
                 string numeroAString = "" + value;
-                if (numeroAString.Length != 16)
-                    throw new Exception_TarjetaIncorrecta("El numero de la tarjeta debe contener 16 digitos");
+                if (numeroAString.Length != 16 || !numeroAString.All(char.IsDigit))
+                    throw new ExepcionTarjetaIncorrecta("El numero de la tarjeta debe contener 16 digitos númericos");
                 else
                     this.numero = value;
             }
@@ -59,10 +64,9 @@ namespace OblDiseño1
             get => codigoSeguridad;
             set {
                 string codigoAString = "" + value;
-                if (this.Tipo == "American Express" && codigoAString.Length != 4)
-                    throw new Exception_TarjetaIncorrecta("El codigo de seguridad debe contener 4 digitos");
-                else if (codigoAString.Length != 3)
-                    throw new Exception_TarjetaIncorrecta("El codigo de seguridad debe contener 3 digitos");
+
+                if (codigoAString.Length != 3 && codigoAString.Length != 4)
+                    throw new ExepcionTarjetaIncorrecta("El codigo de seguridad debe contener 3 digitos");
                 else
                     this.codigoSeguridad = value;
             }
@@ -76,7 +80,7 @@ namespace OblDiseño1
                 int day = value.Day;
                 if ((year < anio_MIN || year > anio_MAX) || (month < mes_MIN || month > mes_MAX) 
                     || (day < dia_MIN || day > dia_MAX))
-                    throw new Exception_TarjetaIncorrecta("No puede ingresar un campo vacio");
+                    throw new ExepcionTarjetaIncorrecta("No puede ingresar un campo vacio");
                 else
                     this.fechaVencimiento = value;
             }
@@ -86,7 +90,7 @@ namespace OblDiseño1
             get => categoria;
             set {
                 if (value == null)
-                    throw new Exception_TarjetaIncorrecta("No puede ingresar un campo vacio");
+                    throw new ExepcionTarjetaIncorrecta("No puede ingresar un campo vacio");
                 else
                     this.categoria = value;
             }
@@ -103,7 +107,7 @@ namespace OblDiseño1
             if ((unNombre != null) && (unNombre.Length >= largo_MIN) && (unNombre.Length <= largo_MAX))
                 this.nombre = unNombre;
             else
-                throw new Exception_TarjetaIncorrecta("El campo no puede ser vacio");
+                throw new ExepcionTarjetaIncorrecta("El campo no puede ser vacio");
         }
 
         public static bool ValidarLargoNumeroDeTarjeta(string posibleNumeroDeTarjeta)
@@ -116,7 +120,7 @@ namespace OblDiseño1
             if ((unTipo != null) && (unTipo.Length >= largo_MIN) && (unTipo.Length <= largo_MAX))
                 this.tipo = unTipo;
             else
-                throw new Exception_TarjetaIncorrecta("El campo no puede ser vacio");
+                throw new ExepcionTarjetaIncorrecta("El campo no puede ser vacio");
         }
 
         public override bool Equals(object obj)

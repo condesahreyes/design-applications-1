@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
+using OblDiseño1.Entidades;
 using System;
 
 namespace Pruebas
@@ -36,31 +37,41 @@ namespace Pruebas
 
         Categoria categoria;
 
-        Dupla_UsuarioContrasenia unaDupla;
+        Credencial unaCredencial;
+
+        Contraseña contraseña;
 
         [TestInitialize]
         public void Setup()
         {
-            nombreUsuario = "JuanEjemplo";
-            usuarioContrasenia = "aSD0v89ha+sfunv/*av";
-            sitio = "sitio.ejemplo.uy";
-            nota = "Esto es una nota para el test";
             nivelSeguridad = 5;
-            nombreCategoria = "Categoria";
-            categoria = new Categoria(nombreCategoria);
-
 
             ultimaModificacion = DateTime.Today;
             nivelSeguridad = 5;
             dataBrench = false;
 
-            unaDupla = new Dupla_UsuarioContrasenia(nombreUsuario, usuarioContrasenia, sitio, nota, categoria);
+            unaCredencial = CrearCredencial();
+        }
+
+        private Credencial CrearCredencial()
+        {
+            nombreUsuario = "JuanEjemplo";
+            usuarioContrasenia = "aSD0v89ha+sfunv/*av";
+            sitio = "sitio.ejemplo.uy";
+            nota = "Esto es una nota para el test";
+            nombreCategoria = "Categoria";
+
+            categoria = new Categoria(nombreCategoria);
+
+            Contraseña contraseña = new Contraseña(usuarioContrasenia);
+
+            return new Credencial(nombreUsuario, contraseña, sitio, nota, categoria);
         }
 
         [TestMethod]
         public void AltaDuplaUsuarioContrasenia()
         {
-            Dupla_UsuarioContrasenia nuevaDupla = new Dupla_UsuarioContrasenia(nombreUsuario, usuarioContrasenia,
+            Credencial nuevaDupla = new Credencial(nombreUsuario, contraseña,
                 sitio, nota, categoria);
 
             Assert.IsNotNull(nuevaDupla);
@@ -69,49 +80,49 @@ namespace Pruebas
         [TestMethod]
         public void AltaVerificacionNombreUsuario()
         {
-            Assert.AreEqual(nombreUsuario, unaDupla.NombreUsuario);
+            Assert.AreEqual(nombreUsuario, unaCredencial.NombreUsuario);
         }
 
         [TestMethod]
         public void AltaVerificacionContrasenia()
         {
-            Assert.AreEqual(usuarioContrasenia, unaDupla.Contrasenia);
+            Assert.AreEqual(usuarioContrasenia, unaCredencial.Contraseña.Contrasenia);
         }
 
         [TestMethod]
         public void AltaVerificacionNombreSitioApp()
         {
-            Assert.AreEqual(sitio, unaDupla.NombreSitioApp);
+            Assert.AreEqual(sitio, unaCredencial.NombreSitioApp);
         }
 
         [TestMethod]
         public void AltaVerificacionNota()
         {
-            Assert.AreEqual(nota, unaDupla.Nota);
+            Assert.AreEqual(nota, unaCredencial.Nota);
         }
 
         [TestMethod]
         public void AltaVerificacionNivelDeSeguridad()
         {
-            Assert.AreEqual(nivelSeguridad, unaDupla.NivelSeguridadContrasenia);
+            Assert.AreEqual(nivelSeguridad, unaCredencial.Contraseña.NivelSeguridadContrasenia);
         }
 
         [TestMethod]
         public void AltaVerificacionDataBrench()
         {
-            Assert.AreEqual(dataBrench, unaDupla.DataBrench);
+            Assert.AreEqual(dataBrench, unaCredencial.DataBrench);
         }
 
         [TestMethod]
         public void AltaVerificacionFechaModificacion()
         {
-            Assert.AreEqual(ultimaModificacion, unaDupla.FechaUltimaModificacion);
+            Assert.AreEqual(ultimaModificacion, unaCredencial.FechaUltimaModificacion);
         }
 
         [TestMethod]
         public void AltaVerificacionCategoria()
         {
-            Assert.AreEqual(categoria, unaDupla.Categoria);
+            Assert.AreEqual(categoria, unaCredencial.Categoria);
         }
 
         [TestMethod]
@@ -119,18 +130,18 @@ namespace Pruebas
         {
             string unaContrasenia = "aaaaa";
             int nuevoNivelSeguridad = 1;
-            unaDupla.Contrasenia = unaContrasenia;
+            unaCredencial.Contraseña.Contrasenia = unaContrasenia;
 
-            Assert.AreEqual(nuevoNivelSeguridad, unaDupla.NivelSeguridadContrasenia);
+            Assert.AreEqual(nuevoNivelSeguridad, unaCredencial.Contraseña.NivelSeguridadContrasenia);
         }
 
         [TestMethod]
         public void ModificacionFechaUltimaModificacion()
         {
             DateTime unaUltimaModificacion = new DateTime(2021, 03, 29);
-            unaDupla.FechaUltimaModificacion = unaUltimaModificacion;
+            unaCredencial.FechaUltimaModificacion = unaUltimaModificacion;
 
-            Assert.AreEqual(unaUltimaModificacion, unaDupla.FechaUltimaModificacion);
+            Assert.AreEqual(unaUltimaModificacion, unaCredencial.FechaUltimaModificacion);
         }
 
         [TestMethod]
@@ -138,97 +149,97 @@ namespace Pruebas
         {
             string unNombreCategoria = "Personal";
             Categoria unaCategoria = new Categoria(unNombreCategoria);
-            unaDupla.Categoria = unaCategoria;
+            unaCredencial.Categoria = unaCategoria;
 
-            Assert.AreEqual(unaCategoria, unaDupla.Categoria);
+            Assert.AreEqual(unaCategoria, unaCredencial.Categoria);
         }
 
         [TestMethod]
         public void ModificacionNota()
         {
             string unaNota = "Una nueva nota";
-            unaDupla.Nota = unaNota;
+            unaCredencial.Nota = unaNota;
 
-            Assert.AreEqual(unaNota, unaDupla.Nota);
+            Assert.AreEqual(unaNota, unaCredencial.Nota);
         }
 
         [TestMethod]
         public void ModificacionSitioApp()
         {
             string unSitioApp = "otroStioDeEjemplo.edu.uy";
-            unaDupla.NombreSitioApp = unSitioApp;
+            unaCredencial.NombreSitioApp = unSitioApp;
 
-            Assert.AreEqual(unSitioApp, unaDupla.NombreSitioApp);
+            Assert.AreEqual(unSitioApp, unaCredencial.NombreSitioApp);
         }
 
         [TestMethod]
         public void ModificacionContrasenia()
         {
             string unaContrasenia = "aaaaa";
-            unaDupla.Contrasenia = unaContrasenia;
+            unaCredencial.Contraseña.Contrasenia = unaContrasenia;
 
-            Assert.AreEqual(unaContrasenia, unaDupla.Contrasenia);
+            Assert.AreEqual(unaContrasenia, unaCredencial.Contraseña.Contrasenia);
         }
 
         [TestMethod]
         public void ModificacionNombreUsuario()
         {
             string unNombreUsuario = "Hernán";
-            unaDupla.NombreUsuario = unNombreUsuario;
+            unaCredencial.NombreUsuario = unNombreUsuario;
 
-            Assert.AreEqual(unNombreUsuario, unaDupla.NombreUsuario);
+            Assert.AreEqual(unNombreUsuario, unaCredencial.NombreUsuario);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreUsuarioCorto()
         {
             string nombreUsuarioCorto = "Juan";
-            unaDupla.NombreUsuario = nombreUsuarioCorto;
+            unaCredencial.NombreUsuario = nombreUsuarioCorto;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreUsuarioLargo()
         {
             string nombreUsuarioLargo = "HELENE GERMAINE JOSEPHE MARIE";
-            unaDupla.NombreUsuario = nombreUsuarioLargo;
+            unaCredencial.NombreUsuario = nombreUsuarioLargo;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionContraseniaCorta()
         {
             string contraseniaCorta = "1234";
-            unaDupla.Contrasenia = contraseniaCorta;
+            unaCredencial.Contraseña.Contrasenia = contraseniaCorta;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionContraseniaLarga()
         {
             string contraseniaLarga = "12345678912345678912345678";
-            unaDupla.Contrasenia = contraseniaLarga;
+            unaCredencial.Contraseña.Contrasenia = contraseniaLarga;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreSitioAppCorto()
         {
             string nombreSitioAppCorto = "12";
-            unaDupla.NombreSitioApp = nombreSitioAppCorto;
+            unaCredencial.NombreSitioApp = nombreSitioAppCorto;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNombreSitioAppLargo()
         {
             string nombreSitioAppLargo = "12345678912345678912345678";
-            unaDupla.NombreSitioApp = nombreSitioAppLargo;
+            unaCredencial.NombreSitioApp = nombreSitioAppLargo;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void ModificacionNotaLarga()
         {
             string notaLarga = "";
@@ -236,53 +247,53 @@ namespace Pruebas
             for (int i = 0; i < 251; i++)
                 notaLarga += i;
 
-            unaDupla.Nota = notaLarga;
+            unaCredencial.Nota = notaLarga;
         }
 
         [TestMethod]
         public void GeneracionDeContraseniaLargoInseguro()
         {
-            string contrasenia = Dupla_UsuarioContrasenia.GenerarContrasenia(largoInseguro, caracteresRequeridos);
+            string contrasenia = Contraseña.GenerarContrasenia(largoInseguro, caracteresRequeridos);
             Assert.AreEqual(largoInseguro, contrasenia.Length);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaMuyCorta()
         {
             int largoIncorrecto = 4;
-            Dupla_UsuarioContrasenia.GenerarContrasenia(largoIncorrecto, caracteresRequeridos);
+            Contraseña.GenerarContrasenia(largoIncorrecto, caracteresRequeridos);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaMuyLarga()
         {
             int largoIncorrecto = 26;
-            Dupla_UsuarioContrasenia.GenerarContrasenia(largoIncorrecto, caracteresRequeridos);
+            Contraseña.GenerarContrasenia(largoIncorrecto, caracteresRequeridos);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaNinguTipoDeCaracter()
         {
             bool[] caracteres = { false, false, false, false };
-            Dupla_UsuarioContrasenia.GenerarContrasenia(largoSeguridadMedia, caracteres);
+            Contraseña.GenerarContrasenia(largoSeguridadMedia, caracteres);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_DatosDeContraseniaInvalidos))]
+        [ExpectedException(typeof(ExepcionDatosDeContraseniaInvalidos))]
         public void GeneracionDeContraseniaLargoContraseniaCorta()
         {
             int largoInvalido = 4;
-            Dupla_UsuarioContrasenia.GenerarContrasenia(largoInvalido, caracteresRequeridos);
+            Contraseña.GenerarContrasenia(largoInvalido, caracteresRequeridos);
         }
 
         [TestMethod]
         public void GeneracionDeContraseniaCaracteresCorrectos()
         {
-            string unaContrasenia = Dupla_UsuarioContrasenia.GenerarContrasenia(largoSeguro, caracteresRequeridos);
-            bool[] tiposCaracteresContenidos = Dupla_UsuarioContrasenia.ObtenerTiposCaracteresContenidos(unaContrasenia);
+            string unaContrasenia = Contraseña.GenerarContrasenia(largoSeguro, caracteresRequeridos);
+            bool[] tiposCaracteresContenidos = Contraseña.ObtenerTiposCaracteresContenidos(unaContrasenia);
 
             for (int i = 0; i < caracteresRequeridos.Length; i++)
                 Assert.AreEqual(caracteresRequeridos[i], tiposCaracteresContenidos[i]);
@@ -292,7 +303,7 @@ namespace Pruebas
         public void GeneracionContraseniaSeguiridadRoja()
         {
             string contraseniaRoja = "2b+2B+";
-            int nivelSeguridad = Dupla_UsuarioContrasenia.CalcularSeguridad(contraseniaRoja);
+            int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaRoja);
 
             Assert.AreEqual(nivelContraseniaRoja, nivelSeguridad);
         }
@@ -301,7 +312,7 @@ namespace Pruebas
         public void GeneracionDeContraseniaSeguiridadNaranja()
         {
             string contraseniaNaranja = "Ashen0ne++";
-            int nivelSeguridad = Dupla_UsuarioContrasenia.CalcularSeguridad(contraseniaNaranja);
+            int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaNaranja);
 
             Assert.AreEqual(nivelContraseniaNaranja, nivelSeguridad);
         }
@@ -309,8 +320,8 @@ namespace Pruebas
         [TestMethod]
         public void GeneracionDeContraseniaSeguiridadAmarilla()
         {
-            string contraseniaAmarilla = "4ST0RA_GREAT-SWORD";
-            int nivelSeguridad = Dupla_UsuarioContrasenia.CalcularSeguridad(contraseniaAmarilla);
+            string contraseniaAmarilla = "4ST0RAGREATSWORD";
+            int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaAmarilla);
 
             Assert.AreEqual(nivelContraseniaAmarilla, nivelSeguridad);
         }
@@ -319,7 +330,7 @@ namespace Pruebas
         public void GeneracionDeContraseniaSeguiridadVerdeClaro()
         {
             string contraseniaVerdeClaro = "AncientGearChosGiant10";
-            int nivelSeguridad = Dupla_UsuarioContrasenia.CalcularSeguridad(contraseniaVerdeClaro);
+            int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaVerdeClaro);
 
             Assert.AreEqual(nivelContraseniaVerdeClaro, nivelSeguridad);
         }
@@ -328,7 +339,7 @@ namespace Pruebas
         public void GeneracionDeContraseniaSeguiridadVerdeOscuro()
         {
             string contraseniaVerdeOscuro = "AaBbCcDdEeFfGg123+-*";
-            int nivelSeguridad = Dupla_UsuarioContrasenia.CalcularSeguridad(contraseniaVerdeOscuro);
+            int nivelSeguridad = Contraseña.CalcularSeguridad(contraseniaVerdeOscuro);
 
             Assert.AreEqual(nivelContraseniaVerdeOscuro, nivelSeguridad);
         }
@@ -336,9 +347,9 @@ namespace Pruebas
         [TestMethod]
         public void BajaDuplaUsuarioContrasenia()
         {
-            unaDupla = null;
+            unaCredencial = null;
 
-            Assert.IsNull(unaDupla);
+            Assert.IsNull(unaCredencial);
         }
 
     }

@@ -51,7 +51,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.button_Modificar.TabIndex = 1;
             this.button_Modificar.Text = "Modificar Contraseña";
             this.button_Modificar.UseVisualStyleBackColor = false;
-            this.button_Modificar.Click += new System.EventHandler(this.button1_Click);
+            this.button_Modificar.Click += new System.EventHandler(this.btnModificarContrasenia_Click);
             // 
             // dataGridView_Contrasenias
             // 
@@ -70,7 +70,6 @@ namespace InterfazGrafica.InterfacesReporte
             this.dataGridView_Contrasenias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Contrasenias.Size = new System.Drawing.Size(470, 235);
             this.dataGridView_Contrasenias.TabIndex = 0;
-            this.dataGridView_Contrasenias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Contrasenias_CellContentClick);
             // 
             // Nombre_Usuario
             // 

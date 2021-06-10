@@ -10,10 +10,8 @@ namespace OblDiseño1
         
         public Usuario AgregarUsuario(string nombreUsuario, string contrasenia)
         {
-
             Usuario nuevoUsuario = new Usuario(nombreUsuario, contrasenia);
             usuarios.Add(nuevoUsuario);
-
             return nuevoUsuario;
         }
 
@@ -39,6 +37,7 @@ namespace OblDiseño1
 
         public Usuario DevolverUsuario(string nombreUsuario)
         {
+            
             foreach (Usuario us in usuarios)
                 if (us.Nombre.Equals(nombreUsuario))
                     return us;
@@ -46,11 +45,18 @@ namespace OblDiseño1
             throw new ObjectNotFoundException();
         }
 
-        public List<object>[] ObtenerDataBreaches(ref Usuario usuario, List<string> datosDataBreaches)
+        public List<Credencial> ObtenerDataBreachesCredenciales(ref Usuario usuario, List<string> datosDataBreaches)
         {
             ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
             
-            return dataBreaches.ObtenerEntidadesVulneradas(datosDataBreaches);
+            return dataBreaches.ObtenerCredencialesVulneradas(datosDataBreaches);
+        }
+
+        public List<Tarjeta> ObtenerDataBreachesTarjetas(ref Usuario usuario, List<string> datosDataBreaches)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+
+            return dataBreaches.ObtenerTarjetasVulneradas(datosDataBreaches);
         }
 
     }

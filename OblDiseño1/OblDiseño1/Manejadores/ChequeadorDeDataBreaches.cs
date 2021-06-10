@@ -1,33 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OblDiseño1
 {
     public class ChequeadorDeDataBreaches
     {
-
         public Usuario usuario { get; set; }
 
-        private const int cant_caracteres_en_numero_tarjeta = 16;
-        private const int cant_tipos_de_entidades_vulneradas = 2;
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;
         }
 
-        public List<Object>[] ObtenerEntidadesVulneradas(List<string> datosDelDataBreach)
+        public List<Tarjeta> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
         {
-            List<object>[] entidadesVulneradas = new List<object>[cant_tipos_de_entidades_vulneradas];
-
-            entidadesVulneradas[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
-            entidadesVulneradas[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
-
-            return entidadesVulneradas;
-        }
-
-        private List<Object> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
-        {
-            List<Object> tarjetasVulneradas = new List<Object>();
+            List<Tarjeta> tarjetasVulneradas = new List<Tarjeta>();
 
             foreach (string dato in datosDelDataBreach) 
                 if (Tarjeta.ValidarLargoNumeroDeTarjeta(dato) && this.usuario.RevisarSiLaTarjetaEsMia(dato))
@@ -36,15 +22,15 @@ namespace OblDiseño1
             return tarjetasVulneradas;
         }
 
-        private List<Object> ObtenerDuplasVulneradas(List<string> datosDelDataBreach)
+        public List<Credencial> ObtenerCredencialesVulneradas(List<string> datosDelDataBreach)
         {
-            List<Object> duplasVulneradas = new List<Object>();
+            List<Credencial> credencialesVulneradas = new List<Credencial>();
 
             foreach (string dato in datosDelDataBreach)
                 if (this.usuario.RevisarSiLaContraseniaEsMia(dato))
-                    duplasVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
+                    credencialesVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
 
-            return duplasVulneradas;
+            return credencialesVulneradas;
         }
     }
 }

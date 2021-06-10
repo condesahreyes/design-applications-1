@@ -1,7 +1,7 @@
-﻿using OblDiseño1;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
 {
@@ -48,9 +48,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
-            string codigoSeguridad = textBoxCodigoSeguridad.Text;
-            string nombreCategoria = comboBoxCategorias.Text;
-            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
             string nuevoNumeroTarjeta = textBoxNumeroTarjeta.Text;
 
             if (nuevoNumeroTarjeta != this.tarjeta.Numero &&
@@ -62,39 +59,51 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 try
                 {
-                    int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-
-                    this.tarjeta.Nombre = textBoxNombre.Text;
-                    this.tarjeta.Tipo = textBoxTipo.Text;
-                    this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
-                    this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
-                    this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
-                    this.tarjeta.Categoria = categoria;
-                    this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
-
+                    ModificarTarjeta();
                     MessageBox.Show("Se modifico correctamente la tarjeta");
-
-                    this.Close();
                     IrAInterfazTarjeta();
                 }
-                catch (Exception_TarjetaIncorrecta)
+                catch (ExepcionTarjetaIncorrecta)
                 {
-                    MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
-                                    "debe cumplir con el siguiente formato: " +
-                                    "\n\n" +
-                                    "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                    "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                    "> Número: Enteros de 16 dígitos\n\n" +
-                                    "> Código: Enteros de 3 o 4 dígitos, si es American Express deben ser 4 sino 3\n\n" +
-                                    "> Fecha: No vacía\n\n" +
-                                    "> Nota: Como máximo 250 caracteress\n\n" +
-                                    "> Categoría: Se selecciona de las disponibles en el sistema");
+                    MostrarCualesSonLosDatosCorrectos();
                 }
                 catch (System.FormatException)
                 {
                     MessageBox.Show("El codigo de seguridad debe ser un numero de 3 o 4 digitos");
                 }
             }
+        }
+
+        private void ModificarTarjeta()
+        {
+            string codigoSeguridad = textBoxCodigoSeguridad.Text;
+            string nombreCategoria = comboBoxCategorias.Text;
+
+            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
+
+            int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+
+            this.tarjeta.Nombre = textBoxNombre.Text;
+            this.tarjeta.Tipo = textBoxTipo.Text;
+            this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
+            this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
+            this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
+            this.tarjeta.Categoria = categoria;
+            this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
+        }
+
+        private void MostrarCualesSonLosDatosCorrectos()
+        {
+            MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
+                            "debe cumplir con el siguiente formato: " +
+                            "\n\n" +
+                            "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
+                            "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
+                            "> Número: Enteros de 16 dígitos\n\n" +
+                            "> Código: Enteros de 3 o 4 dígitos\n\n" +
+                            "> Fecha: No vacía\n\n" +
+                            "> Nota: Como máximo 250 caracteress\n\n" +
+                            "> Categoría: Se selecciona de las disponibles en el sistema");
         }
 
         private void IrAInterfazTarjeta()
@@ -110,6 +119,5 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
             interfazTarjeta.Show();
         }
-
     }
 }
