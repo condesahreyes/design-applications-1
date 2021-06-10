@@ -27,9 +27,8 @@ namespace InterfazGrafica.InterfazCategoria
 
         private void CargarLista()
         {
-            //ControladorObtener obtener = new ControladorObtener(this.usuario);
-            List<Categoria> categorias = usuario.ObtenerCategorias();
-            //List<Categoria> categorias = obtener.ObtenerCategorias();
+            ControladorObtener obtener = new ControladorObtener(this.usuario);
+            List<Categoria> categorias = obtener.ObtenerCategorias();
             categorias.Sort();
 
             dataGridCategorias.DataSource = categorias;

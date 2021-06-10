@@ -36,10 +36,10 @@ namespace AccesoDatos.Controladores
 
         public List<Categoria> ObtenerCategorias()
         {
-            //IRepositorio<Categoria, string> repositorio = new CategoriaRepositorio(usuario);
+            IRepositorio<Categoria, string> repositorio = new CategoriaRepositorio(usuario);
 
-            // return repositorio.GetAll();
-            return null;
+            return repositorio.GetAll();
+            //return null;
         }
 
         public void AgregarCredencial(Credencial credencial)

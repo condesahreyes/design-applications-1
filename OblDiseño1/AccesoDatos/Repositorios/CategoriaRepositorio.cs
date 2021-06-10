@@ -77,7 +77,7 @@ namespace AccesoDatos
                 foreach (var cat in contexto.categorias)
                 {
                     Categoria categoriaDominio = mapper.PasarADominio(cat);
-                    if(categoriaDominio.Nombre==this.usuario.Nombre)
+                    if(cat.UsuarioNombre==this.usuario.Nombre)
                         categoriasADevolver.Add(categoriaDominio);
                 }
 
