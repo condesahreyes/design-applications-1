@@ -13,10 +13,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 {
     public partial class Interfaz_MostrarContrasenia : Form
     {
-        private Dupla_UsuarioContrasenia laDupla;
-        public Interfaz_MostrarContrasenia(Dupla_UsuarioContrasenia unaDupla)
+        private Credencial credencial;
+        public Interfaz_MostrarContrasenia(Credencial unaCredencial)
         {
-            this.laDupla = unaDupla;
+            this.credencial = unaCredencial;
             InitializeComponent();
             ColocarContrasenia();
             IniziarCronometroParaAutodestruccion();
@@ -24,7 +24,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void ColocarContrasenia()
         {
-            this.textBox_contrasenia.Text = laDupla.Contrasenia;
+            this.textBox_contrasenia.Text = credencial.ObtenerContraseña;
         }
 
         private void IniziarCronometroParaAutodestruccion()

@@ -1,6 +1,7 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using System.Windows.Forms;
 using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
@@ -126,8 +127,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
-                Dupla_UsuarioContrasenia duplaSeleccionada = (Dupla_UsuarioContrasenia)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                Interfaz_MostrarContrasenia mostratContra = new Interfaz_MostrarContrasenia(duplaSeleccionada);
+                Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                Interfaz_MostrarContrasenia mostratContra = new Interfaz_MostrarContrasenia(credencialSeleccionada);
                 mostratContra.Show();
             }
         }
