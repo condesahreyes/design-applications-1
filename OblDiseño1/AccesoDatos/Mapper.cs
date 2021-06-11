@@ -70,7 +70,6 @@ namespace AccesoDatos
             credencialDominio.NombreUsuario = credencialEntidad.NombreUsuario;
             credencialDominio.Nota = credencialEntidad.Nota;
             credencialDominio.TipoSitioOApp = credencialEntidad.TipoSitioOApp;
-            credencialDominio.Id = credencialEntidad.CredencialId;
 
             return credencialDominio;
         }

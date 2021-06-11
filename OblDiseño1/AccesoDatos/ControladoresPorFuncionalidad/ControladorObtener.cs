@@ -12,10 +12,10 @@ namespace AccesoDatos.Controladores
             this.usuario = usuario;
         }
 
-        public void ObtenerUsuario(Usuario unUsuario)
+        public Usuario ObtenerUsuario(Usuario unUsuario)
         {
-            //IRepositorio<Usuario, string> repositorio = new UsuarioRepositorio();
-            //repositorio.Get(unUsuario.Nombre);
+            IRepositorio<Usuario, string> repositorio = new UsuarioRepositorio();
+            return repositorio.Get(unUsuario.Nombre);
         }
 
         public EntidadUsuario ObtenerUsuarioDto(Usuario unUsuario)
@@ -37,15 +37,21 @@ namespace AccesoDatos.Controladores
         public List<Categoria> ObtenerCategorias()
         {
             IRepositorio<Categoria, string> repositorio = new CategoriaRepositorio(usuario);
-
             return repositorio.GetAll();
-            //return null;
+        }
+
+        public EntidadCategoria ObtenerCategoriaDto()
+        {
+            /*IRepositorio<Categoria, string> repositorio = new CategoriaRepositorio(usuario);
+            
+            return repositorio.GetAll();*/
+            return null;
         }
 
         public void AgregarCredencial(Credencial credencial)
         {
-            //IRepositorio<Credencial, int> repositorio = new CredencialRepositorio(usuario);
-            //repositorio.Add(credencial);
+            IRepositorio<Credencial, int> repositorio = new CredencialRepositorio(usuario);
+            repositorio.Add(credencial);
         }
 
         public void AgregarTarjeta(Tarjeta tarjeta)

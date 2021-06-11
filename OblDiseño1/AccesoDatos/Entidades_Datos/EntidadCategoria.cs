@@ -11,8 +11,6 @@ namespace AccesoDatos.Entidades_Datos
     {
         public string NombreCategoria { set; get; }
 
-        //public String Usuario { set; get; }
-
         public EntidadUsuario Usuario { set; get; }
 
         public string UsuarioNombre { set; get; }
@@ -25,7 +23,6 @@ namespace AccesoDatos.Entidades_Datos
         {
             this.NombreCategoria = nombre;
             this.UsuarioNombre = usuario.Nombre;
-            //this.Usuario = usuario;
         }
     }
 }

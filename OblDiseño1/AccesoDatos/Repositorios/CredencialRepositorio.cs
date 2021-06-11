@@ -1,4 +1,5 @@
-﻿using AccesoDatos.Entidades_Datos;
+﻿using AccesoDatos.Controladores;
+using AccesoDatos.Entidades_Datos;
 using OblDiseño1;
 using System;
 using System.Collections.Generic;
@@ -11,26 +12,38 @@ namespace AccesoDatos
     public class CredencialRepositorio : IRepositorio<Credencial, int>
     {
         private readonly Mapper mapper = new Mapper();
-        public EntidadUsuario usuario;
+        private Usuario usuario;
+
         public CredencialRepositorio(Usuario usuarioDueñoDominio)
         {
-            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            this.usuario = usuarioDueñoDominio;
         }
 
-        public void Add(Credencial credencialDominio) 
+        public void Add(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => (credencial.NombreUsuario == credencialDominio.NombreUsuario) &&
-                (credencial.NombreSitioApp == credencialDominio.NombreSitioApp)))
+                if (contexto.credenciales.Any(c => (c.NombreUsuario == credencial.NombreUsuario) &&
+                (c.NombreSitioApp == credencial.NombreSitioApp)))
                     throw new ExepcionObjetosRepetidos("Ya existe una credencial con para este nombre de usuario y sitio");
                 else
                 {
+                    /*
+                    ControladorObtener obtener = new ControladorObtener(this.usuario);
+
+                    EntidadCategoria entidadCtaegoria = obtener.Cat
+                    EntidadUsuario entidadUsuario = obtener.ObtenerUsuarioDto(this.usuario);
+                    EntidadContraseña miContraseña = new EntidadContraseña(credencial.ObtenerContraseña, 
+                        credencial.ObtenerNivelSeguridad, credencial);
+                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario, 
+                        miContraseña, credencial.NombreSitioApp, credencial.Nota, , entidadUsuario);
+
+
                     EntidadCredencial entidadCredencialAAgregar = mapper.PasarAEntidad(credencialDominio);
-                    entidadCredencialAAgregar.Usuario = this.usuario;
+                    entidadCredencialAAgregar.UsuarioGestor = this.usuario;
                     contexto.credenciales.Add(entidadCredencialAAgregar);
                     contexto.SaveChanges();
-                    credencialDominio.Id = entidadCredencialAAgregar.CredencialId;
+                    */
                 }
             }
         }
@@ -102,13 +115,15 @@ namespace AccesoDatos
 
         public bool Existe(int id)
         {
+            /*
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => credencial.CredencialId == id))
+                if (contexto.credenciales.Any(credencial => credencial. == id))
                     return true;
                 else
                     return false;
-            }
+            */
+            return false;
         }
 
         public List<Categoria> ObtenerMisCategorias(string nombre)

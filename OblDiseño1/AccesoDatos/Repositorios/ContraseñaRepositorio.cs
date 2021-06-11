@@ -19,14 +19,14 @@ namespace AccesoDatos
             this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
         }
         public void Add(Contraseña contraseña)
-        {
+        {/*
             using (Contexto contexto = new Contexto())
             {
                 EntidadContraseña contraseñaEntidad = mapper.PasarAEntidad(contraseña);
-                contraseñaEntidad.Usuario = this.usuario;
+                contraseñaEntidad.CredencialUsuario. = this.usuario;
                 contexto.contraseñas.Add(contraseñaEntidad);
                 contexto.SaveChanges();
-            }
+            }*/
         }
 
         public void Clear()

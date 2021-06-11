@@ -11,10 +11,9 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadTarjeta
     {
-        public int EntidadTarjetaId { get; set; }
         public int Numero { get; set; }
-
-        public EntidadUsuario Usuario { set; get; }
+        public EntidadUsuario UsuarioGestor { set; get; }
+        public string UsuarioGestorNombre { set; get; }
         public string NotaOpcional { set; get; }
         public string Nombre { get; set; }
         public string Tipo { get; set; }

@@ -26,10 +26,12 @@ namespace AccesoDatos
                     throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con este numero");
                 else
                 {
+                    /*
                     EntidadTarjeta tarjetaEntidad = mapper.PasarAEntidad(tarjetaDominio);
                     tarjetaEntidad.Usuario = this.usuario;
                     contexto.tarjetas.Add(tarjetaEntidad);
                     contexto.SaveChanges();
+                    */
                 }
             }
         }
