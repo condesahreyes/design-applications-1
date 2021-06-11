@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
-using AccesoDatos.Controladores;
+using AccesoDatos;
 
 namespace InterfazGrafica.InterfazCategoria
 {
@@ -27,8 +27,8 @@ namespace InterfazGrafica.InterfazCategoria
 
         private void CargarLista()
         {
-            ControladorObtener obtener = new ControladorObtener(this.usuario);
-            List<Categoria> categorias = obtener.ObtenerCategorias();
+            CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            List<Categoria> categorias = repositorioCategoria.GetAll();
             categorias.Sort();
 
             dataGridCategorias.DataSource = categorias;

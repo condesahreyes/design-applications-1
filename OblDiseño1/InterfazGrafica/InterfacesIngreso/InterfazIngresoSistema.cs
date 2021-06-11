@@ -66,8 +66,8 @@ namespace InterfazGrafica.InterfazIngreso
             {
                 //Usuario unUsuario=sistema.AgregarUsuario(nombreUsuario, contrasenia);
                 Usuario usuarioAAgregar = new Usuario(nombreUsuario, contrasenia);
-                ControladorDarDeAlta controlador = new ControladorDarDeAlta(usuarioAAgregar);
-                controlador.AgregarUsuario(usuarioAAgregar);
+                UsuarioRepositorio repositorioUsuaurio = new UsuarioRepositorio();
+                repositorioUsuaurio.Add(usuarioAAgregar);
                 MessageBox.Show("Se lo ha registrado como nuevo usuario");
                 return usuarioAAgregar;
             }

@@ -1,8 +1,7 @@
-﻿using AccesoDatos.Controladores;
-using AccesoDatos.Entidades_Datos;
-using OblDiseño1;
+﻿using AccesoDatos.Entidades_Datos;
 using System.Collections.Generic;
 using System.Linq;
+using OblDiseño1;
 
 namespace AccesoDatos
 {
@@ -12,7 +11,6 @@ namespace AccesoDatos
         Usuario usuario;
         public CategoriaRepositorio(Usuario usuarioDueñoDominio)
         {
-            //this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
             this.usuario = usuarioDueñoDominio;
         }
         public void Add(Categoria categoriaDominio) 
@@ -23,9 +21,9 @@ namespace AccesoDatos
                     throw new ExepcionObjetosRepetidos("Ya existe una categoria con este nombre");
                 else
                 {
-                    ControladorObtener obtener = new ControladorObtener(this.usuario);
+                    UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
 
-                    EntidadUsuario entidadUsuario= obtener.ObtenerUsuarioDto(this.usuario);
+                    EntidadUsuario entidadUsuario = repositorioUsuario.ObtenerUsuarioDto(this.usuario);
                     EntidadCategoria categoriaAlAgregar = new EntidadCategoria(categoriaDominio.Nombre, entidadUsuario); 
 
                     contexto.categorias.Add(categoriaAlAgregar);

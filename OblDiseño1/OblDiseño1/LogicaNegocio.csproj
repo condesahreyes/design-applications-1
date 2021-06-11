@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControladoresPorEntidades\ControladorCategoria.cs" />
-    <Compile Include="ControladoresPorEntidades\ControladorUsuario.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\CDarDeAlta.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\ControladorDarDeAlta.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\ControladorUsuario.cs" />
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Contraseña.cs" />
     <Compile Include="Entidades\Reporte.cs" />

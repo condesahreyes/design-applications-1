@@ -1,5 +1,4 @@
-﻿using AccesoDatos.Controladores;
-using AccesoDatos.Entidades_Datos;
+﻿using AccesoDatos.Entidades_Datos;
 using OblDiseño1;
 using System;
 using System.Collections.Generic;

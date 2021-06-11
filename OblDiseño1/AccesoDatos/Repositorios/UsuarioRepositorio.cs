@@ -49,6 +49,22 @@ namespace AccesoDatos
             }
         }
 
+        public EntidadUsuario ObtenerUsuarioDto(Usuario unUsuario)
+        {
+            IRepositorio<Usuario, string> repositorio = new UsuarioRepositorio();
+            using (Contexto contexto = new Contexto())
+            {
+                if (repositorio.Existe(unUsuario.Nombre))
+                {
+                    return contexto.usuarios.Find(unUsuario.Nombre);
+
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
+            }
+
+        }
+
 
         public List<Usuario> GetAll() 
         {
