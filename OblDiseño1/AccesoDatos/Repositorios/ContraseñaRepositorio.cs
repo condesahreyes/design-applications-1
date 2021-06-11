@@ -99,6 +99,11 @@ namespace AccesoDatos
             }
         }
 
+        public void Modificar(Contraseña elemento)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Categoria> ObtenerMisCategorias(string nombre)
         {
             throw new NotImplementedException();

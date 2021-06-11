@@ -139,7 +139,10 @@ namespace AccesoDatos
             }
         }
 
-
+        public void Modificar(Usuario elemento)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

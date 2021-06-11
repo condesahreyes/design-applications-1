@@ -111,5 +111,10 @@ namespace AccesoDatos
         {
             throw new System.NotImplementedException();
         }
+
+        public void Modificar(Categoria elemento)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

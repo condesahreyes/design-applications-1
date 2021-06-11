@@ -121,5 +121,10 @@ namespace AccesoDatos
         {
             throw new NotImplementedException();
         }
+
+        public void Modificar(Tarjeta elemento)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

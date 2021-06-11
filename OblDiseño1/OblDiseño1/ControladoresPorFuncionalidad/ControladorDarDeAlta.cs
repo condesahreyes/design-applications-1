@@ -6,23 +6,23 @@ namespace OblDiseño1.ControladoresPorEntidades
 {
     public class ControladorCategoria
     {
-        Usuario usuario;
-        IRepositorio<Categoria, string> repositorio;
-        public ControladorCategoria(IRepositorio<Categoria, string> repositorio, Usuario usuario)
-        {
-            this.repositorio = repositorio;
-            this.usuario = usuario;
-        }
+        //Usuario usuario;
+        //IRepositorio<Categoria, string> repositorio;
+        //public ControladorCategoria(IRepositorio<Categoria, string> repositorio, Usuario usuario)
+        //{
+        //    this.repositorio = repositorio;
+        //    this.usuario = usuario;
+        //}
 
-        public void AgregarCategoria(Categoria categoria, IRepositorio<Usuario, string> repositorioUsuario)
-        {
-            List<Categoria> categorias = repositorioUsuario.ObtenerMisCategorias(usuario.Nombre);
-            foreach (Categoria cat in categorias)
-                if (cat.Nombre.ToLower() == categoria.Nombre.ToLower())
-                    throw new DuplicateNameException();
+        //public void AgregarCategoria(Categoria categoria, IRepositorio<Usuario, string> repositorioUsuario)
+        //{
+        //    List<Categoria> categorias = repositorioUsuario.ObtenerMisCategorias(usuario.Nombre);
+        //    foreach (Categoria cat in categorias)
+        //        if (cat.Nombre.ToLower() == categoria.Nombre.ToLower())
+        //            throw new DuplicateNameException();
 
-            repositorio.Add(categoria);
-        }
+        //    repositorio.Add(categoria);
+        //}
 
         public void EliminarCategoria(Categoria categoria)
         {

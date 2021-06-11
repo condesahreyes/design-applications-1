@@ -129,5 +129,10 @@ namespace AccesoDatos
         {
             throw new NotImplementedException();
         }
+
+        public void Modificar(Credencial elemento)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

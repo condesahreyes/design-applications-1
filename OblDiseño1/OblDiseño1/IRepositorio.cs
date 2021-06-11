@@ -22,8 +22,7 @@ namespace OblDiseño1
 
         void Clear();
 
-        List<Categoria> ObtenerMisCategorias(string nombre);
-
+        void Modificar(T elemento);
 
     }
 }
