@@ -36,7 +36,8 @@ namespace InterfazGrafica.InterfazIngreso
 
         public bool VerificarContraseñaCorrecta(string nombreUsuario, string contrasenia)
         {
-            Usuario usuarioIngresado = usuariosRepo.Get(nombreUsuario);
+            Usuario usuario = new Usuario(nombreUsuario, contrasenia);
+            Usuario usuarioIngresado = usuariosRepo.Get(usuario);
             if (usuarioIngresado.Contrasenia == contrasenia)
                 return true;
             else
@@ -45,12 +46,12 @@ namespace InterfazGrafica.InterfazIngreso
 
         private Usuario ObtenerUsuario(string nombreUsuario, string contrasenia)
         {
-            Usuario usuario=null;
+            Usuario usuario= new Usuario(nombreUsuario, contrasenia);
                 //usuario = sistema.DevolverUsuario(nombreUsuario);
                 
-                if (usuariosRepo.Existe(nombreUsuario))
+                if (usuariosRepo.Existe(usuario))
                 {
-                    Usuario usuarioDominio =usuariosRepo.Get(nombreUsuario);
+                    Usuario usuarioDominio =usuariosRepo.Get(usuario);
                     return usuarioDominio;
                 }
                 else

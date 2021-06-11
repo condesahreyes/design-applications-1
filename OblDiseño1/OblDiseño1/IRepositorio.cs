@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1
 {
-    public interface IRepositorio <T,K>
+    public interface IRepositorio <T>
     {
         void Add(T elemento);
 
         bool esVacio();
 
-        bool Existe(K id);
+        bool Existe(T elemento);
 
-        T Get(K id);
+        T Get(T elemento);
 
         List<T> GetAll();
 
-        void Delete(K id);
+        void Delete(T elemento);
 
         void Clear();
 

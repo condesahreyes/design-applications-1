@@ -82,7 +82,7 @@ namespace AccesoDatos
             tarjetaEntidad.FechaVencimiento = tarjetaDominio.FechaVencimiento;
             tarjetaEntidad.Nombre = tarjetaDominio.Nombre;
             tarjetaEntidad.NotaOpcional = tarjetaDominio.NotaOpcional;
-            tarjetaEntidad.Numero = Int32.Parse(tarjetaDominio.Numero);
+            tarjetaEntidad.Numero = tarjetaDominio.Numero;
             tarjetaEntidad.Tipo = tarjetaDominio.Tipo;
 
             return tarjetaEntidad;

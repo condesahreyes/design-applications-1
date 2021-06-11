@@ -5,7 +5,7 @@ using OblDiseño1;
 
 namespace AccesoDatos
 {
-    public class CategoriaRepositorio : IRepositorio<Categoria, string>
+    public class CategoriaRepositorio : IRepositorio<Categoria>
     {
         private readonly Mapper mapper = new Mapper();
         Usuario usuario;
@@ -17,7 +17,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(categoriaDominio.Nombre))
+                if (Existe(categoriaDominio))
                     throw new ExepcionObjetosRepetidos("Ya existe una categoria con este nombre");
                 else
                 {
@@ -40,24 +40,24 @@ namespace AccesoDatos
             }
         }
 
-        public bool Existe(string nombre)
+        public bool Existe(Categoria categoria)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.categorias.Any(cat => cat.NombreCategoria == nombre) && contexto.categorias.Any(cat => cat.Usuario.Nombre == this.usuario.Nombre))
+                if (contexto.categorias.Any(cat => cat.NombreCategoria == categoria.Nombre) && contexto.categorias.Any(cat => cat.Usuario.Nombre == this.usuario.Nombre))
                     return true;
                 else
                     return false;
             }
         }
 
-        public Categoria Get(string nombre) 
+        public Categoria Get(Categoria categoria) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(nombre))
+                if (Existe(categoria))
                 {
-                    EntidadCategoria categoriaEntidad = contexto.categorias.Find(nombre, this.usuario);
+                    EntidadCategoria categoriaEntidad = contexto.categorias.Find(categoria.Nombre, this.usuario);
                     Categoria categoriaDominio = mapper.PasarADominio(categoriaEntidad);
                     return categoriaDominio;
                 }
@@ -83,13 +83,13 @@ namespace AccesoDatos
             }
         }
 
-        public void Delete(string nombre) 
+        public void Delete(Categoria categoria) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(nombre))
+                if (Existe(categoria))
                 {
-                    EntidadCategoria categoriaARemover = contexto.categorias.Find(nombre);
+                    EntidadCategoria categoriaARemover = contexto.categorias.Find(categoria.Nombre);
                     contexto.categorias.Remove(categoriaARemover);
                     contexto.SaveChanges();
                 }

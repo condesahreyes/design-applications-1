@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AccesoDatos
 {
-    public class CredencialRepositorio : IRepositorio<Credencial, int>
+    public class CredencialRepositorio : IRepositorio<Credencial>
     {
         private readonly Mapper mapper = new Mapper();
         private Usuario usuario;
@@ -55,13 +55,13 @@ namespace AccesoDatos
             }
         }
 
-        public Credencial Get(int id) 
+        public Credencial Get(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(id))
+                if (Existe(credencial))
                 {
-                    EntidadCredencial credencialEntidad = contexto.credenciales.Find(id);
+                    EntidadCredencial credencialEntidad = contexto.credenciales.Find(credencial.Contraseña);
                     Credencial credencialDominio = mapper.PasarADominio(credencialEntidad);
                     return credencialDominio;
                 }
@@ -90,13 +90,13 @@ namespace AccesoDatos
         }
 
 
-        public void Delete(int id) 
+        public void Delete(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(id))
+                if (Existe(credencial))
                 {
-                    EntidadCredencial credencialEntidadARemover = contexto.credenciales.Find(id);
+                    EntidadCredencial credencialEntidadARemover = contexto.credenciales.Find(credencial.Contraseña);
                     contexto.credenciales.Remove(credencialEntidadARemover);
                 }
                 else
@@ -112,7 +112,7 @@ namespace AccesoDatos
             }
         }
 
-        public bool Existe(int id)
+        public bool Existe(Credencial credencial)
         {
             /*
             using (Contexto contexto = new Contexto())

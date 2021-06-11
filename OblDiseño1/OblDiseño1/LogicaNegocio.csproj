@@ -47,8 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControladoresPorFuncionalidad\ControladorAlta.cs" />
-    <Compile Include="ControladoresPorFuncionalidad\ControladorDarDeAlta.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\ControladorEliminar.cs" />
     <Compile Include="ControladoresPorFuncionalidad\ControladorModificar.cs" />
+    <Compile Include="ControladoresPorFuncionalidad\ControladorObtener.cs" />
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Contraseña.cs" />
     <Compile Include="Entidades\Reporte.cs" />

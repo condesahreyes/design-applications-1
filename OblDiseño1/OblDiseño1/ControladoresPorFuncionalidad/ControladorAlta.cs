@@ -3,29 +3,29 @@ using System.Data;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
-    class ControladorAlta
+    public class ControladorAlta
     {
         public ControladorAlta()
         {
         }
 
-        public void AgregarUsuario(Usuario usuario, IRepositorio<Usuario, string> repositorioUsuario)
+        public void AgregarUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
         {
             repositorioUsuario.Add(usuario);
         }
 
-        public void AgregarCategoria(Categoria categoria, IRepositorio<Categoria, string> repositorioCategoria)
+        public void AgregarCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
         {
             repositorioCategoria.Add(categoria);
         }
 
 
-        public void AgregarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta, string> repositorioTarjeta)
+        public void AgregarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
         {
             repositorioTarjeta.Add(tarjetaAgregar);
         }
 
-        public void AgregarCredencial(Credencial credencialAgregar, IRepositorio<Credencial, string> repositorioCredencial)
+        public void AgregarCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
         {
             repositorioCredencial.Add(credencialAgregar);
         }
