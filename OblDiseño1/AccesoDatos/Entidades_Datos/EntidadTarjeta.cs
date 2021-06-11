@@ -11,10 +11,9 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadTarjeta
     {
-        public int EntidadTarjetaId { get; set; }
-        public int Numero { get; set; }
-
-        public EntidadUsuario Usuario { set; get; }
+        public string Numero { get; set; }
+        public EntidadUsuario UsuarioGestor { set; get; }
+        public string UsuarioGestorNombre { set; get; }
         public string NotaOpcional { set; get; }
         public string Nombre { get; set; }
         public string Tipo { get; set; }
@@ -28,7 +27,7 @@ namespace AccesoDatos.Entidades_Datos
         public EntidadTarjeta() 
         {
         }
-        public EntidadTarjeta(string nota, string nombre, string tipo, int numero, int codigoSeguridad, DateTime fecha, EntidadCategoria categoria)
+        public EntidadTarjeta(string nota, string nombre, string tipo, string numero, int codigoSeguridad, DateTime fecha, EntidadCategoria categoria)
         {
             this.Nombre = nombre;
             this.NotaOpcional = nota;

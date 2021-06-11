@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AccesoDatos
 {
-    public class TarjetaRepositorio : IRepositorio<Tarjeta, int>
+    public class TarjetaRepositorio : IRepositorio<Tarjeta>
     {
         private readonly Mapper mapper = new Mapper();
 
@@ -21,15 +21,16 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                int numeroTarjetaAInt = Int32.Parse(tarjetaDominio.Numero);
-                if (Existe(numeroTarjetaAInt))
+                if (Existe(tarjetaDominio))
                     throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con este numero");
                 else
                 {
+                    /*
                     EntidadTarjeta tarjetaEntidad = mapper.PasarAEntidad(tarjetaDominio);
                     tarjetaEntidad.Usuario = this.usuario;
                     contexto.tarjetas.Add(tarjetaEntidad);
                     contexto.SaveChanges();
+                    */
                 }
             }
         }
@@ -45,13 +46,13 @@ namespace AccesoDatos
             }
         }
 
-        public Tarjeta Get(int numero) 
+        public Tarjeta Get(Tarjeta tarjeta) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(numero))
+                if (Existe(tarjeta))
                 {
-                    EntidadTarjeta tarjetaEntidad = contexto.tarjetas.Find(numero);
+                    EntidadTarjeta tarjetaEntidad = contexto.tarjetas.Find(tarjeta.Nombre);
                     Tarjeta tarjetaDominio = mapper.PasarADominio(tarjetaEntidad);
                     return tarjetaDominio;
                 }
@@ -81,13 +82,13 @@ namespace AccesoDatos
             }
         }
 
-        public void Delete(int numero)
+        public void Delete(Tarjeta tarjeta)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(numero))
+                if (Existe(tarjeta))
                 {
-                    EntidadTarjeta tarjetaABorrar = contexto.tarjetas.Find(numero);
+                    EntidadTarjeta tarjetaABorrar = contexto.tarjetas.Find(tarjeta.Numero);
                     contexto.tarjetas.Remove(tarjetaABorrar);
                     contexto.SaveChanges();
                 }
@@ -104,11 +105,11 @@ namespace AccesoDatos
             }
         }
 
-        public bool Existe(int numero)
+        public bool Existe(Tarjeta tarjeta)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.tarjetas.Any(tarjetaEntidad => tarjetaEntidad.Numero == numero))
+                if (contexto.tarjetas.Any(tarjetaEntidad => tarjetaEntidad.Numero == tarjeta.Numero))
                     return true;
                 else
                     return false;
@@ -116,6 +117,11 @@ namespace AccesoDatos
         }
 
         public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Modificar(Tarjeta elemento)
         {
             throw new NotImplementedException();
         }

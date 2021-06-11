@@ -70,7 +70,6 @@ namespace AccesoDatos
             credencialDominio.NombreUsuario = credencialEntidad.NombreUsuario;
             credencialDominio.Nota = credencialEntidad.Nota;
             credencialDominio.TipoSitioOApp = credencialEntidad.TipoSitioOApp;
-            credencialDominio.Id = credencialEntidad.CredencialId;
 
             return credencialDominio;
         }
@@ -83,7 +82,7 @@ namespace AccesoDatos
             tarjetaEntidad.FechaVencimiento = tarjetaDominio.FechaVencimiento;
             tarjetaEntidad.Nombre = tarjetaDominio.Nombre;
             tarjetaEntidad.NotaOpcional = tarjetaDominio.NotaOpcional;
-            tarjetaEntidad.Numero = Int32.Parse(tarjetaDominio.Numero);
+            tarjetaEntidad.Numero = tarjetaDominio.Numero;
             tarjetaEntidad.Tipo = tarjetaDominio.Tipo;
 
             return tarjetaEntidad;
