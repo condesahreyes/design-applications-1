@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AccesoDatos
 {
-    public class ContraseñaRepositorio : IRepositorio<Contraseña, string>
+    public class ContraseñaRepositorio : IRepositorio<Contraseña>
     {
         private readonly Mapper mapper = new Mapper();
 
@@ -19,14 +19,14 @@ namespace AccesoDatos
             this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
         }
         public void Add(Contraseña contraseña)
-        {
+        {/*
             using (Contexto contexto = new Contexto())
             {
                 EntidadContraseña contraseñaEntidad = mapper.PasarAEntidad(contraseña);
-                contraseñaEntidad.Usuario = this.usuario;
+                contraseñaEntidad.CredencialUsuario. = this.usuario;
                 contexto.contraseñas.Add(contraseñaEntidad);
                 contexto.SaveChanges();
-            }
+            }*/
         }
 
         public void Clear()
@@ -37,7 +37,7 @@ namespace AccesoDatos
             }
         }
 
-        public void Delete(string contraseña)
+        public void Delete(Contraseña contraseña)
         {
             using (Contexto contexto = new Contexto())
             {
@@ -58,24 +58,24 @@ namespace AccesoDatos
                 return (contexto.contraseñas.Count() == 0);
         }
 
-        public bool Existe(string contraseña)
+        public bool Existe(Contraseña contraseña)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.contraseñas.Any(contra => contra.Contrasenia == contraseña))
+                if (contexto.contraseñas.Any(contra => contra.Contrasenia == contraseña.Contrasenia))
                     return true;
                 else
                     return false;
             }
         }
 
-        public Contraseña Get(string contraseña)
+        public Contraseña Get(Contraseña contraseña)
         {
             using (Contexto contexto = new Contexto())
             {
                 if (Existe(contraseña))
                 {
-                    EntidadContraseña contraseñaEntidad = contexto.contraseñas.Find(contraseña);
+                    EntidadContraseña contraseñaEntidad = contexto.contraseñas.Find(contraseña.Contrasenia);
                     Contraseña contraseñaDominio = mapper.PasarADominio(contraseñaEntidad);
                     return contraseñaDominio;
                 }
@@ -97,6 +97,11 @@ namespace AccesoDatos
 
                 return contraseñasADevolver;
             }
+        }
+
+        public void Modificar(Contraseña elemento)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Categoria> ObtenerMisCategorias(string nombre)

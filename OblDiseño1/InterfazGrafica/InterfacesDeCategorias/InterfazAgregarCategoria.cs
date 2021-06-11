@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using OblDiseño1;
 using System;
 using AccesoDatos;
-using OblDiseño1.ControladoresPorEntidades;
+using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -24,11 +24,9 @@ namespace InterfazGrafica.InterfazDeCategorias
             Categoria categoria = CrearCategoria();
 
             CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
+            ControladorAlta controladorAlta = new ControladorAlta();
 
-            ControladorCategoria controladorCategoria = new ControladorCategoria(repositorioCategoria, this.usuario);
-
-            controladorCategoria.AgregarCategoria(categoria, repositorioUsuario);
+            controladorAlta.AgregarCategoria(categoria, repositorioCategoria);
             AgregarAMisCategorias(categoria);
         }
 

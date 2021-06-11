@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OblDiseño1;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,19 +10,23 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadContraseña
     {
-
-        public int ContraseñaId { set; get; }
         public string Contrasenia { set; get; }
         public int NivelSeguridadContrasenia { set; get; }
 
-        public EntidadUsuario Usuario { set; get; }
+        public EntidadCredencial Credencial { set; get; }
+        public string CredencialNombre { set; get; }
+        public string CredencialSitio { set; get; }
+        public string CredencialUsuario { set; get; }
 
         public EntidadContraseña() { }
 
-        public EntidadContraseña(string unaContrasenia, int nivelSeguridadContrasenia)
+        public EntidadContraseña(string unaContrasenia, int nivelSeguridadContrasenia, Credencial credencial)
         {
             this.Contrasenia = unaContrasenia;
             this.NivelSeguridadContrasenia = nivelSeguridadContrasenia;
+            this.CredencialNombre = credencial.NombreUsuario;
+            this.CredencialSitio = credencial.NombreSitioApp;
+            this.CredencialUsuario = credencial.NombreUsuario;
         }
     }
 }

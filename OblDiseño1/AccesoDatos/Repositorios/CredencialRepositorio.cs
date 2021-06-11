@@ -8,29 +8,41 @@ using System.Threading.Tasks;
 
 namespace AccesoDatos
 {
-    public class CredencialRepositorio : IRepositorio<Credencial, int>
+    public class CredencialRepositorio : IRepositorio<Credencial>
     {
         private readonly Mapper mapper = new Mapper();
-        public EntidadUsuario usuario;
+        private Usuario usuario;
+
         public CredencialRepositorio(Usuario usuarioDueñoDominio)
         {
-            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            this.usuario = usuarioDueñoDominio;
         }
 
-        public void Add(Credencial credencialDominio) 
+        public void Add(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => (credencial.NombreUsuario == credencialDominio.NombreUsuario) &&
-                (credencial.NombreSitioApp == credencialDominio.NombreSitioApp)))
+                if (contexto.credenciales.Any(c => (c.NombreUsuario == credencial.NombreUsuario) &&
+                (c.NombreSitioApp == credencial.NombreSitioApp)))
                     throw new ExepcionObjetosRepetidos("Ya existe una credencial con para este nombre de usuario y sitio");
                 else
                 {
+                    /*
+                    ControladorObtener obtener = new ControladorObtener(this.usuario);
+
+                    EntidadCategoria entidadCtaegoria = obtener.Cat
+                    EntidadUsuario entidadUsuario = obtener.ObtenerUsuarioDto(this.usuario);
+                    EntidadContraseña miContraseña = new EntidadContraseña(credencial.ObtenerContraseña, 
+                        credencial.ObtenerNivelSeguridad, credencial);
+                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario, 
+                        miContraseña, credencial.NombreSitioApp, credencial.Nota, , entidadUsuario);
+
+
                     EntidadCredencial entidadCredencialAAgregar = mapper.PasarAEntidad(credencialDominio);
-                    entidadCredencialAAgregar.Usuario = this.usuario;
+                    entidadCredencialAAgregar.UsuarioGestor = this.usuario;
                     contexto.credenciales.Add(entidadCredencialAAgregar);
                     contexto.SaveChanges();
-                    credencialDominio.Id = entidadCredencialAAgregar.CredencialId;
+                    */
                 }
             }
         }
@@ -43,13 +55,13 @@ namespace AccesoDatos
             }
         }
 
-        public Credencial Get(int id) 
+        public Credencial Get(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(id))
+                if (Existe(credencial))
                 {
-                    EntidadCredencial credencialEntidad = contexto.credenciales.Find(id);
+                    EntidadCredencial credencialEntidad = contexto.credenciales.Find(credencial.Contraseña);
                     Credencial credencialDominio = mapper.PasarADominio(credencialEntidad);
                     return credencialDominio;
                 }
@@ -78,13 +90,13 @@ namespace AccesoDatos
         }
 
 
-        public void Delete(int id) 
+        public void Delete(Credencial credencial) 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(id))
+                if (Existe(credencial))
                 {
-                    EntidadCredencial credencialEntidadARemover = contexto.credenciales.Find(id);
+                    EntidadCredencial credencialEntidadARemover = contexto.credenciales.Find(credencial.Contraseña);
                     contexto.credenciales.Remove(credencialEntidadARemover);
                 }
                 else
@@ -100,18 +112,25 @@ namespace AccesoDatos
             }
         }
 
-        public bool Existe(int id)
+        public bool Existe(Credencial credencial)
         {
+            /*
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => credencial.CredencialId == id))
+                if (contexto.credenciales.Any(credencial => credencial. == id))
                     return true;
                 else
                     return false;
-            }
+            */
+            return false;
         }
 
         public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Modificar(Credencial elemento)
         {
             throw new NotImplementedException();
         }
