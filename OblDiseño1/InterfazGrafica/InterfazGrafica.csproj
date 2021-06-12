@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfacesDataBreaches\InterfazImportarDatosDesdeArchivoTxt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesDataBreaches\InterfazImportarDatosDesdeArchivoTxt.Designer.cs">
+      <DependentUpon>InterfazImportarDatosDesdeArchivoTxt.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfacesDeContrasenias\Interfaz_MostrarContrasenia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +199,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="InterfacesDataBreaches\InterfazImportarDatosDesdeArchivoTxt.resx">
+      <DependentUpon>InterfazImportarDatosDesdeArchivoTxt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfacesDeContrasenias\InterfazAgregarContrasenia.resx">
       <DependentUpon>InterfazAgregarContrasenia.cs</DependentUpon>
     </EmbeddedResource>
