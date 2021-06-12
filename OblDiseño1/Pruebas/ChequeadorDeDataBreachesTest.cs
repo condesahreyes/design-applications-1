@@ -47,6 +47,9 @@ namespace Pruebas
         DateTime[] fechaVencimientoTarjetas = { new DateTime(2030, 04, 20), new DateTime(2025, 07, 17),
                 new DateTime(2030, 04, 20), new DateTime(2029, 05, 25)};
 
+        private readonly string direccionArchivoConInfoBrachada = @"ArchivosParaPruebas\InfoBreachada_Test.txt";
+
+
         [TestInitialize]
         public void Setup()
         {
@@ -101,6 +104,7 @@ namespace Pruebas
                 usuario.AgregarCredencial(credencial);
             }
         }
+
 
         [TestMethod]
         public void AltaChequearDataBreaches()
@@ -163,6 +167,24 @@ namespace Pruebas
         {
             List<Credencial> entidadesBreachadas = 
                 chequeador.ObtenerCredencialesVulneradas(infoBreacheada);
+
+            CollectionAssert.AreEqual(entidadesBreachadas, credencialesBracheadas);
+        }
+
+        [TestMethod]
+        public void VerificarVulneradosTarjetaDesdeArchivo()
+        {
+            List<Tarjeta> entidadesBreachadas =
+                chequeador.ObtenerTarjetasVulneradasDesdeArchivoTxt(direccionArchivoConInfoBrachada);
+
+            CollectionAssert.AreEqual(entidadesBreachadas, tarjetasBreachadas);
+        }
+
+        [TestMethod]
+        public void VerificarVulneradoCredencialDesdeArchivo()
+        {
+            List<Credencial> entidadesBreachadas =
+                chequeador.ObtenerCredencialesVulneradasDesdeArchivoTxt(direccionArchivoConInfoBrachada);
 
             CollectionAssert.AreEqual(entidadesBreachadas, credencialesBracheadas);
         }
