@@ -47,7 +47,7 @@ namespace Pruebas
         DateTime[] fechaVencimientoTarjetas = { new DateTime(2030, 04, 20), new DateTime(2025, 07, 17),
                 new DateTime(2030, 04, 20), new DateTime(2029, 05, 25)};
 
-        private readonly string direccionArchivoConInfoBrachada = @"ArchivosParaPruebas\InfoBreachada_Test.txt";
+        private readonly string direccionArchivoConInfoBrachada = @"..\..\ArchivosParaPruebas\InfoBreachada_Test.txt";
 
 
         [TestInitialize]
