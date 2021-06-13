@@ -11,19 +11,15 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         public ControladorEliminar()
         {
         }
-        public void EliminarUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
-        {
-            repositorioUsuario.Delete(usuario);
-        }
 
         public void EliminarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
         {
-            repositorioTarjeta.Add(tarjetaAgregar);
+            repositorioTarjeta.Delete(tarjetaAgregar);
         }
 
         public void EliminarCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
         {
-            repositorioCredencial.Add(credencialAgregar);
+            repositorioCredencial.Delete(credencialAgregar);
         }
     }
 }

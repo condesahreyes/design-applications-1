@@ -57,7 +57,19 @@ namespace AccesoDatos
 
         public void Delete(Tarjeta tarjeta)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(tarjeta))
+                {
+                    foreach(var tarjetaRecorredora in contexto.tarjetas)
+                        if(tarjetaRecorredora.Numero==tarjeta.Numero && 
+                            tarjetaRecorredora.UsuarioGestorNombre == this.usuario.Nombre)
+                                contexto.tarjetas.Remove(tarjetaRecorredora);
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una tarjeta con este numero");
+            }
         }
 
         public void Clear()

@@ -33,16 +33,21 @@ namespace AccesoDatos
                     EntidadCategoria entidadCategoria = categoriaRepositorio.ObtenerDTOPorString(credencial.Categoria.Nombre);
                     EntidadUsuario entidadUsuario = usuarioRepositorio.ObtenerUsuarioDto(this.usuario);
 
+                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario,
+                         credencial.NombreSitioApp, credencial.Nota, entidadCategoria.CategoriaId,
+                         entidadUsuario.Nombre, 0);
+
                     ContraseñaRepositorio repositorioContraseña = new ContraseñaRepositorio(this.usuario);
                     repositorioContraseña.Add(credencial.Contraseña);
 
-                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario,
-                         credencial.NombreSitioApp, credencial.Nota, entidadCategoria.CategoriaId,
-                         entidadUsuario.Nombre, contexto.contraseñas.Count());
-                    entidad.CredencialId = contexto.credenciales.Count() + 1;
+                    entidad.ContraseniaId = contexto.contraseñas.Max(x => x.ContraseniaId);
 
+                    int idCredencial = 1;
 
-                    int numero = contexto.contraseñas.Count();
+                    if (contexto.credenciales.Count() > 0)
+                        idCredencial = contexto.credenciales.Max(x => x.CredencialId) + 1;
+
+                    entidad.CredencialId = idCredencial;
 
                     contexto.credenciales.Add(entidad);
                     contexto.SaveChanges();
@@ -55,7 +60,7 @@ namespace AccesoDatos
             throw new NotImplementedException();
         }
 
-        public Credencial Get(Credencial credencial) 
+        public Credencial Get(Credencial credencial)
         {
             throw new NotImplementedException();
         }
@@ -66,26 +71,40 @@ namespace AccesoDatos
         }
 
 
-        public void Delete(Credencial credencial) 
+        public void Delete(Credencial credencial)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(credencial))
+                {
+                    foreach (var credencialRecorredora in contexto.credenciales)
+                        if (credencialRecorredora.NombreUsuario == credencial.NombreUsuario &&
+                            credencialRecorredora.UsuarioGestorNombre == this.usuario.Nombre && 
+                            credencialRecorredora.NombreSitioApp == credencial.NombreSitioApp)
+                            contexto.credenciales.Remove(credencialRecorredora);
+
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe dicha credencial");
+            }
         }
 
-        public void Clear() 
+        public void Clear()
         {
             throw new NotImplementedException();
         }
 
         public bool Existe(Credencial credencial)
         {
-            /*
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => credencial. == id))
-                    return true;
-                else
-                    return false;
-            */
+                foreach (var credencialRecorredora in contexto.credenciales)
+                    if (credencialRecorredora.NombreUsuario == credencial.NombreUsuario &&
+                        credencialRecorredora.UsuarioGestorNombre == this.usuario.Nombre &&
+                        credencialRecorredora.NombreSitioApp == credencial.NombreSitioApp)
+                        return true;
+            }
             return false;
         }
 
