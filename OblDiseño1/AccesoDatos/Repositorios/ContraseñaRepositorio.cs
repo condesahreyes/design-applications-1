@@ -24,8 +24,20 @@ namespace AccesoDatos
             {
                 EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
                 contraseña.NivelSeguridadContrasenia);
-
                 contexto.contraseñas.Add(miContraseña);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarCredencialId(int contraseñaId)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var contraseña in contexto.contraseñas)
+                {
+                    if(contraseña.ContraseniaId == contraseñaId)
+                        contraseña.CredencialId= contexto.credenciales.Max(x => x.CredencialId);
+                }
                 contexto.SaveChanges();
             }
         }

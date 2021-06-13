@@ -39,18 +39,12 @@ namespace AccesoDatos
 
                     ContraseñaRepositorio repositorioContraseña = new ContraseñaRepositorio(this.usuario);
                     repositorioContraseña.Add(credencial.Contraseña);
-
-                    entidad.ContraseniaId = contexto.contraseñas.Max(x => x.ContraseniaId);
-
-                    int idCredencial = 1;
-
-                    if (contexto.credenciales.Count() > 0)
-                        idCredencial = contexto.credenciales.Max(x => x.CredencialId) + 1;
-
-                    entidad.CredencialId = idCredencial;
+                    int contraseñaID = contexto.contraseñas.Max(x => x.ContraseniaId);
+                    entidad.ContraseniaId = contraseñaID;
 
                     contexto.credenciales.Add(entidad);
                     contexto.SaveChanges();
+                    repositorioContraseña.AgregarCredencialId(contraseñaID);
                 }
             }
         }
