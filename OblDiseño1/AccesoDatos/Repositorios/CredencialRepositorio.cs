@@ -57,20 +57,55 @@ namespace AccesoDatos
 
         public bool esVacio()
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                return (contexto.credenciales.Count() == 0);
+            }
         }
 
         public Credencial Get(Credencial credencial)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(credencial))
+                {
+                    foreach (var credencialRecorre in contexto.credenciales)
+                    {
+                        if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
+                            credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
+                            && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
+                            return mapper.PasarADominio(credencialRecorre, this.usuario);
+                    }
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una credencial con este id");
+            }
+            return null;
         }
 
         public List<Credencial> GetAll()
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                List<Credencial> credencialesADevolver = new List<Credencial>();
+                if (!esVacio())
+                {
+                    foreach (var entidadCredencial in contexto.credenciales)
+                    {
+                        Credencial credencialDominio = mapper.PasarADominio(entidadCredencial, usuario);
+                        credencialesADevolver.Add(credencialDominio);
+                    }
+                    return credencialesADevolver;
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No hay credenciales guardadas en el sistema");
+            }
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ControladorObtener
         public void Delete(Credencial credencial)
         {
             using (Contexto contexto = new Contexto())
@@ -99,6 +134,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
+<<<<<<< HEAD
                 foreach (var credencialRecorredora in contexto.credenciales)
                     if (credencialRecorredora.NombreUsuario == credencial.NombreUsuario &&
                         credencialRecorredora.UsuarioGestorNombre == this.usuario.Nombre &&
@@ -106,16 +142,27 @@ namespace AccesoDatos
                         return true;
             }
             return false;
+=======
+                foreach (var credencialRecorre in contexto.credenciales)
+                {
+                    if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
+                        credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
+                        && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
+                        return true;
+                }
+                return false;
+            }
+>>>>>>> ControladorObtener
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
-        {
-            throw new NotImplementedException();
-        }
+            public List<Categoria> ObtenerMisCategorias(string nombre)
+            {
+                throw new NotImplementedException();
+            }
 
-        public void Modificar(Credencial elemento)
-        {
-            throw new NotImplementedException();
+            public void Modificar(Credencial elemento)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
-}
