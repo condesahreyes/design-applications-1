@@ -203,7 +203,7 @@ namespace Pruebas
         private void EliminarTarjeta(Tarjeta tarjeta, Usuario usuario)
         {
             IRepositorio<Tarjeta> iRepoTarjeta = new TarjetaRepositorio(usuario);
-            controladorAlta.EliminarTarjeta(tarjeta, iRepoTarjeta);
+            controladorEliminar.EliminarTarjeta(tarjeta, iRepoTarjeta);
 
         }
 
@@ -215,7 +215,7 @@ namespace Pruebas
         private void EliminarCredencial(Credencial credencial, Usuario usuario)
         {
             IRepositorio<Credencial> iRepoCredencial = new CredencialRepositorio(usuario);
-            controladorAlta.EliminarCredencial(credencial, iRepoCredencial);
+            controladorEliminar.EliminarCredencial(credencial, iRepoCredencial);
         }
     }
 }
