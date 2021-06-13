@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1
 {
-    public interface IRepositorio <T>
+    public interface IRepositorio<T>
     {
         void Add(T elemento);
 
@@ -22,7 +22,7 @@ namespace OblDiseño1
 
         void Clear();
 
-        void Modificar(T elemento);
+        void Modificar(T elementoOriginal, T elemento);
 
     }
 }

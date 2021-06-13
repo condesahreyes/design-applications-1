@@ -109,12 +109,21 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Contraseña elemento)
+        public void ModificarConEntidad(int contraseñaId, Contraseña contraseñaAModificar)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
+                contraseñaABuscar.Contrasenia = contraseñaAModificar.Contrasenia;
+            }
+        }
+
+        public List<Categoria> ObtenerMisCategorias(string nombre)
         {
             throw new NotImplementedException();
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
+        public void Modificar(Contraseña elementoOriginal, Contraseña elemento)
         {
             throw new NotImplementedException();
         }

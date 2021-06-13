@@ -133,14 +133,39 @@ namespace AccesoDatos
             return false;
         }
 
-            public List<Categoria> ObtenerMisCategorias(string nombre)
-            {
-                throw new NotImplementedException();
-            }
+        public List<Categoria> ObtenerMisCategorias(string nombre)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Modificar(Credencial elemento)
+        public void Modificar(Credencial credencialOriginal, Credencial credencialAModificar)
+        {
+            CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
+            ContraseñaRepositorio contraseñaRepositorio = new ContraseñaRepositorio(this.usuario);
+            using (Contexto contexto = new Contexto())
             {
-                throw new NotImplementedException();
+                if (!Existe(credencialAModificar) || (credencialOriginal.NombreUsuario == credencialAModificar.NombreUsuario
+                    && credencialOriginal.NombreSitioApp == credencialAModificar.NombreSitioApp))
+                {
+                    foreach (var entidadCredencial in contexto.credenciales)
+                        if ((credencialOriginal.NombreUsuario == entidadCredencial.NombreUsuario) &&
+                            (credencialOriginal.NombreSitioApp == entidadCredencial.NombreSitioApp))
+                        {
+                            entidadCredencial.NombreUsuario = credencialAModificar.NombreUsuario;
+                            entidadCredencial.NombreSitioApp = credencialAModificar.NombreSitioApp;
+                            entidadCredencial.Nota = credencialAModificar.Nota;
+                            entidadCredencial.TipoSitioOApp = credencialAModificar.TipoSitioOApp;
+
+                            contraseñaRepositorio.ModificarConEntidad(entidadCredencial.ContraseniaId, credencialAModificar.Contraseña);
+                            EntidadCategoria nuevaCategoria = categoriaRepositorio.ObtenerDTOPorString(credencialAModificar.Categoria.Nombre);
+                            entidadCredencial.IdCategoria = nuevaCategoria.CategoriaId;
+                            break;
+                        }
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionObjetosRepetidos("Ya existe una contraseña para este nombre de usuario y nombre de sitio");
             }
         }
+    }
     }
