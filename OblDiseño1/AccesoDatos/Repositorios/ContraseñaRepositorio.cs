@@ -19,43 +19,30 @@ namespace AccesoDatos
             this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
         }
         public void Add(Contraseña contraseña)
-        {/*
+        {
             using (Contexto contexto = new Contexto())
             {
-                EntidadContraseña contraseñaEntidad = mapper.PasarAEntidad(contraseña);
-                contraseñaEntidad.CredencialUsuario. = this.usuario;
-                contexto.contraseñas.Add(contraseñaEntidad);
+                EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
+                contraseña.NivelSeguridadContrasenia);
+                miContraseña.CredencialId = contexto.credenciales.Count();
+                contexto.contraseñas.Add(miContraseña);
                 contexto.SaveChanges();
-            }*/
+            }
         }
 
         public void Clear()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.contraseñas.RemoveRange(contexto.contraseñas);
-            }
+            throw new System.NotImplementedException();
         }
 
         public void Delete(Contraseña contraseña)
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(contraseña))
-                {
-                    Contraseña ContraseñaABorrarDominio = Get(contraseña);
-                    EntidadContraseña ContraseñaABorrarEntidad = mapper.PasarAEntidad(ContraseñaABorrarDominio);
-                    contexto.contraseñas.Remove(ContraseñaABorrarEntidad);
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe esta contraseña en el sistema");
-            }
+            throw new System.NotImplementedException();
         }
 
         public bool esVacio()
         {
-            using (Contexto contexto = new Contexto())
-                return (contexto.contraseñas.Count() == 0);
+            throw new System.NotImplementedException();
         }
 
         public bool Existe(Contraseña contraseña)
@@ -71,32 +58,12 @@ namespace AccesoDatos
 
         public Contraseña Get(Contraseña contraseña)
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(contraseña))
-                {
-                    EntidadContraseña contraseñaEntidad = contexto.contraseñas.Find(contraseña.Contrasenia);
-                    Contraseña contraseñaDominio = mapper.PasarADominio(contraseñaEntidad);
-                    return contraseñaDominio;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe esta contraseña asociada en el mismo");
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Contraseña> GetAll()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                List<Contraseña> contraseñasADevolver = new List<Contraseña>();
-                foreach (var contra in contexto.contraseñas)
-                {
-                    Contraseña contraseñaDominio = mapper.PasarADominio(contra);
-                    contraseñasADevolver.Add(contraseñaDominio);
-                }
-
-                return contraseñasADevolver;
-            }
+            throw new System.NotImplementedException();
         }
 
         public void Modificar(Contraseña elemento)

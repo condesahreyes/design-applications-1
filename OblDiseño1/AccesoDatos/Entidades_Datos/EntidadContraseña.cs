@@ -10,23 +10,20 @@ namespace AccesoDatos.Entidades_Datos
 {
     public class EntidadContraseña
     {
+        public int ContraseniaId { get; set; }
         public string Contrasenia { set; get; }
         public int NivelSeguridadContrasenia { set; get; }
 
         public EntidadCredencial Credencial { set; get; }
-        public string CredencialNombre { set; get; }
-        public string CredencialSitio { set; get; }
-        public string CredencialUsuario { set; get; }
+
+        public int CredencialId { get; set; }
 
         public EntidadContraseña() { }
 
-        public EntidadContraseña(string unaContrasenia, int nivelSeguridadContrasenia, Credencial credencial)
+        public EntidadContraseña(string unaContrasenia, int nivelSeguridadContrasenia)
         {
             this.Contrasenia = unaContrasenia;
             this.NivelSeguridadContrasenia = nivelSeguridadContrasenia;
-            this.CredencialNombre = credencial.NombreUsuario;
-            this.CredencialSitio = credencial.NombreSitioApp;
-            this.CredencialUsuario = credencial.NombreUsuario;
         }
     }
 }
