@@ -47,12 +47,38 @@ namespace AccesoDatos
 
         public Tarjeta Get(Tarjeta tarjeta) 
         {
-            throw new NotImplementedException();
+            if (Existe(tarjeta))
+            {
+                using (Contexto contexto = new Contexto())
+                    foreach (var entidadTarjeta in contexto.tarjetas)
+                        if (entidadTarjeta.UsuarioGestorNombre == this.usuario.Nombre
+                            && tarjeta.Numero == entidadTarjeta.Numero)
+                            return mapper.PasarADominio(entidadTarjeta);
+            }
+            else
+            {
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente
+                        ("No existe una tarjeta con este numero");
+            }
+            return null;
         }
 
         public List<Tarjeta> GetAll() 
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                List<Tarjeta> tarjetasADevolver = new List<Tarjeta>();
+                foreach (var entidadTarjeta in contexto.tarjetas)
+                {
+                    if (entidadTarjeta.UsuarioGestorNombre == this.usuario.Nombre)
+                    {
+                        Tarjeta tarjetaDominio = mapper.PasarADominio(entidadTarjeta);
+                        tarjetasADevolver.Add(tarjetaDominio);
+                    }
+
+                }
+                return tarjetasADevolver;
+            }
         }
 
         public void Delete(Tarjeta tarjeta)
@@ -75,11 +101,6 @@ namespace AccesoDatos
                 else
                     return false;
             }
-        }
-
-        public List<Categoria> ObtenerMisCategorias(string nombre)
-        {
-            throw new NotImplementedException();
         }
 
         public void Modificar(Tarjeta elemento)

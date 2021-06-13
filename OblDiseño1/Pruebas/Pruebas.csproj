@@ -62,7 +62,6 @@
     <Compile Include="ContraseñaTest.cs" />
     <Compile Include="ControladorAltaTest.cs" />
     <Compile Include="ControladorObtencionTest.cs" />
-    <Compile Include="ControladorObtenerTest.cs" />
     <Compile Include="CredencialTest.cs" />
     <Compile Include="GestorContraseniasCompartidasTest.cs" />
     <Compile Include="SistemaTest.cs" />

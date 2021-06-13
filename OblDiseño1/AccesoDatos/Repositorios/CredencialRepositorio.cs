@@ -40,7 +40,7 @@ namespace AccesoDatos
                     ContraseñaRepositorio repositorioContraseña = new ContraseñaRepositorio(this.usuario);
                     repositorioContraseña.Add(credencial.Contraseña);
 
-                    entidad.ContraseniaId= contexto.contraseñas.Max(x => x.ContraseniaId);
+                    entidad.ContraseniaId = contexto.contraseñas.Max(x => x.ContraseniaId);
 
                     int idCredencial = 1;
 
@@ -57,51 +57,84 @@ namespace AccesoDatos
 
         public bool esVacio()
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                return (contexto.credenciales.Count() == 0);
+            }
         }
 
-        public Credencial Get(Credencial credencial) 
+        public Credencial Get(Credencial credencial)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(credencial))
+                {
+                    foreach (var credencialRecorre in contexto.credenciales)
+                    {
+                        if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
+                            credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
+                            && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
+                            return mapper.PasarADominio(credencialRecorre, this.usuario);
+                    }
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una credencial con este id");
+            }
+            return null;
         }
 
         public List<Credencial> GetAll()
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                List<Credencial> credencialesADevolver = new List<Credencial>();
+                if (!esVacio())
+                {
+                    foreach (var entidadCredencial in contexto.credenciales)
+                    {
+                        Credencial credencialDominio = mapper.PasarADominio(entidadCredencial, usuario);
+                        credencialesADevolver.Add(credencialDominio);
+                    }
+                    return credencialesADevolver;
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No hay credenciales guardadas en el sistema");
+            }
         }
 
-
-        public void Delete(Credencial credencial) 
+        public void Delete(Credencial credencial)
         {
             throw new NotImplementedException();
         }
 
-        public void Clear() 
+        public void Clear()
         {
             throw new NotImplementedException();
         }
 
         public bool Existe(Credencial credencial)
         {
-            /*
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.credenciales.Any(credencial => credencial. == id))
-                    return true;
-                else
-                    return false;
-            */
-            return false;
+                foreach (var credencialRecorre in contexto.credenciales)
+                {
+                    if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
+                        credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
+                        && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
+                        return true;
+                }
+                return false;
+            }
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
-        {
-            throw new NotImplementedException();
-        }
+            public List<Categoria> ObtenerMisCategorias(string nombre)
+            {
+                throw new NotImplementedException();
+            }
 
-        public void Modificar(Credencial elemento)
-        {
-            throw new NotImplementedException();
+            public void Modificar(Credencial elemento)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
-}

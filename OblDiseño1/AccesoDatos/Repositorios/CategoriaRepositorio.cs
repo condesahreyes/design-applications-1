@@ -51,12 +51,63 @@ namespace AccesoDatos
 
         public Categoria Get(Categoria categoria) 
         {
-            throw new System.NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(categoria))
+                {
+                    foreach (var cat in contexto.categorias)
+                        if (cat.NombreCategoria == categoria.Nombre && cat.UsuarioNombre == this.usuario.Nombre)
+                            return mapper.PasarADominio(cat.CategoriaId, this.usuario);
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+                return null;
+            }
+        }
+
+        public EntidadCategoria ObtenerDTOPorInt(int idCategoria)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                EntidadCategoria miEntidad = contexto.categorias.Find(idCategoria);
+                if (miEntidad != null)
+                    return contexto.categorias.Find(idCategoria);
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+            }
+        }
+
+        public EntidadCategoria ObtenerDTOPorString(string nombreCategoria)
+        {
+            Categoria categoria = new Categoria(nombreCategoria);
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(categoria))
+                {
+                    foreach (var cat in contexto.categorias)
+                        if (cat.NombreCategoria == categoria.Nombre && cat.UsuarioNombre == this.usuario.Nombre)
+                            return cat;
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+                return null;
+            }
         }
 
         public List<Categoria> GetAll()
         {
-            throw new System.NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                List<Categoria> categoriasADevolver = new List<Categoria>();
+                foreach (var cat in contexto.categorias)
+                {
+                    Categoria categoriaDominio = mapper.PasarADominio(cat.CategoriaId, this.usuario);
+                    if (cat.UsuarioNombre == this.usuario.Nombre)
+                        categoriasADevolver.Add(categoriaDominio);
+                }
+
+                return categoriasADevolver;
+            }
         }
 
         public void Delete(Categoria categoria) 
@@ -77,23 +128,6 @@ namespace AccesoDatos
         public void Modificar(Categoria elemento)
         {
             throw new System.NotImplementedException();
-        }
-
-        public EntidadCategoria ObtenerDTOPorString(string nombreCategoria)
-        {
-            Categoria categoria = new Categoria(nombreCategoria);
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(categoria))
-                {
-                    foreach (var cat in contexto.categorias)
-                        if (cat.NombreCategoria == categoria.Nombre && cat.UsuarioNombre == this.usuario.Nombre)
-                            return cat;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
-                return null;
-            }
         }
     }
 }
