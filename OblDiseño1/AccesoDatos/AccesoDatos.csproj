@@ -53,15 +53,9 @@
   <ItemGroup>
     <Compile Include="Entidades_Datos\EntidadContraseña.cs" />
     <Compile Include="Entidades_Datos\EntidadGestorContraseñasCompartidas.cs" />
-<<<<<<< HEAD
-    <Compile Include="Migrations\202106131830286_Migracion.cs" />
-    <Compile Include="Migrations\202106131830286_Migracion.designer.cs">
-      <DependentUpon>202106131830286_Migracion.cs</DependentUpon>
-=======
-    <Compile Include="Migrations\202106130354559_Miracion.cs" />
-    <Compile Include="Migrations\202106130354559_Miracion.designer.cs">
-      <DependentUpon>202106130354559_Miracion.cs</DependentUpon>
->>>>>>> ControladorObtener
+    <Compile Include="Migrations\202106132040011_Migracion.cs" />
+    <Compile Include="Migrations\202106132040011_Migracion.designer.cs">
+      <DependentUpon>202106132040011_Migracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
@@ -88,13 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Migrations\202106131830286_Migracion.resx">
-      <DependentUpon>202106131830286_Migracion.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\202106130354559_Miracion.resx">
-      <DependentUpon>202106130354559_Miracion.cs</DependentUpon>
->>>>>>> ControladorObtener
+    <EmbeddedResource Include="Migrations\202106132040011_Migracion.resx">
+      <DependentUpon>202106132040011_Migracion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

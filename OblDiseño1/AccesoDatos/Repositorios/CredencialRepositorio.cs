@@ -102,10 +102,6 @@ namespace AccesoDatos
             }
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ControladorObtener
         public void Delete(Credencial credencial)
         {
             using (Contexto contexto = new Contexto())
@@ -134,7 +130,6 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-<<<<<<< HEAD
                 foreach (var credencialRecorredora in contexto.credenciales)
                     if (credencialRecorredora.NombreUsuario == credencial.NombreUsuario &&
                         credencialRecorredora.UsuarioGestorNombre == this.usuario.Nombre &&
@@ -142,17 +137,6 @@ namespace AccesoDatos
                         return true;
             }
             return false;
-=======
-                foreach (var credencialRecorre in contexto.credenciales)
-                {
-                    if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
-                        credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
-                        && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
-                        return true;
-                }
-                return false;
-            }
->>>>>>> ControladorObtener
         }
 
             public List<Categoria> ObtenerMisCategorias(string nombre)
