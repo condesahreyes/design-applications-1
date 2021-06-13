@@ -125,9 +125,20 @@ namespace AccesoDatos
             throw new System.NotImplementedException();
         }
 
-        public void Modificar(Categoria elemento)
+        public void Modificar(Categoria original, Categoria aModificar)
         {
-            throw new System.NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (!Existe(aModificar))
+                {
+                    foreach (var cat in contexto.categorias)
+                        if (cat.NombreCategoria == original.Nombre && cat.UsuarioNombre == this.usuario.Nombre)
+                            cat.NombreCategoria = aModificar.Nombre;
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("Ya existe una categoría con ese nombre");
+            }
         }
     }
 }

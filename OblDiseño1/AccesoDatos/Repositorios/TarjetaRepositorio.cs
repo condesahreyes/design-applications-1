@@ -115,9 +115,24 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Tarjeta elemento)
+        public void Modificar(Tarjeta tarjetaOriginal, Tarjeta unaTarjeta)
         {
-            throw new NotImplementedException();
+            CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var tarjeta in contexto.tarjetas)
+                    if (tarjeta.Numero == tarjetaOriginal.Numero && tarjeta.UsuarioGestorNombre == this.usuario.Nombre)
+                    {
+                        tarjeta.Numero = unaTarjeta.Numero;
+                        tarjeta.NotaOpcional = unaTarjeta.NotaOpcional;
+                        tarjeta.Nombre = unaTarjeta.Nombre;
+                        tarjeta.Tipo = unaTarjeta.Tipo;
+                        tarjeta.CodigoSeguridad = unaTarjeta.CodigoSeguridad;
+                        tarjeta.FechaVencimiento = unaTarjeta.FechaVencimiento;
+                        tarjeta.IdCategoria = categoriaRepositorio.ObtenerDTOPorString(unaTarjeta.Categoria.Nombre).CategoriaId;
+                    }
+                contexto.SaveChanges();
+            }
         }
     }
 }

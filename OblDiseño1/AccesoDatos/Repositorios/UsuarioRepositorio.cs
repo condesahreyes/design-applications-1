@@ -119,9 +119,20 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Usuario elemento)
+        public void Modificar(Usuario usuarioOriginal, Usuario usuario)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(usuarioOriginal))
+                {
+                    foreach (var usuarioContexto in contexto.usuarios)
+                        if (usuarioContexto.Nombre == usuarioOriginal.Nombre)
+                            usuarioContexto.Contrasenia = usuario.Contrasenia;
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+            }
         }
     }
 }

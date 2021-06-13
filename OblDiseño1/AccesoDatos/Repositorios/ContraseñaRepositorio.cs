@@ -24,8 +24,20 @@ namespace AccesoDatos
             {
                 EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
                 contraseña.NivelSeguridadContrasenia);
-
                 contexto.contraseñas.Add(miContraseña);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarCredencialId(int contraseñaId)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var contraseña in contexto.contraseñas)
+                {
+                    if(contraseña.ContraseniaId == contraseñaId)
+                        contraseña.CredencialId= contexto.credenciales.Max(x => x.CredencialId);
+                }
                 contexto.SaveChanges();
             }
         }
@@ -97,12 +109,21 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Contraseña elemento)
+        public void ModificarConEntidad(int contraseñaId, Contraseña contraseñaAModificar)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
+                contraseñaABuscar.Contrasenia = contraseñaAModificar.Contrasenia;
+            }
+        }
+
+        public List<Categoria> ObtenerMisCategorias(string nombre)
         {
             throw new NotImplementedException();
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
+        public void Modificar(Contraseña elementoOriginal, Contraseña elemento)
         {
             throw new NotImplementedException();
         }
