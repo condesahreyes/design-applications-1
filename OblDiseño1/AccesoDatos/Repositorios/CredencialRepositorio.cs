@@ -18,7 +18,7 @@ namespace AccesoDatos
             this.usuario = usuarioDueñoDominio;
         }
 
-        public void Add(Credencial credencial) 
+        public void Add(Credencial credencial)
         {
             using (Contexto contexto = new Contexto())
             {
@@ -27,89 +27,53 @@ namespace AccesoDatos
                     throw new ExepcionObjetosRepetidos("Ya existe una credencial con para este nombre de usuario y sitio");
                 else
                 {
-                    /*
-                    ControladorObtener obtener = new ControladorObtener(this.usuario);
+                    UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio();
+                    CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
 
-                    EntidadCategoria entidadCtaegoria = obtener.Cat
-                    EntidadUsuario entidadUsuario = obtener.ObtenerUsuarioDto(this.usuario);
-                    EntidadContraseña miContraseña = new EntidadContraseña(credencial.ObtenerContraseña, 
-                        credencial.ObtenerNivelSeguridad, credencial);
-                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario, 
-                        miContraseña, credencial.NombreSitioApp, credencial.Nota, , entidadUsuario);
+                    EntidadCategoria entidadCategoria = categoriaRepositorio.ObtenerDTOPorString(credencial.Categoria.Nombre);
+                    EntidadUsuario entidadUsuario = usuarioRepositorio.ObtenerUsuarioDto(this.usuario);
+
+                    ContraseñaRepositorio repositorioContraseña = new ContraseñaRepositorio(this.usuario);
+                    repositorioContraseña.Add(credencial.Contraseña);
+
+                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario,
+                         credencial.NombreSitioApp, credencial.Nota, entidadCategoria.CategoriaId,
+                         entidadUsuario.Nombre, contexto.contraseñas.Count());
+                    entidad.CredencialId = contexto.credenciales.Count() + 1;
 
 
-                    EntidadCredencial entidadCredencialAAgregar = mapper.PasarAEntidad(credencialDominio);
-                    entidadCredencialAAgregar.UsuarioGestor = this.usuario;
-                    contexto.credenciales.Add(entidadCredencialAAgregar);
+                    int numero = contexto.contraseñas.Count();
+
+                    contexto.credenciales.Add(entidad);
                     contexto.SaveChanges();
-                    */
                 }
             }
         }
 
         public bool esVacio()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                return (contexto.credenciales.Count() == 0);
-            }
+            throw new NotImplementedException();
         }
 
         public Credencial Get(Credencial credencial) 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(credencial))
-                {
-                    EntidadCredencial credencialEntidad = contexto.credenciales.Find(credencial.Contraseña);
-                    Credencial credencialDominio = mapper.PasarADominio(credencialEntidad);
-                    return credencialDominio;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una credencial con este id");
-            }
+            throw new NotImplementedException();
         }
 
         public List<Credencial> GetAll()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                List<Credencial> credencialesADevolver = new List<Credencial>();
-                if (!esVacio())
-                {
-                    foreach (var entidadCredencial in contexto.credenciales)
-                    {
-                        Credencial credencialDominio = mapper.PasarADominio(entidadCredencial);
-                        credencialesADevolver.Add(credencialDominio);
-                    }
-                    return credencialesADevolver;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No hay credenciales guardadas en el sistema");
-            }
+            throw new NotImplementedException();
         }
 
 
         public void Delete(Credencial credencial) 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(credencial))
-                {
-                    EntidadCredencial credencialEntidadARemover = contexto.credenciales.Find(credencial.Contraseña);
-                    contexto.credenciales.Remove(credencialEntidadARemover);
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una credencial con este id");
-            }
+            throw new NotImplementedException();
         }
 
         public void Clear() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.credenciales.RemoveRange(contexto.credenciales);
-            }
+            throw new NotImplementedException();
         }
 
         public bool Existe(Credencial credencial)

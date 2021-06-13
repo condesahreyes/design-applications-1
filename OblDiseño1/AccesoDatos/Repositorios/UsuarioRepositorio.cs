@@ -28,75 +28,33 @@ namespace AccesoDatos
         }
         public bool esVacio() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                return (contexto.usuarios.Count() == 0);
-            }
+            throw new NotImplementedException();
         }
 
         public Usuario Get(Usuario usuario) 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(usuario))
-                {
-                    EntidadUsuario usuarioEntidad = contexto.usuarios.Find(usuario.Nombre);
-                    Usuario usuarioDominio = mapper.PasarADominio(usuarioEntidad);
-                    return usuarioDominio;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
-            }
+            throw new NotImplementedException();
         }
 
         public EntidadUsuario ObtenerUsuarioDto(Usuario unUsuario)
         {
-            IRepositorio<Usuario> repositorio = new UsuarioRepositorio();
-            using (Contexto contexto = new Contexto())
-            {
-                if (repositorio.Existe(unUsuario))
-                {
-                    return contexto.usuarios.Find(unUsuario.Nombre);
-
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
-            }
-
+            throw new NotImplementedException();
         }
 
 
         public List<Usuario> GetAll() 
         {
-            using (Contexto contexto = new Contexto()) 
-            {
-                if (!esVacio())
-                {
-                    List<Usuario> usuariosADevolver = new List<Usuario>();
-                    foreach (var entidadUsuario in contexto.usuarios)
-                    {
-                        Usuario usuarioDominio = mapper.PasarADominio(entidadUsuario);
-                        usuariosADevolver.Add(usuarioDominio);
-                    }
-                    return usuariosADevolver;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existen usuarios en el sistema");
-            }
-             
+            throw new NotImplementedException();
         }
 
         public void Delete(Usuario usuario)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Clear() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.usuarios.RemoveRange(contexto.usuarios);
-            }
+            throw new NotImplementedException();
         }
 
         public bool Existe(Usuario usuario)
@@ -112,21 +70,7 @@ namespace AccesoDatos
 
         public List<Categoria> ObtenerMisCategorias(Usuario usuario)
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(usuario))
-                {
-                    List<Categoria> categoriasADevolver = new List<Categoria>();
-                    foreach (var entidadCategoria in contexto.categorias)
-                    {
-                        Categoria categoriaDominio = mapper.PasarADominio(entidadCategoria);
-                        categoriasADevolver.Add(categoriaDominio);
-                    }
-                    return categoriasADevolver;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
-            }
+            throw new NotImplementedException();
         }
 
         public void Modificar(Usuario elemento)

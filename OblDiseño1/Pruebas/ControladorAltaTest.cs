@@ -152,7 +152,7 @@ namespace Pruebas
         public void VerificarQueSeAgregoTarjeta()
         {
             IRepositorio<Tarjeta> iRepoTarjeta = new TarjetaRepositorio(usuario);
-            controladorAlta.AgregarTarjeta(categoria, iRepoTarjeta);
+            controladorAlta.AgregarTarjeta(tarjeta, iRepoTarjeta);
 
             int contidadTajetas = 0;
             using (Contexto contexto = new Contexto())
