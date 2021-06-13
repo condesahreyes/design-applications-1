@@ -1,10 +1,8 @@
 ﻿using AccesoDatos.Entidades_Datos;
-using OblDiseño1;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OblDiseño1;
+using System;
 
 namespace AccesoDatos
 {
@@ -38,7 +36,18 @@ namespace AccesoDatos
 
         public EntidadUsuario ObtenerUsuarioDto(Usuario unUsuario)
         {
-            throw new NotImplementedException();
+            IRepositorio<Usuario> repositorio = new UsuarioRepositorio();
+            using (Contexto contexto = new Contexto())
+            {
+                if (repositorio.Existe(unUsuario))
+                {
+                    return contexto.usuarios.Find(unUsuario.Nombre);
+
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");
+            }
+
         }
 
 

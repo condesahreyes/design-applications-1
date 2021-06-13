@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Migracion : DbMigration
+    public partial class Migacon : DbMigration
     {
         public override void Up()
         {

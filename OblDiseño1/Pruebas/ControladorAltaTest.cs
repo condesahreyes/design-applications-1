@@ -1,117 +1,62 @@
-﻿using AccesoDatos;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OblDiseño1;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.Entidades;
-using System;
 using System.Collections.Generic;
+using OblDiseño1.Entidades;
+using AccesoDatos;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
     [TestClass]
     public class ControladorAltaTest
     {
-        private ControladorAlta controladorAlta = new ControladorAlta();
-
-        private static string notaCredencial;
-        private static string nombreSitioCredencial;
-        private static string nombresitioCredencialQueNoEsta;
-        private static string nombreLargo;
-        private static string contraseniaCorta;
-        private static string contraseniaLarga;
-        private static string contraseniaNoPresenteEnListaCredenciales;
-        private static string numeroDeTarjetaNoPresenteEnListaTarjetas;
-
-        private static string[] contrasenias = {"contrasenia123",
-            "1234Contrasenia", "laContraseña"};
-
-        private static string[] nombres = { "Hernán", "Santiago", "Rodrigo" };
-
-        private static string[] nombresCategorias = {"Personal",
-            "Trabajo", "Entretenimiento", "Estudios"};
-
-        private static string[] nombresTarjetas = {"Visa",
-            "Itau", "BBVA", "HSBC"};
-
-        private static string[] tiposTarjetas = {"Visa gold",
-            "Itau volar", "BBVA credito", "HSBC debito"};
-
-        private static string[] numTarjetas = { "1234567891234567",
-            "7894561234567894", "9876543219876543", "5462134567896543"};
-
-        private static int[] codigosTarjetas = { 123, 321, 456, 789 };
-
-        private List<Tarjeta> tarjetas;
-        private List<Credencial> credenciales;
-        private List<Categoria> categorias;
-
-        private Usuario usuario;
-        private Tarjeta tarjeta;
+        private ControladorAlta controladorAlta;
         private Categoria categoria;
-        private Credencial credencial;
-        private Contraseña contraseña;
-
-
+        private DateTime fecha;
 
         [TestInitialize]
         public void Setup()
         {
-            notaCredencial = "";
-            nombreSitioCredencial = "Instagram";
-            nombresitioCredencialQueNoEsta = "Twitter";
-            contraseniaCorta = "1234";
-            contraseniaLarga = "contrasenia123456789012345";
-            contraseniaNoPresenteEnListaCredenciales = "ContraseniaNoPrsente";
-            numeroDeTarjetaNoPresenteEnListaTarjetas = "2000200020002000";
-            nombreLargo = "Este es un nombre muy largo";
-
-            credenciales = new List<Credencial>();
-            tarjetas = new List<Tarjeta>();
-            categorias = new List<Categoria>();
-
-            usuario = new Usuario(nombres[0], contrasenias[0]);
-            categoria = new Categoria(nombresCategorias[0]);
-            tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
-                codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
-            contraseña = new Contraseña(contrasenias[0]);
-            credencial = new Credencial(nombres[1], contraseña,
-                nombreSitioCredencial, notaCredencial, categoria);
+            //Borrar todos los datos de la Base antes de ejecutar los test
+            controladorAlta = new ControladorAlta();
+            categoria = new Categoria("Trabajo");
+            fecha = new DateTime(2021, 12, 15);
         }
 
-        /*
-        public void AgregarUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario);
-        public void AgregarCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria);
-        public void AgregarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta);
-        public void AgregarCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial);
-        */
         [TestMethod]
         public void VerificarQueSeAgregoUsuario()
         {
-            IRepositorio<Usuario> iRepoUsuario = new UsuarioRepositorio();
-            controladorAlta.AgregarUsuario(usuario, iRepoUsuario);
+            Usuario usuarioPrueba = new Usuario("Hernán", "Contraseña");
+            AgregarUsuario(usuarioPrueba);
 
             int contidadUsuarios = 0;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadUsuario in contexto.usuarios)
                     contidadUsuarios++; 
             }
+
             Assert.IsTrue(contidadUsuarios>0);
         }
 
         [TestMethod]
         public void VerificarContraseniaYNombreDeUsuario()
         {
-            IRepositorio<Usuario> iRepoUsuario = new UsuarioRepositorio();
-            controladorAlta.AgregarUsuario(usuario, iRepoUsuario);
+            Usuario usuarioPrueba = new Usuario("Pedrito", "Contraseña");
+            AgregarUsuario(usuarioPrueba);
 
             bool hayUsuarioConEsaContrasenia = false;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadUsuario in contexto.usuarios)
-                    if (entidadUsuario.Nombre == usuario.Nombre && entidadUsuario.Contrasenia == usuario.Contrasenia)
+                    if (entidadUsuario.Nombre == usuarioPrueba.Nombre 
+                        && entidadUsuario.Contrasenia == usuarioPrueba.Contrasenia)
                         hayUsuarioConEsaContrasenia = true;
             }
+
             Assert.IsTrue(hayUsuarioConEsaContrasenia);
         }
 
@@ -119,31 +64,41 @@ namespace Pruebas
         [TestMethod]
         public void VerificarQueSeAgregoCategoria()
         {
-            IRepositorio<Categoria> iRepoCategoria = new CategoriaRepositorio(usuario);
-            controladorAlta.AgregarCategoria(categoria, iRepoCategoria);
+            Usuario usuarioPrueba = new Usuario("Juan Perez", "Contraseña");
+            Categoria categoria = new Categoria("Personal");
+
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
 
             int contidadCategorias = 0;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadCategoria in contexto.categorias)
                     contidadCategorias++;
             }
+
             Assert.IsTrue(contidadCategorias > 0);
         }
 
         [TestMethod]
         public void VerificarQueSeAgregoCategoriaCorrectamente()
         {
-            IRepositorio<Categoria> iRepoCategoria = new CategoriaRepositorio(usuario);
-            controladorAlta.AgregarCategoria(categoria, iRepoCategoria);
+            Usuario usuarioPrueba = new Usuario("Alberto", "Contraseña");
+
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
 
             bool seAgregoCorrectamente = false;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadCategoria in contexto.categorias)
-                    if (entidadCategoria.UsuarioNombre == usuario.Nombre && entidadCategoria.NombreCategoria == categoria.Nombre)
+                    if (entidadCategoria.UsuarioNombre == usuarioPrueba.Nombre 
+                        && entidadCategoria.NombreCategoria == categoria.Nombre)
                         seAgregoCorrectamente = true;
             }
+
             Assert.IsTrue(seAgregoCorrectamente);
         }
 
@@ -151,79 +106,128 @@ namespace Pruebas
         [TestMethod]
         public void VerificarQueSeAgregoTarjeta()
         {
-            IRepositorio<Tarjeta> iRepoTarjeta = new TarjetaRepositorio(usuario);
-            controladorAlta.AgregarTarjeta(tarjeta, iRepoTarjeta);
+            Usuario usuarioPrueba = new Usuario("Miguel", "ContraMiguel");
+
+
+            Tarjeta tarjeta = new Tarjeta("Visas", "Tipo 1", "1234567891234567", 111, fecha, categoria, null);
+
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
+            AgregarTarjeta(tarjeta, usuarioPrueba);
 
             int contidadTajetas = 0;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadCategoria in contexto.categorias)
                     contidadTajetas++;
             }
+
             Assert.IsTrue(contidadTajetas > 0);
         }
 
         [TestMethod]
         public void VerificarQueSeAgregoTarjetaCorrectamente()
         {
-            IRepositorio<Tarjeta> iRepoTarjeta = new TarjetaRepositorio(usuario);
-            controladorAlta.AgregarTarjeta(tarjeta, iRepoTarjeta);
+            Tarjeta tarjeta = new Tarjeta("Visas", "Tipo 1", "1234567891234567", 111, fecha, categoria, null);
+            Usuario usuarioPrueba = new Usuario("Miguel Angel", "ContraMiguelAngel");
+
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
+            AgregarTarjeta(tarjeta, usuarioPrueba);
 
             bool seAgregoCorrectamente = false;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadTarjeta in contexto.tarjetas)
-                    if (entidadTarjeta.UsuarioGestorNombre == usuario.Nombre && entidadTarjeta.Numero == tarjeta.Numero)
+                    if (entidadTarjeta.UsuarioGestorNombre == usuarioPrueba.Nombre 
+                        && entidadTarjeta.Numero == tarjeta.Numero)
                         seAgregoCorrectamente = true;
             }
+
             Assert.IsTrue(seAgregoCorrectamente);
-
-
         }
 
         [TestMethod]
         public void VerificarQueSeAgregoCredencial()
         {
-            IRepositorio<Credencial> iRepoCredencial = new CredencialRepositorio(usuario);
+            Contraseña contraseña = new Contraseña("Una contraseña");
+            Credencial credencial = new Credencial("Perez", contraseña,
+                "Instagram", "Nota", categoria);
+            Usuario usuarioPrueba = new Usuario("Usuario", "ContraMiguelAngel");
 
-            controladorAlta.AgregarCredencial(credencial, iRepoCredencial);
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
+            AgregarCredencial(credencial, usuarioPrueba);
 
             int contidadUsuarios = 0;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadCredencial in contexto.credenciales)
-                    if (entidadCredencial.UsuarioGestorNombre == usuario.Nombre &&
+                    if (entidadCredencial.UsuarioGestorNombre == usuarioPrueba.Nombre &&
                         entidadCredencial.NombreUsuario == credencial.NombreUsuario &&
                         entidadCredencial.NombreSitioApp == credencial.NombreSitioApp)
                         contidadUsuarios++;
             }
+
             Assert.IsTrue(contidadUsuarios > 0);
         }
 
         [TestMethod]
         public void VerificarQueSeAgregoLaContraseñaDeLaCredencialCorrectamente()
         {
-            IRepositorio<Credencial> iRepoCredencial = new CredencialRepositorio(usuario);
+            Usuario usuarioPrueba = new Usuario("Usuario pepe", "ContraMiguelAngel");
+            Contraseña contraseña = new Contraseña("Una contraseña");
+            Credencial credencial = new Credencial("Soy Hernán", contraseña,
+                "Facebook", "Ya no se usa Facebook", categoria);
 
-            controladorAlta.AgregarCredencial(credencial, iRepoCredencial);
+            AgregarUsuario(usuarioPrueba);
+            AgregarCategoria(categoria, usuarioPrueba);
+            AgregarCredencial(credencial, usuarioPrueba);
+
             bool contraseñaCorrecta = false;
             int idContraseña = 0;
+
             using (Contexto contexto = new Contexto())
             {
                 foreach (var entidadCredencial in contexto.credenciales)
-                    if (entidadCredencial.UsuarioGestorNombre == usuario.Nombre &&
+                    if (entidadCredencial.UsuarioGestorNombre == usuarioPrueba.Nombre &&
                         entidadCredencial.NombreUsuario == credencial.NombreUsuario &&
                         entidadCredencial.NombreSitioApp == credencial.NombreSitioApp)
                         idContraseña = entidadCredencial.ContraseniaId;
-            }
 
-            using (Contexto contexto = new Contexto())
-            {
                 foreach (var entidadContraseña in contexto.contraseñas)
                     if (entidadContraseña.ContraseniaId == idContraseña)
                         contraseñaCorrecta = true;
             }
+
             Assert.IsTrue(contraseñaCorrecta);
+        }
+
+        private void AgregarUsuario(Usuario usuario)
+        {
+            IRepositorio<Usuario> iRepoUsuario = new UsuarioRepositorio();
+            controladorAlta.AgregarUsuario(usuario, iRepoUsuario);
+        }
+
+        private void AgregarCategoria(Categoria categoria, Usuario usuario)
+        {
+            IRepositorio<Categoria> iRepoCategoria = new CategoriaRepositorio(usuario);
+            controladorAlta.AgregarCategoria(categoria, iRepoCategoria);
+        }
+
+        private void AgregarTarjeta(Tarjeta tarjeta, Usuario usuario)
+        {
+            IRepositorio<Tarjeta> iRepoTarjeta = new TarjetaRepositorio(usuario);
+            controladorAlta.AgregarTarjeta(tarjeta, iRepoTarjeta);
+        }
+
+        private void AgregarCredencial(Credencial credencial, Usuario usuario)
+        {
+            IRepositorio<Credencial> iRepoCredencial = new CredencialRepositorio(usuario);
+            controladorAlta.AgregarCredencial(credencial, iRepoCredencial);
         }
     }
 }
