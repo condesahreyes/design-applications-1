@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
-    class ControladorEliminar
+    public class ControladorEliminar
     {
         public ControladorEliminar()
         {

@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="ContraseñaTest.cs" />
     <Compile Include="ControladorAltaTest.cs" />
+    <Compile Include="ControladorEliminarTest.cs" />
     <Compile Include="CredencialTest.cs" />
     <Compile Include="GestorContraseniasCompartidasTest.cs" />
     <Compile Include="SistemaTest.cs" />
