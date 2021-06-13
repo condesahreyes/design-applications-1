@@ -7,6 +7,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
     {
         public ControladorAlta()
         {
+
         }
 
     }

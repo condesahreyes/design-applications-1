@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace AccesoDatos
 {
-    class Contexto : DbContext
+    public class Contexto : DbContext
     {
         public DbSet<EntidadCategoria> categorias { get; set; }
         public DbSet<EntidadCredencial> credenciales { get; set; }
