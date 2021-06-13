@@ -31,6 +31,7 @@ namespace AccesoDatos
             //modelBuilder.Entity<EntidadContraseña>().HasRequired<EntidadCredencial>(c => c.Credencial).WithRequiredPrincipal(s => s.Contrasenia);
 
             modelBuilder.Entity<EntidadCredencial>().HasKey(c => new { c.CredencialId });
+            modelBuilder.Entity<EntidadCredencial>().Property(c => c.CredencialId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             //modelBuilder.Entity<EntidadCredencial>().Property(c => c.CredencialId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.credenciales).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);
             modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadCategoria>(c => c.Categoria).WithMany(u => u.Credenciales).HasForeignKey(t => new { t.IdCategoria });
@@ -44,7 +45,7 @@ namespace AccesoDatos
             modelBuilder.Entity<ContraseñasQueMeComparten>().HasRequired<EntidadUsuario>(c => c.UsuarioDueño).WithMany(u => u.QueMeComparten).HasForeignKey(t => new { t.UsuarioNombre, t.CredencialId }).WillCascadeOnDelete(false);
             */
 
-            modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadContraseña>(c => c.Contrasenia).WithOptional(u => u.Credencial);
+            modelBuilder.Entity<EntidadCredencial>().HasOptional<EntidadContraseña>(c => c.Contrasenia).WithOptionalDependent(u => u.Credencial);
 
             modelBuilder.Entity<EntidadTarjeta>().HasKey(c => new { c.TarjetaId });
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.tarjetas).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);
