@@ -33,16 +33,21 @@ namespace AccesoDatos
                     EntidadCategoria entidadCategoria = categoriaRepositorio.ObtenerDTOPorString(credencial.Categoria.Nombre);
                     EntidadUsuario entidadUsuario = usuarioRepositorio.ObtenerUsuarioDto(this.usuario);
 
+                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario,
+                         credencial.NombreSitioApp, credencial.Nota, entidadCategoria.CategoriaId,
+                         entidadUsuario.Nombre, 0);
+
                     ContraseñaRepositorio repositorioContraseña = new ContraseñaRepositorio(this.usuario);
                     repositorioContraseña.Add(credencial.Contraseña);
 
-                    EntidadCredencial entidad = new EntidadCredencial(credencial.NombreUsuario,
-                         credencial.NombreSitioApp, credencial.Nota, entidadCategoria.CategoriaId,
-                         entidadUsuario.Nombre, contexto.contraseñas.Count());
-                    entidad.CredencialId = contexto.credenciales.Count() + 1;
+                    entidad.ContraseniaId= contexto.contraseñas.Max(x => x.ContraseniaId);
 
+                    int idCredencial = 1;
 
-                    int numero = contexto.contraseñas.Count();
+                    if (contexto.credenciales.Count() > 0)
+                        idCredencial = contexto.credenciales.Max(x => x.CredencialId) + 1;
+
+                    entidad.CredencialId = idCredencial;
 
                     contexto.credenciales.Add(entidad);
                     contexto.SaveChanges();

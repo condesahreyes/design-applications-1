@@ -24,7 +24,7 @@ namespace AccesoDatos
             {
                 EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
                 contraseña.NivelSeguridadContrasenia);
-                miContraseña.CredencialId = contexto.credenciales.Count();
+
                 contexto.contraseñas.Add(miContraseña);
                 contexto.SaveChanges();
             }

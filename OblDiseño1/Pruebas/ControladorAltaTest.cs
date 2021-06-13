@@ -18,10 +18,23 @@ namespace Pruebas
         [TestInitialize]
         public void Setup()
         {
-            //Borrar todos los datos de la Base antes de ejecutar los test
+            EliminarDatosBD();
             controladorAlta = new ControladorAlta();
             categoria = new Categoria("Trabajo");
             fecha = new DateTime(2021, 12, 15);
+        }
+
+        private void EliminarDatosBD()
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.credenciales.RemoveRange(contexto.credenciales);
+                contexto.contraseñas.RemoveRange(contexto.contraseñas);
+                contexto.tarjetas.RemoveRange(contexto.tarjetas);
+                contexto.categorias.RemoveRange(contexto.categorias);
+                contexto.usuarios.RemoveRange(contexto.usuarios);
+                contexto.SaveChanges();
+            }
         }
 
         [TestMethod]

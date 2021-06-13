@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
-    class ControladorObtener
+    public class ControladorObtener
     {
         public ControladorObtener()
         {

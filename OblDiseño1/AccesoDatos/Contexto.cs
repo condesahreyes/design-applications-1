@@ -44,7 +44,7 @@ namespace AccesoDatos
             modelBuilder.Entity<ContraseñasQueMeComparten>().HasRequired<EntidadUsuario>(c => c.UsuarioDueño).WithMany(u => u.QueMeComparten).HasForeignKey(t => new { t.UsuarioNombre, t.CredencialId }).WillCascadeOnDelete(false);
             */
 
-            modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadContraseña>(c => c.Contrasenia).WithOptional(u => u.Credencial);
+            modelBuilder.Entity<EntidadCredencial>().HasOptional<EntidadContraseña>(c => c.Contrasenia).WithOptionalDependent(u => u.Credencial);
 
             modelBuilder.Entity<EntidadTarjeta>().HasKey(c => new { c.TarjetaId });
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.tarjetas).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);

@@ -7,13 +7,13 @@ namespace AccesoDatos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Migacon : IMigrationMetadata
+    public sealed partial class Miracion : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Migacon));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Miracion));
         
         string IMigrationMetadata.Id
         {
-            get { return "202106130100398_Migacon"; }
+            get { return "202106130354559_Miracion"; }
         }
         
         string IMigrationMetadata.Source
