@@ -6,31 +6,20 @@ using System.Threading.Tasks;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
-    class ControladorEliminar
+    public class ControladorEliminar
     {
         public ControladorEliminar()
         {
         }
 
-        public void EliminarUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
-        {
-            repositorioUsuario.Delete(usuario);
-        }
-
-        public void EliminarCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
-        {
-            repositorioCategoria.Delete(categoria);
-        }
-
-
         public void EliminarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
         {
-            repositorioTarjeta.Add(tarjetaAgregar);
+            repositorioTarjeta.Delete(tarjetaAgregar);
         }
 
         public void EliminarCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
         {
-            repositorioCredencial.Add(credencialAgregar);
+            repositorioCredencial.Delete(credencialAgregar);
         }
     }
 }

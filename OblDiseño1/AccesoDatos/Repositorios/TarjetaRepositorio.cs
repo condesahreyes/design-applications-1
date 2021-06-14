@@ -12,73 +12,72 @@ namespace AccesoDatos
     {
         private readonly Mapper mapper = new Mapper();
 
-        public EntidadUsuario usuario;
+        public Usuario usuario;
         public TarjetaRepositorio(Usuario usuarioDueñoDominio)
         {
-            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            this.usuario = usuarioDueñoDominio;
         }
-        public void Add(Tarjeta tarjetaDominio) 
+        public void Add(Tarjeta tarjetaAgregar)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (Existe(tarjetaDominio))
+                if (Existe(tarjetaAgregar))
                     throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con este numero");
                 else
                 {
-                    /*
-                    EntidadTarjeta tarjetaEntidad = mapper.PasarAEntidad(tarjetaDominio);
-                    tarjetaEntidad.Usuario = this.usuario;
-                    contexto.tarjetas.Add(tarjetaEntidad);
+                    UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio();
+                    CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
+
+                    int idCategoria = categoriaRepositorio.ObtenerDTOPorString(tarjetaAgregar.Categoria.Nombre).CategoriaId;
+
+                    EntidadTarjeta tarjeta = new EntidadTarjeta(tarjetaAgregar.NotaOpcional, tarjetaAgregar.Nombre,
+                        tarjetaAgregar.Tipo, tarjetaAgregar.Numero, tarjetaAgregar.CodigoSeguridad,
+                        tarjetaAgregar.FechaVencimiento, idCategoria, this.usuario.Nombre);
+
+                    contexto.tarjetas.Add(tarjeta);
                     contexto.SaveChanges();
-                    */
                 }
             }
         }
 
         public bool esVacio() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (contexto.tarjetas.Count() == 0)
-                    return true;
-                else
-                    return false;
-            }
+            throw new NotImplementedException();
         }
 
         public Tarjeta Get(Tarjeta tarjeta) 
         {
-            using (Contexto contexto = new Contexto())
+            if (Existe(tarjeta))
             {
-                if (Existe(tarjeta))
-                {
-                    EntidadTarjeta tarjetaEntidad = contexto.tarjetas.Find(tarjeta.Nombre);
-                    Tarjeta tarjetaDominio = mapper.PasarADominio(tarjetaEntidad);
-                    return tarjetaDominio;
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una tarjeta con este numero");
+                using (Contexto contexto = new Contexto())
+                    foreach (var entidadTarjeta in contexto.tarjetas)
+                        if (entidadTarjeta.UsuarioGestorNombre == this.usuario.Nombre
+                            && tarjeta.Numero == entidadTarjeta.Numero)
+                            return mapper.PasarADominio(entidadTarjeta);
             }
-                
-
+            else
+            {
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente
+                        ("No existe una tarjeta con este numero");
+            }
+            return null;
         }
 
         public List<Tarjeta> GetAll() 
         {
             using (Contexto contexto = new Contexto())
             {
-                if (!esVacio())
+                List<Tarjeta> tarjetasADevolver = new List<Tarjeta>();
+                foreach (var entidadTarjeta in contexto.tarjetas)
                 {
-                    List<Tarjeta> tarjetasADevolver = new List<Tarjeta>();
-                    foreach (var tarjetaEntidad in contexto.tarjetas)
+                    if (entidadTarjeta.UsuarioGestorNombre == this.usuario.Nombre)
                     {
-                        Tarjeta tarjetaDominio = mapper.PasarADominio(tarjetaEntidad);
+                        Tarjeta tarjetaDominio = mapper.PasarADominio(entidadTarjeta);
                         tarjetasADevolver.Add(tarjetaDominio);
                     }
-                    return tarjetasADevolver;
+
                 }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existen tarjetas en el sistema");
+                return tarjetasADevolver;
             }
         }
 
@@ -88,8 +87,10 @@ namespace AccesoDatos
             {
                 if (Existe(tarjeta))
                 {
-                    EntidadTarjeta tarjetaABorrar = contexto.tarjetas.Find(tarjeta.Numero);
-                    contexto.tarjetas.Remove(tarjetaABorrar);
+                    foreach(var tarjetaRecorredora in contexto.tarjetas)
+                        if(tarjetaRecorredora.Numero==tarjeta.Numero && 
+                            tarjetaRecorredora.UsuarioGestorNombre == this.usuario.Nombre)
+                                contexto.tarjetas.Remove(tarjetaRecorredora);
                     contexto.SaveChanges();
                 }
                 else
@@ -99,31 +100,39 @@ namespace AccesoDatos
 
         public void Clear()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.tarjetas.RemoveRange(contexto.tarjetas);
-            }
+            throw new NotImplementedException();
         }
 
         public bool Existe(Tarjeta tarjeta)
         {
             using (Contexto contexto = new Contexto())
             {
-                if (contexto.tarjetas.Any(tarjetaEntidad => tarjetaEntidad.Numero == tarjeta.Numero))
+                if (contexto.tarjetas.Any(tarjetaEntidad => tarjetaEntidad.Numero == tarjeta.Numero) &&
+                    contexto.tarjetas.Any(tarjetaEntidad => tarjetaEntidad.UsuarioGestorNombre == this.usuario.Nombre))
                     return true;
                 else
                     return false;
             }
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
+        public void Modificar(Tarjeta tarjetaOriginal, Tarjeta unaTarjeta)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Modificar(Tarjeta elemento)
-        {
-            throw new NotImplementedException();
+            CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(this.usuario);
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var tarjeta in contexto.tarjetas)
+                    if (tarjeta.Numero == tarjetaOriginal.Numero && tarjeta.UsuarioGestorNombre == this.usuario.Nombre)
+                    {
+                        tarjeta.Numero = unaTarjeta.Numero;
+                        tarjeta.NotaOpcional = unaTarjeta.NotaOpcional;
+                        tarjeta.Nombre = unaTarjeta.Nombre;
+                        tarjeta.Tipo = unaTarjeta.Tipo;
+                        tarjeta.CodigoSeguridad = unaTarjeta.CodigoSeguridad;
+                        tarjeta.FechaVencimiento = unaTarjeta.FechaVencimiento;
+                        tarjeta.IdCategoria = categoriaRepositorio.ObtenerDTOPorString(unaTarjeta.Categoria.Nombre).CategoriaId;
+                    }
+                contexto.SaveChanges();
+            }
         }
     }
 }

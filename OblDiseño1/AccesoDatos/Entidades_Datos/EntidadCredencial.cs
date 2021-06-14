@@ -11,11 +11,14 @@ namespace AccesoDatos.Entidades_Datos
     public class EntidadCredencial
     {
 
+        public int CredencialId { get; set; }
         public string NombreUsuario { get; set; }
 
-        public EntidadContraseña Contrasenia { get; set ; }
+        public EntidadContraseña Contrasenia { get; set; }
 
-        public string NombreSitioApp { get; set ; }
+        public int ContraseniaId { get; set; }
+
+        public string NombreSitioApp { get; set; }
 
         public EntidadUsuario UsuarioGestor { set; get; }
 
@@ -23,28 +26,27 @@ namespace AccesoDatos.Entidades_Datos
 
         public string TipoSitioOApp { get; set; }
 
-        public string Nota { get; set ; }
+        public string Nota { get; set; }
 
         public EntidadCategoria Categoria { get; set; }
 
+        public int IdCategoria { get; set; }
+
         public DateTime FechaUltimaModificacion { get; set; }
 
-        
-        public EntidadCredencial() 
+        public EntidadCredencial()
         {
         }
 
-
-        public EntidadCredencial(string unNombreUsuario, EntidadContraseña unaContrasenia,
-            string unSitio, string laNota, EntidadCategoria laCategoria, EntidadUsuario miUsuario)
+        public EntidadCredencial(string unNombreUsuario, string unSitio, string laNota, int categoria, string usuario, int contraseña)
         {
             NombreUsuario = unNombreUsuario;
-            Contrasenia = unaContrasenia;
             NombreSitioApp = unSitio;
             Nota = laNota;
-            Categoria = laCategoria;
             FechaUltimaModificacion = DateTime.Today;
-            this.UsuarioGestor = miUsuario;
+            IdCategoria = categoria;
+            UsuarioGestorNombre = usuario;
+            this.ContraseniaId = contraseña;
         }
     }
 }

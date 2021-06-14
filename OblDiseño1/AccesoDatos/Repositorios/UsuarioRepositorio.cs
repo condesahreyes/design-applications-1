@@ -1,10 +1,8 @@
 ﻿using AccesoDatos.Entidades_Datos;
-using OblDiseño1;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OblDiseño1;
+using System;
 
 namespace AccesoDatos
 {
@@ -28,10 +26,7 @@ namespace AccesoDatos
         }
         public bool esVacio() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                return (contexto.usuarios.Count() == 0);
-            }
+            throw new NotImplementedException();
         }
 
         public Usuario Get(Usuario usuario) 
@@ -65,10 +60,9 @@ namespace AccesoDatos
 
         }
 
-
         public List<Usuario> GetAll() 
         {
-            using (Contexto contexto = new Contexto()) 
+            using (Contexto contexto = new Contexto())
             {
                 if (!esVacio())
                 {
@@ -83,20 +77,16 @@ namespace AccesoDatos
                 else
                     throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existen usuarios en el sistema");
             }
-             
         }
 
         public void Delete(Usuario usuario)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Clear() 
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.usuarios.RemoveRange(contexto.usuarios);
-            }
+            throw new NotImplementedException();
         }
 
         public bool Existe(Usuario usuario)
@@ -119,7 +109,7 @@ namespace AccesoDatos
                     List<Categoria> categoriasADevolver = new List<Categoria>();
                     foreach (var entidadCategoria in contexto.categorias)
                     {
-                        Categoria categoriaDominio = mapper.PasarADominio(entidadCategoria);
+                        Categoria categoriaDominio = mapper.PasarADominio(entidadCategoria.CategoriaId, usuario);
                         categoriasADevolver.Add(categoriaDominio);
                     }
                     return categoriasADevolver;
@@ -129,9 +119,20 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Usuario elemento)
+        public void Modificar(Usuario usuarioOriginal, Usuario usuario)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(usuarioOriginal))
+                {
+                    foreach (var usuarioContexto in contexto.usuarios)
+                        if (usuarioContexto.Nombre == usuarioOriginal.Nombre)
+                            usuarioContexto.Contrasenia = usuario.Contrasenia;
+                    contexto.SaveChanges();
+                }
+                else
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+            }
         }
     }
 }

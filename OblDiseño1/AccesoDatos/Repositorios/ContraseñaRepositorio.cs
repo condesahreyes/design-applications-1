@@ -13,49 +13,48 @@ namespace AccesoDatos
     {
         private readonly Mapper mapper = new Mapper();
 
-        public EntidadUsuario usuario;
+        public Usuario usuario;
         public ContraseñaRepositorio(Usuario usuarioDueñoDominio)
         {
-            this.usuario = mapper.PasarAEntidad(usuarioDueñoDominio);
+            this.usuario = usuarioDueñoDominio;
         }
         public void Add(Contraseña contraseña)
-        {/*
+        {
             using (Contexto contexto = new Contexto())
             {
-                EntidadContraseña contraseñaEntidad = mapper.PasarAEntidad(contraseña);
-                contraseñaEntidad.CredencialUsuario. = this.usuario;
-                contexto.contraseñas.Add(contraseñaEntidad);
+                EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
+                contraseña.NivelSeguridadContrasenia);
+                contexto.contraseñas.Add(miContraseña);
                 contexto.SaveChanges();
-            }*/
+            }
+        }
+
+        public void AgregarCredencialId(int contraseñaId)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var contraseña in contexto.contraseñas)
+                {
+                    if(contraseña.ContraseniaId == contraseñaId)
+                        contraseña.CredencialId= contexto.credenciales.Max(x => x.CredencialId);
+                }
+                contexto.SaveChanges();
+            }
         }
 
         public void Clear()
         {
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.contraseñas.RemoveRange(contexto.contraseñas);
-            }
+            throw new System.NotImplementedException();
         }
 
         public void Delete(Contraseña contraseña)
         {
-            using (Contexto contexto = new Contexto())
-            {
-                if (Existe(contraseña))
-                {
-                    Contraseña ContraseñaABorrarDominio = Get(contraseña);
-                    EntidadContraseña ContraseñaABorrarEntidad = mapper.PasarAEntidad(ContraseñaABorrarDominio);
-                    contexto.contraseñas.Remove(ContraseñaABorrarEntidad);
-                }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe esta contraseña en el sistema");
-            }
+            throw new System.NotImplementedException();
         }
 
         public bool esVacio()
         {
-            using (Contexto contexto = new Contexto())
-                return (contexto.contraseñas.Count() == 0);
+            throw new System.NotImplementedException();
         }
 
         public bool Existe(Contraseña contraseña)
@@ -76,12 +75,23 @@ namespace AccesoDatos
                 if (Existe(contraseña))
                 {
                     EntidadContraseña contraseñaEntidad = contexto.contraseñas.Find(contraseña.Contrasenia);
-                    Contraseña contraseñaDominio = mapper.PasarADominio(contraseñaEntidad);
+                    Contraseña contraseñaDominio = mapper.PasarADominioContraseña(contraseñaEntidad.ContraseniaId, usuario);
                     return contraseñaDominio;
                 }
                 else
                     throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe esta contraseña asociada en el mismo");
             }
+        }
+
+        public EntidadContraseña ObtenerDto(int  id)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var contraseña in contexto.contraseñas)
+                    if (contraseña.ContraseniaId == id)
+                        return contraseña;
+            }
+            return null;
         }
 
         public List<Contraseña> GetAll()
@@ -91,7 +101,7 @@ namespace AccesoDatos
                 List<Contraseña> contraseñasADevolver = new List<Contraseña>();
                 foreach (var contra in contexto.contraseñas)
                 {
-                    Contraseña contraseñaDominio = mapper.PasarADominio(contra);
+                    Contraseña contraseñaDominio = mapper.PasarADominioContraseña(contra.ContraseniaId, usuario);
                     contraseñasADevolver.Add(contraseñaDominio);
                 }
 
@@ -99,12 +109,21 @@ namespace AccesoDatos
             }
         }
 
-        public void Modificar(Contraseña elemento)
+        public void ModificarConEntidad(int contraseñaId, Contraseña contraseñaAModificar)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
+                contraseñaABuscar.Contrasenia = contraseñaAModificar.Contrasenia;
+            }
+        }
+
+        public List<Categoria> ObtenerMisCategorias(string nombre)
         {
             throw new NotImplementedException();
         }
 
-        public List<Categoria> ObtenerMisCategorias(string nombre)
+        public void Modificar(Contraseña elementoOriginal, Contraseña elemento)
         {
             throw new NotImplementedException();
         }
