@@ -1,37 +1,40 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1;
-using AccesoDatos;
 using AccesoDatos.Entidades_Datos;
-using System.Linq;
+using System.Collections.Generic;
 using OblDiseño1.Entidades;
+using AccesoDatos;
+using System.Linq;
+using System.Text;
+using OblDiseño1;
+using System;
 
 namespace Pruebas
 {
-
     [TestClass]
     public class ControladorObtencionTest
     {
+        private ControladorObtener controladorObtener = new ControladorObtener();
+
         private DateTime fecha;
-        private const string usuarioGestor = "Hernán";
+
+        private const string usuarioCredencial = "Usuario insta";
+        private const string numeroTarjeta = "1234567891234567";
         private const string contraseña = "Mi contraseña";
         private const string categoriaNombre = "Personal";
-        private const string numeroTarjeta = "1234567891234567";
-        private const string usuarioCredencial = "Usuario insta";
         private const string credencialSitio = "Facebook";
-        private const string credencialNota = "Nota ";
         private const string nombreTarjeta = "Master Card";
+        private const string usuarioGestor = "Hernán";
+        private const string credencialNota = "Nota ";
         private const string tipoTarjeta = "Debito";
 
         private static Usuario usuario = new Usuario(usuarioGestor, contraseña);
-        private ControladorObtener controladorObtener = new ControladorObtener();
-        private IRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio();
+        private Categoria categoria = new Categoria(categoriaNombre);
+
+        private IRepositorio<Credencial> credencialRepo = new CredencialRepositorio(usuario);
         private IRepositorio<Categoria> categoriaRepo = new CategoriaRepositorio(usuario);
         private IRepositorio<Tarjeta> tarjetaRepo = new TarjetaRepositorio(usuario);
-        private IRepositorio<Credencial> credencialRepo = new CredencialRepositorio(usuario);
+        private IRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio();
 
         [TestInitialize]
         public void Setup()
@@ -235,8 +238,8 @@ namespace Pruebas
             int idCategoria = ObtenerIdCategoria(nombreCategoria, nombreUsuario);
 
             EntidadUsuario entidadUsuario = new EntidadUsuario(nombreUsuario, null);
-            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta, tipoTarjeta, numeroTarjeta, 1234,
-                fecha, idCategoria, nombreUsuario);
+            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta, 
+                tipoTarjeta, numeroTarjeta, 1234, fecha, idCategoria, nombreUsuario);
 
             using (Contexto contexto = new Contexto())
             {
@@ -264,7 +267,8 @@ namespace Pruebas
             using (Contexto contexto = new Contexto())
             {
                 int idContraseña = contexto.contraseñas.Max(x => x.ContraseniaId);
-                entidadCredencial = new EntidadCredencial(nombreUsuario, credencialSitio, credencialNota, idCategoria, usuarioDueño, idContraseña);
+                entidadCredencial = new EntidadCredencial(nombreUsuario, credencialSitio, 
+                    credencialNota, idCategoria, usuarioDueño, idContraseña);
 
                 contexto.credenciales.Add(entidadCredencial);
                 contexto.SaveChanges();
@@ -280,6 +284,5 @@ namespace Pruebas
                 contexto.SaveChanges();
             }
         }
-
     }
 }

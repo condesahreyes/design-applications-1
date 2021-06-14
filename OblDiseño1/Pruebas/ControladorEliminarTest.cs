@@ -16,21 +16,23 @@ namespace Pruebas
         private ControladorEliminar controladorEliminar = new ControladorEliminar();
 
         private DateTime fecha;
-        private const string usuarioGestor = "Hernán";
+
+        private const string usuarioCredencial = "Usuario insta";
+        private const string numeroTarjeta = "1234567891234567";
         private const string contraseña = "Mi contraseña";
         private const string categoriaNombre = "Personal";
-        private const string numeroTarjeta = "1234567891234567";
-        private const string usuarioCredencial = "Usuario insta";
         private const string credencialSitio = "Facebook";
+        private const string nombreTarjeta = "Master Card";
+        private const string usuarioGestor = "Hernán";
         private const string credencialNota = "Nota ";
-        private const string nombreTarjeta= "Master Card";
         private const string tipoTarjeta = "Debito";
 
         private static Usuario usuario = new Usuario(usuarioGestor, contraseña);
-        private IRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio();
+
+        private IRepositorio<Credencial> credencialRepo = new CredencialRepositorio(usuario);
         private IRepositorio<Categoria> categoriaRepo = new CategoriaRepositorio(usuario);
         private IRepositorio<Tarjeta> tarjetaRepo = new TarjetaRepositorio(usuario);
-        private IRepositorio<Credencial> credencialRepo = new CredencialRepositorio(usuario);
+        private IRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio();
 
         [TestInitialize]
         public void Setup()
@@ -79,7 +81,8 @@ namespace Pruebas
         public void VerificarQueSeEliminoLaTarjetaCorrecta()
         {
             Categoria categoria = new Categoria(categoriaNombre);
-            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, 1234, fecha, categoria, credencialNota);
+            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta, numeroTarjeta, 1234, 
+                fecha, categoria, credencialNota);
 
             EliminarTarjeta(tarjeta, usuario);
 
@@ -101,7 +104,8 @@ namespace Pruebas
 
             Categoria categoria = new Categoria(categoriaNombre);
             Contraseña contraseñaDominio = new Contraseña(contraseña);
-            Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio, credencialSitio, credencialNota, categoria);
+            Credencial credencial = new Credencial(usuarioCredencial, 
+                contraseñaDominio, credencialSitio, credencialNota, categoria);
 
             EliminarCredencial(credencial, usuario);
 
@@ -126,7 +130,6 @@ namespace Pruebas
                 credencialSitio, credencialNota, categoria);
 
             EliminarCredencial(credencial, usuario);
-
         }
 
         [TestMethod]
@@ -134,7 +137,8 @@ namespace Pruebas
         {
             Categoria categoria = new Categoria(categoriaNombre);
             Contraseña contraseñaDominio = new Contraseña(contraseña);
-            Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio, credencialSitio, credencialNota, categoria);
+            Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio, 
+                credencialSitio, credencialNota, categoria);
 
             EliminarCredencial(credencial, usuario);
 
@@ -163,7 +167,6 @@ namespace Pruebas
             IRepositorio<Credencial> iRepoCredencial = new CredencialRepositorio(usuario);
             controladorEliminar.EliminarCredencial(credencial, iRepoCredencial);
         }
-
         private void AgregarUnRegistroEnCadaTabla()
         {
             AgregarUsuario(usuarioGestor, contraseña);
@@ -212,7 +215,8 @@ namespace Pruebas
             int idCategoria = ObtenerIdCategoria(nombreCategoria, nombreUsuario);
 
             EntidadUsuario entidadUsuario = new EntidadUsuario(nombreUsuario, null);
-            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta, tipoTarjeta, numeroTarjeta, 1234,
+            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta, 
+                tipoTarjeta, numeroTarjeta, 1234,
                 fecha, idCategoria, nombreUsuario);
 
             using (Contexto contexto = new Contexto())
@@ -241,7 +245,8 @@ namespace Pruebas
             using (Contexto contexto = new Contexto())
             {
                 int idContraseña = contexto.contraseñas.Max(x => x.ContraseniaId);
-                entidadCredencial = new EntidadCredencial(nombreUsuario, credencialSitio, credencialNota, idCategoria, usuarioDueño, idContraseña);
+                entidadCredencial = new EntidadCredencial(nombreUsuario, credencialSitio, credencialNota, 
+                    idCategoria, usuarioDueño, idContraseña);
 
                 contexto.credenciales.Add(entidadCredencial);
                 contexto.SaveChanges();
@@ -250,7 +255,8 @@ namespace Pruebas
 
         public void AgregarContraseña(string contraseña, int nivelSeguridadContrasenia)
         {
-            EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, nivelSeguridadContrasenia);
+            EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, 
+                nivelSeguridadContrasenia);
             using (Contexto contexto = new Contexto())
             {
                 contexto.contraseñas.Add(entidadContraseña);
