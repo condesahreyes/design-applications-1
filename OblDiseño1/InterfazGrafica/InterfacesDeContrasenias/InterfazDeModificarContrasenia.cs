@@ -1,7 +1,10 @@
-﻿using InterfazGrafica.InterfazDataBreaches;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfazDataBreaches;
 using InterfazGrafica.InterfacesReporte;
+using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -12,7 +15,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private Credencial credencial;
         private Usuario usuario;
         private Sistema sistema;
-        
+
         private int nivelSeguridadContrasenia;
 
         private string interfazPadre;
@@ -21,14 +24,24 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
 
-        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema, 
+        private IRepositorio<Credencial> repositorioCredencial;
+        private IRepositorio<Contraseña> repositorioContraseña;
+        private IRepositorio<Categoria> repositorioCategoria;
+
+        private ControladorObtener controladorObtener;
+
+        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
             Credencial credencial, string padre)
         {
             this.usuario = usuario;
             this.sistema = sistema;
             this.credencial = credencial;
             this.interfazPadre = padre;
-            this.nivelSeguridadContrasenia = credencial.Contraseña.NivelSeguridadContrasenia;
+
+            this.repositorioCredencial = new CredencialRepositorio(this.usuario);
+            this.repositorioContraseña = new ContraseñaRepositorio(this.usuario);
+            this.repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            this.controladorObtener = new ControladorObtener();
 
             InitializeComponent();
             ColocarDatosEnLosCampos();
@@ -37,11 +50,17 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void ColocarDatosEnLosCampos()
         {
             this.textBox_Usuario.Text = credencial.NombreUsuario;
-            this.textBox_Contrasenia.Text = credencial.Contraseña.Contrasenia;
+
             this.textBox_Sitio.Text = credencial.NombreSitioApp;
 
+            List<Categoria> categorias = repositorioCategoria.GetAll();
+
+            Credencial credencialPorBD = controladorObtener.ObtenerCredencial(credencial, repositorioCredencial);
+
+            this.textBox_Contrasenia.Text = credencialPorBD.ObtenerContraseña;
+
             var bindingSource = new BindingSource();
-            bindingSource.DataSource = usuario.ObtenerCategorias();
+            bindingSource.DataSource = categorias;
             this.comboBox_Categoria.DataSource = bindingSource.DataSource;
             SeleccionarCategoriaOriginal();
             this.richTextBox_Nota.Text = credencial.Nota;
@@ -93,29 +112,32 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void button_Aceptar_Click(object sender, EventArgs e)
         {
-            if (HuboCambios())
+
+            string nuevoNombreUsuario = this.textBox_Usuario.Text;
+            string nuevoNombreSitio = this.textBox_Sitio.Text;
+
+            if (VerificarQueTengoCombinacionNombreSitio(nuevoNombreUsuario, nuevoNombreSitio) &&
+                 (nuevoNombreUsuario != this.credencial.NombreUsuario || nuevoNombreSitio != this.credencial.NombreSitioApp))
             {
-                string nuevoNombreUsuario = this.textBox_Usuario.Text;
-                string nuevoNombreSitio = this.textBox_Sitio.Text;
-                if (usuario.VerificarQueTengoCombinacionNombreSitio(nuevoNombreUsuario, nuevoNombreSitio) &&
-                    (nuevoNombreUsuario != this.credencial.NombreUsuario || nuevoNombreSitio != this.credencial.NombreSitioApp))
-                {
-                    MessageBox.Show("Error: ese Nombre de Uusario ya esta registrado para ese Sitio en el sistema");
-                }
-                else
-                {
-                    if (ModificarContrasenia())
-                    {
-                        MessageBox.Show("La contraseña se modifico correctamente");
-                        CerrarVentana();
-                    }
-                }
+                MessageBox.Show("Error: ese Nombre de Uusario ya esta registrado para ese Sitio en el sistema");
             }
             else
             {
-                MessageBox.Show("No se realizaron cambios");
+                ModificarContrasenia();
+                MessageBox.Show("La contraseña se modifico correctamente");
                 CerrarVentana();
             }
+        }
+
+        public bool VerificarQueTengoCombinacionNombreSitio(string nuevoNombreUsuario, string nuevoNombreSitio)
+        {
+            List<Credencial> credenciales = repositorioCredencial.GetAll();
+            foreach (var credencial in credenciales)
+            {
+                if (credencial.NombreUsuario == nuevoNombreUsuario && credencial.NombreSitioApp == nuevoNombreSitio)
+                    return true;
+            }
+            return false;
         }
 
         private void CerrarVentana()
@@ -124,7 +146,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 case posibleInterfazPadre_ReporteVer:
                     Reporte funcionalidad = new Reporte(usuario);
-                    InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
+                    InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, 
+                        ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
                     interfazVer.Show();
                     this.Close();
                     break;
@@ -141,62 +164,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
         }
 
-        private bool HuboCambios()
-        {
-            bool seRealizaronCambios = false;
-            if (!this.credencial.NombreUsuario.Equals(this.textBox_Usuario.Text))
-            {
-                seRealizaronCambios = true;
-            }
-            if (!this.credencial.Contraseña.Contrasenia.Equals(this.textBox_Contrasenia.Text))
-            {
-                seRealizaronCambios = true;
-            }
-            if (!this.credencial.NombreSitioApp.Equals(this.textBox_Sitio.Text))
-            {
-                seRealizaronCambios = true;
-            }
-            if (!this.credencial.Categoria.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
-            {
-                seRealizaronCambios = true;
-            }
-            if (!this.credencial.Nota.Equals(this.richTextBox_Nota.Text))
-            {
-                seRealizaronCambios = true;
-            }
-            return seRealizaronCambios;
-        }
-
         private bool ModificarContrasenia()
         {
             bool seModificoCorrectamente = false;
             try
             {
-                if (!this.credencial.NombreUsuario.Equals(this.textBox_Usuario.Text))
-                {
-                    this.credencial.NombreUsuario = this.textBox_Usuario.Text;
-                    seModificoCorrectamente = true;
-                }
-                if (!this.credencial.Contraseña.Contrasenia.Equals(this.textBox_Contrasenia.Text))
-                {
-                    this.credencial.Contraseña.Contrasenia = this.textBox_Contrasenia.Text;
-                    seModificoCorrectamente = true;
-                }
-                if (!this.credencial.NombreSitioApp.Equals(this.textBox_Sitio.Text))
-                {
-                    this.credencial.NombreSitioApp = this.textBox_Sitio.Text;
-                    seModificoCorrectamente = true;
-                }
-                if (!this.credencial.Categoria.Equals((Categoria)this.comboBox_Categoria.SelectedItem))
-                {
-                    this.credencial.Categoria = (Categoria)this.comboBox_Categoria.SelectedItem;
-                    seModificoCorrectamente = true;
-                }
-                if (!this.credencial.Nota.Equals(this.richTextBox_Nota.Text))
-                {
-                    this.credencial.Nota = this.richTextBox_Nota.Text;
-                    seModificoCorrectamente = true;
-                }
+                ModificarCredencial();
             }
             catch (ExepcionDatosDeContraseniaInvalidos)
             {
@@ -204,6 +177,22 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 MostrarCualesSonLosDatosCorrector();
             }
             return seModificoCorrectamente;
+        }
+
+        private void ModificarCredencial()
+        {
+            string nombreNuevaCredencial = textBox_Usuario.Text;
+            string contraseñaNuevaCredencial = textBox_Contrasenia.Text;
+            string sitioNuevaCredencial = textBox_Sitio.Text;
+            string notaNuevaCredencial = richTextBox_Nota.Text;
+
+            Contraseña nuevaContraseña = new Contraseña(contraseñaNuevaCredencial);
+            Categoria categoriaNuevaCredencial = (Categoria)this.comboBox_Categoria.SelectedItem;
+            Credencial credencialAModificar = new Credencial(nombreNuevaCredencial, nuevaContraseña, 
+                sitioNuevaCredencial, notaNuevaCredencial, categoriaNuevaCredencial);
+            ControladorModificar controladorModificar = new ControladorModificar();
+
+            controladorModificar.ModificarCredencial(this.credencial, credencialAModificar, repositorioCredencial);
         }
 
         private void MostrarCualesSonLosDatosCorrector()

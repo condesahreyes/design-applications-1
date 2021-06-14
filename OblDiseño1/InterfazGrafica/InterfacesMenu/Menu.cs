@@ -1,5 +1,6 @@
 ﻿using InterfazGrafica.InterfazCompartirContraseñas;
 using InterfazGrafica.InterfacesDeContrasenias;
+using OblDiseño1.ControladoresPorFuncionalidad;
 using InterfazGrafica.InterfacesDeTarjetas;
 using InterfazGrafica.InterfazDataBreaches;
 using InterfazGrafica.InterfazCategoria;
@@ -8,6 +9,7 @@ using InterfazGrafica.InterfazIngreso;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
+using AccesoDatos;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -15,6 +17,8 @@ namespace InterfazGrafica.InterfacesMenu
     {
         private Sistema sistema;
         private Usuario usuario;
+        private ControladorObtener controladorObtener;
+        private CategoriaRepositorio categoriaRepo;
 
         private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
             "se debe registrar una Categoría para acceder a esta opción.";
@@ -23,7 +27,8 @@ namespace InterfazGrafica.InterfacesMenu
         {
             this.usuario = usuario;
             this.sistema = sistema;
-
+            controladorObtener = new ControladorObtener();
+            categoriaRepo = new CategoriaRepositorio(this.usuario);
             InitializeComponent();
         }
 
@@ -36,7 +41,7 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnContrasenias_Click(object sender, EventArgs e)
         {
-            if (usuario.ObtenerCategorias().Count > 0)
+            if (controladorObtener.ObtenerCategorias(categoriaRepo).Count > 0)
             {
                 this.Hide();
                 InterfazContrasenia contrasenias = new InterfazContrasenia(ref usuario, ref sistema);
@@ -48,7 +53,7 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnTarjetas_Click(object sender, EventArgs e)
         {
-            if (usuario.ObtenerCategorias().Count > 0)
+            if (controladorObtener.ObtenerCategorias(categoriaRepo).Count > 0)
                 IrAPantallaTarjetas();
             else
                 MessageBox.Show(msgErrorDebeCrearCategoria);

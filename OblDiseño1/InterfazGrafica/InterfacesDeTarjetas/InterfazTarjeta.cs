@@ -1,5 +1,8 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -10,23 +13,28 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Usuario usuario;
         private Sistema sistema;
 
+        private ControladorObtener controladorObtener = new ControladorObtener();
+        private IRepositorio<Tarjeta> tarjetaRepositorio;
+
         public InterfazTarjeta(ref Usuario usuario, ref Sistema sistema)
         {
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
+            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
             CargarListaTarjetas(ref usuario, ref sistema);
             ModificarNombreDeColumnasDelDataGrid();
         }
 
         private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
         {
-            if (usuario.ObtenerTarjetas().Count > 0)
-                usuario.ObtenerTarjetas().Sort();
-                dataGridTarjetas.DataSource = usuario.ObtenerTarjetas();
-                dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
-                dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
-                dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+            List<Tarjeta> misTarjetas = controladorObtener.ObtenerTarjetas(tarjetaRepositorio);
+            if (misTarjetas.Count > 0)
+                misTarjetas.Sort();
+            dataGridTarjetas.DataSource = misTarjetas;
+            dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
+            dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
+            dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
         }
 
         private void ModificarNombreDeColumnasDelDataGrid()
@@ -45,9 +53,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void btnAgregarTarjeta_Click(object sender, EventArgs e)
         {
-                this.Close();
-                InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
-                interfazAgregar.Show();
+            this.Close();
+            InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
+            interfazAgregar.Show();
         }
 
         private void btnModificarTarjeta_Click(object sender, EventArgs e)
@@ -95,6 +103,5 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 eliminarTarjeta.Show();
             }
         }
-
     }
 }

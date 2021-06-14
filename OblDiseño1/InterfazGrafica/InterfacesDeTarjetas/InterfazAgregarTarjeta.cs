@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -9,6 +11,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     {
         private Usuario usuario;
         private Sistema sistema;
+
+        private ControladorAlta controladorAlta = new ControladorAlta();
+        private ControladorObtener controladorObtener = new ControladorObtener();
+
+        private IRepositorio<Categoria> repositorioCategoria;
+
         public InterfazAgregarTarjeta(ref Usuario usuario, ref Sistema sistema)
         {
             InitializeComponent();
@@ -16,16 +24,18 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
 
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
+
             CargarOpcionesDeCategoria();
         }
 
         private void CargarOpcionesDeCategoria()
         {
-            List<string> categorias = usuario.ListarToStringDeMisCategorias();
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
 
-            for (int i = 0; i < categorias.Count; i++)
+            foreach (var recorredorCategoria in categorias)
             {
-                string categoriaMostrar = categorias[i];
+                string categoriaMostrar = recorredorCategoria.Nombre;
                 comboBoxCategorias.Items.Add(categoriaMostrar);
             }
         }
@@ -38,7 +48,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 MessageBox.Show("Se ha dado de alta la Tarjeta con éxito");
                 IrAInterfazTarjeta();
             }
-            
+
             catch (ExepcionObjetosRepetidos)
             {
                 MessageBox.Show("Ya existe una tarjeta con el mismo numero");
@@ -67,13 +77,15 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nombreCategoria = comboBoxCategorias.Text;
             string notaOpcional = textBoxNotaOpcional.Text;
 
-            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
+            Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
             Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
                 numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
 
-            usuario.AgregarTarjeta(nuevaTarjeta);
+            IRepositorio<Tarjeta> tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
+
+            controladorAlta.AgregarTarjeta(nuevaTarjeta, tarjetaRepositorio);
         }
 
         private void MostrarCualesSonLosDatosCorrectos()

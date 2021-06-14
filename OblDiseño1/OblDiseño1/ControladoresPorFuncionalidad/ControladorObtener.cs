@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
@@ -11,6 +7,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         public ControladorObtener()
         {
         }
+
         public Usuario ObtenerUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
         {
             return repositorioUsuario.Get(usuario);
@@ -44,9 +41,9 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             return repositorioTarjeta.GetAll();
         }
 
-        public Credencial ObtenerCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
+        public Credencial ObtenerCredencial(Credencial credencial, IRepositorio<Credencial> repositorioCredencial)
         {
-            return repositorioCredencial.Get(credencialAgregar);
+            return repositorioCredencial.Get(credencial);
         }
 
         public List<Credencial> ObtenerCredenciales(IRepositorio<Credencial> repositorioCredencial)

@@ -91,9 +91,8 @@ namespace AccesoDatos
                     }
                     return credencialesADevolver;
                 }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No hay credenciales guardadas en el sistema");
             }
+            return null;
         }
 
         public void Delete(Credencial credencial)

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -11,7 +13,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Sistema sistema;
         private Tarjeta tarjeta;
 
-        private List<string> categorias;
+        private ControladorObtener controladorObtener = new ControladorObtener();
+        private IRepositorio<Categoria> repositorioCategoria;
+        private IRepositorio<Tarjeta> repositorioTarjeta;
 
         public InterfazModificarTarjeta(ref Sistema sistema, ref Usuario usuario, ref Tarjeta tarjeta)
         {
@@ -20,7 +24,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             this.tarjeta = tarjeta;
-            this.categorias = usuario.ListarToStringDeMisCategorias();
+
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            repositorioTarjeta = new TarjetaRepositorio(this.usuario);
 
             CargarComboCategorias();
             CargarDatosViejos();
@@ -28,9 +34,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void CargarComboCategorias()
         {
-            for (int i = 0; i < categorias.Count; i++)
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+
+            foreach (var recorredorCategoria in categorias)
             {
-                string categoriaMostrar = categorias[i];
+                string categoriaMostrar = recorredorCategoria.Nombre;
                 comboBoxCategorias.Items.Add(categoriaMostrar);
             }
         }
@@ -51,7 +59,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string nuevoNumeroTarjeta = textBoxNumeroTarjeta.Text;
 
             if (nuevoNumeroTarjeta != this.tarjeta.Numero &&
-                usuario.RevisarSiLaTarjetaEsMia(nuevoNumeroTarjeta))
+                controladorObtener.ExisteTarjeta(nuevoNumeroTarjeta, repositorioTarjeta))
             {
                 MessageBox.Show("Ya hay una tarjeta registrada con ese numero en el sistema");
             }
@@ -79,17 +87,22 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             string codigoSeguridad = textBoxCodigoSeguridad.Text;
             string nombreCategoria = comboBoxCategorias.Text;
 
-            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
+            Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
 
-            this.tarjeta.Nombre = textBoxNombre.Text;
-            this.tarjeta.Tipo = textBoxTipo.Text;
-            this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
-            this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
-            this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
-            this.tarjeta.Categoria = categoria;
-            this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
+            ControladorModificar controladorModificar = new ControladorModificar();
+
+            Tarjeta nuevaTarjeta = new Tarjeta();
+            nuevaTarjeta.Nombre = textBoxNombre.Text;
+            nuevaTarjeta.Tipo = textBoxTipo.Text;
+            nuevaTarjeta.Numero = textBoxNumeroTarjeta.Text;
+            nuevaTarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
+            nuevaTarjeta.FechaVencimiento = dateTimePicker1.Value;
+            nuevaTarjeta.Categoria = categoria;
+            nuevaTarjeta.NotaOpcional = textBoxNotaOpcional.Text;
+
+            controladorModificar.ModificarTarjeta(this.tarjeta, nuevaTarjeta, repositorioTarjeta);
         }
 
         private void MostrarCualesSonLosDatosCorrectos()
