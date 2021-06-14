@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ingresoSistema = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,7 +42,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.btnCambiarContraseña);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.ingresoSistema);
             this.panel1.Controls.Add(this.label2);
@@ -55,24 +55,24 @@
             this.panel1.Size = new System.Drawing.Size(383, 267);
             this.panel1.TabIndex = 8;
             // 
-            // button2
+            // btnCambiarContraseña
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(49, 218);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 27);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Cambiar contraseña";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCambiarContraseña.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnCambiarContraseña.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCambiarContraseña.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCambiarContraseña.FlatAppearance.BorderSize = 0;
+            this.btnCambiarContraseña.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCambiarContraseña.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCambiarContraseña.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnCambiarContraseña.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnCambiarContraseña.Location = new System.Drawing.Point(49, 218);
+            this.btnCambiarContraseña.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCambiarContraseña.Name = "btnCambiarContraseña";
+            this.btnCambiarContraseña.Size = new System.Drawing.Size(145, 27);
+            this.btnCambiarContraseña.TabIndex = 6;
+            this.btnCambiarContraseña.Text = "Cambiar contraseña";
+            this.btnCambiarContraseña.UseVisualStyleBackColor = false;
+            this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
             // 
             // label1
             // 
@@ -182,6 +182,6 @@
         private System.Windows.Forms.TextBox pssGestor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox userGestor;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCambiarContraseña;
     }
 }
