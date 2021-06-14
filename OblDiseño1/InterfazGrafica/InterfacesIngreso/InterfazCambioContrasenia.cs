@@ -13,7 +13,6 @@ namespace InterfazGrafica.InterfazIngreso
         private ControladorModificar controladorModificar = new ControladorModificar();
         private ControladorObtener controladorObtener = new ControladorObtener();
         private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
-        private ControladorAlta controladorAlta = new ControladorAlta();
 
         public InterfazCambioContrasenia(ref Sistema sistema)
         {
@@ -30,7 +29,8 @@ namespace InterfazGrafica.InterfazIngreso
             try
             {
                 Usuario intentoLogin = new Usuario(nombreUsuario, contrasenia);
-                if (controladorObtener.ObtenerUsuario(intentoLogin, usuariosRepo)!=null)
+                Usuario usuarioRegistrado = controladorObtener.ObtenerUsuario(intentoLogin, usuariosRepo);
+                if (usuarioRegistrado != null && usuarioRegistrado.Contrasenia == contrasenia)
                     ModificarContrasenia(intentoLogin, nuevaContrasenia);
                 else
                     MessageBox.Show("Error, contraseña incorrecta");

@@ -2,9 +2,9 @@
 using InterfazGrafica.InterfazDeCategorias;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos;
 
 namespace InterfazGrafica.InterfazCategoria
 {
@@ -13,8 +13,8 @@ namespace InterfazGrafica.InterfazCategoria
         private Usuario usuario;
         private Sistema sistema;
 
-        private readonly string msgNoHayCategorias= "Error, no hay categorías para modificar";
-        private readonly string msgSelecionarCategorias= "Error, debe seleccionar una categoría";
+        private readonly string msgNoHayCategorias = "Error, no hay categorías para modificar";
+        private readonly string msgSelecionarCategorias = "Error, debe seleccionar una categoría";
 
         public InterfazCategorias(ref Usuario usuario, ref Sistema sistema)
         {
@@ -44,7 +44,7 @@ namespace InterfazGrafica.InterfazCategoria
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazAgregarCategoria agregarCategoria = new 
+            InterfazAgregarCategoria agregarCategoria = new
                 InterfazAgregarCategoria(ref sistema, ref usuario);
             agregarCategoria.Show();
         }
