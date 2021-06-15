@@ -5,7 +5,6 @@ namespace OblDiseño1
 {
     public class Credencial : IComparable<Credencial>
     {
-        public int Id { set; get; }
         public string NombreUsuario { get => nombreUsuario; set => ActualizarNombreUsuario(value); }
 
         public string NombreSitioApp { get => nombreSitioApp; set => ActualizarNombreSitioApp(value); }

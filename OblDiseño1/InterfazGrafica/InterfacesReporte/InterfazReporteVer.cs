@@ -59,6 +59,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void ModificarDatosVisibles()
         {
+            this.dataGridView_Contrasenias.AllowUserToAddRows = false;
             this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].Visible = false;
             this.dataGridView_Contrasenias.Columns["ObtenerNivelSeguridad"].Visible = false;
             this.dataGridView_Contrasenias.Columns["ObtenerContraseña"].Visible = false;
@@ -119,7 +120,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void btnModificarContrasenia_Click(object sender, EventArgs e)
         {
-            if (0 < dataGridView_Contrasenias.RowCount)
+            if (dataGridView_Contrasenias.CurrentRow != null && 0 < dataGridView_Contrasenias.RowCount)
             {
                 Credencial duplaSeleccionada = (Credencial)dataGridView_Contrasenias.CurrentRow.
                     DataBoundItem;
@@ -128,6 +129,8 @@ namespace InterfazGrafica.InterfacesReporte
                 modContra.Show();
                 this.Close();
             }
+            else
+                MessageBox.Show("No se ha seleccionado ninguna contraseña");
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OblDiseño1;
 using System;
 using AccesoDatos;
+using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -29,6 +30,7 @@ namespace InterfazGrafica.InterfacesMenu
             this.sistema = sistema;
             controladorObtener = new ControladorObtener();
             categoriaRepo = new CategoriaRepositorio(this.usuario);
+
             InitializeComponent();
         }
 

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfazIngreso
 {
@@ -51,7 +52,11 @@ namespace InterfazGrafica.InterfazIngreso
                 Usuario usuario = new Usuario(nombreUsuario, contrasenia);
 
                 if (usuariosRepo.Existe(usuario))
-                    return usuariosRepo.Get(usuario);
+                {
+                    usuario = usuariosRepo.Get(usuario);
+                    
+                }
+                    
                 else
                 {
                     controladorAlta.AgregarUsuario(usuario, usuariosRepo);

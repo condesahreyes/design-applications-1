@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace InterfazGrafica.InterfazCategoria
 {
@@ -28,7 +29,8 @@ namespace InterfazGrafica.InterfazCategoria
         private void CargarLista()
         {
             CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            List<Categoria> categorias = repositorioCategoria.GetAll();
+            ControladorObtener controladorObtener = new ControladorObtener();
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
             categorias.Sort();
 
             dataGridCategorias.DataSource = categorias;

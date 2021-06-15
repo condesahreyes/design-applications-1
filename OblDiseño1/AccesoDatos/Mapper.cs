@@ -1,6 +1,7 @@
 ﻿using AccesoDatos.Entidades_Datos;
 using OblDiseño1.Entidades;
 using OblDiseño1;
+using System.Collections.Generic;
 
 namespace AccesoDatos
 {

@@ -16,7 +16,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private Usuario usuario;
         private Sistema sistema;
 
-        private int nivelSeguridadContrasenia;
+        private int nivelSeguridadContraseniaOriginal;
+        private int nivelSeguridadContraseniaNuevo;
 
         private string interfazPadre;
 
@@ -30,12 +31,15 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private ControladorObtener controladorObtener;
 
+
         public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
             Credencial credencial, string padre)
         {
             this.usuario = usuario;
             this.sistema = sistema;
             this.credencial = credencial;
+            this.nivelSeguridadContraseniaOriginal = this.credencial.ObtenerNivelSeguridad;
+            this.nivelSeguridadContraseniaNuevo = this.nivelSeguridadContraseniaOriginal;
             this.interfazPadre = padre;
 
             this.repositorioCredencial = new CredencialRepositorio(this.usuario);
@@ -146,8 +150,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 case posibleInterfazPadre_ReporteVer:
                     Reporte funcionalidad = new Reporte(usuario);
+                    reporte reporte = funcionalidad.ObtenerReporteSeguridadContrasenias();
+                    ActualizarReporte(reporte);
+                        
                     InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, 
-                        ref sistema, funcionalidad.ObtenerReporteSeguridadContrasenias(), nivelSeguridadContrasenia);
+                        ref sistema, reporte, this.nivelSeguridadContraseniaOriginal);
                     interfazVer.Show();
                     this.Close();
                     break;
@@ -161,6 +168,17 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     interfazDataBreaches.Show();
                     this.Close();
                     break;
+            }
+        }
+
+        public void ActualizarReporte(reporte reporte)
+        {
+            if (this.nivelSeguridadContraseniaOriginal != this.nivelSeguridadContraseniaNuevo)
+            {
+                reporte.duplasPorSeguridad[nivelSeguridadContraseniaNuevo].cantidad++;
+                reporte.duplasPorSeguridad[nivelSeguridadContraseniaNuevo].unaListaCredenciales.Add(this.credencial);
+                reporte.duplasPorSeguridad[nivelSeguridadContraseniaOriginal].cantidad--;
+                reporte.duplasPorSeguridad[nivelSeguridadContraseniaOriginal].unaListaCredenciales.Remove(this.credencial);
             }
         }
 
@@ -193,6 +211,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             ControladorModificar controladorModificar = new ControladorModificar();
 
             controladorModificar.ModificarCredencial(this.credencial, credencialAModificar, repositorioCredencial);
+            this.nivelSeguridadContraseniaNuevo = credencialAModificar.ObtenerNivelSeguridad;
         }
 
         private void MostrarCualesSonLosDatosCorrector()
