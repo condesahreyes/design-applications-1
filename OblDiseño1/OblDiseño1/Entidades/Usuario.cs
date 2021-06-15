@@ -177,6 +177,7 @@ namespace OblDiseño1
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
         {
+            if(this.credenciales!=null)
             foreach (Credencial unaDupla in this.credenciales)
                 if (unaDupla.Contraseña.Contrasenia == unaContrasenia)
                     return true;

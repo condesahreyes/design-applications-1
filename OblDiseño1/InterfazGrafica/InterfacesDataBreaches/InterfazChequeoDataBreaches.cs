@@ -8,6 +8,7 @@ using System.Linq;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfazDataBreaches
 {
@@ -17,12 +18,14 @@ namespace InterfazGrafica.InterfazDataBreaches
         private Usuario usuario;
 
         private ControladorObtener controladorObtener;
+        private ControladorAlta controladorAlta;
 
         private IRepositorio<Usuario> usuarioRepositorio;
 
         public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
         {
             controladorObtener = new ControladorObtener();
+            controladorAlta = new ControladorAlta();
             InitializeComponent();
             this.sistema = sistema;
             this.usuarioRepositorio = new UsuarioRepositorio();
@@ -100,6 +103,14 @@ namespace InterfazGrafica.InterfazDataBreaches
             
             List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
             List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
+
+            chequeador.TarjetasVulneradas = tarjetasVulneradas;
+            chequeador.CredencialesVulneradas = credencialesVulnderadas;
+
+            IRepositorio<ChequeadorDeDataBreaches> dataBreachRepo = new DataBrechRepositorio(this.usuario);
+
+            chequeador.Fecha = new DateTime(2029, 05, 25);
+            controladorAlta.AgregarDataBrache(chequeador, dataBreachRepo);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridCredenciales(credencialesVulnderadas);

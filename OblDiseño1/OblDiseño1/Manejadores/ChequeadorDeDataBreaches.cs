@@ -10,6 +10,12 @@ namespace OblDiseño1
     {
         public Usuario usuario { get; set; }
 
+        public DateTime Fecha { get; set; }
+
+        public List<Tarjeta> TarjetasVulneradas { get; set; }
+
+        public List<Credencial> CredencialesVulneradas { get; set; }
+
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;

@@ -51,11 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades_Datos\EntidadDataBreach.cs" />
+    <Compile Include="Entidades_Datos\EntidadDataBrechCredencial.cs" />
+    <Compile Include="Entidades_Datos\EntidadDataBrechTarjeta.cs" />
     <Compile Include="Entidades_Datos\EntidadContraseña.cs" />
     <Compile Include="Entidades_Datos\EntidadGestorContraseñasCompartidas.cs" />
-    <Compile Include="Migrations\202106150332414_Migracion.cs" />
-    <Compile Include="Migrations\202106150332414_Migracion.designer.cs">
-      <DependentUpon>202106150332414_Migracion.cs</DependentUpon>
+    <Compile Include="Migrations\202106152154267_Migracion.cs" />
+    <Compile Include="Migrations\202106152154267_Migracion.designer.cs">
+      <DependentUpon>202106152154267_Migracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="Entidades_Datos\EntidadCredencial.cs" />
     <Compile Include="Entidades_Datos\EntidadTarjeta.cs" />
     <Compile Include="Entidades_Datos\EntidadUsuario.cs" />
+    <Compile Include="Repositorios\DataBrechRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Mapper.cs" />
@@ -82,8 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106150332414_Migracion.resx">
-      <DependentUpon>202106150332414_Migracion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106152154267_Migracion.resx">
+      <DependentUpon>202106152154267_Migracion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
