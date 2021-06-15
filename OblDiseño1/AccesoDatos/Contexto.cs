@@ -11,6 +11,7 @@ namespace AccesoDatos
         public DbSet<EntidadContraseña> contraseñas { set; get; }
         public DbSet<EntidadTarjeta> tarjetas { get; set; }
         public DbSet<EntidadUsuario> usuarios { get; set; }
+        public DbSet<EntidadRegistroCredencialCompartida> credencialesCompartidas { get; set; }
 
 
         public Contexto() : base("BddD1")
@@ -51,6 +52,12 @@ namespace AccesoDatos
             modelBuilder.Entity<EntidadTarjeta>().HasKey(c => new { c.TarjetaId });
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.tarjetas).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadCategoria>(c => c.Categoria).WithMany(u => u.Tarjetas).HasForeignKey(t => new { t.IdCategoria });
+
+
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasKey(e => new { e.NombreUsuarioQueComparte, e.NombreUsuarioAlQueSeLeCompartio, e.CredencialCompartidaId }) ;
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadUsuario>(r => r.UsuarioQueComparte).WithMany(u => u.credencialesQueComparto).HasForeignKey<string>(s => s.NombreUsuarioQueComparte).WillCascadeOnDelete(false);
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadUsuario>(r => r.UsuarioAlQueSeLeCompartio).WithMany(u => u.credencialesQueMeCompartieron).HasForeignKey<string>(s => s.NombreUsuarioAlQueSeLeCompartio).WillCascadeOnDelete(false);
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadCredencial>(r => r.CredencialCompartida).WithMany(c => c.registrosEnLosQueEstoyCompartida).HasForeignKey<int>(s => s.CredencialCompartidaId).WillCascadeOnDelete(false);
         }
     }
 }

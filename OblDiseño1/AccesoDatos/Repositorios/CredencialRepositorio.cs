@@ -168,5 +168,23 @@ namespace AccesoDatos
                     throw new ExepcionObjetosRepetidos("Ya existe una contraseña para este nombre de usuario y nombre de sitio");
             }
         }
+
+        public int ObtenerId(Credencial credencial)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var unaCredencial in contexto.credenciales)
+                {
+                    if (unaCredencial.NombreSitioApp == credencial.NombreSitioApp &&
+                        unaCredencial.NombreUsuario == credencial.NombreUsuario)
+                    {
+                        return unaCredencial.CredencialId;
+                    }      
+                }
+                string mensajeExepcion = "La credencial de <<NombreSitioApp = " + credencial.NombreSitioApp 
+                    + ">> y <<NombreUsuario = " + credencial.NombreUsuario + ">>";
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente(mensajeExepcion);
+            }
+        }
     }
-    }
+}

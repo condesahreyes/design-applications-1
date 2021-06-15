@@ -64,7 +64,7 @@ namespace InterfazGrafica.InterfazIngreso
                 }
                 return usuario;
             }
-            catch (Exception InvalidUsuarioDataException)
+            catch (Exception ExcepcionInvalidUsuarioData)
             {
                 MessageBox.Show("Verifique que su usuario contenga entre 1 a 25 " +
                     "caracteres y su contraseña entre 5 a 25 caracteres.");
