@@ -2,6 +2,7 @@
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System.Collections.Generic;
+using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace AccesoDatos
 {
@@ -129,9 +130,19 @@ namespace AccesoDatos
 
         public Usuario PasarADominio(EntidadUsuario usuarioEntidad)
         {
+            ControladorObtener controladorObtener = new ControladorObtener();
+
             Usuario usuarioDominio = new Usuario();
+            
             usuarioDominio.Nombre = usuarioEntidad.Nombre;
             usuarioDominio.Contrasenia = usuarioEntidad.Contrasenia;
+            TarjetaRepositorio repoTarjeta = new TarjetaRepositorio(usuarioDominio);
+            CategoriaRepositorio repoCategoria = new CategoriaRepositorio(usuarioDominio);
+            CredencialRepositorio repoCredencial = new CredencialRepositorio(usuarioDominio);
+
+            usuarioDominio.tarjetas = repoTarjeta.GetAll();
+            usuarioDominio.credenciales = repoCredencial.GetAll();
+            usuarioDominio.categorias = repoCategoria.GetAll();
 
             return usuarioDominio;
         }

@@ -12,6 +12,7 @@ namespace AccesoDatos.Entidades_Datos
     {
 
         public int CredencialId { get; set; }
+
         public string NombreUsuario { get; set; }
 
         public EntidadContraseña Contrasenia { get; set; }

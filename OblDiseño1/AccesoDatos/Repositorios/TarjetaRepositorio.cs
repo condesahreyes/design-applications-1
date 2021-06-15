@@ -1,10 +1,8 @@
 ﻿using AccesoDatos.Entidades_Datos;
-using OblDiseño1;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OblDiseño1;
+using System;
 
 namespace AccesoDatos
 {

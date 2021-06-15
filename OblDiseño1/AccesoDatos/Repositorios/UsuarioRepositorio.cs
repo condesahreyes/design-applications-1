@@ -36,8 +36,7 @@ namespace AccesoDatos
                 if (Existe(usuario))
                 {
                     EntidadUsuario usuarioEntidad = contexto.usuarios.Find(usuario.Nombre);
-                    Usuario usuarioDominio = mapper.PasarADominio(usuarioEntidad);
-                    return usuarioDominio;
+                    return mapper.PasarADominio(usuarioEntidad);
                 }
                 else
                     throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe un usuario con este nombre");

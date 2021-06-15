@@ -1,11 +1,9 @@
 ﻿using AccesoDatos.Entidades_Datos;
-using OblDiseño1;
-using OblDiseño1.Entidades;
-using System;
 using System.Collections.Generic;
+using OblDiseño1.Entidades;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OblDiseño1;
+using System;
 
 namespace AccesoDatos
 {
@@ -14,6 +12,7 @@ namespace AccesoDatos
         private readonly Mapper mapper = new Mapper();
 
         public Usuario usuario;
+
         public ContraseñaRepositorio(Usuario usuarioDueñoDominio)
         {
             this.usuario = usuarioDueñoDominio;
@@ -75,8 +74,7 @@ namespace AccesoDatos
                 if (Existe(contraseña))
                 {
                     EntidadContraseña contraseñaEntidad = contexto.contraseñas.Find(contraseña.Contrasenia);
-                    Contraseña contraseñaDominio = mapper.PasarADominioContraseña(contraseñaEntidad.ContraseniaId, usuario);
-                    return contraseñaDominio;
+                    return mapper.PasarADominioContraseña(contraseñaEntidad.ContraseniaId, usuario);
                 }
                 else
                     throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe esta contraseña asociada en el mismo");

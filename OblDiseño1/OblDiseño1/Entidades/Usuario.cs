@@ -22,9 +22,9 @@ namespace OblDiseño1
         private const int LARGO_NOMBRE_MAX = 25;
         private const int LARGO_NOMBRE_MIN = 1;
 
-        private List<Credencial> credenciales;
-        private List<Categoria> categorias;
-        private List<Tarjeta> tarjetas;
+        public List<Credencial> credenciales;
+        public List<Categoria> categorias;
+        public List<Tarjeta> tarjetas;
 
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }

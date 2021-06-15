@@ -1,12 +1,13 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using InterfazGrafica.InterfacesDeContrasenias;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfacesDataBreaches;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using AccesoDatos;
 using OblDiseño1;
 using System;
-using InterfazGrafica.InterfacesDataBreaches;
 
 namespace InterfazGrafica.InterfazDataBreaches
 {
@@ -15,17 +16,17 @@ namespace InterfazGrafica.InterfazDataBreaches
         private Sistema sistema;
         private Usuario usuario;
 
-        private IRepositorio<Tarjeta> tarjetaRepositorio;
-        private IRepositorio<Credencial> credencialRepositorio;
+        private ControladorObtener controladorObtener;
+
+        private IRepositorio<Usuario> usuarioRepositorio;
 
         public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
         {
+            controladorObtener = new ControladorObtener();
             InitializeComponent();
             this.sistema = sistema;
-            this.usuario = usuario;
-
-            this.tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-            this.credencialRepositorio = new CredencialRepositorio(this.usuario);
+            this.usuarioRepositorio = new UsuarioRepositorio();
+            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
         }
 
         private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
@@ -94,8 +95,8 @@ namespace InterfazGrafica.InterfazDataBreaches
             List<string> listaDatos = datos.Split(new[] { "\n" }, 
                     StringSplitOptions.RemoveEmptyEntries).ToList();
 
-
-            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario, tarjetaRepositorio, credencialRepositorio);
+            
+            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario);
             
             List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
             List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);

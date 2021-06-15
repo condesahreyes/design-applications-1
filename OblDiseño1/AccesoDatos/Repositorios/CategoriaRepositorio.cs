@@ -8,7 +8,8 @@ namespace AccesoDatos
     public class CategoriaRepositorio : IRepositorio<Categoria>
     {
         private readonly Mapper mapper = new Mapper();
-        Usuario usuario;
+        private Usuario usuario;
+
         public CategoriaRepositorio(Usuario usuarioDueñoDominio)
         {
             this.usuario = usuarioDueñoDominio;
