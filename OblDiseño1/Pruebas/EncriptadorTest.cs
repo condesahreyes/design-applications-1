@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using OblDiseño1;
-
+using OblDiseño1.Manejadores;
+using System;
 
 namespace Pruebas
 {
@@ -17,6 +15,7 @@ namespace Pruebas
         private static string llave1;
         private static string llave2;
 
+        private Encriptador encriptador = new Encriptador();
 
         [TestInitialize]
         public void Setup()
@@ -29,48 +28,52 @@ namespace Pruebas
         [TestMethod]
         public void GenerarLLave()
         {
-            llave1 = Encriptador.GenerarLlave();
+            llave1 = encriptador.GenerarLlave();
             Assert.IsNotNull(llave1);
         }
 
         [TestMethod]
         public void EncriptaCorrectamenteTest()
         {
-            llave1 = Encriptador.generarLLave();
-            string contrasenia1Encriptada = new Encriptador.Encriptar(contrasenia1, llave1);
+            llave1 = encriptador.GenerarLlave();
+            
+            string contrasenia1Encriptada = encriptador.Encriptar(contrasenia1, llave1);
             Assert.AreNotEqual(contrasenia1, contrasenia1Encriptada);
         }
 
         [TestMethod]
         public void EncriptaContraseniasDiferentesConMismaLlaveMethod1()
         {
-            llave1 = Encriptador.GenerarLlave();
-            string contrasenia1Encriptada = new Encriptador.Encriptar(contrasenia1, llave1);
-            string contrasenia2Encriptada = new Encriptador.Encriptar(contrasenia2, llave1);
-            Assert.AreEqual(contrasenia1Encriptada, contrasenia2Encriptada);
+            llave1 = encriptador.GenerarLlave();
+            
+            string contrasenia1Encriptada = encriptador.Encriptar(contrasenia1, llave1);
+            string contrasenia2Encriptada = encriptador.Encriptar(contrasenia2, llave1);
+            Assert.AreNotEqual(contrasenia1Encriptada, contrasenia2Encriptada);
         }
 
         [TestMethod]
         public void EncriptaDiferentementeLaMismaContraConDifrentesLlaves()
         {
-            llave1 = Encriptador.GenerarLlave();
-            llave2 = Encriptador.GenerarLlave();
+            llave1 = encriptador.GenerarLlave();
+            llave2 = encriptador.GenerarLlave();
             while (llave1.Equals(llave2))
             {
-                llave2 = Encriptador.GenerarLlave();
+                llave2 = encriptador.GenerarLlave();
             }
-            string contrasenia1EncriptadaConLlave1 = new Encriptador.Encriptar(contrasenia1, llave1);
-            string contrasenia1EncriptadaConLlave2 = new Encriptador.Encriptar(contrasenia1, llave2);
-            Assert.AreEqual(contrasenia1EncriptadaConLlave1, contrasenia1EncriptadaConLlave2);
+
+            string contrasenia1EncriptadaConLlave1 = encriptador.Encriptar(contrasenia1, llave1);
+            string contrasenia1EncriptadaConLlave2 = encriptador.Encriptar(contrasenia1, llave2);
+            Assert.AreNotEqual(contrasenia1EncriptadaConLlave1, contrasenia1EncriptadaConLlave2);
         }
 
         [TestMethod]
         public void DesencriptaCorrectamente()
         {
-            llave1 = Encriptador.generarLLave();
-            string contrasenia1Encriptada = new Encriptador.Encriptar(contrasenia1, llave1);
-            string contrasenia1Desencriptada = new Encriptador.Desencriptar(contrasenia1Encriptada, llave1);
-            Assert.AreNotEqual(contrasenia1, contrasenia1Encriptada);
+            llave1 = encriptador.GenerarLlave();
+       
+            string contrasenia1Encriptada = encriptador.Encriptar(contrasenia1, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contrasenia1, contrasenia1Desencriptada);
         }
     }
 }
