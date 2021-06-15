@@ -59,5 +59,18 @@ namespace OblDiseño1
         //    return dataBreaches.ObtenerTarjetasVulneradas(datosDataBreaches);
         //}
 
+        public List<Credencial> ObtenerDataBreachesCredencialesMedianteRuta(ref Usuario usuario, string rutaDatosBreachados)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+
+            return dataBreaches.ObtenerCredencialesVulneradasDesdeArchivoTxt(rutaDatosBreachados);
+        }
+
+        public List<Tarjeta> ObtenerDataBreachesTarjetassMedianteRuta(ref Usuario usuario, string rutaDatosBreachados)
+        {
+            ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
+
+            return dataBreaches.ObtenerTarjetasVulneradasDesdeArchivoTxt(rutaDatosBreachados);
+        }
     }
 }

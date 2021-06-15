@@ -6,6 +6,7 @@ using System.Linq;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using InterfazGrafica.InterfacesDataBreaches;
 
 namespace InterfazGrafica.InterfazDataBreaches
 {
@@ -122,6 +123,29 @@ namespace InterfazGrafica.InterfazDataBreaches
             this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
+        }
+
+        private void button_ImportarDesdeArchivo_Click(object sender, EventArgs e)
+        {
+            string rutaVacia = "";
+
+            InterfazImportarDatosDesdeArchivoTxt interfazImportarDesdeArchivo = new InterfazImportarDatosDesdeArchivoTxt(ref sistema);
+            interfazImportarDesdeArchivo.ShowDialog();
+
+            string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
+
+            if (!rutaSeleccionada.Equals(rutaVacia))
+            {
+                MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
+
+                List<Credencial> credencialesVulnderadas = sistema.
+                    ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
+                List<Tarjeta> tarjetasVulneradas = sistema.
+                    ObtenerDataBreachesTarjetassMedianteRuta(ref usuario, rutaSeleccionada);
+
+                CargarDataGridTarjetas(tarjetasVulneradas);
+                CargarDataGridCredenciales(credencialesVulnderadas);
+            }
         }
     }
 }

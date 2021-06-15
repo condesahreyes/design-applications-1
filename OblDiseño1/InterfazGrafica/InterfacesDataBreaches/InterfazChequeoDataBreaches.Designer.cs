@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnModificarDupla = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button_ImportarDesdeArchivo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTarjetas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridContrasenias)).BeginInit();
             this.SuspendLayout();
@@ -220,12 +221,28 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Ingrese datos";
             // 
+            // button_ImportarDesdeArchivo
+            // 
+            this.button_ImportarDesdeArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.button_ImportarDesdeArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_ImportarDesdeArchivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_ImportarDesdeArchivo.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.button_ImportarDesdeArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.button_ImportarDesdeArchivo.Location = new System.Drawing.Point(144, 347);
+            this.button_ImportarDesdeArchivo.Name = "button_ImportarDesdeArchivo";
+            this.button_ImportarDesdeArchivo.Size = new System.Drawing.Size(170, 27);
+            this.button_ImportarDesdeArchivo.TabIndex = 34;
+            this.button_ImportarDesdeArchivo.Text = "Importar Desde Archivo";
+            this.button_ImportarDesdeArchivo.UseVisualStyleBackColor = false;
+            this.button_ImportarDesdeArchivo.Click += new System.EventHandler(this.button_ImportarDesdeArchivo_Click);
+            // 
             // InterfazChequeoDataBreaches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.button_ImportarDesdeArchivo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnModificarDupla);
             this.Controls.Add(this.label3);
@@ -258,5 +275,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnModificarDupla;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_ImportarDesdeArchivo;
     }
 }
