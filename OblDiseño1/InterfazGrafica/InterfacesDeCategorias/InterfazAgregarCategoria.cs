@@ -1,9 +1,9 @@
-﻿using InterfazGrafica.InterfazCategoria;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfazCategoria;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos;
-using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace InterfazGrafica.InterfazDeCategorias
 {
@@ -23,18 +23,13 @@ namespace InterfazGrafica.InterfazDeCategorias
         {
             Categoria categoria = CrearCategoria();
 
-            CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            ControladorAlta controladorAlta = new ControladorAlta();
-
-            controladorAlta.AgregarCategoria(categoria, repositorioCategoria);
-            AgregarAMisCategorias(categoria);
-        }
-
-        private void AgregarAMisCategorias(Categoria categoria)
-        {
             if (categoria != null)
                 try
                 {
+                    CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
+                    ControladorAlta controladorAlta = new ControladorAlta();
+                    controladorAlta.AgregarCategoria(categoria, repositorioCategoria);
+
                     MessageBox.Show("Categoria '" + categoria.Nombre + "' creada con exito");
                     IrACategoria();
                 }
@@ -54,7 +49,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             {
                 categoria = new Categoria(nomCategoria);
             }
-            catch(ExepcionInvalidCategoriaData)
+            catch (ExepcionInvalidCategoriaData)
             {
                 MessageBox.Show("Error el nombre de la categoría debe contener entre 3 a 15 caracteres.");
             }

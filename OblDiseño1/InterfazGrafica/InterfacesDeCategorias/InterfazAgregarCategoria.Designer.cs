@@ -125,7 +125,6 @@
             this.Name = "InterfazAgregarCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Categoría";
-            this.Load += new System.EventHandler(this.InterfazAgregarCategoria_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

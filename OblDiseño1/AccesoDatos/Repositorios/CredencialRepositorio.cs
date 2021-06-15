@@ -91,9 +91,8 @@ namespace AccesoDatos
                     }
                     return credencialesADevolver;
                 }
-                else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No hay credenciales guardadas en el sistema");
             }
+            return null;
         }
 
         public void Delete(Credencial credencial)
@@ -156,8 +155,10 @@ namespace AccesoDatos
                             entidadCredencial.Nota = credencialAModificar.Nota;
                             entidadCredencial.TipoSitioOApp = credencialAModificar.TipoSitioOApp;
 
-                            contraseñaRepositorio.ModificarConEntidad(entidadCredencial.ContraseniaId, credencialAModificar.Contraseña);
-                            EntidadCategoria nuevaCategoria = categoriaRepositorio.ObtenerDTOPorString(credencialAModificar.Categoria.Nombre);
+                            contraseñaRepositorio.ModificarConEntidad(entidadCredencial.ContraseniaId, 
+                                credencialAModificar.Contraseña);
+                            EntidadCategoria nuevaCategoria = categoriaRepositorio.ObtenerDTOPorString
+                                (credencialAModificar.Categoria.Nombre);
                             entidadCredencial.IdCategoria = nuevaCategoria.CategoriaId;
                             break;
                         }

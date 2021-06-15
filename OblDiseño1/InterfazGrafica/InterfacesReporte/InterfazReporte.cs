@@ -3,6 +3,9 @@ using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
+using AccesoDatos;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -26,10 +29,37 @@ namespace InterfazGrafica.InterfacesReporte
 
             this.usuario = usuario;
             this.sistema = sistema;
+            ActualizarDatosUsuario();
             manejadorDeDatosReporte = new Reporte(usuario);
+
             this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
 
             ActualizarLables();
+        }
+
+        public void ActualizarDatosUsuario()
+        {
+
+            this.usuario.BorrarListas();
+
+            ControladorObtener controladorObtener = new ControladorObtener();
+            CredencialRepositorio credencialRepositorio = new CredencialRepositorio(usuario);
+            CategoriaRepositorio categoriaRepositorio = new CategoriaRepositorio(usuario);
+
+            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(credencialRepositorio);
+            if (credenciales != null)
+            {
+                foreach (var credencial in credenciales)
+                    usuario.AgregarCredencial(credencial);
+            }
+
+
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(categoriaRepositorio);
+            if (categorias != null)
+            {
+                foreach (var categoria in categorias)
+                    usuario.AgregarCategoria(categoria);
+            }
         }
 
         public void ActualizarLables()

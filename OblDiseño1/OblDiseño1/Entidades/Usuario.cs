@@ -29,7 +29,12 @@ namespace OblDiseño1
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-        public Usuario() { }
+        public Usuario() 
+        {
+            this.categorias = new List<Categoria>();
+            this.tarjetas = new List<Tarjeta>();
+            this.credenciales = new List<Credencial>();
+        }
 
         public GestorContraseniasCompartidas GestorCompartirContrasenia { get; }
 
@@ -56,6 +61,13 @@ namespace OblDiseño1
         public List<Categoria> ObtenerCategorias()
         {
             return this.categorias;
+        }
+
+        public void BorrarListas()
+        {
+            this.categorias.Clear();
+            this.credenciales.Clear();
+            this.tarjetas.Clear();
         }
 
         private bool ValidarNombreUsuario(string unNombre)

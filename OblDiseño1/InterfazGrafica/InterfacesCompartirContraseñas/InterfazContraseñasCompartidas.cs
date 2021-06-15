@@ -26,6 +26,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void CargarContraseñasCompartidas()
         {
             BindingSource biso = new BindingSource();
+            this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
             GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
             biso.DataSource = miGestor.ObtenerContraseniasCompartidasPorMi().Keys;
 
@@ -62,6 +63,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarContraseñasCompartidasConmigo()
         {
+            this.dataGridContraseñasCompartidasConmigo.AllowUserToAddRows = false;
             BindingSource biso2 = new BindingSource();
             GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
             List<Credencial> listaCredencialesCompartidasConmigo = new List<Credencial>();

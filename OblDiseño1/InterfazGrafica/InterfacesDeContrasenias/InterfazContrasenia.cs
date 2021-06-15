@@ -1,15 +1,22 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    
+
     public partial class InterfazContrasenia : Form
     {
         private Usuario usuario;
         private Sistema sistema;
+
+        private ControladorObtener controladorObtener = new ControladorObtener();
+
+        private IRepositorio<Credencial> credencialRepositorio;
 
         public InterfazContrasenia(ref Usuario usuario, ref Sistema sistema)
         {
@@ -17,6 +24,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             this.usuario = usuario;
             this.sistema = sistema;
+
+            credencialRepositorio = new CredencialRepositorio(this.usuario);
 
             CargarCredenciales();
         }
@@ -26,9 +35,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.dataGridView_ListaDuplas.Columns.Clear();
             this.dataGridView_ListaDuplas.DataSource = null;
 
-            usuario.ObtenerCredenciales().Sort();
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
+            List<Credencial> misCredenciales = repositorioCredencial.GetAll();
+
+            if (misCredenciales != null) { 
             BindingSource biso = new BindingSource();
-            biso.DataSource = usuario.ObtenerCredenciales();
+            biso.DataSource = misCredenciales;
 
             this.dataGridView_ListaDuplas.DataSource = biso;
 
@@ -38,6 +50,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             this.dataGridView_ListaDuplas.RowHeadersVisible = false;
             this.dataGridView_ListaDuplas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
         }
 
         private void ModificarACamposNoVisibles()
@@ -84,10 +97,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
-                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
 
-                InterfazDeModificarContrasenia interfazModiicar = new 
-                    InterfazDeModificarContrasenia(ref usuario, ref sistema, duplaSeleccionada, "InterfazContrasenia");
+                InterfazDeModificarContrasenia interfazModiicar = new
+                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, "InterfazContrasenia");
 
                 interfazModiicar.Show();
                 this.Close();
@@ -98,11 +111,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void btnEliminarContrasenia_Click(object sender, System.EventArgs e)
         {
-            if (0 < dataGridView_ListaDuplas.RowCount && ConfirmarEliminacion())
+            if (0 < controladorObtener.ObtenerCredenciales(credencialRepositorio).Count && ConfirmarEliminacion())
             {
                 EliminarContrasenia();
                 CargarCredenciales();
-                
+
             }
             else if (0 == dataGridView_ListaDuplas.RowCount)
                 MessageBox.Show("No hay contraseñas para eliminar");
@@ -110,17 +123,22 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void EliminarContrasenia()
         {
-            Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-            usuario.RemoverDupla(duplaSeleccionada);
-            MessageBox.Show("Se elimino correctamente");
+            if(dataGridView_ListaDuplas.CurrentRow != null)
+            {
+                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                ControladorEliminar controladorEliminar = new ControladorEliminar();
+                controladorEliminar.EliminarCredencial(duplaSeleccionada, credencialRepositorio);
+                MessageBox.Show("Se elimino correctamente");
+            }else
+                MessageBox.Show("Primero debe seleccionar una credencial");
         }
 
         private bool ConfirmarEliminacion()
         {
-            DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "", 
+            DialogResult resultado = MessageBox.Show("Esta seguro que desea eliminar esta contraseña", "",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
 
-            return (resultado==DialogResult.Yes)? true : false;
+            return (resultado == DialogResult.Yes) ? true : false;
         }
 
         private void button_Mostrar_Click(object sender, EventArgs e)
@@ -128,7 +146,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                Interfaz_MostrarContrasenia mostratContra = new Interfaz_MostrarContrasenia(credencialSeleccionada);
+                Contraseña mostratContra = new Contraseña(credencialSeleccionada);
                 mostratContra.Show();
             }
         }

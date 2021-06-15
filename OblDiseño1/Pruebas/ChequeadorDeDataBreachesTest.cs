@@ -68,7 +68,7 @@ namespace Pruebas
             contraseniaDeDuplaBreachada = new List<string> { "ContraTwitter23." };
             numeroTagetaBreachada = new List<string> { "9999888877776666" };
 
-            chequeador = new ChequeadorDeDataBreaches(usuario);
+            chequeador = new ChequeadorDeDataBreaches(usuario, null, null);
         }
 
         private void CargarTarjetasAlUsuario()

@@ -115,6 +115,7 @@ namespace AccesoDatos
             {
                 EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
                 contraseñaABuscar.Contrasenia = contraseñaAModificar.Contrasenia;
+                contexto.SaveChanges();
             }
         }
 
