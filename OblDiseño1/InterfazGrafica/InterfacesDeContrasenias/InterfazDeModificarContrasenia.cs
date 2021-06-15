@@ -26,7 +26,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
 
         private IRepositorio<Credencial> repositorioCredencial;
-        private IRepositorio<Contraseña> repositorioContraseña;
+        private IRepositorio<OblDiseño1.Entidades.Contraseña> repositorioContraseña;
         private IRepositorio<Categoria> repositorioCategoria;
 
         private ControladorObtener controladorObtener;
@@ -204,7 +204,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             string sitioNuevaCredencial = textBox_Sitio.Text;
             string notaNuevaCredencial = richTextBox_Nota.Text;
 
-            Contraseña nuevaContraseña = new Contraseña(contraseñaNuevaCredencial);
+            OblDiseño1.Entidades.Contraseña nuevaContraseña = new OblDiseño1.Entidades.Contraseña(contraseñaNuevaCredencial);
             Categoria categoriaNuevaCredencial = (Categoria)this.comboBox_Categoria.SelectedItem;
             Credencial credencialAModificar = new Credencial(nombreNuevaCredencial, nuevaContraseña, 
                 sitioNuevaCredencial, notaNuevaCredencial, categoriaNuevaCredencial);

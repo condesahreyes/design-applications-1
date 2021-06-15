@@ -179,7 +179,7 @@
             this.dataGridContrasenias.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridContrasenias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContrasenias.Size = new System.Drawing.Size(282, 106);
-            this.dataGridContrasenias.TabIndex = 30;
+            this.dataGridContrasenias.TabIndex = 0;
             // 
             // label3
             // 

@@ -147,22 +147,22 @@ namespace Pruebas
             bool puedoIngresar = sistema.PuedoIngresarAlSistema("Diego", contraseniasUsuario[0]);
         }
 
-        [TestMethod]
-        public void ObtenerDuplasVulneradasTest()
-        {
-            Usuario usu = sistema.ObtenerUsuarios()[0];
-            List<Credencial> credencialesVulneradas = sistema.ObtenerDataBreachesCredenciales(ref usu, infoBreachada);
+        //[TestMethod]
+        //public void ObtenerDuplasVulneradasTest()
+        //{
+        //    Usuario usu = sistema.ObtenerUsuarios()[0];
+        //    List<Credencial> credencialesVulneradas = sistema.ObtenerDataBreachesCredenciales(ref usu, infoBreachada);
 
-            CollectionAssert.AreEquivalent(duplasVulneradas, credencialesVulneradas);
-        }
+        //    CollectionAssert.AreEquivalent(duplasVulneradas, credencialesVulneradas);
+        //}
 
-        [TestMethod]
-        public void ObtenerTarjetasVulneradasTest()
-        {
-            Usuario usu = sistema.ObtenerUsuarios()[0];
-            List<Tarjeta> entidesVulneradas = sistema.ObtenerDataBreachesTarjetas(ref usu, infoBreachada);
+        //[TestMethod]
+        //public void ObtenerTarjetasVulneradasTest()
+        //{
+        //    Usuario usu = sistema.ObtenerUsuarios()[0];
+        //    List<Tarjeta> entidesVulneradas = sistema.ObtenerDataBreachesTarjetas(ref usu, infoBreachada);
 
-            CollectionAssert.AreEquivalent(tarjetasVulneradas, entidesVulneradas);
-        }
+        //    CollectionAssert.AreEquivalent(tarjetasVulneradas, entidesVulneradas);
+        //}
     }
 }

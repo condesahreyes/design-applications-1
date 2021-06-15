@@ -14,6 +14,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Sistema sistema;
 
         private ControladorObtener controladorObtener = new ControladorObtener();
+
         private IRepositorio<Tarjeta> tarjetaRepositorio;
 
         public InterfazTarjeta(ref Usuario usuario, ref Sistema sistema)

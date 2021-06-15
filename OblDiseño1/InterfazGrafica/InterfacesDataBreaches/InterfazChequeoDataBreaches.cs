@@ -3,6 +3,7 @@ using InterfazGrafica.InterfacesDeContrasenias;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -13,16 +14,24 @@ namespace InterfazGrafica.InterfazDataBreaches
         private Sistema sistema;
         private Usuario usuario;
 
+        private IRepositorio<Tarjeta> tarjetaRepositorio;
+        private IRepositorio<Credencial> credencialRepositorio;
+
         public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
             this.sistema = sistema;
             this.usuario = usuario;
+
+            this.tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
+            this.credencialRepositorio = new CredencialRepositorio(this.usuario);
         }
 
         private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
         {
             BindingSource biso = new BindingSource();
+
+            this.dataGridContrasenias.AllowUserToAddRows = false;
 
             credencialesVulneradas.Sort();
             biso.DataSource = credencialesVulneradas;
@@ -54,16 +63,18 @@ namespace InterfazGrafica.InterfazDataBreaches
         {
             BindingSource biso = new BindingSource();
 
+            this.dataGridTarjetas.AllowUserToAddRows = false;
+
             tarjetasVulneradas.Sort();
             biso.DataSource = tarjetasVulneradas;
+            this.dataGridTarjetas.DataSource = tarjetasVulneradas;
 
-            CambiarColumnasVisiblesDelDataGridTarjetas(tarjetasVulneradas);
+            CambiarColumnasVisiblesDelDataGridTarjetas();
             ModificarHeaderTextTarjeta();
         }
 
-        private void CambiarColumnasVisiblesDelDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
+        private void CambiarColumnasVisiblesDelDataGridTarjetas()
         {
-            dataGridTarjetas.DataSource = tarjetasVulneradas;
             dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
             dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
             dataGridTarjetas.Columns["fechaVencimiento"].Visible = false;
@@ -82,10 +93,11 @@ namespace InterfazGrafica.InterfazDataBreaches
             List<string> listaDatos = datos.Split(new[] { "\n" }, 
                     StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            List<Credencial> credencialesVulnderadas = sistema.
-                ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
-            List<Tarjeta> tarjetasVulneradas = sistema.
-                ObtenerDataBreachesTarjetas(ref usuario, listaDatos);
+
+            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario, tarjetaRepositorio, credencialRepositorio);
+            
+            List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
+            List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridCredenciales(credencialesVulnderadas);
