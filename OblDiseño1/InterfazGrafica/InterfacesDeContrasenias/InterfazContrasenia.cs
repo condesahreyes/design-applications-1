@@ -55,7 +55,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void ModificarACamposNoVisibles()
         {
-            this.dataGridView_ListaDuplas.Columns["Id"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["ObtenerNivelSeguridad"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["ObtenerContraseña"].Visible = false;
             this.dataGridView_ListaDuplas.Columns["TipoSitioOApp"].Visible = false;

@@ -7,9 +7,9 @@ using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazIngreso;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos;
 
 namespace InterfazGrafica.InterfacesMenu
 {
