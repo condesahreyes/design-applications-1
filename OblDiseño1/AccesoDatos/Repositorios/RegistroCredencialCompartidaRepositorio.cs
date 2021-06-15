@@ -25,25 +25,15 @@ namespace AccesoDatos.Repositorios
             {
                 if (!Existe(aCompartir, alQueLeComparto))
                 {
-                    EntidadUsuario entidadUsuarioDuenio = mapper.PasarAEntidad(this.usuarioDuenio);
-                    EntidadUsuario entidadUsuarioAlQueSeLeComparte = mapper.PasarAEntidad(alQueLeComparto);
-                    EntidadCredencial entidadCredencial = mapper.PasarAEntidadCredencial(aCompartir, this.usuarioDuenio);
+                    EntidadRegistroCredencialCompartida registroAPersistir = CrearRegistro(aCompartir, alQueLeComparto);
 
-                    EntidadRegistroCredencialCompartida registroAPersistir = new EntidadRegistroCredencialCompartida();
-
-                    contexto.credencialesCompartidas.Add()
+                    contexto.credencialesCompartidas.Add(registroAPersistir);
                     contexto.SaveChanges();
                 }
                 else
                 {
-
+                    throw new ExepcionObjetosRepetidos("Se intento insertar en la base un Registro Contrasenia Compartida que ya existia");
                 }
-
-
-                EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
-                contraseña.NivelSeguridadContrasenia);
-                contexto.contraseñas.Add(miContraseña);
-                contexto.SaveChanges();
             }
         }
 
@@ -52,30 +42,48 @@ namespace AccesoDatos.Repositorios
             throw new NotImplementedException();
         }
 
-        public void Delete(Credencial aCompartir, Usuario alQueLeComparto)
+        public void Delete(Credencial aDejarDeCompartir, Usuario alQueLeDejoDeCompartir)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(aDejarDeCompartir, alQueLeDejoDeCompartir))
+                {
+                    EntidadRegistroCredencialCompartida registroADejarDeCompartir = CrearRegistro(aDejarDeCompartir, alQueLeDejoDeCompartir);
+
+                    foreach (var registro in contexto.credencialesCompartidas)
+                    {
+                        if(VerificarQueSonElMismoRegistro(registroADejarDeCompartir, registro))
+                        {
+                            contexto.credencialesCompartidas.Remove(registro);
+                            contexto.SaveChanges();
+                            break;
+                        }
+                    }               
+                }
+                else
+                {
+                    throw new ExepcionObjetosRepetidos("Se intento eliminar en la base un Registro Contrasenia Compartida que no existia");
+                }
+            }
         }
 
         public bool esVacio()
         {
-            throw new NotImplementedException();
+            using(Contexto contexto = new Contexto())
+            {
+                return contexto.credencialesCompartidas.Count() == 0;
+            }
         }
 
-        public bool Existe(Credencial aCompartir, Usuario alQueLeComparto)
+        public bool Existe(Credencial unaCredencial, Usuario unUsuario)
         {
             using(Contexto contexto = new Contexto())
             {
-                EntidadUsuario entidadUsuarioDuenio = mapper.PasarAEntidad(this.usuarioDuenio);
-                EntidadUsuario entidadUsuarioAlQueSeLeComparte = mapper.PasarAEntidad(alQueLeComparto);
-                EntidadCredencial entidadCredencial = mapper.PasarAEntidadCredencial(aCompartir, this.usuarioDuenio);
+                EntidadRegistroCredencialCompartida registroAVerificarExistencia = CrearRegistro(unaCredencial, unUsuario);
 
                 foreach (var registro in contexto.credencialesCompartidas)
                 {
-                    if (registro.NombreUsuarioQueComparte == entidadUsuarioDuenio.Nombre &&
-                        registro.NombreUsuarioAlQueSeLeCompartio == entidadUsuarioAlQueSeLeComparte.Nombre &&
-                        registro.CredencialCompartida.NombreSitioApp == entidadCredencial.NombreSitioApp &&
-                        registro.CredencialCompartida.NombreUsuario == entidadCredencial.NombreUsuario) 
+                    if (VerificarQueSonElMismoRegistro(registroAVerificarExistencia, registro)) 
                     { 
                         return true;
                     }
@@ -84,14 +92,70 @@ namespace AccesoDatos.Repositorios
             }
         }
 
-        public Credencial Get(Credencial aCompartir, Usuario alQueLeComparto)
+
+        public List<Credencial> ObtenerTodasLasCredencialesQueComparto()
         {
-            throw new NotImplementedException();
+            using(Contexto contexto = new Contexto())
+            {
+                List<Credencial> credencialesADevolver = new List<Credencial>();
+                foreach (var entidadRegistroContraseniaCompartida in contexto.credencialesCompartidas)
+                {
+                    if (entidadRegistroContraseniaCompartida.NombreUsuarioQueComparte == this.usuarioDuenio.Nombre)
+                    {
+                        Credencial credencialDeDominio = mapper.PasarADominio(
+                            entidadRegistroContraseniaCompartida.CredencialCompartida, this.usuarioDuenio);
+
+                        credencialesADevolver.Add(credencialDeDominio);
+                    }
+
+                }
+                return credencialesADevolver;
+            }
         }
 
-        public List<Credencial> GetAll()
+
+        public List<Credencial> ObtenerTodasLasCredencialesQueMeComparten()
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                List<Credencial> credencialesADevolver = new List<Credencial>();
+                foreach (var entidadRegistroContraseniaCompartida in contexto.credencialesCompartidas)
+                {
+                    if (entidadRegistroContraseniaCompartida.NombreUsuarioAlQueSeLeCompartio == this.usuarioDuenio.Nombre)
+                    {
+                        Credencial credencialDeDominio = mapper.PasarADominio(
+                            entidadRegistroContraseniaCompartida.CredencialCompartida, this.usuarioDuenio);
+
+                        credencialesADevolver.Add(credencialDeDominio);
+                    }
+
+                }
+                return credencialesADevolver;
+            }
+        }
+
+
+        private bool VerificarQueSonElMismoRegistro(EntidadRegistroCredencialCompartida registroADejarDeCompartir,
+            EntidadRegistroCredencialCompartida registro)
+        {
+            if (registro.CredencialCompartidaId == registroADejarDeCompartir.CredencialCompartidaId &&
+                registro.NombreUsuarioAlQueSeLeCompartio == registroADejarDeCompartir.NombreUsuarioAlQueSeLeCompartio &&
+                registro.NombreUsuarioQueComparte == registroADejarDeCompartir.NombreUsuarioQueComparte)
+                return true;
+            return false;
+        }
+
+        private EntidadRegistroCredencialCompartida CrearRegistro(Credencial aCompartir, Usuario alQueLeComparto)
+        {
+            EntidadUsuario entidadUsuarioDuenio = mapper.PasarAEntidad(this.usuarioDuenio);
+            EntidadUsuario entidadUsuarioAlQueSeLeComparte = mapper.PasarAEntidad(alQueLeComparto);
+            EntidadCredencial entidadCredencial = mapper.PasarAEntidadCredencial(aCompartir, this.usuarioDuenio);
+
+            CredencialRepositorio credenRepo = new CredencialRepositorio(this.usuarioDuenio);
+
+
+            return new EntidadRegistroCredencialCompartida(entidadUsuarioDuenio.Nombre, entidadUsuarioAlQueSeLeComparte.Nombre,
+                credenRepo.ObtenerId(aCompartir));
         }
     }
 }

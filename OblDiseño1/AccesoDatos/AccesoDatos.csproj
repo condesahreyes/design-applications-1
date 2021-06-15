@@ -67,7 +67,7 @@
     <Compile Include="Entidades_Datos\EntidadCredencial.cs" />
     <Compile Include="Entidades_Datos\EntidadTarjeta.cs" />
     <Compile Include="Entidades_Datos\EntidadUsuario.cs" />
-    <Compile Include="Repositorios\CredencialRegistroCompartidaRepositorio.cs" />
+    <Compile Include="Repositorios\RegistroCredencialCompartidaRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Mapper.cs" />

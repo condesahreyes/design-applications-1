@@ -14,9 +14,11 @@ namespace OblDiseño1
 
         bool Existe(T elemento, K elemento2);
 
-        T Get(T elemento, K elemento2);
+        //T Get(T elemento, K elemento2);
 
-        List<T> GetAll();
+        List<T> ObtenerTodasLasCredencialesQueComparto();
+
+        List<T> ObtenerTodasLasCredencialesQueMeComparten();
 
         void Delete(T elemento, K elemento2);
 
