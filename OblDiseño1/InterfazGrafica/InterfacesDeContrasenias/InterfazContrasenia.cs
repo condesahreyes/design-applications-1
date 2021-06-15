@@ -146,7 +146,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             if (0 < dataGridView_ListaDuplas.RowCount)
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                Interfaz_MostrarContrasenia mostratContra = new Interfaz_MostrarContrasenia(credencialSeleccionada);
+                Contraseña mostratContra = new Contraseña(credencialSeleccionada);
                 mostratContra.Show();
             }
         }

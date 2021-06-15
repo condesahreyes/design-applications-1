@@ -29,6 +29,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarDataGrid()
         {
+            this.dataGridUsuariosCompartidos.AllowUserToAddRows = false;
             if (miGestor.ObtenerContraseniasCompartidasPorMi().ContainsKey(credencial))
             {
                 List<Usuario> usuariosCompartidosPorDupla = miGestor.
@@ -58,5 +59,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 new InterfazContraseñasCompartidas(ref sistema, ref usuario);
             interfazContraseñasCompartidas.Show();
         }
+
     }
 }

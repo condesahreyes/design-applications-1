@@ -66,7 +66,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             ControladorAlta controladorAlta = new ControladorAlta();
 
             Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
-            Contraseña contraseña = new Contraseña(contrasenia);
+            OblDiseño1.Entidades.Contraseña contraseña = new OblDiseño1.Entidades.Contraseña(contrasenia);
             Credencial credencial = new Credencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
 
             controladorAlta.AgregarCredencial(credencial, repositorioCredencial);
