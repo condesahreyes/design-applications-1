@@ -43,8 +43,20 @@ namespace InterfazGrafica.InterfacesDataBreaches
 
         private void btnHistoricoVer_Click(object sender, EventArgs e)
         {
+            if (dataGridHistorico.RowCount > 0)
+                AVisualizarHistorico();
+            else
+                MessageBox.Show("Error, aun no hay historicos");
             //InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
             //dataBreaches.Show();
+        }
+
+        private void AVisualizarHistorico()
+        {
+            ChequeadorDeDataBreaches miDataBreach = (ChequeadorDeDataBreaches)dataGridHistorico.CurrentRow.DataBoundItem;
+            InterfazVerRegistroDataBreach verRegistro = new InterfazVerRegistroDataBreach(ref this.usuario, ref this.sistema, ref miDataBreach);
+            this.Close();
+            verRegistro.Show();
         }
 
         private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)

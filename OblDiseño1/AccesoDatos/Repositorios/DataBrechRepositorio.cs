@@ -63,6 +63,34 @@ namespace AccesoDatos.Repositorios
             return null;
         }
 
+        public List<Tarjeta> ObtenerTarjetasVulneradas(ChequeadorDeDataBreaches chequeador)
+        {
+            List<Tarjeta> tarjetas = new List<Tarjeta>();
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var tarjeta in contexto.dataBreachTarjetas)
+                {
+                    if (tarjeta.DataBrechId == chequeador.id)
+                        tarjetas.Add(mapper.PasarADominioTarjetaVulnerada(tarjeta));
+                }
+            }
+            return tarjetas;
+        }
+
+        public List<Credencial> ObtenerCredencialesVulneradas(ChequeadorDeDataBreaches chequeador)
+        {
+            List<Credencial> tarjetas = new List<Credencial>();
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var credencial in contexto.dataBreachCredencial)
+                {
+                    if (credencial.DataBrechId == chequeador.id)
+                        tarjetas.Add(mapper.PasarADominioCredencialVulnerada(credencial));
+                }
+            }
+            return tarjetas;
+        }
+
         public List<ChequeadorDeDataBreaches> GetAll()
         {
             List<ChequeadorDeDataBreaches> misDataBreaches = new List<ChequeadorDeDataBreaches>();

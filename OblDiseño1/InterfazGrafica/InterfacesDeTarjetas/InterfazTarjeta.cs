@@ -23,11 +23,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.usuario = usuario;
             this.sistema = sistema;
             tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-            CargarListaTarjetas(ref usuario, ref sistema);
+            CargarListaTarjetas();
             ModificarNombreDeColumnasDelDataGrid();
         }
 
-        private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
+        private void CargarListaTarjetas()
         {
             List<Tarjeta> misTarjetas = controladorObtener.ObtenerTarjetas(tarjetaRepositorio);
             if (misTarjetas.Count > 0)

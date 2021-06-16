@@ -2,6 +2,7 @@
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos.Repositorios;
 
 namespace AccesoDatos
 {
@@ -218,19 +219,14 @@ namespace AccesoDatos
 
         public ChequeadorDeDataBreaches PasarADominioDataBreach(EntidadDataBreach dataBreach, Usuario usuario)
         {
+            DataBrechRepositorio repoDataBreach = new DataBrechRepositorio(usuario);
             ChequeadorDeDataBreaches miDataBreach = new ChequeadorDeDataBreaches(usuario);
             miDataBreach.Fecha = dataBreach.fecha;
             miDataBreach.id = dataBreach.IdDataBrech;
 
-            /*foreach (var credencial in dataBreach.credencialVulneradas)
-            {
-                miDataBreach.CredencialesVulneradas.Add(PasarADominioCredencialVulnerada(credencial));
-            }
 
-            foreach (var tarjeta in dataBreach.tarjetasVulneradas)
-            {
-                miDataBreach.TarjetasVulneradas.Add(PasarADominioTarjetaVulnerada(tarjeta));
-            }*/
+            miDataBreach.CredencialesVulneradas = repoDataBreach.ObtenerCredencialesVulneradas(miDataBreach);
+            miDataBreach.TarjetasVulneradas = repoDataBreach.ObtenerTarjetasVulneradas(miDataBreach);
 
             return miDataBreach;
         }
