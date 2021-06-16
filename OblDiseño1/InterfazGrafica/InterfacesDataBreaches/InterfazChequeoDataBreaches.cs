@@ -133,8 +133,8 @@ namespace InterfazGrafica.InterfazDataBreaches
         private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
-            menu.Show();
+            InterfazHistoricosDataBreach dataBreach = new InterfazHistoricosDataBreach(ref usuario, ref sistema);
+            dataBreach.Show();
         }
 
         private void button_ImportarDesdeArchivo_Click(object sender, EventArgs e)

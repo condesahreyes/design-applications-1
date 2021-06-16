@@ -56,9 +56,9 @@
     <Compile Include="Entidades_Datos\EntidadDataBrechTarjeta.cs" />
     <Compile Include="Entidades_Datos\EntidadContraseña.cs" />
     <Compile Include="Entidades_Datos\EntidadGestorContraseñasCompartidas.cs" />
-    <Compile Include="Migrations\202106152154267_Migracion.cs" />
-    <Compile Include="Migrations\202106152154267_Migracion.designer.cs">
-      <DependentUpon>202106152154267_Migracion.cs</DependentUpon>
+    <Compile Include="Migrations\202106152358238_Migracion.cs" />
+    <Compile Include="Migrations\202106152358238_Migracion.designer.cs">
+      <DependentUpon>202106152358238_Migracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
@@ -86,8 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106152154267_Migracion.resx">
-      <DependentUpon>202106152154267_Migracion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106152358238_Migracion.resx">
+      <DependentUpon>202106152358238_Migracion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

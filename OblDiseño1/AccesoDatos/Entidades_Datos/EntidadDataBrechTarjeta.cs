@@ -29,7 +29,7 @@ namespace AccesoDatos.Entidades_Datos
 
         public DateTime FechaVencimiento { get; set; }
 
-        public int Categoria { get; set; }
+        public string Categoria { get; set; }
 
         public EntidadDataBrechTarjeta()
         {
@@ -37,7 +37,7 @@ namespace AccesoDatos.Entidades_Datos
 
         public EntidadDataBrechTarjeta(int tarjetaId, string numero, string nombreUsuario, 
             string nota, string nombreTarjeta, string tipo, int codigoSeguridad, DateTime fecha,
-            int categoriaId)
+            string categoria)
         {
             this.TarjetaId = tarjetaId;
             this.Numero = numero;
@@ -47,7 +47,7 @@ namespace AccesoDatos.Entidades_Datos
             this.Tipo = tipo;
             this.CodigoSeguridad = codigoSeguridad;
             this.FechaVencimiento = fecha;
-            this.Categoria = categoriaId;
+            this.Categoria = categoria;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AccesoDatos.Entidades_Datos;
 using OblDiseño1.Entidades;
 using OblDiseño1;
-using System.Collections.Generic;
 using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace AccesoDatos
@@ -151,9 +150,10 @@ namespace AccesoDatos
         {
             TarjetaRepositorio repoTarjeta = new TarjetaRepositorio(usuario);
             EntidadTarjeta tarjetaEntidad = repoTarjeta.ObtenerDto(tarjetaBracheada);
+            Categoria categoria = PasarADominio(tarjetaEntidad.IdCategoria, usuario);
             EntidadDataBrechTarjeta miTarjeta = new EntidadDataBrechTarjeta(tarjetaEntidad.TarjetaId, tarjetaEntidad.Numero,
                 tarjetaEntidad.UsuarioGestorNombre, tarjetaEntidad.NotaOpcional, tarjetaEntidad.Nombre, tarjetaEntidad.Tipo,
-                tarjetaEntidad.CodigoSeguridad, tarjetaEntidad.FechaVencimiento, tarjetaEntidad.IdCategoria);
+                tarjetaEntidad.CodigoSeguridad, tarjetaEntidad.FechaVencimiento, categoria.Nombre);
 
             return miTarjeta;
         }
@@ -187,9 +187,52 @@ namespace AccesoDatos
             return dataBreach;
         }
 
+
+
+        public Credencial PasarADominioCredencialVulnerada(EntidadDataBrechCredencial credencialVulnerada)
+        {
+            Credencial credencial = new Credencial();
+            credencial.NombreUsuario = credencialVulnerada.NombreUsuario;
+            credencial.Contraseña = new Contraseña(credencialVulnerada.Contrasenia);
+            credencial.NombreSitioApp = credencialVulnerada.NombreSitioApp;
+            credencial.Nota = credencialVulnerada.Nota;
+            credencial.Categoria = new Categoria(credencialVulnerada.Categoria);
+            credencial.FechaUltimaModificacion = credencialVulnerada.FechaUltimaModificacion;
+
+            return credencial;
+        }
+
+        public Tarjeta PasarADominioTarjetaVulnerada(EntidadDataBrechTarjeta tarjetaVulnerada)
+        {
+            Tarjeta tarjeta= new Tarjeta();
+            tarjeta.Nombre = tarjetaVulnerada.Nombre;
+            tarjeta.Tipo = tarjetaVulnerada.Tipo;
+            tarjeta.Numero = tarjetaVulnerada.Numero;
+            tarjeta.CodigoSeguridad = tarjetaVulnerada.CodigoSeguridad;
+            tarjeta.FechaVencimiento = tarjetaVulnerada.FechaVencimiento;
+            tarjeta.Categoria = new Categoria(tarjetaVulnerada.Categoria);
+            tarjeta.NotaOpcional = tarjetaVulnerada.NotaOpcional;
+
+            return tarjeta;
+        }
+
         public ChequeadorDeDataBreaches PasarADominioDataBreach(EntidadDataBreach dataBreach, Usuario usuario)
         {
-            return new ChequeadorDeDataBreaches(usuario);
+            ChequeadorDeDataBreaches miDataBreach = new ChequeadorDeDataBreaches(usuario);
+            miDataBreach.Fecha = dataBreach.fecha;
+            miDataBreach.id = dataBreach.IdDataBrech;
+
+            /*foreach (var credencial in dataBreach.credencialVulneradas)
+            {
+                miDataBreach.CredencialesVulneradas.Add(PasarADominioCredencialVulnerada(credencial));
+            }
+
+            foreach (var tarjeta in dataBreach.tarjetasVulneradas)
+            {
+                miDataBreach.TarjetasVulneradas.Add(PasarADominioTarjetaVulnerada(tarjeta));
+            }*/
+
+            return miDataBreach;
         }
 
     }

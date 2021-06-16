@@ -20,6 +20,8 @@ namespace AccesoDatos.Entidades_Datos
 
         public ICollection<EntidadDataBrechCredencial> credencialVulneradas { get; set; }
 
+        public EntidadDataBreach() { }
+
         public EntidadDataBreach(DateTime fecha, string nombreUsuario)
         {
             this.fecha = fecha;

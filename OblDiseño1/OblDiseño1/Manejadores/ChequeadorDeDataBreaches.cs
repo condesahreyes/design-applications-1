@@ -8,6 +8,7 @@ namespace OblDiseño1
 {
     public class ChequeadorDeDataBreaches
     {
+        public int id { get; set; }
         public Usuario usuario { get; set; }
 
         public DateTime Fecha { get; set; }
@@ -19,6 +20,9 @@ namespace OblDiseño1
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;
+            CredencialesVulneradas = new List<Credencial>();
+            TarjetasVulneradas = new List<Tarjeta>();
+
         }
 
         public List<Tarjeta> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)

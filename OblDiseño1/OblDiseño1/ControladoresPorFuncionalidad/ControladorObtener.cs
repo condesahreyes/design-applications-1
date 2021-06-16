@@ -50,5 +50,15 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         {
             return repositorioCredencial.GetAll();
         }
+
+        public ChequeadorDeDataBreaches ObtenerDataBreach(ChequeadorDeDataBreaches dataBreach, IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)
+        {
+            return repositorioDataBreach.Get(dataBreach);
+        }
+
+        public List<ChequeadorDeDataBreaches> ObtenerDataBreaches(IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)
+        {
+            return repositorioDataBreach.GetAll();
+        }
     }
 }

@@ -2,9 +2,6 @@
 using OblDiseño1;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccesoDatos.Repositorios
 {
@@ -53,14 +50,31 @@ namespace AccesoDatos.Repositorios
             throw new NotImplementedException();
         }
 
-        ChequeadorDeDataBreaches IRepositorio<ChequeadorDeDataBreaches>.Get(ChequeadorDeDataBreaches elemento)
+        public ChequeadorDeDataBreaches Get(ChequeadorDeDataBreaches dataBreachABuscar)
         {
-            throw new NotImplementedException();
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var dataBreach in contexto.dataBreach)
+                {
+                    if (dataBreach.IdDataBrech == dataBreachABuscar.id && dataBreach.UsuarioNombre==this.usuario.Nombre)
+                        return mapper.PasarADominioDataBreach(dataBreach, this.usuario);
+                }
+            }
+            return null;
         }
 
-        List<ChequeadorDeDataBreaches> IRepositorio<ChequeadorDeDataBreaches>.GetAll()
+        public List<ChequeadorDeDataBreaches> GetAll()
         {
-            throw new NotImplementedException();
+            List<ChequeadorDeDataBreaches> misDataBreaches = new List<ChequeadorDeDataBreaches>();
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var dataBreach in contexto.dataBreach)
+                {
+                    if (dataBreach.UsuarioNombre == this.usuario.Nombre)
+                        misDataBreaches.Add(mapper.PasarADominioDataBreach(dataBreach, this.usuario));
+                }
+            }
+            return misDataBreaches;
         }
     }
 }
