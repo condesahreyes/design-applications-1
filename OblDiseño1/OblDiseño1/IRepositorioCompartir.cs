@@ -20,9 +20,16 @@ namespace OblDiseño1
 
         List<T> ObtenerTodasLasCredencialesQueMeComparten();
 
+        List<T> ObtenerCredencialesQueMeComparteUnUsuario(K elemento);
+
+        List<K> ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(T elemento);
+
+        List<K> ObtenerUsuariosQueMeCompartenAlgunaCredencial();
+
         void Delete(T elemento, K elemento2);
 
         void Clear();
+
 
         //void Modificar(T elementoOriginal, T elemento, K elemento2);
 

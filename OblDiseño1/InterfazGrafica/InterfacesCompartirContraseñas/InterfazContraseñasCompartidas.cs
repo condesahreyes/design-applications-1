@@ -4,7 +4,7 @@ using OblDiseño1.Entidades;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
-
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -12,12 +12,32 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Sistema sistema;
         private Usuario usuario;
+        GestorContraseniasCompartidas miGestor;
         public InterfazContraseñasCompartidas(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
             this.sistema = sistema;
+            miGestor = usuario.GestorCompartirContrasenia;
+            
+            IRepositorioCompartir<Credencial, Usuario> repositorioContraseñasCompartidas = new RegistroCredencialCompartidaRepositorio(this.usuario);
+            List<Credencial> contraseñasQueComparto = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueComparto();
+            List<Credencial> contraseñasQueMeComparten = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueMeComparten();
+            
+            List<Usuario> usuariosQueMeCompartenAlgunaCredencial = repositorioContraseñasCompartidas.ObtenerUsuariosQueMeCompartenAlgunaCredencial();
+
+            foreach (var credencial in contraseñasQueComparto)
+            {
+                List<Usuario> usuariosALosQueComparto = repositorioContraseñasCompartidas.ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(credencial);
+                miGestor.ObtenerContraseniasCompartidasPorMi().Add(credencial, usuariosALosQueComparto);
+            }
+
+            foreach (var usuarioQueMeComparteAlgunaCred in usuariosQueMeCompartenAlgunaCredencial)
+            {
+                List<Credencial> credencialesQueMeComparteElUsuario = repositorioContraseñasCompartidas.ObtenerCredencialesQueMeComparteUnUsuario(usuarioQueMeComparteAlgunaCred);
+                miGestor.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparteAlgunaCred,credencialesQueMeComparteElUsuario);
+            }
 
             CargarContraseñasCompartidas();
             CargarContraseñasCompartidasConmigo();
@@ -25,9 +45,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarContraseñasCompartidas()
         {
+            
+
             BindingSource biso = new BindingSource();
             this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
-            GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
+            
             biso.DataSource = miGestor.ObtenerContraseniasCompartidasPorMi().Keys;
 
             if (miGestor.ObtenerContraseniasCompartidasPorMi().Count == 0)

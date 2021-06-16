@@ -104,8 +104,8 @@ namespace AccesoDatos.Repositorios
                     {
                         Credencial credencialDeDominio = mapper.PasarADominio(
                             entidadRegistroContraseniaCompartida.CredencialCompartida, this.usuarioDuenio);
-
-                        credencialesADevolver.Add(credencialDeDominio);
+                        if (!(credencialesADevolver.Contains(credencialDeDominio)))
+                            credencialesADevolver.Add(credencialDeDominio);
                     }
 
                 }
@@ -133,6 +133,64 @@ namespace AccesoDatos.Repositorios
                 return credencialesADevolver;
             }
         }
+
+        public List<Usuario> ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(Credencial credencialCompartida)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                List<Usuario> usuariosADevolver = new List<Usuario>();
+                foreach (var entidadRegistroContraseniaCompartida in contexto.credencialesCompartidas)
+                {
+                    if (entidadRegistroContraseniaCompartida.NombreUsuarioQueComparte == this.usuarioDuenio.Nombre)
+                    {
+                        Usuario usuarioDeDominio = mapper.PasarADominio(entidadRegistroContraseniaCompartida.UsuarioAlQueSeLeCompartio);
+                        usuariosADevolver.Add(usuarioDeDominio);
+                    }
+                }
+                return usuariosADevolver;
+            }
+        }
+
+        public List<Credencial> ObtenerCredencialesQueMeComparteUnUsuario(Usuario usuarioQueMeComparte)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                List<Credencial> credencialesADevolver = new List<Credencial>();
+                foreach (var entidadRegistroContraseniaCompartida in contexto.credencialesCompartidas)
+                {
+                    if (entidadRegistroContraseniaCompartida.NombreUsuarioAlQueSeLeCompartio == this.usuarioDuenio.Nombre &&
+                        entidadRegistroContraseniaCompartida.NombreUsuarioQueComparte == usuarioQueMeComparte.Nombre)
+                    {
+                        Usuario usuarioQueComparte = mapper.PasarADominio(entidadRegistroContraseniaCompartida.UsuarioQueComparte);
+                        Credencial credencialDeDominio = mapper.PasarADominio(
+                            entidadRegistroContraseniaCompartida.CredencialCompartida, usuarioQueComparte);
+                        credencialesADevolver.Add(credencialDeDominio);
+                    }
+                }
+
+                return credencialesADevolver;
+            }
+        }
+
+        public List<Usuario> ObtenerUsuariosQueMeCompartenAlgunaCredencial()
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                List<Usuario> usuariosADevolver = new List<Usuario>();
+                foreach (var entidadRegistroContraseniaCompartida in contexto.credencialesCompartidas)
+                {
+                    if (entidadRegistroContraseniaCompartida.NombreUsuarioAlQueSeLeCompartio == this.usuarioDuenio.Nombre)
+                    {
+                        Usuario usuarioQueComparte = mapper.PasarADominio(entidadRegistroContraseniaCompartida.UsuarioQueComparte);
+                        if (!(usuariosADevolver.Contains(usuarioQueComparte)))
+                            usuariosADevolver.Add(usuarioQueComparte);
+                    }
+                }
+
+                return usuariosADevolver;
+            }
+        }
+        
 
 
         private bool VerificarQueSonElMismoRegistro(EntidadRegistroCredencialCompartida registroADejarDeCompartir,
