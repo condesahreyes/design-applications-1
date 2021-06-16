@@ -24,10 +24,6 @@ namespace AccesoDatos.Entidades_Datos
 
         public DateTime FechaUltimaModificacion { get; set; }
 
-        public EntidadDataBrechCredencial()
-        {
-        }
-
         public EntidadDataBrechCredencial(int idCredencial, string nombreUsuario, string contraseña, 
             string nombreSitio, string usuarioDueño, string nota, string categoria, DateTime fechaVencimiento)
         {

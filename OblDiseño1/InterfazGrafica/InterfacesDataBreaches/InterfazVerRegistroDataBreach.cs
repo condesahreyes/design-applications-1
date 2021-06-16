@@ -13,14 +13,15 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private Usuario usuario;
         private Sistema sistema;
         private ChequeadorDeDataBreaches dataBreach;
-        public InterfazVerRegistroDataBreach(ref Usuario usuario, ref Sistema sistema, ref ChequeadorDeDataBreaches dataBreach)
+
+        public InterfazVerRegistroDataBreach(ref Usuario usuario, 
+            ref Sistema sistema, ref ChequeadorDeDataBreaches dataBreach)
         {
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
             this.dataBreach = dataBreach;
             CargarListaTarjetas();
-            ModificarNombreDeColumnasDelDataGrid();
             CargarCredenciales();
         }
 
@@ -33,6 +34,8 @@ namespace InterfazGrafica.InterfacesDataBreaches
             dataGridHistoricoTarjeta.Columns["Categoria"].DisplayIndex = 0;
             dataGridHistoricoTarjeta.Columns["NotaOpcional"].Visible = false;
             dataGridHistoricoTarjeta.Columns["CodigoSeguridad"].Visible = false;
+
+            ModificarNombreDeColumnasDelDataGrid();
         }
 
         private void ModificarNombreDeColumnasDelDataGrid()
@@ -78,7 +81,8 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private void btnVolverHistorico_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazHistoricosDataBreach dataBreach = new InterfazHistoricosDataBreach(ref usuario, ref sistema);
+            InterfazHistoricosDataBreach dataBreach = new 
+                InterfazHistoricosDataBreach(ref usuario, ref sistema);
             dataBreach.Show();
         }
 
@@ -87,27 +91,31 @@ namespace InterfazGrafica.InterfacesDataBreaches
             if (0 < dataGridCredenciales.RowCount)
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridCredenciales.CurrentRow.DataBoundItem;
+
                 IRepositorio<Credencial> repoCredencial = new CredencialRepositorio(this.usuario);
                 ControladorObtener controladorObtener = new ControladorObtener();
 
                 Credencial credencial = controladorObtener.ObtenerCredencial(credencialSeleccionada, repoCredencial);
-                if(credencial == null || credencial.ObtenerContraseña!=credencialSeleccionada.ObtenerContraseña)
-                {
-                    MessageBox.Show("Esta contraseña ya se modifico");
-                }
-                else
-                {
-                    string nombreDeEstaPantalla = "InterfazVerRegistroDataBreach";
-                    InterfazDeModificarContrasenia interfazModiicar = new
-                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, 
-                    nombreDeEstaPantalla, this.dataBreach);
-                    this.Close();
-                    interfazModiicar.Show();
-                }
-                
+
+                ModificarContraseña(credencial, credencialSeleccionada);
             }
             else
                 MessageBox.Show("No hay contraseñas para modificar");
+        }
+
+        private void ModificarContraseña(Credencial credencial, Credencial credencialSeleccionada)
+        {
+            if (credencial == null || credencial.ObtenerContraseña != credencialSeleccionada.ObtenerContraseña)
+                MessageBox.Show("Esta contraseña ya se modifico");
+            else
+            {
+                string nombreDeEstaPantalla = "InterfazVerRegistroDataBreach";
+                InterfazDeModificarContrasenia interfazModiicar = new
+                InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada,
+                nombreDeEstaPantalla, this.dataBreach);
+                this.Close();
+                interfazModiicar.Show();
+            }
         }
     }
 }

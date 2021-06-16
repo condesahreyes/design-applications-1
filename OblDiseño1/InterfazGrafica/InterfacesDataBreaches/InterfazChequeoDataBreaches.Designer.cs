@@ -207,7 +207,7 @@
             this.btnModificarDupla.TabIndex = 32;
             this.btnModificarDupla.Text = "Modificar contraseña";
             this.btnModificarDupla.UseVisualStyleBackColor = false;
-            this.btnModificarDupla.Click += new System.EventHandler(this.button1_Click);
+            this.btnModificarDupla.Click += new System.EventHandler(this.btnModificarDupla_Click);
             // 
             // label1
             // 

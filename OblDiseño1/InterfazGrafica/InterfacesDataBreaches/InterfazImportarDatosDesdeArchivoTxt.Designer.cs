@@ -126,7 +126,6 @@ namespace InterfazGrafica.InterfacesDataBreaches
             this.Name = "InterfazImportarDatosDesdeArchivoTxt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importar Archivo Data Breach";
-            this.Load += new System.EventHandler(this.InterfazImportarDatosDesdeArchivoTxt_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

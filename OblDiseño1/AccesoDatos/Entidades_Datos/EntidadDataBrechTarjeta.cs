@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccesoDatos.Entidades_Datos
 {
@@ -30,10 +26,6 @@ namespace AccesoDatos.Entidades_Datos
         public DateTime FechaVencimiento { get; set; }
 
         public string Categoria { get; set; }
-
-        public EntidadDataBrechTarjeta()
-        {
-        }
 
         public EntidadDataBrechTarjeta(int tarjetaId, string numero, string nombreUsuario, 
             string nota, string nombreTarjeta, string tipo, int codigoSeguridad, DateTime fecha,

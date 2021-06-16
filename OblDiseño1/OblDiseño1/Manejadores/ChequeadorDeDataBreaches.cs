@@ -1,7 +1,6 @@
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.IO;
 using System;
 
 namespace OblDiseño1
@@ -50,22 +49,26 @@ namespace OblDiseño1
         public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivoTxt(string pathDelArchivo)
         {
             List<string> infoBreachada;
+
             using (StreamReader lector = new StreamReader(pathDelArchivo))
             {
                 string infoBrachadaEnUnSoloString = lector.ReadLine();
                 infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
             }
+
             return ObtenerTarjetasVulneradas(infoBreachada);
         }
 
         public List<Credencial> ObtenerCredencialesVulneradasDesdeArchivoTxt(string pathDelArchivo)
         {
             List<string> infoBreachada;
+
             using (StreamReader lector = new StreamReader(pathDelArchivo))
             {
                 string infoBrachadaEnUnSoloString = lector.ReadLine();
                 infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
             }
+
             return ObtenerCredencialesVulneradas(infoBreachada);
         }
     }

@@ -1,8 +1,8 @@
-﻿using AccesoDatos.Entidades_Datos;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos.Entidades_Datos;
+using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using OblDiseño1;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos.Repositorios;
 
 namespace AccesoDatos
 {
@@ -147,33 +147,22 @@ namespace AccesoDatos
             return usuarioDominio;
         }
 
-        public EntidadDataBrechTarjeta PasarAEntidadTarjetaBracheada(Tarjeta tarjetaBracheada, Usuario usuario)
+        public ChequeadorDeDataBreaches PasarADominioDataBreach(EntidadDataBreach dataBreach, Usuario usuario)
         {
-            TarjetaRepositorio repoTarjeta = new TarjetaRepositorio(usuario);
-            EntidadTarjeta tarjetaEntidad = repoTarjeta.ObtenerDto(tarjetaBracheada);
-            Categoria categoria = PasarADominio(tarjetaEntidad.IdCategoria, usuario);
-            EntidadDataBrechTarjeta miTarjeta = new EntidadDataBrechTarjeta(tarjetaEntidad.TarjetaId, tarjetaEntidad.Numero,
-                tarjetaEntidad.UsuarioGestorNombre, tarjetaEntidad.NotaOpcional, tarjetaEntidad.Nombre, tarjetaEntidad.Tipo,
-                tarjetaEntidad.CodigoSeguridad, tarjetaEntidad.FechaVencimiento, categoria.Nombre);
+            DataBrechRepositorio repoDataBreach = new DataBrechRepositorio(usuario);
+            ChequeadorDeDataBreaches miDataBreach = new ChequeadorDeDataBreaches(usuario);
 
-            return miTarjeta;
+            miDataBreach.Fecha = dataBreach.fecha;
+            miDataBreach.id = dataBreach.IdDataBrech;
+
+            miDataBreach.CredencialesVulneradas = repoDataBreach.ObtenerCredencialesVulneradas(miDataBreach);
+            miDataBreach.TarjetasVulneradas = repoDataBreach.ObtenerTarjetasVulneradas(miDataBreach);
+
+            return miDataBreach;
         }
 
-        public EntidadDataBrechCredencial PasarAEntidadCredencialBracheada(Credencial credencialBracheada, Usuario usuario)
-        {
-            CredencialRepositorio repoCredencial = new CredencialRepositorio(usuario);
-
-            EntidadCredencial credencialEntidad = repoCredencial.ObtenerDto(credencialBracheada);
-
-            string contraseña = credencialBracheada.ObtenerContraseña;
-
-            EntidadDataBrechCredencial miCredencial = new EntidadDataBrechCredencial(credencialEntidad.CredencialId, credencialEntidad.NombreUsuario,
-                contraseña, credencialEntidad.NombreSitioApp, credencialEntidad.UsuarioGestorNombre, credencialBracheada.Nota ,credencialBracheada.Categoria.Nombre, credencialBracheada.FechaUltimaModificacion);
-
-            return miCredencial;
-        }
-
-        public EntidadDataBreach PasarAEntidadDataBreach(ChequeadorDeDataBreaches dataBreachParametro, Usuario usuario)
+        public EntidadDataBreach PasarAEntidadDataBreach(ChequeadorDeDataBreaches dataBreachParametro, 
+            Usuario usuario)
         {
             EntidadDataBreach dataBreach = new EntidadDataBreach(dataBreachParametro.Fecha, usuario.Nombre);
             foreach (var tarjeta in dataBreachParametro.TarjetasVulneradas)
@@ -189,6 +178,36 @@ namespace AccesoDatos
         }
 
 
+        public EntidadDataBrechTarjeta PasarAEntidadTarjetaBracheada(Tarjeta tarjetaBracheada, Usuario usuario)
+        {
+            TarjetaRepositorio repoTarjeta = new TarjetaRepositorio(usuario);
+
+            EntidadTarjeta tarjetaEntidad = repoTarjeta.ObtenerDto(tarjetaBracheada);
+
+            Categoria categoria = PasarADominio(tarjetaEntidad.IdCategoria, usuario);
+
+            EntidadDataBrechTarjeta miTarjeta = new EntidadDataBrechTarjeta(tarjetaEntidad.TarjetaId, tarjetaEntidad.Numero,
+                tarjetaEntidad.UsuarioGestorNombre, tarjetaEntidad.NotaOpcional, tarjetaEntidad.Nombre, tarjetaEntidad.Tipo,
+                tarjetaEntidad.CodigoSeguridad, tarjetaEntidad.FechaVencimiento, categoria.Nombre);
+
+            return miTarjeta;
+        }
+
+        public EntidadDataBrechCredencial PasarAEntidadCredencialBracheada(Credencial credencialBracheada, Usuario usuario)
+        {
+            CredencialRepositorio repoCredencial = new CredencialRepositorio(usuario);
+
+            EntidadCredencial credencialEntidad = repoCredencial.ObtenerDto(credencialBracheada);
+
+            string contraseña = credencialBracheada.ObtenerContraseña;
+
+            EntidadDataBrechCredencial miCredencial = new EntidadDataBrechCredencial(credencialEntidad.CredencialId,
+                credencialEntidad.NombreUsuario, contraseña, credencialEntidad.NombreSitioApp,
+                credencialEntidad.UsuarioGestorNombre, credencialBracheada.Nota, credencialBracheada.Categoria.Nombre,
+                credencialBracheada.FechaUltimaModificacion);
+
+            return miCredencial;
+        }
 
         public Credencial PasarADominioCredencialVulnerada(EntidadDataBrechCredencial credencialVulnerada)
         {
@@ -216,20 +235,5 @@ namespace AccesoDatos
 
             return tarjeta;
         }
-
-        public ChequeadorDeDataBreaches PasarADominioDataBreach(EntidadDataBreach dataBreach, Usuario usuario)
-        {
-            DataBrechRepositorio repoDataBreach = new DataBrechRepositorio(usuario);
-            ChequeadorDeDataBreaches miDataBreach = new ChequeadorDeDataBreaches(usuario);
-            miDataBreach.Fecha = dataBreach.fecha;
-            miDataBreach.id = dataBreach.IdDataBrech;
-
-
-            miDataBreach.CredencialesVulneradas = repoDataBreach.ObtenerCredencialesVulneradas(miDataBreach);
-            miDataBreach.TarjetasVulneradas = repoDataBreach.ObtenerTarjetasVulneradas(miDataBreach);
-
-            return miDataBreach;
-        }
-
     }
 }

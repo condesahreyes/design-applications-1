@@ -1,7 +1,7 @@
 ﻿using AccesoDatos.Entidades_Datos;
+using System.Collections.Generic;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
 
 namespace AccesoDatos.Repositorios
 {
@@ -19,7 +19,8 @@ namespace AccesoDatos.Repositorios
         {
             using (Contexto contexto = new Contexto())
             {
-                EntidadDataBreach dataBreach = mapper.PasarAEntidadDataBreach(dataBreachParametro, this.usuario);
+                EntidadDataBreach dataBreach = mapper.PasarAEntidadDataBreach
+                    (dataBreachParametro, this.usuario);
                 contexto.dataBreach.Add(dataBreach);
                 contexto.SaveChanges();
             }
@@ -55,10 +56,9 @@ namespace AccesoDatos.Repositorios
             using (Contexto contexto = new Contexto())
             {
                 foreach (var dataBreach in contexto.dataBreach)
-                {
-                    if (dataBreach.IdDataBrech == dataBreachABuscar.id && dataBreach.UsuarioNombre==this.usuario.Nombre)
+                    if (dataBreach.IdDataBrech == dataBreachABuscar.id && 
+                        dataBreach.UsuarioNombre==this.usuario.Nombre)
                         return mapper.PasarADominioDataBreach(dataBreach, this.usuario);
-                }
             }
             return null;
         }
@@ -69,10 +69,8 @@ namespace AccesoDatos.Repositorios
             using (Contexto contexto = new Contexto())
             {
                 foreach (var tarjeta in contexto.dataBreachTarjetas)
-                {
                     if (tarjeta.DataBrechId == chequeador.id)
                         tarjetas.Add(mapper.PasarADominioTarjetaVulnerada(tarjeta));
-                }
             }
             return tarjetas;
         }
@@ -83,10 +81,8 @@ namespace AccesoDatos.Repositorios
             using (Contexto contexto = new Contexto())
             {
                 foreach (var credencial in contexto.dataBreachCredencial)
-                {
                     if (credencial.DataBrechId == chequeador.id)
                         tarjetas.Add(mapper.PasarADominioCredencialVulnerada(credencial));
-                }
             }
             return tarjetas;
         }
@@ -97,10 +93,8 @@ namespace AccesoDatos.Repositorios
             using (Contexto contexto = new Contexto())
             {
                 foreach (var dataBreach in contexto.dataBreach)
-                {
                     if (dataBreach.UsuarioNombre == this.usuario.Nombre)
                         misDataBreaches.Add(mapper.PasarADominioDataBreach(dataBreach, this.usuario));
-                }
             }
             return misDataBreaches;
         }

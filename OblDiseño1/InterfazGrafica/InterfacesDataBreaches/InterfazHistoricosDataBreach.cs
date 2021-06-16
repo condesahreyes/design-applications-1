@@ -1,35 +1,39 @@
-﻿
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using AccesoDatos.Repositorios;
-using OblDiseño1;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using OblDiseño1.ControladoresPorFuncionalidad;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using InterfazGrafica.InterfazDataBreaches;
+using System.Collections.Generic;
+using AccesoDatos.Repositorios;
+using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDataBreaches
 {
     public partial class InterfazHistoricosDataBreach : Form
     {
-        private ControladorObtener controladorObtener;
         private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
+
+        private ControladorObtener controladorObtener;
         private Usuario usuario;
         private Sistema sistema;
+
         public InterfazHistoricosDataBreach(ref Usuario usuario, ref Sistema sistema)
         {
             InitializeComponent();
+
             this.usuario = usuario;
             this.sistema = sistema;
             this.controladorObtener = new ControladorObtener();
             this.repositorioDataBreach = new DataBrechRepositorio(usuario);
+
             CargarDataGrid();
             ModificarNombreDeColumnasDelDataGrid();
         }
 
         private void CargarDataGrid()
         {
-            List<ChequeadorDeDataBreaches> misDataBreaches = controladorObtener.ObtenerDataBreaches(repositorioDataBreach);
+            List<ChequeadorDeDataBreaches> misDataBreaches = controladorObtener.
+                ObtenerDataBreaches(repositorioDataBreach);
 
             dataGridHistorico.DataSource = misDataBreaches;
             dataGridHistorico.Columns["usuario"].Visible = false;
@@ -46,15 +50,17 @@ namespace InterfazGrafica.InterfacesDataBreaches
             if (dataGridHistorico.RowCount > 0)
                 AVisualizarHistorico();
             else
-                MessageBox.Show("Error, aun no hay historicos");
-            //InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
-            //dataBreaches.Show();
+                MessageBox.Show("Error, aún no hay historicos");
         }
 
         private void AVisualizarHistorico()
         {
-            ChequeadorDeDataBreaches miDataBreach = (ChequeadorDeDataBreaches)dataGridHistorico.CurrentRow.DataBoundItem;
-            InterfazVerRegistroDataBreach verRegistro = new InterfazVerRegistroDataBreach(ref this.usuario, ref this.sistema, ref miDataBreach);
+            ChequeadorDeDataBreaches miDataBreach = (ChequeadorDeDataBreaches)
+                dataGridHistorico.CurrentRow.DataBoundItem;
+
+            InterfazVerRegistroDataBreach verRegistro = new InterfazVerRegistroDataBreach
+                (ref this.usuario, ref this.sistema, ref miDataBreach);
+
             this.Close();
             verRegistro.Show();
         }
@@ -69,7 +75,8 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private void btnChequeo_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+            InterfazChequeoDataBreaches dataBreaches = new 
+                InterfazChequeoDataBreaches(ref sistema, ref usuario);
             dataBreaches.Show();
         }
     }
