@@ -1,6 +1,9 @@
 ﻿using System.Windows.Forms;
 using System;
 using OblDiseño1;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos;
+using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -21,26 +24,40 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarOpcionesDeUsuariosACompartir()
         {
-            foreach (var iterador in sistema.ObtenerUsuarios())
-                if (iterador.Nombre != this.usuario.Nombre)
-                    comboBoxUsuarios.Items.Add(iterador.Nombre);
+            ControladorObtener controladorObtener = new ControladorObtener();
+            UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
+            List<Usuario> usuariosDisponibles = controladorObtener.ObtenerUsuarios(repositorioUsuario);
+            usuariosDisponibles.Remove(this.usuario);
+
+            foreach (var usuario in usuariosDisponibles)
+                comboBoxUsuarios.Items.Add(usuario.Nombre);
         }
 
         private void CargarOpcionesDeSitiosParaCompartir()
         {
-            foreach (var iterador in usuario.ObtenerCredenciales())
-                comboBoxSitios.Items.Add(iterador.NombreSitioApp);
+            ControladorObtener controladorObtener = new ControladorObtener();
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
+            List<Credencial> credenciales = repositorioCredencial.GetAll();
+
+            foreach (var credencial in credenciales)
+            {
+                comboBoxSitios.Items.Add(credencial.NombreSitioApp);
+            }
+            //foreach (var iterador in usuario.ObtenerCredenciales())
+            //    comboBoxSitios.Items.Add(iterador.NombreSitioApp);
         }
 
         private void comboBoxSitios_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxUsuariosSitios.Items.Clear();
             string sitio = comboBoxSitios.SelectedItem.ToString();
-            foreach (var iterador in usuario.ObtenerCredenciales())
-            {
-                if (iterador.NombreSitioApp == sitio)
-                    comboBoxUsuariosSitios.Items.Add(iterador.NombreUsuario);
-            }
+            
+            
+            //foreach (var iterador in usuario.ObtenerCredenciales())
+            //{
+            //    if (iterador.NombreSitioApp == sitio)
+            //        comboBoxUsuariosSitios.Items.Add(iterador.NombreUsuario);
+            //}
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)

@@ -50,5 +50,10 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         {
             return repositorioCredencial.GetAll();
         }
+
+        public List<Usuario> ObtenerUsuarios(IRepositorio<Usuario> repositorioUsuario)
+        {
+            return repositorioUsuario.GetAll();
+        }
     }
 }
