@@ -20,7 +20,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.usuario = usuario;
             this.sistema = sistema;
             miGestor = usuario.GestorCompartirContrasenia;
-            
+            miGestor.BorrarDatosDeGestor();
+           
             IRepositorioCompartir<Credencial, Usuario> repositorioContraseñasCompartidas = new RegistroCredencialCompartidaRepositorio(this.usuario);
             List<Credencial> contraseñasQueComparto = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueComparto();
             List<Credencial> contraseñasQueMeComparten = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueMeComparten();
@@ -49,7 +50,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
             BindingSource biso = new BindingSource();
             this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
-            
+            miGestor = usuario.GestorCompartirContrasenia;
+
             biso.DataSource = miGestor.ObtenerContraseniasCompartidasPorMi().Keys;
 
             if (miGestor.ObtenerContraseniasCompartidasPorMi().Count == 0)
@@ -85,6 +87,28 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarContraseñasCompartidasConmigo()
         {
+
+            BindingSource biso = new BindingSource();
+            this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
+            this.miGestor = usuario.GestorCompartirContrasenia;
+
+            biso.DataSource = this.miGestor.ObtenerContraseniasCompartidasConmigo().Values;
+
+            if (this.miGestor.ObtenerContraseniasCompartidasConmigo().Count == 0)
+            {
+                this.dataGridContraseñasCompartidas.Visible = true;
+            }
+            else
+            {
+                this.dataGridContraseñasCompartidas.DataSource = biso;
+                HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas();
+                ModificarNombreDeColumnasDataGridContraseñasCompartidas();
+            }
+
+
+
+
+
             this.dataGridContraseñasCompartidasConmigo.AllowUserToAddRows = false;
             BindingSource biso2 = new BindingSource();
             GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
@@ -171,6 +195,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 new InterfazDejarDeCompartirContrasenia(ref sistema, ref usuario, ref credencialSeleccionada);
             this.Close();
             interfazDejarDeCompartirContrasenias.Show();
+        }
+
+        private void dataGridContraseñasCompartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

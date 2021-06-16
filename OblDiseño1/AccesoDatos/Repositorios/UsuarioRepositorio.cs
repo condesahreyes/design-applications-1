@@ -63,7 +63,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                if (!esVacio())
+                if (contexto.usuarios.Count() > 0)
                 {
                     List<Usuario> usuariosADevolver = new List<Usuario>();
                     foreach (var entidadUsuario in contexto.usuarios)
@@ -74,7 +74,7 @@ namespace AccesoDatos
                     return usuariosADevolver;
                 }
                 else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existen usuarios en el sistema");
+                    return null;
             }
         }
 

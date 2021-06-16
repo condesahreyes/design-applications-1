@@ -79,9 +79,10 @@ namespace AccesoDatos
 
         public List<Credencial> GetAll()
         {
+            List<Credencial> credencialesADevolver = new List<Credencial>();
             using (Contexto contexto = new Contexto())
             {
-                List<Credencial> credencialesADevolver = new List<Credencial>();
+               
                 if (!esVacio())
                 {
                     foreach (var entidadCredencial in contexto.credenciales)
@@ -92,7 +93,7 @@ namespace AccesoDatos
                     return credencialesADevolver;
                 }
             }
-            return null;
+            return credencialesADevolver;
         }
 
         public void Delete(Credencial credencial)
@@ -184,6 +185,17 @@ namespace AccesoDatos
                 string mensajeExepcion = "La credencial de <<NombreSitioApp = " + credencial.NombreSitioApp 
                     + ">> y <<NombreUsuario = " + credencial.NombreUsuario + ">>";
                 throw new ExepcionIntentoDeObtencionDeObjetoInexistente(mensajeExepcion);
+            }
+        }
+
+        public EntidadCredencial ObtenerEntidadCredencialPorId(int id)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var unaCredencial in contexto.credenciales)
+                    if (unaCredencial.CredencialId == id)
+                        return unaCredencial;
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una credencial con este id");
             }
         }
     }

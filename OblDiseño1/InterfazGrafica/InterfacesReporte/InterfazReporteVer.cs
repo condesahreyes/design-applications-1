@@ -38,6 +38,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.usuarioRepositorio = new UsuarioRepositorio();
             this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
             this.nivelDeSeguridad = nivelDeSeguridad;
+            this.reporte = reporte;
 
             ActualizarLabel(nivelDeSeguridad);
             ActualizarDatosALaTabla();

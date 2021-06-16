@@ -7,13 +7,13 @@ namespace AccesoDatos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Migracion : IMigrationMetadata
+    public sealed partial class BddD1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Migracion));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BddD1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202106151823529_Migracion"; }
+            get { return "202106160517178_BddD1"; }
         }
         
         string IMigrationMetadata.Source

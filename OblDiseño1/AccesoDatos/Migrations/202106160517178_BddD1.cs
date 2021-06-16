@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Migracion : DbMigration
+    public partial class BddD1 : DbMigration
     {
         public override void Up()
         {
@@ -55,6 +55,22 @@
                 .PrimaryKey(t => t.ContraseniaId);
             
             CreateTable(
+                "dbo.EntidadRegistroCredencialCompartidas",
+                c => new
+                    {
+                        NombreUsuarioQueComparte = c.String(nullable: false, maxLength: 128),
+                        NombreUsuarioAlQueSeLeCompartio = c.String(nullable: false, maxLength: 128),
+                        CredencialCompartidaId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.NombreUsuarioQueComparte, t.NombreUsuarioAlQueSeLeCompartio, t.CredencialCompartidaId })
+                .ForeignKey("dbo.EntidadCredencials", t => t.CredencialCompartidaId)
+                .ForeignKey("dbo.EntidadUsuarios", t => t.NombreUsuarioAlQueSeLeCompartio)
+                .ForeignKey("dbo.EntidadUsuarios", t => t.NombreUsuarioQueComparte)
+                .Index(t => t.NombreUsuarioQueComparte)
+                .Index(t => t.NombreUsuarioAlQueSeLeCompartio)
+                .Index(t => t.CredencialCompartidaId);
+            
+            CreateTable(
                 "dbo.EntidadUsuarios",
                 c => new
                     {
@@ -90,18 +106,25 @@
         {
             DropForeignKey("dbo.EntidadCategorias", "UsuarioNombre", "dbo.EntidadUsuarios");
             DropForeignKey("dbo.EntidadCredencials", "UsuarioGestorNombre", "dbo.EntidadUsuarios");
+            DropForeignKey("dbo.EntidadRegistroCredencialCompartidas", "NombreUsuarioQueComparte", "dbo.EntidadUsuarios");
+            DropForeignKey("dbo.EntidadRegistroCredencialCompartidas", "NombreUsuarioAlQueSeLeCompartio", "dbo.EntidadUsuarios");
             DropForeignKey("dbo.EntidadTarjetas", "UsuarioGestorNombre", "dbo.EntidadUsuarios");
             DropForeignKey("dbo.EntidadTarjetas", "IdCategoria", "dbo.EntidadCategorias");
+            DropForeignKey("dbo.EntidadRegistroCredencialCompartidas", "CredencialCompartidaId", "dbo.EntidadCredencials");
             DropForeignKey("dbo.EntidadCredencials", "Contrasenia_ContraseniaId", "dbo.EntidadContraseña");
             DropForeignKey("dbo.EntidadCredencials", "IdCategoria", "dbo.EntidadCategorias");
             DropIndex("dbo.EntidadTarjetas", new[] { "IdCategoria" });
             DropIndex("dbo.EntidadTarjetas", new[] { "UsuarioGestorNombre" });
+            DropIndex("dbo.EntidadRegistroCredencialCompartidas", new[] { "CredencialCompartidaId" });
+            DropIndex("dbo.EntidadRegistroCredencialCompartidas", new[] { "NombreUsuarioAlQueSeLeCompartio" });
+            DropIndex("dbo.EntidadRegistroCredencialCompartidas", new[] { "NombreUsuarioQueComparte" });
             DropIndex("dbo.EntidadCredencials", new[] { "Contrasenia_ContraseniaId" });
             DropIndex("dbo.EntidadCredencials", new[] { "IdCategoria" });
             DropIndex("dbo.EntidadCredencials", new[] { "UsuarioGestorNombre" });
             DropIndex("dbo.EntidadCategorias", new[] { "UsuarioNombre" });
             DropTable("dbo.EntidadTarjetas");
             DropTable("dbo.EntidadUsuarios");
+            DropTable("dbo.EntidadRegistroCredencialCompartidas");
             DropTable("dbo.EntidadContraseña");
             DropTable("dbo.EntidadCredencials");
             DropTable("dbo.EntidadCategorias");

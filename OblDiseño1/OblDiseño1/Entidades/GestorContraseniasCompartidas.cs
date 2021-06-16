@@ -16,6 +16,12 @@ namespace OblDiseño1.Entidades
             this.contraseniasCompartidasPorMi = new Dictionary<Credencial, List<Usuario>>();
         }
 
+        public void BorrarDatosDeGestor()
+        {
+            this.contraseniasCompartidasConmigo.Clear();
+            this.contraseniasCompartidasPorMi.Clear();
+        }
+
         private void CompartirContraseniaAUsuario(Credencial credencialACompartir, Usuario usuarioACompartir)
         {
             GestorContraseniasCompartidas gestorACompartir = usuarioACompartir.GestorCompartirContrasenia;

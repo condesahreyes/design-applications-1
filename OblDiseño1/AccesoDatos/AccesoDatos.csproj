@@ -54,9 +54,9 @@
     <Compile Include="Entidades_Datos\EntidadContraseña.cs" />
     <Compile Include="Entidades_Datos\EntidadRegistroCredencialCompartida.cs" />
     <Compile Include="Entidades_Datos\EntidadGestorContraseñasCompartidas.cs" />
-    <Compile Include="Migrations\202106151823529_Migracion.cs" />
-    <Compile Include="Migrations\202106151823529_Migracion.designer.cs">
-      <DependentUpon>202106151823529_Migracion.cs</DependentUpon>
+    <Compile Include="Migrations\202106160517178_BddD1.cs" />
+    <Compile Include="Migrations\202106160517178_BddD1.designer.cs">
+      <DependentUpon>202106160517178_BddD1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
@@ -84,8 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106151823529_Migracion.resx">
-      <DependentUpon>202106151823529_Migracion.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106160517178_BddD1.resx">
+      <DependentUpon>202106160517178_BddD1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
