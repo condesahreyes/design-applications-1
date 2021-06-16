@@ -29,5 +29,10 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         {
             repositorioCredencial.Add(credencialAgregar);
         }
+
+        public void AgregarDataBrache(ChequeadorDeDataBreaches dataBreach, IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)
+        {
+            repositorioDataBreach.Add(dataBreach);
+        }
     }
 }

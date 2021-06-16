@@ -7,10 +7,12 @@
     {
         public override void Up()
         {
+            AlterColumn("dbo.EntidadDataBrechTarjetas", "Categoria", c => c.String());
         }
         
         public override void Down()
         {
+            AlterColumn("dbo.EntidadDataBrechTarjetas", "Categoria", c => c.Int(nullable: false));
         }
     }
 }

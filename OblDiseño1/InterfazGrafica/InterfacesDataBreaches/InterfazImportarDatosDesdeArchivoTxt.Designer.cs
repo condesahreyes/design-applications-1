@@ -33,8 +33,8 @@ namespace InterfazGrafica.InterfacesDataBreaches
             this.button_Volver = new System.Windows.Forms.Button();
             this.button_Importar = new System.Windows.Forms.Button();
             this.richTextBox_rutaDelArchivoSeleccionado = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.button_Buscar = new System.Windows.Forms.Button();
+            this.lblListadoTarjetas = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -83,16 +83,6 @@ namespace InterfazGrafica.InterfacesDataBreaches
             this.richTextBox_rutaDelArchivoSeleccionado.TabIndex = 4;
             this.richTextBox_rutaDelArchivoSeleccionado.Text = "";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(6, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(287, 26);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Ruta del archivo Seleccionado:";
-            // 
             // button_Buscar
             // 
             this.button_Buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
@@ -109,20 +99,33 @@ namespace InterfazGrafica.InterfacesDataBreaches
             this.button_Buscar.UseVisualStyleBackColor = false;
             this.button_Buscar.Click += new System.EventHandler(this.button_Buscar_Click);
             // 
+            // lblListadoTarjetas
+            // 
+            this.lblListadoTarjetas.AutoSize = true;
+            this.lblListadoTarjetas.BackColor = System.Drawing.Color.Transparent;
+            this.lblListadoTarjetas.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lblListadoTarjetas.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblListadoTarjetas.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblListadoTarjetas.Location = new System.Drawing.Point(269, 79);
+            this.lblListadoTarjetas.Name = "lblListadoTarjetas";
+            this.lblListadoTarjetas.Size = new System.Drawing.Size(282, 26);
+            this.lblListadoTarjetas.TabIndex = 13;
+            this.lblListadoTarjetas.Text = "Ruta del archivo Seleccionado";
+            // 
             // InterfazImportarDatosDesdeArchivoTxt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.button_Buscar);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox_rutaDelArchivoSeleccionado);
             this.Controls.Add(this.button_Importar);
             this.Controls.Add(this.button_Volver);
             this.Name = "InterfazImportarDatosDesdeArchivoTxt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazImportarDatosDesdeArchivoTxt";
-            this.Load += new System.EventHandler(this.InterfazImportarDatosDesdeArchivoTxt_Load);
+            this.Text = "Importar Archivo Data Breach";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,7 +137,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private System.Windows.Forms.Button button_Volver;
         private System.Windows.Forms.Button button_Importar;
         private System.Windows.Forms.RichTextBox richTextBox_rutaDelArchivoSeleccionado;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_Buscar;
+        private System.Windows.Forms.Label lblListadoTarjetas;
     }
 }

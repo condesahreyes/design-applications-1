@@ -54,6 +54,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 MostrarMensajeUsuarioYaRegistrado();
             }
+            catch (ExepcionObjetosRepetidos)
+            {
+                MostrarMensajeUsuarioYaRegistrado();
+            }
         }
 
         private void DarDeAltaCredencial()

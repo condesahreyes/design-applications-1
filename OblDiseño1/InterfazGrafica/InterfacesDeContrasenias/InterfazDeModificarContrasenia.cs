@@ -1,4 +1,5 @@
 ﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfacesDataBreaches;
 using InterfazGrafica.InterfazDataBreaches;
 using InterfazGrafica.InterfacesReporte;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private Usuario usuario;
         private Sistema sistema;
 
+        private ChequeadorDeDataBreaches miChequeador;
+
         private int nivelSeguridadContraseniaOriginal;
         private int nivelSeguridadContraseniaNuevo;
 
@@ -24,6 +27,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_ReporteVer = "InterfazReporteVer";
         private const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
+        private const string posibleInterfazPadre_ChequeoDataBreachesHistorico = "InterfazVerRegistroDataBreach";
 
         private IRepositorio<Credencial> repositorioCredencial;
         private IRepositorio<OblDiseño1.Entidades.Contraseña> repositorioContraseña;
@@ -35,6 +39,21 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
             Credencial credencial, string padre)
         {
+            Inicializador(ref usuario, ref sistema, credencial, padre, null);
+        }
+
+        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
+            Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
+        {
+            Inicializador(ref usuario, ref sistema, credencial, padre, miChequeador);
+        }
+
+        private void Inicializador(ref Usuario usuario, ref Sistema sistema,
+            Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
+        {
+            if (miChequeador != null)
+                this.miChequeador = miChequeador;
+
             this.usuario = usuario;
             this.sistema = sistema;
             this.credencial = credencial;
@@ -166,6 +185,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 case posibleInterfazPadre_ChequeoDataBreaches:
                     InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
                     interfazDataBreaches.Show();
+                    this.Close();
+                    break;                
+                case posibleInterfazPadre_ChequeoDataBreachesHistorico:
+                    InterfazVerRegistroDataBreach interfazDataBreachesHistorico = new InterfazVerRegistroDataBreach(ref usuario, ref sistema, ref miChequeador);
+                    interfazDataBreachesHistorico.Show();
                     this.Close();
                     break;
             }
