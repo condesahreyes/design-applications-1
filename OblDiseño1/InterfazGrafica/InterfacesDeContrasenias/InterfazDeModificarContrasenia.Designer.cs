@@ -198,7 +198,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.comboBox_Categoria.Name = "comboBox_Categoria";
             this.comboBox_Categoria.Size = new System.Drawing.Size(178, 21);
             this.comboBox_Categoria.TabIndex = 0;
-            
             // 
             // richTextBox_Nota
             // 
@@ -347,7 +346,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.label1.TabIndex = 27;
             this.label1.Text = "Nombre";
             // 
-            // Interfaz_ModificarContrasenia
+            // InterfazDeModificarContrasenia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -376,7 +375,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.button_GenerarContrasenia);
             this.Controls.Add(this.button_Aceptar);
-            this.Name = "Interfaz_ModificarContrasenia";
+            this.Name = "InterfazDeModificarContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificar Contraseña";
             this.ResumeLayout(false);

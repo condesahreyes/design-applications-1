@@ -12,6 +12,7 @@ namespace Pruebas
         private static readonly string contrasenia1 = "cae][qwQWDc,p[12waC,WQE";
         private static readonly string contrasenia2 = "QWERTY123.";
 
+
         private static string llave1;
         private static string llave2;
 
@@ -52,6 +53,16 @@ namespace Pruebas
         }
 
         [TestMethod]
+        public void EncriptaIgualLaMismaContraseniaConLaMismaLlave()
+        {
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada1 = encriptador.Encriptar(contrasenia1, llave1);
+            string contrasenia1Encriptada2 = encriptador.Encriptar(contrasenia1, llave1);
+            Assert.AreEqual(contrasenia1Encriptada1, contrasenia1Encriptada2);
+        }
+
+        [TestMethod]
         public void EncriptaDiferentementeLaMismaContraConDifrentesLlaves()
         {
             llave1 = encriptador.GenerarLlave();
@@ -75,5 +86,142 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contrasenia1, contrasenia1Desencriptada);
         }
+
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta()
+        {
+            string contraseniaCorta = "Qaqwq";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta1()
+        {
+            string contraseniaCorta = "Qaqwq1";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta2()
+        {
+            string contraseniaCorta = "Qaqwq22";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta3()
+        {
+            string contraseniaCorta = "Qaqwq333";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta4()
+        {
+            string contraseniaCorta = "Qaqwq4444";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta55555()
+        {
+            string contraseniaCorta = "Qaqwq55555";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta6()
+        {
+            string contraseniaCorta = "Qaqwq666666";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta7()
+        {
+            string contraseniaCorta = "Qaqwq7777777";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta8()
+        {
+            string contraseniaCorta = "Qaqwq88888888";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta9()
+        {
+            string contraseniaCorta = "Qaqwq999999999";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta10()
+        {
+            string contraseniaCorta = "Qaqwq1010101010";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta11()
+        {
+            string contraseniaCorta = "Qaqwq10101010101";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        [TestMethod]
+        public void DesencriptaCorrectamenteContraseniaCorta12()
+        {
+            string contraseniaCorta = "Qaqwq101010101010";
+            llave1 = encriptador.GenerarLlave();
+
+            string contrasenia1Encriptada = encriptador.Encriptar(contraseniaCorta, llave1);
+            string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
+            Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
+        }
+        /*      [TestMethod]
+              public void sdcaesvfdetrwferfdgrwe()
+              {
+                  string encriptado = "7J\u0088^·6P\u0097PÖV(\u001b\u009c\u001e¨\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+              }*/
     }
 }
