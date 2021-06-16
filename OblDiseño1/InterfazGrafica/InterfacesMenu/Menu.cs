@@ -102,16 +102,10 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnCompartirContrasenia_Click_1(object sender, EventArgs e)
         {
-            if (controladorObtener.ObtenerCredenciales(credencialRepo).Count > 0)
-            {
                 this.Close();
                 InterfazContraseñasCompartidas interfazContraseñas = new
                     InterfazContraseñasCompartidas(ref sistema, ref usuario);
                 interfazContraseñas.Show();
-            }
-            else
-                MessageBox.Show("No existen credenciales registradas aun");
-            
         }
     }
 }

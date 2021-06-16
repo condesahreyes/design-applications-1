@@ -54,8 +54,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             if (dataGridUsuariosCompartidos.CurrentRow != null && 0 < dataGridUsuariosCompartidos.RowCount)
             {
                 Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-                usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
-
+                //usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
                 this.controladorEliminar.EliminarRegistroCredencialCompartida(this.credencial,
                     usuarioSeleccionado, this.repositorioRegistroContraCompartida);
                 

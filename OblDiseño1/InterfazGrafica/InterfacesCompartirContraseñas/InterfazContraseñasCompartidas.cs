@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using OblDiseño1;
 using System;
 using AccesoDatos.Repositorios;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -145,10 +147,18 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonCompartir_Click(object sender, EventArgs e)
         {
-            this.Close();
-            InterfazCompartirContraseña interfazCompartirContraseña = 
-                new InterfazCompartirContraseña(ref sistema, ref usuario);
-            interfazCompartirContraseña.Show();
+            ControladorObtener controladorObtener = new ControladorObtener();
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
+            if (controladorObtener.ObtenerCredenciales(repositorioCredencial).Count > 0)
+            {
+                this.Close();
+                InterfazCompartirContraseña interfazCompartirContraseña =
+                    new InterfazCompartirContraseña(ref sistema, ref usuario);
+                interfazCompartirContraseña.Show();
+            }
+            else
+                MessageBox.Show("No existen credenciales registradas aun");
+
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)

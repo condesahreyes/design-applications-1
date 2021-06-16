@@ -87,8 +87,11 @@ namespace AccesoDatos
                 {
                     foreach (var entidadCredencial in contexto.credenciales)
                     {
-                        Credencial credencialDominio = mapper.PasarADominio(entidadCredencial, usuario);
-                        credencialesADevolver.Add(credencialDominio);
+                        if (entidadCredencial.UsuarioGestorNombre == this.usuario.Nombre)
+                        {
+                            Credencial credencialDominio = mapper.PasarADominio(entidadCredencial, usuario);
+                            credencialesADevolver.Add(credencialDominio);
+                        }
                     }
                     return credencialesADevolver;
                 }

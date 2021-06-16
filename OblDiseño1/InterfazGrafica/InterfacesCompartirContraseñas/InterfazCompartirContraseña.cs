@@ -86,6 +86,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             string nomSitioSeleccionado = comboBoxSitios.Text;
             string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
             RegistroCredencialCompartidaRepositorio repositorioCredencialCompartida = new RegistroCredencialCompartidaRepositorio(this.usuario);
+            ControladorAlta controladorAlta = new ControladorAlta();
 
             foreach (var iterador in this.usuario.ObtenerCredenciales())
             {
@@ -95,8 +96,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                     Credencial credencialACompartir = iterador;
                     try
                     {
-                        repositorioCredencialCompartida.Add(credencialACompartir, usuarioACompartir);
-                        this.usuario.CompartirContrasenia(credencialACompartir, usuarioACompartir);
+                        controladorAlta.AgregarRegistroCredencialCompartida(credencialACompartir,usuarioACompartir, repositorioCredencialCompartida);
                         MessageBox.Show("Se compartio la contraseña correctamente");
                         IrAInterfazContraseñasCompartidas();
                     }

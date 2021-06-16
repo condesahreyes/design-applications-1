@@ -56,10 +56,10 @@ namespace AccesoDatos.Repositorios
                         if(VerificarQueSonElMismoRegistro(registroADejarDeCompartir, registro))
                         {
                             contexto.credencialesCompartidas.Remove(registro);
-                            contexto.SaveChanges();
                             break;
                         }
-                    }               
+                    }
+                    contexto.SaveChanges();
                 }
                 else
                 {
