@@ -88,64 +88,50 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void CargarContraseñasCompartidasConmigo()
         {
 
-            BindingSource biso = new BindingSource();
+            BindingSource biso2 = new BindingSource();
             this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
             this.miGestor = usuario.GestorCompartirContrasenia;
 
-            biso.DataSource = this.miGestor.ObtenerContraseniasCompartidasConmigo().Values;
-
-            if (this.miGestor.ObtenerContraseniasCompartidasConmigo().Count == 0)
-            {
-                this.dataGridContraseñasCompartidas.Visible = true;
-            }
-            else
-            {
-                this.dataGridContraseñasCompartidas.DataSource = biso;
-                HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidas();
-                ModificarNombreDeColumnasDataGridContraseñasCompartidas();
-            }
-
-
-
-
-
-            this.dataGridContraseñasCompartidasConmigo.AllowUserToAddRows = false;
-            BindingSource biso2 = new BindingSource();
-            GestorContraseniasCompartidas miGestor = usuario.GestorCompartirContrasenia;
             List<Credencial> listaCredencialesCompartidasConmigo = new List<Credencial>();
-
-            foreach (var iterador in miGestor.ObtenerContraseniasCompartidasConmigo())
+            foreach (var iterador in this.miGestor.ObtenerContraseniasCompartidasConmigo())
             {
                 foreach (var iteradorAuxiliar in iterador.Value)
                     listaCredencialesCompartidasConmigo.Add(iteradorAuxiliar);
             }
 
+
             biso2.DataSource = listaCredencialesCompartidasConmigo;
-            if (listaCredencialesCompartidasConmigo.Count > 0)
+
+            if (this.miGestor.ObtenerContraseniasCompartidasConmigo().Count == 0)
+            {
+                this.dataGridContraseñasCompartidasConmigo.Visible = true;
+            }
+            else
             {
                 this.dataGridContraseñasCompartidasConmigo.DataSource = biso2;
                 HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo();
                 ModificarNombreDeColumnasDataGridContraseñasCompartidasConmigo();
             }
+
         }
 
         private void HacerAlgunasColumnasNoVisiblesDelDataGridContraseñasCompartidasConmigo()
         {
-            this.dataGridContraseñasCompartidas.Columns["ObtenerNivelSeguridad"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["ObtenerContraseña"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["TipoSitioOApp"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["DataBrench"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["Contraseña"].Visible = false;
-            this.dataGridContraseñasCompartidas.Columns["Nota"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["ObtenerNivelSeguridad"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["ObtenerContraseña"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["TipoSitioOApp"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["DataBrench"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["Contraseña"].Visible = false;
+            this.dataGridContraseñasCompartidasConmigo.Columns["Nota"].Visible = false;
         }
 
         private void ModificarNombreDeColumnasDataGridContraseñasCompartidasConmigo()
         {
-            this.dataGridContraseñasCompartidas.Columns["NombreUsuario"].HeaderText = "Usuario Nombre";
-            this.dataGridContraseñasCompartidas.Columns["NombreSitioApp"].HeaderText = "Sitio";
-            this.dataGridContraseñasCompartidas.Columns["FechaUltimaModificacion"].HeaderText =
+            this.dataGridContraseñasCompartidasConmigo.Columns["NombreUsuario"].HeaderText = "Usuario Nombre";
+            this.dataGridContraseñasCompartidasConmigo.Columns["NombreSitioApp"].HeaderText = "Sitio";
+            this.dataGridContraseñasCompartidasConmigo.Columns["FechaUltimaModificacion"].HeaderText =
                 "Ultima Modificación";
-            this.dataGridContraseñasCompartidas.Columns["Categoria"].HeaderText = "Categoría";
+            this.dataGridContraseñasCompartidasConmigo.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void InterfazContraseñasCompartidas_Load(object sender, EventArgs e)

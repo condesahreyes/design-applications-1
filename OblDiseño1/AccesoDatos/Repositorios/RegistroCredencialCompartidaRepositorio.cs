@@ -163,6 +163,7 @@ namespace AccesoDatos.Repositorios
 
         public List<Credencial> ObtenerCredencialesQueMeComparteUnUsuario(Usuario usuarioQueMeComparte)
         {
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuarioDuenio);
             using (Contexto contexto = new Contexto())
             {
                 List<Credencial> credencialesADevolver = new List<Credencial>();
@@ -171,9 +172,12 @@ namespace AccesoDatos.Repositorios
                     if (entidadRegistroContraseniaCompartida.NombreUsuarioAlQueSeLeCompartio == this.usuarioDuenio.Nombre &&
                         entidadRegistroContraseniaCompartida.NombreUsuarioQueComparte == usuarioQueMeComparte.Nombre)
                     {
-                        Usuario usuarioQueComparte = mapper.PasarADominio(entidadRegistroContraseniaCompartida.UsuarioQueComparte);
+                        Usuario usuarioQueMeEstaCompartiendo = new Usuario();
+                        usuarioQueMeEstaCompartiendo.Nombre = entidadRegistroContraseniaCompartida.NombreUsuarioQueComparte;
+
+                        EntidadCredencial entidadCredencialCompartida = repositorioCredencial.ObtenerEntidadCredencialPorId(entidadRegistroContraseniaCompartida.CredencialCompartidaId);
                         Credencial credencialDeDominio = mapper.PasarADominio(
-                            entidadRegistroContraseniaCompartida.CredencialCompartida, usuarioQueComparte);
+                            entidadCredencialCompartida, usuarioQueMeEstaCompartiendo);
                         credencialesADevolver.Add(credencialDeDominio);
                     }
                 }
