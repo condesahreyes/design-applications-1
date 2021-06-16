@@ -1,5 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using OblDiseño1.Entidades;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -9,18 +12,29 @@ namespace InterfazGrafica.InterfacesDeContrasenias
     {
         private Usuario usuario;
         private Sistema sistema;
+
+        private ControladorObtener controladorObtener = new ControladorObtener();
+
+        private IRepositorio<Categoria> repositorioCategoria;
+        private IRepositorio<Credencial> repositorioCredencial;
+
         public InterfazAgregarContrasenia(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
             this.sistema = sistema;
-            AgregarCategorias();    
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            repositorioCredencial = new CredencialRepositorio(this.usuario);
+
+            AgregarCategorias();
         }
 
         private void AgregarCategorias()
         {
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+
             var bindingSource = new BindingSource();
-            bindingSource.DataSource = usuario.ObtenerCategorias();
+            bindingSource.DataSource = categorias;
             this.comboBoxCategoria.DataSource = bindingSource.DataSource;
             this.comboBoxCategoria.SelectedIndex = 0;
         }
@@ -49,11 +63,13 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             string nombreSitio = textBoxNombreSitioApp.Text;
             string nota = textBoxNota.Text;
 
+            ControladorAlta controladorAlta = new ControladorAlta();
+
             Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
-            Contraseña contraseña = new Contraseña(contrasenia);
+            OblDiseño1.Entidades.Contraseña contraseña = new OblDiseño1.Entidades.Contraseña(contrasenia);
             Credencial credencial = new Credencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
 
-            usuario.AgregarCredencial(credencial);
+            controladorAlta.AgregarCredencial(credencial, repositorioCredencial);
 
             MessageBox.Show("Se ha agregado la contraseña con éxito");
         }

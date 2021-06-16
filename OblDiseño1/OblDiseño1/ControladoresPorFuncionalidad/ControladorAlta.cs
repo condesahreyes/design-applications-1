@@ -29,5 +29,10 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         {
             repositorioCredencial.Add(credencialAgregar);
         }
+
+        public void AgregarRegistroCredencialCompartida(Credencial credencialACompartir, Usuario usuarioAlQueComparto, IRepositorioCompartir<Credencial,Usuario> repositorioCompartir)
+        {
+            repositorioCompartir.Add(credencialACompartir, usuarioAlQueComparto);
+        }
     }
 }

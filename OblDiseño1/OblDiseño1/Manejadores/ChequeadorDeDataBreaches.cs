@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System;
 
 namespace OblDiseño1
 {
@@ -15,7 +19,7 @@ namespace OblDiseño1
         {
             List<Tarjeta> tarjetasVulneradas = new List<Tarjeta>();
 
-            foreach (string dato in datosDelDataBreach) 
+            foreach (string dato in datosDelDataBreach)
                 if (Tarjeta.ValidarLargoNumeroDeTarjeta(dato) && this.usuario.RevisarSiLaTarjetaEsMia(dato))
                     tarjetasVulneradas.Add(this.usuario.ObtenerTarjetaDeNumero(dato));
 
@@ -31,6 +35,28 @@ namespace OblDiseño1
                     credencialesVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
 
             return credencialesVulneradas;
+        }
+
+        public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivoTxt(string pathDelArchivo)
+        {
+            List<string> infoBreachada;
+            using (StreamReader lector = new StreamReader(pathDelArchivo))
+            {
+                string infoBrachadaEnUnSoloString = lector.ReadLine();
+                infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
+            }
+            return ObtenerTarjetasVulneradas(infoBreachada);
+        }
+
+        public List<Credencial> ObtenerCredencialesVulneradasDesdeArchivoTxt(string pathDelArchivo)
+        {
+            List<string> infoBreachada;
+            using (StreamReader lector = new StreamReader(pathDelArchivo))
+            {
+                string infoBrachadaEnUnSoloString = lector.ReadLine();
+                infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
+            }
+            return ObtenerCredencialesVulneradas(infoBreachada);
         }
     }
 }

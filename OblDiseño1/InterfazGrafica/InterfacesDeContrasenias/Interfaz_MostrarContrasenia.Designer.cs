@@ -1,7 +1,7 @@
 ﻿
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    partial class Interfaz_MostrarContrasenia
+    partial class Contraseña
     {
         /// <summary>
         /// Required designer variable.
@@ -31,16 +31,19 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             this.textBox_contrasenia = new System.Windows.Forms.TextBox();
             this.button_Volver = new System.Windows.Forms.Button();
-            this.lblListadoContrasenias = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_contrasenia
             // 
+            this.textBox_contrasenia.Enabled = false;
             this.textBox_contrasenia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_contrasenia.Location = new System.Drawing.Point(139, 53);
+            this.textBox_contrasenia.HideSelection = false;
+            this.textBox_contrasenia.Location = new System.Drawing.Point(22, 58);
             this.textBox_contrasenia.Name = "textBox_contrasenia";
-            this.textBox_contrasenia.Size = new System.Drawing.Size(377, 31);
+            this.textBox_contrasenia.Size = new System.Drawing.Size(332, 31);
             this.textBox_contrasenia.TabIndex = 0;
+            this.textBox_contrasenia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button_Volver
             // 
@@ -49,7 +52,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.button_Volver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Volver.Font = new System.Drawing.Font("Candara", 11.25F, System.Drawing.FontStyle.Bold);
             this.button_Volver.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.button_Volver.Location = new System.Drawing.Point(12, 145);
+            this.button_Volver.Location = new System.Drawing.Point(12, 113);
             this.button_Volver.Name = "button_Volver";
             this.button_Volver.Size = new System.Drawing.Size(81, 27);
             this.button_Volver.TabIndex = 11;
@@ -57,30 +60,30 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.button_Volver.UseVisualStyleBackColor = false;
             this.button_Volver.Click += new System.EventHandler(this.button_Volver_Click);
             // 
-            // lblListadoContrasenias
+            // label1
             // 
-            this.lblListadoContrasenias.AutoSize = true;
-            this.lblListadoContrasenias.BackColor = System.Drawing.Color.Transparent;
-            this.lblListadoContrasenias.Font = new System.Drawing.Font("Candara", 15.75F, System.Drawing.FontStyle.Bold);
-            this.lblListadoContrasenias.ForeColor = System.Drawing.Color.Black;
-            this.lblListadoContrasenias.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblListadoContrasenias.Location = new System.Drawing.Point(12, 58);
-            this.lblListadoContrasenias.Name = "lblListadoContrasenias";
-            this.lblListadoContrasenias.Size = new System.Drawing.Size(121, 26);
-            this.lblListadoContrasenias.TabIndex = 12;
-            this.lblListadoContrasenias.Text = "Contraseña:";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
+            this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(172)))), ((int)(((byte)(192)))));
+            this.label1.Location = new System.Drawing.Point(245, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 22);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Contraseña";
             // 
-            // Interfaz_MostrarContrasenia
+            // Contraseña
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 184);
-            this.Controls.Add(this.lblListadoContrasenias);
+            this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
+            this.ClientSize = new System.Drawing.Size(366, 152);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button_Volver);
             this.Controls.Add(this.textBox_contrasenia);
-            this.Name = "Interfaz_MostrarContrasenia";
+            this.Name = "Contraseña";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Contraseña";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,6 +93,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private System.Windows.Forms.TextBox textBox_contrasenia;
         private System.Windows.Forms.Button button_Volver;
-        private System.Windows.Forms.Label lblListadoContrasenias;
+        private System.Windows.Forms.Label label1;
     }
 }

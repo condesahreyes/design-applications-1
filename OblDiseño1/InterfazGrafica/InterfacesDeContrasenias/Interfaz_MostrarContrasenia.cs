@@ -11,10 +11,10 @@ using OblDiseño1;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
-    public partial class Interfaz_MostrarContrasenia : Form
+    public partial class Contraseña : Form
     {
         private Credencial credencial;
-        public Interfaz_MostrarContrasenia(Credencial unaCredencial)
+        public Contraseña(Credencial unaCredencial)
         {
             this.credencial = unaCredencial;
             InitializeComponent();
@@ -40,6 +40,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void button_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void lblListadoContrasenias_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

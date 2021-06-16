@@ -1,0 +1,288 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos.Entidades_Datos;
+using System.Collections.Generic;
+using OblDiseño1.Entidades;
+using AccesoDatos;
+using System.Linq;
+using System.Text;
+using OblDiseño1;
+using System;
+
+namespace Pruebas
+{
+    [TestClass]
+    public class ControladorObtencionTest
+    {
+        private ControladorObtener controladorObtener = new ControladorObtener();
+
+        private DateTime fecha;
+
+        private const string usuarioCredencial = "Usuario insta";
+        private const string numeroTarjeta = "1234567891234567";
+        private const string contraseña = "Mi contraseña";
+        private const string categoriaNombre = "Personal";
+        private const string credencialSitio = "Facebook";
+        private const string nombreTarjeta = "Master Card";
+        private const string usuarioGestor = "Hernán";
+        private const string credencialNota = "Nota ";
+        private const string tipoTarjeta = "Debito";
+
+        private static Usuario usuario = new Usuario(usuarioGestor, contraseña);
+        private Categoria categoria = new Categoria(categoriaNombre);
+
+        private IRepositorio<Credencial> credencialRepo = new CredencialRepositorio(usuario);
+        private IRepositorio<Categoria> categoriaRepo = new CategoriaRepositorio(usuario);
+        private IRepositorio<Tarjeta> tarjetaRepo = new TarjetaRepositorio(usuario);
+        private IRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio();
+
+        [TestInitialize]
+        public void Setup()
+        {
+            EliminarDatosBD();
+            fecha = new DateTime(2021, 12, 15);
+            AgregarUnRegistroEnCadaTabla();
+        }
+
+        [TestMethod]
+        public void ObtenerUnUsuarioNoNull()
+        {
+            Usuario usuarioObtenido = controladorObtener.ObtenerUsuario(usuario, usuarioRepo);
+
+            Assert.IsNotNull(usuarioObtenido);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
+        public void BuscarUsuarioInexistente()
+        {
+            Usuario usaurioInexistente = new Usuario("Juancito", contraseña);
+            Usuario usuarioObtenido = controladorObtener.ObtenerUsuario(usaurioInexistente, usuarioRepo);
+        }
+
+        [TestMethod]
+        public void VerificarNombreUsuarioGestor()
+        {
+            Usuario usuarioObtenido = controladorObtener.ObtenerUsuario(usuario, usuarioRepo);
+
+            Assert.IsTrue(usuarioObtenido.Nombre==usuarioGestor);
+        }
+
+        [TestMethod]
+        public void ObtenerCategoria()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+            Categoria usuarioObtenido = controladorObtener.ObtenerCategoria(categoria, categoriaRepo);
+
+            Assert.IsTrue(usuarioObtenido.Nombre == categoriaNombre);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
+        public void QuererObtenerCategoriaInexistente()
+        {
+            Categoria categoriaNoExiste = new Categoria("NoExiste");
+            Categoria usuarioObtenido = controladorObtener.ObtenerCategoria(categoriaNoExiste, categoriaRepo);
+        }
+
+        [TestMethod]
+        public void VerificarCategoriaNombre()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+            Categoria categoriaObtenida = controladorObtener.ObtenerCategoria(categoria, categoriaRepo);
+
+            Assert.IsTrue(categoria.Nombre == categoriaObtenida.Nombre);
+        }
+
+        [TestMethod]
+        public void ObtenerTarjeta()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+
+            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+                numeroTarjeta, 1234, fecha, categoria, credencialNota);
+            Tarjeta tajrteaObtenida = controladorObtener.ObtenerTarjeta(tarjeta, tarjetaRepo);
+
+            Assert.IsNotNull(tajrteaObtenida);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
+        public void QuererObtenerTarjetaInexistente()
+        {
+            string numeroTarjetaInexistente = "1245551234555555";
+
+            Categoria categoria = new Categoria(categoriaNombre);
+            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+                numeroTarjetaInexistente, 1234, fecha, categoria, credencialNota);
+
+            Tarjeta tajrteaObtenida = controladorObtener.ObtenerTarjeta(tarjeta, tarjetaRepo);
+        }
+
+        [TestMethod]
+        public void VerificarNumeroTarjejeta()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+
+            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+                numeroTarjeta, 1234, fecha, categoria, credencialNota);
+            Tarjeta tajrteaObtenida = controladorObtener.ObtenerTarjeta(tarjeta, tarjetaRepo);
+
+            Assert.IsTrue(tajrteaObtenida.Numero == numeroTarjeta);
+        }
+
+        [TestMethod]
+        public void VerificarCategoriaTarjejeta()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+
+            Tarjeta tarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+                numeroTarjeta, 1234, fecha, categoria, credencialNota);
+            Tarjeta tajrteaObtenida = controladorObtener.ObtenerTarjeta(tarjeta, tarjetaRepo);
+
+            Assert.IsTrue(tajrteaObtenida.Categoria.Nombre == categoria.Nombre);
+        }
+
+        [TestMethod]
+        public void ObtenerCredencial()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+            Contraseña contraseñaDominio = new Contraseña(contraseña);
+            Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio,
+                 credencialSitio, credencialNota, categoria);
+
+            Credencial credencialObtenida= controladorObtener.ObtenerCredencial(credencial, credencialRepo);
+
+            Assert.IsNotNull(credencialObtenida);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
+        public void QuererObtenerCredencialInexistente()
+        {
+            Categoria categoria = new Categoria(categoriaNombre);
+            Contraseña contraseñaDominio = new Contraseña(contraseña);
+            Credencial credencial = new Credencial("noExiste", contraseñaDominio,
+                credencialSitio, credencialNota, categoria);
+
+            Credencial credencialObtenida = controladorObtener.ObtenerCredencial(credencial, credencialRepo);
+
+        }
+
+        [TestMethod]
+        public void ObtenerTodasMisCategorias()
+        {
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(categoriaRepo);
+            Assert.IsTrue(categorias.Count==1);
+        }
+
+        [TestMethod]
+        public void ObtenerTodasMisTarjetas()
+        {
+            List<Tarjeta> tarjetas = controladorObtener.ObtenerTarjetas(tarjetaRepo);
+            Assert.IsTrue(tarjetas.Count == 1);
+        }
+
+        [TestMethod]
+        public void ObtenerTodasMisCredenciales()
+        {
+            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(credencialRepo);
+            Assert.IsTrue(credenciales.Count == 1);
+        }
+
+        private void AgregarUnRegistroEnCadaTabla()
+        {
+            AgregarUsuario(usuarioGestor, contraseña);
+            AgregarCategoria(categoriaNombre, usuarioGestor);
+            AgregarTarjeta(numeroTarjeta, usuarioGestor, categoriaNombre);
+            AgregarCredencial(usuarioCredencial, categoriaNombre, usuarioGestor);
+        }
+
+        private void EliminarDatosBD()
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.credenciales.RemoveRange(contexto.credenciales);
+                contexto.contraseñas.RemoveRange(contexto.contraseñas);
+                contexto.tarjetas.RemoveRange(contexto.tarjetas);
+                contexto.categorias.RemoveRange(contexto.categorias);
+                contexto.usuarios.RemoveRange(contexto.usuarios);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarUsuario(string nombreUsuario, string contraseña)
+        {
+            EntidadUsuario entidadusuario = new EntidadUsuario(nombreUsuario, contraseña);
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.usuarios.Add(entidadusuario);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarCategoria(string nombreCategoria, string nombreUsuario)
+        {
+            EntidadUsuario entidadUsuario = new EntidadUsuario(nombreUsuario, contraseña);
+            EntidadCategoria entidadCategoria = new EntidadCategoria(nombreCategoria, entidadUsuario);
+
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.categorias.Add(entidadCategoria);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarTarjeta(string numeroTarjeta, string nombreUsuario, string nombreCategoria)
+        {
+            int idCategoria = ObtenerIdCategoria(nombreCategoria, nombreUsuario);
+
+            EntidadUsuario entidadUsuario = new EntidadUsuario(nombreUsuario, null);
+            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta, 
+                tipoTarjeta, numeroTarjeta, 1234, fecha, idCategoria, nombreUsuario);
+
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.tarjetas.Add(entidadTarjeta);
+                contexto.SaveChanges();
+            }
+        }
+
+        public int ObtenerIdCategoria(string nombreCategoria, string usuarioDueño)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                foreach (var categoria in contexto.categorias)
+                    if (categoria.NombreCategoria == nombreCategoria && categoria.UsuarioNombre == usuarioDueño)
+                        return categoria.CategoriaId;
+            }
+            return 0;
+        }
+
+        public void AgregarCredencial(string nombreUsuario, string nombreCategoria, string usuarioDueño)
+        {
+            int idCategoria = ObtenerIdCategoria(nombreCategoria, usuarioDueño);
+            EntidadCredencial entidadCredencial;
+            AgregarContraseña(contraseña, 0);
+            using (Contexto contexto = new Contexto())
+            {
+                int idContraseña = contexto.contraseñas.Max(x => x.ContraseniaId);
+                entidadCredencial = new EntidadCredencial(nombreUsuario, credencialSitio, 
+                    credencialNota, idCategoria, usuarioDueño, idContraseña);
+
+                contexto.credenciales.Add(entidadCredencial);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void AgregarContraseña(string contraseña, int nivelSeguridadContrasenia)
+        {
+            EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, nivelSeguridadContrasenia);
+            using (Contexto contexto = new Contexto())
+            {
+                contexto.contraseñas.Add(entidadContraseña);
+                contexto.SaveChanges();
+            }
+        }
+    }
+}

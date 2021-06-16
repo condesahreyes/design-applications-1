@@ -3,6 +3,9 @@ using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
+using AccesoDatos;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -14,6 +17,10 @@ namespace InterfazGrafica.InterfacesReporte
 
         private Reporte manejadorDeDatosReporte;
 
+        private ControladorObtener controladorObtener;
+
+        private IRepositorio<Usuario> usuarioRepositorio;
+
         private const int nivelSeguridadRojo = 1;
         private const int nivelSeguridadNaranja = 2;
         private const int nivelSeguridadAmarillo = 3;
@@ -24,9 +31,12 @@ namespace InterfazGrafica.InterfacesReporte
         {
             InitializeComponent();
 
-            this.usuario = usuario;
+            this.controladorObtener = new ControladorObtener();
             this.sistema = sistema;
+            this.usuarioRepositorio = new UsuarioRepositorio();
+            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
             manejadorDeDatosReporte = new Reporte(usuario);
+
             this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
 
             ActualizarLables();
@@ -96,7 +106,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void button_PorCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(usuario, sistema, reporte);
+            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(this.usuario, sistema, reporte);
             porCat.Show();
         }
     }

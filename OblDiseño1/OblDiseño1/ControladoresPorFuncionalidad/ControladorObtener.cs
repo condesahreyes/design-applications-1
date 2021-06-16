@@ -1,36 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OblDiseño1.ControladoresPorFuncionalidad
 {
-    class ControladorObtener
+    public class ControladorObtener
     {
         public ControladorObtener()
         {
         }
 
-        public void ObtenerUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
+        public Usuario ObtenerUsuario(Usuario usuario, IRepositorio<Usuario> repositorioUsuario)
         {
-            repositorioUsuario.Get(usuario);
+            return repositorioUsuario.Get(usuario);
         }
 
-        public void ObtenerCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
+        public Categoria ObtenerCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
         {
-            repositorioCategoria.Get(categoria);
+            return repositorioCategoria.Get(categoria);
+        }
+
+        public List<Categoria> ObtenerCategorias(IRepositorio<Categoria> repositorioCategoria)
+        {
+            return repositorioCategoria.GetAll();
         }
 
 
-        public void ObtenerTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
+        public Tarjeta ObtenerTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
         {
-            repositorioTarjeta.Get(tarjetaAgregar);
+            return repositorioTarjeta.Get(tarjetaAgregar);
         }
 
-        public void ObtenerCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
+        public bool ExisteTarjeta(string numeroTarjeta, IRepositorio<Tarjeta> repositorioTarjeta)
         {
-            repositorioCredencial.Get(credencialAgregar);
+            Tarjeta tarjeta = new Tarjeta();
+            tarjeta.Numero = numeroTarjeta;
+            return repositorioTarjeta.Existe(tarjeta);
+        }
+
+        public List<Tarjeta> ObtenerTarjetas(IRepositorio<Tarjeta> repositorioTarjeta)
+        {
+            return repositorioTarjeta.GetAll();
+        }
+
+        public Credencial ObtenerCredencial(Credencial credencial, IRepositorio<Credencial> repositorioCredencial)
+        {
+            return repositorioCredencial.Get(credencial);
+        }
+
+        public List<Credencial> ObtenerCredenciales(IRepositorio<Credencial> repositorioCredencial)
+        {
+            return repositorioCredencial.GetAll();
+        }
+
+        public List<Usuario> ObtenerUsuarios(IRepositorio<Usuario> repositorioUsuario)
+        {
+            return repositorioUsuario.GetAll();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using OblDiseño1.Entidades;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.Entidades;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -23,12 +25,18 @@ namespace InterfazGrafica.InterfacesReporte
         private Sistema sistema;
         private reporte reporte;
 
+        private ControladorObtener controladorObtener;
+
+        private IRepositorio<Usuario> usuarioRepositorio;
+
         public InterfazReportePorCategoria(Usuario usu, Sistema sist, reporte rep)
         {
             InitializeComponent();
 
+            this.controladorObtener = new ControladorObtener();
+            this.sistema = sistema;
+            this.usuarioRepositorio = new UsuarioRepositorio();
             this.usuario = usu;
-            this.sistema = sist;
             this.reporte = rep;
 
             CrearGraficas();

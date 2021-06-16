@@ -1,5 +1,8 @@
-﻿using InterfazGrafica.InterfazCategoria;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfazCategoria;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 
 namespace InterfazGrafica.InterfazDeCategorias
@@ -9,6 +12,8 @@ namespace InterfazGrafica.InterfazDeCategorias
         private Usuario usuario;
         private Sistema sistema;
         private Categoria categoria;
+
+        private CategoriaRepositorio repositorioCategoria;
 
         private string validacionNombre = "Error el " +
             "nombre de la categoría debe contener entre 3 a 15 caracteres.";
@@ -22,15 +27,25 @@ namespace InterfazGrafica.InterfazDeCategorias
             this.sistema = sistema;
             this.categoria = categoria;
             this.textBoxModificarCategoria.Text = this.categoria.Nombre;
+
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
         }
 
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)
         {
+
             string nuevoNombre = textBoxModificarCategoria.Text;
-            if (YaExisteOtraCategoriaConEseNombre(nuevoNombre) || categoria.Nombre==nuevoNombre) 
+            if (!YaExisteOtraCategoriaConEseNombre(nuevoNombre) || categoria.Nombre == nuevoNombre)
                 try
                 {
-                    this.categoria.ActualizarNombre(nuevoNombre);
+                    if (categoria.Nombre != nuevoNombre)
+                    {
+                        Categoria categoriaModificar = new Categoria(nuevoNombre);
+                        ControladorModificar controladorModificar = new ControladorModificar();
+                        controladorModificar.ModificarCategoria(this.categoria, categoriaModificar, repositorioCategoria);
+                        this.categoria.ActualizarNombre(nuevoNombre);
+                    }
+
                     MessageBox.Show(modificadoCorrectamente);
                     IrACategoria();
                 }
@@ -45,10 +60,12 @@ namespace InterfazGrafica.InterfazDeCategorias
 
         private bool YaExisteOtraCategoriaConEseNombre(string nuevoNombreCategoria)
         {
-            foreach (Categoria cat in usuario.ObtenerCategorias())
+            ControladorObtener controladorObtener = new ControladorObtener();
+            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            foreach (Categoria cat in categorias)
                 if (cat.Nombre.ToLower() == nuevoNombreCategoria.ToLower())
-                    return false;
-            return true;
+                    return true;
+            return false;
         }
 
         private void IrACategoria()

@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -12,6 +14,11 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private Credencial credencial;
         private Sistema sistema;
         private Usuario usuario;
+
+        private ControladorObtener controladorObtener = new ControladorObtener();
+        private ControladorEliminar controladorEliminar = new ControladorEliminar();
+
+        private IRepositorioCompartir<Credencial, Usuario> repositorioRegistroContraCompartida;
 
         public InterfazDejarDeCompartirContrasenia(ref Sistema sistema, 
             ref Usuario usuario, ref Credencial credencial)
@@ -24,11 +31,14 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
             miGestor = usuario.GestorCompartirContrasenia;
 
+            repositorioRegistroContraCompartida = new RegistroCredencialCompartidaRepositorio(usuario);
+
             CargarDataGrid();
         }
 
         private void CargarDataGrid()
         {
+            this.dataGridUsuariosCompartidos.AllowUserToAddRows = false;
             if (miGestor.ObtenerContraseniasCompartidasPorMi().ContainsKey(credencial))
             {
                 List<Usuario> usuariosCompartidosPorDupla = miGestor.
@@ -41,9 +51,16 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonDejarDeCompartir_Click(object sender, EventArgs e)
         {
-            Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-            usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
-            IrAInterfazContraseñasCompartidas();
+            if (dataGridUsuariosCompartidos.CurrentRow != null && 0 < dataGridUsuariosCompartidos.RowCount)
+            {
+                Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
+                //usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
+                this.controladorEliminar.EliminarRegistroCredencialCompartida(this.credencial,
+                    usuarioSeleccionado, this.repositorioRegistroContraCompartida);
+                
+                
+                IrAInterfazContraseñasCompartidas();
+            }
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -58,5 +75,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 new InterfazContraseñasCompartidas(ref sistema, ref usuario);
             interfazContraseñasCompartidas.Show();
         }
+
     }
 }

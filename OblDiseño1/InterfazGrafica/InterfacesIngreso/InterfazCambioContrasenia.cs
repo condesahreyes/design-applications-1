@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -7,6 +9,11 @@ namespace InterfazGrafica.InterfazIngreso
     public partial class InterfazCambioContrasenia : Form
     {
         private Sistema sistema;
+
+        private ControladorModificar controladorModificar = new ControladorModificar();
+        private ControladorObtener controladorObtener = new ControladorObtener();
+        private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
+
         public InterfazCambioContrasenia(ref Sistema sistema)
         {
             InitializeComponent();
@@ -21,14 +28,12 @@ namespace InterfazGrafica.InterfazIngreso
 
             try
             {
-                if(sistema.PuedoIngresarAlSistema(nombreUsuario, contrasenia))
-                {
-                    Usuario usuario = sistema.DevolverUsuario(nombreUsuario);
-                    ModificarContrasenia(ref usuario, nuevaContrasenia);
-                }
+                Usuario intentoLogin = new Usuario(nombreUsuario, contrasenia);
+                Usuario usuarioRegistrado = controladorObtener.ObtenerUsuario(intentoLogin, usuariosRepo);
+                if (usuarioRegistrado != null && usuarioRegistrado.Contrasenia == contrasenia)
+                    ModificarContrasenia(intentoLogin, nuevaContrasenia);
                 else
                     MessageBox.Show("Error, contraseña incorrecta");
-
             }
             catch (Exception ObjectNotFoundException)
             {
@@ -37,11 +42,13 @@ namespace InterfazGrafica.InterfazIngreso
             }
         }
 
-        private void ModificarContrasenia(ref Usuario usuario, string unaContrasenia)
+        private void ModificarContrasenia(Usuario usuario, string unaContrasenia)
         {
             try
             {
-                usuario.ActualizarContrasenia(unaContrasenia);
+                Usuario usuarioModificado = new Usuario(usuario.Nombre, unaContrasenia);
+
+                controladorModificar.ModificarUsuario(usuario, usuarioModificado, usuariosRepo);
                 MessageBox.Show("Su contraseña se ha actualizado con éxito. Pruebe loguearse");
                 IrAlLogin();
             }
@@ -63,6 +70,7 @@ namespace InterfazGrafica.InterfazIngreso
         {
             IrAlLogin();
         }
+
         private void IrAlLogin()
         {
             this.Hide();

@@ -1,8 +1,11 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using InterfazGrafica.InterfacesDeContrasenias;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfacesDataBreaches;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
+using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -13,16 +16,24 @@ namespace InterfazGrafica.InterfazDataBreaches
         private Sistema sistema;
         private Usuario usuario;
 
+        private ControladorObtener controladorObtener;
+
+        private IRepositorio<Usuario> usuarioRepositorio;
+
         public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
         {
+            controladorObtener = new ControladorObtener();
             InitializeComponent();
             this.sistema = sistema;
-            this.usuario = usuario;
+            this.usuarioRepositorio = new UsuarioRepositorio();
+            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
         }
 
         private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
         {
             BindingSource biso = new BindingSource();
+
+            this.dataGridContrasenias.AllowUserToAddRows = false;
 
             credencialesVulneradas.Sort();
             biso.DataSource = credencialesVulneradas;
@@ -54,16 +65,18 @@ namespace InterfazGrafica.InterfazDataBreaches
         {
             BindingSource biso = new BindingSource();
 
+            this.dataGridTarjetas.AllowUserToAddRows = false;
+
             tarjetasVulneradas.Sort();
             biso.DataSource = tarjetasVulneradas;
+            this.dataGridTarjetas.DataSource = tarjetasVulneradas;
 
-            CambiarColumnasVisiblesDelDataGridTarjetas(tarjetasVulneradas);
+            CambiarColumnasVisiblesDelDataGridTarjetas();
             ModificarHeaderTextTarjeta();
         }
 
-        private void CambiarColumnasVisiblesDelDataGridTarjetas(List<Tarjeta> tarjetasVulneradas)
+        private void CambiarColumnasVisiblesDelDataGridTarjetas()
         {
-            dataGridTarjetas.DataSource = tarjetasVulneradas;
             dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
             dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
             dataGridTarjetas.Columns["fechaVencimiento"].Visible = false;
@@ -82,10 +95,11 @@ namespace InterfazGrafica.InterfazDataBreaches
             List<string> listaDatos = datos.Split(new[] { "\n" }, 
                     StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            List<Credencial> credencialesVulnderadas = sistema.
-                ObtenerDataBreachesCredenciales(ref usuario, listaDatos);
-            List<Tarjeta> tarjetasVulneradas = sistema.
-                ObtenerDataBreachesTarjetas(ref usuario, listaDatos);
+            
+            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario);
+            
+            List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
+            List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridCredenciales(credencialesVulnderadas);
@@ -110,6 +124,29 @@ namespace InterfazGrafica.InterfazDataBreaches
             this.Close();
             Menu menu = new Menu(ref sistema, ref usuario);
             menu.Show();
+        }
+
+        private void button_ImportarDesdeArchivo_Click(object sender, EventArgs e)
+        {
+            string rutaVacia = "";
+
+            InterfazImportarDatosDesdeArchivoTxt interfazImportarDesdeArchivo = new InterfazImportarDatosDesdeArchivoTxt(ref sistema);
+            interfazImportarDesdeArchivo.ShowDialog();
+
+            string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
+
+            if (!rutaSeleccionada.Equals(rutaVacia))
+            {
+                MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
+
+                List<Credencial> credencialesVulnderadas = sistema.
+                    ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
+                List<Tarjeta> tarjetasVulneradas = sistema.
+                    ObtenerDataBreachesTarjetassMedianteRuta(ref usuario, rutaSeleccionada);
+
+                CargarDataGridTarjetas(tarjetasVulneradas);
+                CargarDataGridCredenciales(credencialesVulnderadas);
+            }
         }
     }
 }

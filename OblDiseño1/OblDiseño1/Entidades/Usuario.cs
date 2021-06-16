@@ -22,14 +22,20 @@ namespace OblDiseño1
         private const int LARGO_NOMBRE_MAX = 25;
         private const int LARGO_NOMBRE_MIN = 1;
 
-        private List<Credencial> credenciales;
-        private List<Categoria> categorias;
-        private List<Tarjeta> tarjetas;
+        public List<Credencial> credenciales;
+        public List<Categoria> categorias;
+        public List<Tarjeta> tarjetas;
 
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-        public Usuario() { }
+        public Usuario() 
+        {
+            this.categorias = new List<Categoria>();
+            this.tarjetas = new List<Tarjeta>();
+            this.credenciales = new List<Credencial>();
+            this.GestorCompartirContrasenia = new GestorContraseniasCompartidas(this);
+        }
 
         public GestorContraseniasCompartidas GestorCompartirContrasenia { get; }
 
@@ -56,6 +62,13 @@ namespace OblDiseño1
         public List<Categoria> ObtenerCategorias()
         {
             return this.categorias;
+        }
+
+        public void BorrarListas()
+        {
+            this.categorias.Clear();
+            this.credenciales.Clear();
+            this.tarjetas.Clear();
         }
 
         private bool ValidarNombreUsuario(string unNombre)
