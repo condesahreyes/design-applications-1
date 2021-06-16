@@ -27,6 +27,10 @@ namespace AccesoDatos.Entidades_Datos
 
         public string Categoria { get; set; }
 
+        public EntidadDataBrechTarjeta()
+        {
+        }
+
         public EntidadDataBrechTarjeta(int tarjetaId, string numero, string nombreUsuario, 
             string nota, string nombreTarjeta, string tipo, int codigoSeguridad, DateTime fecha,
             string categoria)

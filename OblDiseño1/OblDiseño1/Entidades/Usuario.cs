@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using OblDiseño1.Exception;
 using System.Data;
