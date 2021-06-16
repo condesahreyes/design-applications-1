@@ -21,5 +21,12 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
         {
             repositorioCredencial.Delete(credencialAgregar);
         }
+
+        public void EliminarRegistroCredencialCompartida(Credencial aDejarDeCompartir, Usuario alQueLeDejoDeCompartir,
+                                    IRepositorioCompartir<Credencial, Usuario> repositorioRegistro)
+        {
+            repositorioRegistro.Delete(aDejarDeCompartir, alQueLeDejoDeCompartir);
+        }
+
     }
 }
