@@ -3,11 +3,16 @@ using AccesoDatos.Entidades_Datos;
 using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using OblDiseño1;
+using System.Collections.Generic;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.Manejadores;
 
 namespace AccesoDatos
 {
     public class Mapper
     {
+        private Encriptador encriptador = new Encriptador();
+        
         public EntidadCategoria PasarAEntidad(Categoria categoriaDominio, Usuario usuario)
         {
             EntidadCategoria categoriaDto = new EntidadCategoria();
@@ -34,11 +39,10 @@ namespace AccesoDatos
 
         public Contraseña PasarADominioContraseña(int idContraseña, Usuario usuario)
         {
-            EntidadContraseña contraseñaEntidad;
             ContraseñaRepositorio contraseñaRepositorio = new ContraseñaRepositorio(usuario);
-            contraseñaEntidad=contraseñaRepositorio.ObtenerDto(idContraseña);
-            return new Contraseña(contraseñaEntidad.Contrasenia);
-
+            string contraseniaEncriptada = contraseñaRepositorio.ObtenerDto(idContraseña).Contrasenia;
+            string contraseniaDesencriptada = encriptador.Desencriptar(contraseniaEncriptada, encriptador.LlaveEjemplo);
+            return new Contraseña(contraseniaDesencriptada);
         }
 
         public EntidadCredencial PasarAEntidadCredencial(Credencial credencialDominio, Usuario usuario)
