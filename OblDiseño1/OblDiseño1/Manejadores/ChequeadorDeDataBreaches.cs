@@ -1,18 +1,27 @@
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.IO;
 using System;
 
 namespace OblDiseño1
 {
     public class ChequeadorDeDataBreaches
     {
+        public int id { get; set; }
         public Usuario usuario { get; set; }
+
+        public DateTime Fecha { get; set; }
+
+        public List<Tarjeta> TarjetasVulneradas { get; set; }
+
+        public List<Credencial> CredencialesVulneradas { get; set; }
 
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;
+            CredencialesVulneradas = new List<Credencial>();
+            TarjetasVulneradas = new List<Tarjeta>();
+
         }
 
         public List<Tarjeta> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
@@ -40,22 +49,26 @@ namespace OblDiseño1
         public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivoTxt(string pathDelArchivo)
         {
             List<string> infoBreachada;
+
             using (StreamReader lector = new StreamReader(pathDelArchivo))
             {
                 string infoBrachadaEnUnSoloString = lector.ReadLine();
                 infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
             }
+
             return ObtenerTarjetasVulneradas(infoBreachada);
         }
 
         public List<Credencial> ObtenerCredencialesVulneradasDesdeArchivoTxt(string pathDelArchivo)
         {
             List<string> infoBreachada;
+
             using (StreamReader lector = new StreamReader(pathDelArchivo))
             {
                 string infoBrachadaEnUnSoloString = lector.ReadLine();
                 infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
             }
+
             return ObtenerCredencialesVulneradas(infoBreachada);
         }
     }

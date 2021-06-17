@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using OblDiseño1.Exception;
 using System.Data;
@@ -178,6 +179,7 @@ namespace OblDiseño1
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
         {
+            if(this.credenciales!=null)
             foreach (Credencial unaDupla in this.credenciales)
                 if (unaDupla.Contraseña.Contrasenia == unaContrasenia)
                     return true;

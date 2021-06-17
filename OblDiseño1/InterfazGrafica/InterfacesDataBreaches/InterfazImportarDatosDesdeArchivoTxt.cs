@@ -1,32 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using OblDiseño1;
+using System.IO;
+using System;
 
 namespace InterfazGrafica.InterfacesDataBreaches
 {
     public partial class InterfazImportarDatosDesdeArchivoTxt : Form
     {
-        private Sistema sistema;
         private string rutaSeleccionada = "";
+        private Sistema sistema;
+
         public InterfazImportarDatosDesdeArchivoTxt(ref Sistema sistema)
         {
             this.sistema = sistema;
             InitializeComponent();
         }
-
-        private void InterfazImportarDatosDesdeArchivoTxt_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void button_Volver_Click(object sender, EventArgs e)
         {
@@ -50,7 +38,6 @@ namespace InterfazGrafica.InterfacesDataBreaches
                 }
             }
         }
-
 
         private bool VerificarQueEsTxt(string ruta)
         {

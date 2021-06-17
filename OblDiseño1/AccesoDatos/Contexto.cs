@@ -13,6 +13,10 @@ namespace AccesoDatos
         public DbSet<EntidadUsuario> usuarios { get; set; }
         public DbSet<EntidadRegistroCredencialCompartida> credencialesCompartidas { get; set; }
 
+        public DbSet<EntidadDataBreach> dataBreach { get; set; }
+        public DbSet<EntidadDataBrechTarjeta> dataBreachTarjetas { get; set; }
+        public DbSet<EntidadDataBrechCredencial> dataBreachCredencial { get; set; }
+
 
         public Contexto() : base("BddD1")
         {
@@ -52,6 +56,16 @@ namespace AccesoDatos
             modelBuilder.Entity<EntidadTarjeta>().HasKey(c => new { c.TarjetaId });
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.tarjetas).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);
             modelBuilder.Entity<EntidadTarjeta>().HasRequired<EntidadCategoria>(c => c.Categoria).WithMany(u => u.Tarjetas).HasForeignKey(t => new { t.IdCategoria });
+
+            modelBuilder.Entity<EntidadDataBreach>().HasKey(c => new { c.IdDataBrech });
+            modelBuilder.Entity<EntidadDataBreach>().Property(c => c.IdDataBrech).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<EntidadDataBrechTarjeta>().HasKey(c => new { c.DataBrechId, c.TarjetaId });
+            modelBuilder.Entity<EntidadDataBrechCredencial>().HasKey(c => new { c.DataBrechId, c.IdCredencial });
+
+            modelBuilder.Entity<EntidadDataBrechTarjeta>().HasRequired<EntidadDataBreach>(c => c.dataBreach).WithMany(u => u.tarjetasVulneradas).HasForeignKey(t => new { t.DataBrechId });
+
+            modelBuilder.Entity<EntidadDataBrechCredencial>().HasRequired<EntidadDataBreach>(c => c.dataBreach).WithMany(u => u.credencialVulneradas).HasForeignKey(t => new { t.DataBrechId });
 
 
             modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasKey(e => new { e.NombreUsuarioQueComparte, e.NombreUsuarioAlQueSeLeCompartio, e.CredencialCompartidaId }) ;

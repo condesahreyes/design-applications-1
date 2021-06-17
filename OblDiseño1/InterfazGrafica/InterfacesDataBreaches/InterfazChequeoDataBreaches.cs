@@ -1,8 +1,8 @@
-﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using InterfazGrafica.InterfacesDeContrasenias;
+﻿using InterfazGrafica.InterfacesDeContrasenias;
 using OblDiseño1.ControladoresPorFuncionalidad;
 using InterfazGrafica.InterfacesDataBreaches;
 using System.Collections.Generic;
+using AccesoDatos.Repositorios;
 using System.Windows.Forms;
 using System.Linq;
 using AccesoDatos;
@@ -17,16 +17,99 @@ namespace InterfazGrafica.InterfazDataBreaches
         private Usuario usuario;
 
         private ControladorObtener controladorObtener;
+        private ControladorAlta controladorAlta;
 
         private IRepositorio<Usuario> usuarioRepositorio;
 
         public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
         {
-            controladorObtener = new ControladorObtener();
             InitializeComponent();
+
+            controladorObtener = new ControladorObtener();
+            controladorAlta = new ControladorAlta();
+
             this.sistema = sistema;
             this.usuarioRepositorio = new UsuarioRepositorio();
             this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
+        }
+
+        private void btnChequear_Click(object sender, EventArgs e)
+        {
+            string datos = TextBoxDatosDataBreaches.Text;
+
+            List<string> listaDatos = datos.Split(new[] { "\n" }, 
+                    StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            CrearChequeadorYMostrarDatosVulnerados(listaDatos);
+        }
+
+        private void CrearChequeadorYMostrarDatosVulnerados(List<string> listaDatos)
+        {
+            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario);
+
+            List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
+            List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
+
+            chequeador.TarjetasVulneradas = tarjetasVulneradas;
+            chequeador.CredencialesVulneradas = credencialesVulnderadas;
+
+            IRepositorio<ChequeadorDeDataBreaches> dataBreachRepo = new DataBrechRepositorio(this.usuario);
+
+            chequeador.Fecha = DateTime.Now;
+            controladorAlta.AgregarDataBrache(chequeador, dataBreachRepo);
+
+            CargarDataGridTarjetas(tarjetasVulneradas);
+            CargarDataGridCredenciales(credencialesVulnderadas);
+        }
+
+        private void btnModificarDupla_Click(object sender, EventArgs e)
+        {
+            if (0 < dataGridContrasenias.RowCount)
+            {
+                Credencial credencialSeleccionada = (Credencial)dataGridContrasenias.CurrentRow.DataBoundItem;
+
+                InterfazDeModificarContrasenia interfazModificarContrasenia = new 
+                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, 
+                    "InterfazChequeoDataBreaches");
+
+                interfazModificarContrasenia.Show();
+                this.Close();
+            }
+        }
+
+        private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            InterfazHistoricosDataBreach dataBreach = new 
+                InterfazHistoricosDataBreach(ref usuario, ref sistema);
+            dataBreach.Show();
+        }
+
+        private void button_ImportarDesdeArchivo_Click(object sender, EventArgs e)
+        {
+            string rutaVacia = "";
+
+            InterfazImportarDatosDesdeArchivoTxt interfazImportarDesdeArchivo = new 
+                InterfazImportarDatosDesdeArchivoTxt(ref sistema);
+            interfazImportarDesdeArchivo.ShowDialog();
+
+            string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
+
+            if (!rutaSeleccionada.Equals(rutaVacia))
+                CargarDataGridsConDatosImportados(rutaSeleccionada);
+        }
+
+        private void CargarDataGridsConDatosImportados(string rutaSeleccionada)
+        {
+            MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
+
+            List<Credencial> credencialesVulnderadas = sistema.
+                ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
+            List<Tarjeta> tarjetasVulneradas = sistema.
+                ObtenerDataBreachesTarjetassMedianteRuta(ref usuario, rutaSeleccionada);
+
+            CargarDataGridTarjetas(tarjetasVulneradas);
+            CargarDataGridCredenciales(credencialesVulnderadas);
         }
 
         private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
@@ -86,67 +169,6 @@ namespace InterfazGrafica.InterfazDataBreaches
         private void ModificarHeaderTextTarjeta()
         {
             this.dataGridTarjetas.Columns["Numero"].HeaderText = "Número";
-        }
-
-        private void btnChequear_Click(object sender, EventArgs e)
-        {
-            string datos = TextBoxDatosDataBreaches.Text;
-
-            List<string> listaDatos = datos.Split(new[] { "\n" }, 
-                    StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            
-            ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario);
-            
-            List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
-            List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
-
-            CargarDataGridTarjetas(tarjetasVulneradas);
-            CargarDataGridCredenciales(credencialesVulnderadas);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (0 < dataGridContrasenias.RowCount)
-            {
-                Credencial credencialSeleccionada = (Credencial)dataGridContrasenias.CurrentRow.DataBoundItem;
-                InterfazDeModificarContrasenia interfazModificarContrasenia = new 
-                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, 
-                    "InterfazChequeoDataBreaches");
-
-                interfazModificarContrasenia.Show();
-                this.Close();
-            }
-        }
-
-        private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
-            menu.Show();
-        }
-
-        private void button_ImportarDesdeArchivo_Click(object sender, EventArgs e)
-        {
-            string rutaVacia = "";
-
-            InterfazImportarDatosDesdeArchivoTxt interfazImportarDesdeArchivo = new InterfazImportarDatosDesdeArchivoTxt(ref sistema);
-            interfazImportarDesdeArchivo.ShowDialog();
-
-            string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
-
-            if (!rutaSeleccionada.Equals(rutaVacia))
-            {
-                MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
-
-                List<Credencial> credencialesVulnderadas = sistema.
-                    ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
-                List<Tarjeta> tarjetasVulneradas = sistema.
-                    ObtenerDataBreachesTarjetassMedianteRuta(ref usuario, rutaSeleccionada);
-
-                CargarDataGridTarjetas(tarjetasVulneradas);
-                CargarDataGridCredenciales(credencialesVulnderadas);
-            }
         }
     }
 }

@@ -12,6 +12,7 @@ using OblDiseño1;
 using System;
 using AccesoDatos;
 using System.Collections.Generic;
+using InterfazGrafica.InterfacesDataBreaches;
 
 namespace InterfazGrafica.InterfacesMenu
 {
@@ -89,8 +90,9 @@ namespace InterfazGrafica.InterfacesMenu
         private void btnDataBreaches_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazChequeoDataBreaches dataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
-            dataBreaches.Show();
+            InterfazHistoricosDataBreach dataBreach = new InterfazHistoricosDataBreach(ref usuario, ref sistema);
+            dataBreach.Show();
+
         }
 
         private void btnReportes_Click(object sender, EventArgs e)

@@ -61,6 +61,24 @@ namespace AccesoDatos
             return null;
         }
 
+        public EntidadTarjeta ObtenerDto(Tarjeta tarjeta)
+        {
+            if (Existe(tarjeta))
+            {
+                using (Contexto contexto = new Contexto())
+                    foreach (var entidadTarjeta in contexto.tarjetas)
+                        if (entidadTarjeta.UsuarioGestorNombre == this.usuario.Nombre
+                            && tarjeta.Numero == entidadTarjeta.Numero)
+                            return entidadTarjeta;
+            }
+            else
+            {
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente
+                        ("No existe una tarjeta con este numero");
+            }
+            return null;
+        }
+
         public List<Tarjeta> GetAll() 
         {
             using (Contexto contexto = new Contexto())

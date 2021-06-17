@@ -1,4 +1,5 @@
 ﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfacesDataBreaches;
 using InterfazGrafica.InterfazDataBreaches;
 using InterfazGrafica.InterfacesReporte;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
@@ -16,6 +18,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private Usuario usuario;
         private Sistema sistema;
 
+        private ChequeadorDeDataBreaches miChequeador;
+
         private int nivelSeguridadContraseniaOriginal;
         private int nivelSeguridadContraseniaNuevo;
 
@@ -24,6 +28,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_ReporteVer = "InterfazReporteVer";
         private const string posibleInterfazPadre_Contrasenia = "InterfazContrasenia";
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
+        private const string posibleInterfazPadre_ChequeoDataBreachesHistorico = "InterfazVerRegistroDataBreach";
 
         private IRepositorio<Credencial> repositorioCredencial;
         private IRepositorio<OblDiseño1.Entidades.Contraseña> repositorioContraseña;
@@ -35,6 +40,21 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
             Credencial credencial, string padre)
         {
+            Inicializador(ref usuario, ref sistema, credencial, padre, null);
+        }
+
+        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
+            Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
+        {
+            Inicializador(ref usuario, ref sistema, credencial, padre, miChequeador);
+        }
+
+        private void Inicializador(ref Usuario usuario, ref Sistema sistema,
+            Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
+        {
+            if (miChequeador != null)
+                this.miChequeador = miChequeador;
+
             this.usuario = usuario;
             this.sistema = sistema;
             this.credencial = credencial;
@@ -167,6 +187,11 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
                     interfazDataBreaches.Show();
                     this.Close();
+                    break;                
+                case posibleInterfazPadre_ChequeoDataBreachesHistorico:
+                    InterfazVerRegistroDataBreach interfazDataBreachesHistorico = new InterfazVerRegistroDataBreach(ref usuario, ref sistema, ref miChequeador);
+                    interfazDataBreachesHistorico.Show();
+                    this.Close();
                     break;
             }
         }
@@ -237,6 +262,55 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 nuevaContra = genContra.ObtenerNuevaContrasenia();
             }
             this.textBox_Contrasenia.Text = nuevaContra;
+        }
+
+        private void btnSugerencias_Click(object sender, EventArgs e)
+        {
+            string posibleContraseña = textBox_Contrasenia.Text;
+
+            string mensaje = "";
+
+            mensaje = EsContraseñaSegura(posibleContraseña, mensaje);
+
+            mensaje = EsContraseñaDuplicada(posibleContraseña, mensaje);
+
+            mensaje = EsContraseñaVulnerada(posibleContraseña, mensaje);
+
+            MessageBox.Show(mensaje);
+        }
+
+        private string EsContraseñaSegura(string posibleContraseña, string mensaje)
+        {
+            bool segura = controladorObtener.ObtenerSiEsContraseniaSegura(posibleContraseña);
+
+            if (segura)
+                mensaje = mensaje + "Es una contraseña segura \n";
+            else
+                mensaje = mensaje + "No es una contraseña segura \n";
+
+            return mensaje;
+        }
+
+        private string EsContraseñaDuplicada(string posibleContraseña, string mensaje)
+        {
+            bool duplicada = controladorObtener.ObtenerSiEsContraseniaDuplicada
+                (posibleContraseña, this.credencial, repositorioCredencial);
+
+            if (duplicada)
+                mensaje = mensaje + "Es una contraseña duplicada \n";
+
+            return mensaje;
+        }
+
+        private string EsContraseñaVulnerada(string posibleContraseña, string mensaje)
+        {
+            IRepositorio<ChequeadorDeDataBreaches> repoDataBreach = new DataBrechRepositorio(this.usuario);
+            bool vulnerada = controladorObtener.ObtenerSiEsContraseñaVulnerada(posibleContraseña, repoDataBreach);
+
+            if (vulnerada)
+                mensaje = mensaje + "Es una contraseña vulnerada \n";
+
+            return mensaje;
         }
     }
 }

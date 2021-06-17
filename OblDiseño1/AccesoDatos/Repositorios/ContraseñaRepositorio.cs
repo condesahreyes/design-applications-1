@@ -4,13 +4,14 @@ using OblDiseño1.Entidades;
 using System.Linq;
 using OblDiseño1;
 using System;
+using OblDiseño1.Manejadores;
 
 namespace AccesoDatos
 {
     public class ContraseñaRepositorio : IRepositorio<Contraseña>
     {
         private readonly Mapper mapper = new Mapper();
-
+        private Encriptador encriptador = new Encriptador();
         public Usuario usuario;
 
         public ContraseñaRepositorio(Usuario usuarioDueñoDominio)
@@ -21,7 +22,8 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                EntidadContraseña miContraseña = new EntidadContraseña(contraseña.Contrasenia,
+                string contraseniaEncriptada = encriptador.Encriptar(contraseña.Contrasenia, encriptador.LlaveEjemplo);
+                EntidadContraseña miContraseña = new EntidadContraseña(contraseniaEncriptada,
                 contraseña.NivelSeguridadContrasenia);
                 contexto.contraseñas.Add(miContraseña);
                 contexto.SaveChanges();
@@ -112,7 +114,7 @@ namespace AccesoDatos
             using (Contexto contexto = new Contexto())
             {
                 EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
-                contraseñaABuscar.Contrasenia = contraseñaAModificar.Contrasenia;
+                contraseñaABuscar.Contrasenia = encriptador.Encriptar(contraseñaAModificar.Contrasenia, encriptador.LlaveEjemplo);
                 contexto.SaveChanges();
             }
         }

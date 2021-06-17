@@ -77,6 +77,24 @@ namespace AccesoDatos
             return null;
         }
 
+        public EntidadCredencial ObtenerDto(Credencial credencial)
+        {
+            using (Contexto contexto = new Contexto())
+            {
+                if (Existe(credencial))
+                {
+                    foreach (var credencialRecorre in contexto.credenciales)
+                    {
+                        if (credencialRecorre.UsuarioGestorNombre == usuario.Nombre &&
+                            credencialRecorre.NombreSitioApp == credencial.NombreSitioApp
+                            && credencialRecorre.NombreUsuario == credencial.NombreUsuario)
+                            return credencialRecorre;
+                    }
+                }
+            }
+            return null;
+        }
+
         public List<Credencial> GetAll()
         {
             List<Credencial> credencialesADevolver = new List<Credencial>();

@@ -67,7 +67,7 @@
             this.dataGridTarjetas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dataGridTarjetas.EnableHeadersVisualStyles = false;
             this.dataGridTarjetas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
-            this.dataGridTarjetas.Location = new System.Drawing.Point(269, 97);
+            this.dataGridTarjetas.Location = new System.Drawing.Point(269, 70);
             this.dataGridTarjetas.MultiSelect = false;
             this.dataGridTarjetas.Name = "dataGridTarjetas";
             this.dataGridTarjetas.ReadOnly = true;
@@ -82,9 +82,9 @@
             // 
             // TextBoxDatosDataBreaches
             // 
-            this.TextBoxDatosDataBreaches.Location = new System.Drawing.Point(23, 97);
+            this.TextBoxDatosDataBreaches.Location = new System.Drawing.Point(23, 70);
             this.TextBoxDatosDataBreaches.Name = "TextBoxDatosDataBreaches";
-            this.TextBoxDatosDataBreaches.Size = new System.Drawing.Size(221, 211);
+            this.TextBoxDatosDataBreaches.Size = new System.Drawing.Size(221, 174);
             this.TextBoxDatosDataBreaches.TabIndex = 1;
             this.TextBoxDatosDataBreaches.Text = "";
             // 
@@ -123,9 +123,9 @@
             this.btnChequear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChequear.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
             this.btnChequear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnChequear.Location = new System.Drawing.Point(144, 310);
+            this.btnChequear.Location = new System.Drawing.Point(74, 250);
             this.btnChequear.Name = "btnChequear";
-            this.btnChequear.Size = new System.Drawing.Size(100, 27);
+            this.btnChequear.Size = new System.Drawing.Size(170, 27);
             this.btnChequear.TabIndex = 27;
             this.btnChequear.Text = "Chequear";
             this.btnChequear.UseVisualStyleBackColor = false;
@@ -137,7 +137,7 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label2.Location = new System.Drawing.Point(265, 72);
+            this.label2.Location = new System.Drawing.Point(265, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 22);
             this.label2.TabIndex = 29;
@@ -162,7 +162,7 @@
             this.dataGridContrasenias.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dataGridContrasenias.EnableHeadersVisualStyles = false;
             this.dataGridContrasenias.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(27)))), ((int)(((byte)(60)))));
-            this.dataGridContrasenias.Location = new System.Drawing.Point(269, 231);
+            this.dataGridContrasenias.Location = new System.Drawing.Point(269, 204);
             this.dataGridContrasenias.MultiSelect = false;
             this.dataGridContrasenias.Name = "dataGridContrasenias";
             this.dataGridContrasenias.ReadOnly = true;
@@ -179,7 +179,7 @@
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.dataGridContrasenias.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridContrasenias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridContrasenias.Size = new System.Drawing.Size(282, 106);
+            this.dataGridContrasenias.Size = new System.Drawing.Size(282, 113);
             this.dataGridContrasenias.TabIndex = 0;
             // 
             // label3
@@ -188,7 +188,7 @@
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label3.Location = new System.Drawing.Point(265, 206);
+            this.label3.Location = new System.Drawing.Point(265, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(220, 22);
             this.label3.TabIndex = 31;
@@ -201,13 +201,13 @@
             this.btnModificarDupla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificarDupla.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
             this.btnModificarDupla.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.btnModificarDupla.Location = new System.Drawing.Point(396, 343);
+            this.btnModificarDupla.Location = new System.Drawing.Point(381, 336);
             this.btnModificarDupla.Name = "btnModificarDupla";
-            this.btnModificarDupla.Size = new System.Drawing.Size(155, 27);
+            this.btnModificarDupla.Size = new System.Drawing.Size(170, 27);
             this.btnModificarDupla.TabIndex = 32;
             this.btnModificarDupla.Text = "Modificar contraseña";
             this.btnModificarDupla.UseVisualStyleBackColor = false;
-            this.btnModificarDupla.Click += new System.EventHandler(this.button1_Click);
+            this.btnModificarDupla.Click += new System.EventHandler(this.btnModificarDupla_Click);
             // 
             // label1
             // 
@@ -215,7 +215,7 @@
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.label1.Location = new System.Drawing.Point(19, 72);
+            this.label1.Location = new System.Drawing.Point(19, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 22);
             this.label1.TabIndex = 33;
@@ -228,7 +228,7 @@
             this.button_ImportarDesdeArchivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ImportarDesdeArchivo.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
             this.button_ImportarDesdeArchivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
-            this.button_ImportarDesdeArchivo.Location = new System.Drawing.Point(144, 347);
+            this.button_ImportarDesdeArchivo.Location = new System.Drawing.Point(74, 283);
             this.button_ImportarDesdeArchivo.Name = "button_ImportarDesdeArchivo";
             this.button_ImportarDesdeArchivo.Size = new System.Drawing.Size(170, 27);
             this.button_ImportarDesdeArchivo.TabIndex = 34;

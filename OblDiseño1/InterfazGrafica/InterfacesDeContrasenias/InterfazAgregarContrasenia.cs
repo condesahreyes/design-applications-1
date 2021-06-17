@@ -5,6 +5,7 @@ using OblDiseño1.Entidades;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
@@ -51,6 +52,10 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 MostrarCualesSonLosDatosCorrectos();
             }
             catch (ExepcionInvalidUsuarioData)
+            {
+                MostrarMensajeUsuarioYaRegistrado();
+            }
+            catch (ExepcionObjetosRepetidos)
             {
                 MostrarMensajeUsuarioYaRegistrado();
             }
@@ -114,6 +119,55 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 nuevaContrasenia = generarContrasenia.ObtenerNuevaContrasenia();
 
             this.textBoxContrasenia.Text = nuevaContrasenia;
+        }
+
+        private void btnSugerencias_Click(object sender, EventArgs e)
+        {
+            string posibleContraseña = textBoxContrasenia.Text;
+
+            string mensaje = "";
+
+            mensaje = EsContraseñaSegura(posibleContraseña, mensaje);
+
+            mensaje = EsContraseñaDuplicada(posibleContraseña, mensaje);
+
+            mensaje = EsContraseñaVulnerada(posibleContraseña, mensaje);
+
+            MessageBox.Show(mensaje);
+        }
+
+        private string EsContraseñaSegura(string posibleContraseña, string mensaje)
+        {
+            bool segura = controladorObtener.ObtenerSiEsContraseniaSegura(posibleContraseña);
+
+            if (segura)
+                mensaje = mensaje + "Es una contraseña segura \n";
+            else
+                mensaje = mensaje + "No es una contraseña segura \n";
+
+            return mensaje;
+        }
+
+        private string EsContraseñaDuplicada(string posibleContraseña, string mensaje)
+        {
+            bool duplicada = controladorObtener.ObtenerSiEsContraseniaDuplicada
+                (posibleContraseña, null, repositorioCredencial);
+
+            if (duplicada)
+                mensaje = mensaje + "Es una contraseña duplicada \n";
+
+            return mensaje;
+        }
+
+        private string EsContraseñaVulnerada(string posibleContraseña, string mensaje)
+        {
+            IRepositorio<ChequeadorDeDataBreaches> repoDataBreach = new DataBrechRepositorio(this.usuario);
+            bool vulnerada = controladorObtener.ObtenerSiEsContraseñaVulnerada(posibleContraseña, repoDataBreach);
+
+            if (vulnerada)
+                mensaje = mensaje + "Es una contraseña vulnerada \n";
+
+            return mensaje;
         }
     }
 }
