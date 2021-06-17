@@ -44,6 +44,7 @@
     <Compile Include="ControladoresPorEntidad\ControladorCategoria.cs" />
     <Compile Include="ControladoresPorEntidad\ControladorCredencial.cs" />
     <Compile Include="ControladoresPorEntidad\ControladorDataBreach.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorRegistroCredencialCompartida.cs" />
     <Compile Include="ControladoresPorEntidad\ControladorTarjeta.cs" />
     <Compile Include="ControladoresPorEntidad\ControladorUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

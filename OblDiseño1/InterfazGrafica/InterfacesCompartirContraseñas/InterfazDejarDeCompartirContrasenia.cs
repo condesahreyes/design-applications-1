@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
+using CapaDeComunicación.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -13,10 +14,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private Credencial credencial;
         private Usuario usuario;
 
-        private ControladorObtener controladorObtener = new ControladorObtener();
-        private ControladorEliminar controladorEliminar = new ControladorEliminar();
-
-        private IRepositorioCompartir<Credencial, Usuario> repositorioRegistroContraCompartida;
+        private ControladorRegistroCredencialCompartida controladorRegistroCredencialCompartida;
 
         public InterfazDejarDeCompartirContrasenia(ref Usuario usuario, ref Credencial credencial)
         {
@@ -24,11 +22,9 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
             this.usuario = usuario;
             this.credencial = credencial;
+            this.controladorRegistroCredencialCompartida = new ControladorRegistroCredencialCompartida(this.usuario);
 
             miGestor = usuario.GestorCompartirContrasenia;
-
-            repositorioRegistroContraCompartida = new RegistroCredencialCompartidaRepositorio(usuario);
-
             CargarDataGrid();
         }
 
@@ -50,9 +46,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             if (dataGridUsuariosCompartidos.CurrentRow != null && 0 < dataGridUsuariosCompartidos.RowCount)
             {
                 Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-                this.controladorEliminar.EliminarRegistroCredencialCompartida(this.credencial,
-                    usuarioSeleccionado, this.repositorioRegistroContraCompartida);
-
+                controladorRegistroCredencialCompartida.dejarDeCompartirCredencial(this.credencial, usuarioSeleccionado);
+                MessageBox.Show("La contraseña se dejo de compartir exitosamente");
                 IrAInterfazContraseñasCompartidas();
             }
         }

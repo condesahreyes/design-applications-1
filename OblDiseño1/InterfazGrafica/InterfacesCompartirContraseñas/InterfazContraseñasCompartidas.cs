@@ -7,6 +7,7 @@ using AccesoDatos;
 using OblDiseño1;
 using System;
 using OblDiseño1.ControladoresPorEntidad;
+using CapaDeComunicación.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -14,31 +15,32 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Usuario usuario;
         GestorContraseniasCompartidas miGestor;
+        ControladorRegistroCredencialCompartida controladorRegistroCredencialCompartida;
         ControladorCredencial controladorCredencial;
         public InterfazContraseñasCompartidas(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
+            this.controladorRegistroCredencialCompartida = new ControladorRegistroCredencialCompartida(this.usuario);
+            this.controladorCredencial = new ControladorCredencial(this.usuario);
             miGestor = usuario.GestorCompartirContrasenia;
             miGestor.BorrarDatosDeGestor();
 
-            controladorCredencial = new ControladorCredencial(this.usuario);
-            IRepositorioCompartir<Credencial, Usuario> repositorioContraseñasCompartidas = new RegistroCredencialCompartidaRepositorio(this.usuario);
-            List<Credencial> contraseñasQueComparto = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueComparto();
-            List<Credencial> contraseñasQueMeComparten = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueMeComparten();
+            List<Credencial> contraseñasQueComparto = controladorRegistroCredencialCompartida.ObtenerTodasLasCredencialesQueComparto();
+            List<Credencial> contraseñasQueMeComparten = controladorRegistroCredencialCompartida.ObtenerTodasLasCredencialesQueMeComparten();
             
-            List<Usuario> usuariosQueMeCompartenAlgunaCredencial = repositorioContraseñasCompartidas.ObtenerUsuariosQueMeCompartenAlgunaCredencial();
+            List<Usuario> usuariosQueMeCompartenAlgunaCredencial = controladorRegistroCredencialCompartida.ObtenerUsuariosQueMeCompartenAlgunaCredencial();
 
             foreach (var credencial in contraseñasQueComparto)
             {
-                List<Usuario> usuariosALosQueComparto = repositorioContraseñasCompartidas.ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(credencial);
+                List<Usuario> usuariosALosQueComparto = controladorRegistroCredencialCompartida.ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(credencial);
                 miGestor.ObtenerContraseniasCompartidasPorMi().Add(credencial, usuariosALosQueComparto);
             }
 
             foreach (var usuarioQueMeComparteAlgunaCred in usuariosQueMeCompartenAlgunaCredencial)
             {
-                List<Credencial> credencialesQueMeComparteElUsuario = repositorioContraseñasCompartidas.ObtenerCredencialesQueMeComparteUnUsuario(usuarioQueMeComparteAlgunaCred);
+                List<Credencial> credencialesQueMeComparteElUsuario = controladorRegistroCredencialCompartida.ObtenerCredencialesQueMeComparteElUsuario(usuarioQueMeComparteAlgunaCred);
                 miGestor.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparteAlgunaCred,credencialesQueMeComparteElUsuario);
             }
 

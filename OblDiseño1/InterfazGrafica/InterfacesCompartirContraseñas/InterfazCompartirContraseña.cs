@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using CapaDeComunicación.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -14,11 +15,13 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private ControladorUsuario controladorUsuario;
         private ControladorCredencial controladorCredencial;
+        private ControladorRegistroCredencialCompartida controladorRegistroCredencialCompartida;
 
          public InterfazCompartirContraseña(ref Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
+            this.controladorRegistroCredencialCompartida = new ControladorRegistroCredencialCompartida(this.usuario);
 
             CrearManejadoresCredencial();
             CrearControladorUsuario();
@@ -96,8 +99,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             string nomSitioSeleccionado = comboBoxSitios.Text;
             string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
             RegistroCredencialCompartidaRepositorio repositorioCredencialCompartida = new RegistroCredencialCompartidaRepositorio(this.usuario);
-            ControladorAlta controladorAlta = new ControladorAlta();
-
+            
             foreach (var iterador in this.usuario.ObtenerCredenciales())
             {
                 if ((iterador.NombreSitioApp == nomSitioSeleccionado) && 
@@ -106,8 +108,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                     Credencial credencialACompartir = iterador;
                     try
                     {
-                        controladorAlta.AgregarRegistroCredencialCompartida(credencialACompartir,usuarioACompartir, 
-                            repositorioCredencialCompartida);
+                        this.controladorRegistroCredencialCompartida.compartirCredencial(credencialACompartir, usuarioACompartir);
                         MessageBox.Show("Se compartio la contraseña correctamente");
                         IrAInterfazContraseñasCompartidas();
                     }
