@@ -22,7 +22,7 @@ namespace AccesoDatos
         {
             using (Contexto contexto = new Contexto())
             {
-                string contraseniaEncriptada = encriptador.Encriptar(contraseña.Contrasenia, encriptador.LlaveEjemplo);
+                string contraseniaEncriptada = encriptador.Encriptar(contraseña.Contrasenia, encriptador.ObtenerLlaveHardcodeada());
                 EntidadContraseña miContraseña = new EntidadContraseña(contraseniaEncriptada,
                 contraseña.NivelSeguridadContrasenia);
                 contexto.contraseñas.Add(miContraseña);
@@ -114,7 +114,7 @@ namespace AccesoDatos
             using (Contexto contexto = new Contexto())
             {
                 EntidadContraseña contraseñaABuscar = contexto.contraseñas.Find(contraseñaId);
-                contraseñaABuscar.Contrasenia = encriptador.Encriptar(contraseñaAModificar.Contrasenia, encriptador.LlaveEjemplo);
+                contraseñaABuscar.Contrasenia = encriptador.Encriptar(contraseñaAModificar.Contrasenia, encriptador.ObtenerLlaveHardcodeada());
                 contexto.SaveChanges();
             }
         }
