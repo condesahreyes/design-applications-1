@@ -8,16 +8,13 @@ namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazCambioContrasenia : Form
     {
-        private Sistema sistema;
-
         private ControladorModificar controladorModificar = new ControladorModificar();
         private ControladorObtener controladorObtener = new ControladorObtener();
         private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
 
-        public InterfazCambioContrasenia(ref Sistema sistema)
+        public InterfazCambioContrasenia()
         {
             InitializeComponent();
-            this.sistema = sistema;
         }
 
         private void btnModificarContrasenia_Click(object sender, EventArgs e)
@@ -74,7 +71,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void IrAlLogin()
         {
             this.Hide();
-            InterfazIngresoSistema login = new InterfazIngresoSistema(ref sistema);
+            InterfazIngresoSistema login = new InterfazIngresoSistema();
             login.Show();
         }
     }

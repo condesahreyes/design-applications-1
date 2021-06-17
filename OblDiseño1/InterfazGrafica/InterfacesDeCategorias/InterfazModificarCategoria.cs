@@ -1,4 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfazCategoria;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,41 +10,35 @@ namespace InterfazGrafica.InterfazDeCategorias
     public partial class InterfazModificarCategoria : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private Categoria categoria;
 
         private CategoriaRepositorio repositorioCategoria;
+        private ControladorCategoria controladorCategoria;
 
         private string validacionNombre = "Error el " +
             "nombre de la categoría debe contener entre 3 a 15 caracteres.";
         private string modificadoCorrectamente = "El nombre de la categoría fue modificada con éxito.";
 
-        public InterfazModificarCategoria(ref Sistema sistema, ref Usuario usuario, ref Categoria categoria)
+        public InterfazModificarCategoria(ref Usuario usuario, ref Categoria categoria)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
             this.categoria = categoria;
             this.textBoxModificarCategoria.Text = this.categoria.Nombre;
 
             repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
         }
 
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)
         {
-
             string nuevoNombre = textBoxModificarCategoria.Text;
             if (!YaExisteOtraCategoriaConEseNombre(nuevoNombre) || categoria.Nombre == nuevoNombre)
                 try
                 {
                     if (categoria.Nombre != nuevoNombre)
-                    {
-                        Categoria categoriaModificar = new Categoria(nuevoNombre);
-                        ControladorModificar controladorModificar = new ControladorModificar();
-                        controladorModificar.ModificarCategoria(this.categoria, categoriaModificar, repositorioCategoria);
-                        this.categoria.ActualizarNombre(nuevoNombre);
-                    }
+                        controladorCategoria.ModificarCategoria(ref this.categoria, nuevoNombre);
 
                     MessageBox.Show(modificadoCorrectamente);
                     IrACategoria();
@@ -60,18 +54,19 @@ namespace InterfazGrafica.InterfazDeCategorias
 
         private bool YaExisteOtraCategoriaConEseNombre(string nuevoNombreCategoria)
         {
-            ControladorObtener controladorObtener = new ControladorObtener();
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
+
             foreach (Categoria cat in categorias)
                 if (cat.Nombre.ToLower() == nuevoNombreCategoria.ToLower())
                     return true;
+
             return false;
         }
 
         private void IrACategoria()
         {
             this.Close();
-            InterfazCategorias categoria = new InterfazCategorias(ref usuario, ref sistema);
+            InterfazCategorias categoria = new InterfazCategorias(ref usuario);
             categoria.Show();
         }
 

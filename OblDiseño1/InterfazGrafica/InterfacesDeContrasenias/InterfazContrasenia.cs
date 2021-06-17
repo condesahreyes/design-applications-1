@@ -1,5 +1,5 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccesoDatos;
@@ -12,22 +12,24 @@ namespace InterfazGrafica.InterfacesDeContrasenias
     public partial class InterfazContrasenia : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
-
-        private ControladorObtener controladorObtener = new ControladorObtener();
 
         private IRepositorio<Credencial> credencialRepositorio;
+        private ControladorCredencial controladorCredencial;
 
-        public InterfazContrasenia(ref Usuario usuario, ref Sistema sistema)
+        public InterfazContrasenia(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
 
-            credencialRepositorio = new CredencialRepositorio(this.usuario);
-
+            CrearManejadoresCredencial();
             CargarCredenciales();
+        }
+
+        private void CrearManejadoresCredencial()
+        {
+            credencialRepositorio = new CredencialRepositorio(this.usuario);
+            controladorCredencial = new ControladorCredencial(this.usuario, credencialRepositorio);
         }
 
         private void CargarCredenciales()
@@ -35,8 +37,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             this.dataGridView_ListaDuplas.Columns.Clear();
             this.dataGridView_ListaDuplas.DataSource = null;
 
-            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
-            List<Credencial> misCredenciales = repositorioCredencial.GetAll();
+            List<Credencial> misCredenciales = controladorCredencial.ObtenerTodasMisCredenciales();
 
             if (misCredenciales != null) { 
             BindingSource biso = new BindingSource();
@@ -82,14 +83,14 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void btnContraseniaVolverMenu_Click(object sender, System.EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
         private void btnAgregarContrasenia_Click(object sender, System.EventArgs e)
         {
             this.Close();
-            InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref sistema, ref usuario);
+            InterfazAgregarContrasenia agregarContrasenia = new InterfazAgregarContrasenia(ref usuario);
             agregarContrasenia.Show();
         }
 
@@ -100,7 +101,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                 Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
 
                 InterfazDeModificarContrasenia interfazModiicar = new
-                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, "InterfazContrasenia");
+                    InterfazDeModificarContrasenia(ref usuario, credencialSeleccionada, "InterfazContrasenia");
 
                 interfazModiicar.Show();
                 this.Close();
@@ -115,7 +116,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             {
                 EliminarContrasenia();
                 CargarCredenciales();
-
             }
             else if (0 == dataGridView_ListaDuplas.RowCount)
                 MessageBox.Show("No hay contraseñas para eliminar");
@@ -125,9 +125,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         {
             if(dataGridView_ListaDuplas.CurrentRow != null)
             {
-                Credencial duplaSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
-                ControladorEliminar controladorEliminar = new ControladorEliminar();
-                controladorEliminar.EliminarCredencial(duplaSeleccionada, credencialRepositorio);
+                Credencial credencialSeleccionada = (Credencial)dataGridView_ListaDuplas.CurrentRow.DataBoundItem;
+                controladorCredencial.EliminarLaCredencial(credencialSeleccionada);
+                
                 MessageBox.Show("Se elimino correctamente");
             }else
                 MessageBox.Show("Primero debe seleccionar una credencial");

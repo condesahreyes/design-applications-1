@@ -8,6 +8,7 @@ namespace OblDiseño1.Interfaces
 {
     public interface IEncriptado
     {
+        string ObtenerLlaveHardcodeada();
         string GenerarLlave();
 
         string Encriptar(string contrasenia, string llave);

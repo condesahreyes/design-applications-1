@@ -1,5 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using OblDiseño1.Exception;
 using System.Data;
@@ -235,7 +234,6 @@ namespace OblDiseño1
             return (this.Nombre);
         }
 
-     
         public List<string> ListarToStringDeMisTarjetas()
         {
             List<string> tarjetasString = new List<string>();
@@ -244,6 +242,5 @@ namespace OblDiseño1
 
             return tarjetasString;
         }
-
     }
 }

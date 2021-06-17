@@ -1,4 +1,5 @@
 ﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccesoDatos;
@@ -10,31 +11,42 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     public partial class InterfazModificarTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private Tarjeta tarjeta;
 
-        private ControladorObtener controladorObtener = new ControladorObtener();
         private IRepositorio<Categoria> repositorioCategoria;
-        private IRepositorio<Tarjeta> repositorioTarjeta;
+        private ControladorCategoria controladorCategoria;
 
-        public InterfazModificarTarjeta(ref Sistema sistema, ref Usuario usuario, ref Tarjeta tarjeta)
+        private IRepositorio<Tarjeta> tarjetaRepositorio;
+        private ControladorTarjeta controladorTarjeta;
+
+        public InterfazModificarTarjeta(ref Usuario usuario, ref Tarjeta tarjeta)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
             this.tarjeta = tarjeta;
 
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            repositorioTarjeta = new TarjetaRepositorio(this.usuario);
-
+            CrearManejadoresTarjeta();
+            CrearManejadoresCredencial();
             CargarComboCategorias();
             CargarDatosViejos();
         }
 
+        private void CrearManejadoresTarjeta()
+        {
+            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
+            controladorTarjeta = new ControladorTarjeta(this.usuario, tarjetaRepositorio);
+        }
+
+        private void CrearManejadoresCredencial()
+        {
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+        }
+
         private void CargarComboCategorias()
         {
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
 
             foreach (var recorredorCategoria in categorias)
             {
@@ -58,8 +70,8 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         {
             string nuevoNumeroTarjeta = textBoxNumeroTarjeta.Text;
 
-            if (nuevoNumeroTarjeta != this.tarjeta.Numero &&
-                controladorObtener.ExisteTarjeta(nuevoNumeroTarjeta, repositorioTarjeta))
+            if (!controladorTarjeta.EsElMismoNumeroTarjeta(nuevoNumeroTarjeta, this.tarjeta.Numero) &&
+                controladorTarjeta.ExisteEsteNumeroTarjeta(nuevoNumeroTarjeta))
             {
                 MessageBox.Show("Ya hay una tarjeta registrada con ese numero en el sistema");
             }
@@ -102,7 +114,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             nuevaTarjeta.Categoria = categoria;
             nuevaTarjeta.NotaOpcional = textBoxNotaOpcional.Text;
 
-            controladorModificar.ModificarTarjeta(this.tarjeta, nuevaTarjeta, repositorioTarjeta);
+            controladorTarjeta.ModificarTarjeta(this.tarjeta, nuevaTarjeta);
         }
 
         private void MostrarCualesSonLosDatosCorrectos()
@@ -122,14 +134,14 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void IrAInterfazTarjeta()
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
     }

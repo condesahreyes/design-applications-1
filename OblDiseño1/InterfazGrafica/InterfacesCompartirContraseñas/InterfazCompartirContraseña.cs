@@ -1,32 +1,51 @@
-﻿using System.Windows.Forms;
-using System;
-using OblDiseño1;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos;
+﻿using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using AccesoDatos.Repositorios;
+using System.Windows.Forms;
+using AccesoDatos;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
     public partial class InterfazCompartirContraseña : Form
     {
-        private Sistema sistema;
         private Usuario usuario;
-        ControladorObtener controladorObtener = new ControladorObtener();
-         public InterfazCompartirContraseña(ref Sistema sistema, ref Usuario usuario)
+
+        private ControladorUsuario controladorUsuario;
+        private IRepositorio<Usuario> usuarioRepositorio;
+
+        private IRepositorio<Credencial> credencialRepositorio;
+        private ControladorCredencial controladorCredencial;
+
+         public InterfazCompartirContraseña(ref Usuario usuario)
         {
             InitializeComponent();
-            this.sistema = sistema;
             this.usuario = usuario;
 
+            CrearManejadoresCredencial();
+            CrearControladorUsuario();
             CargarOpcionesDeUsuariosACompartir();
             CargarOpcionesDeSitiosParaCompartir();
         }
 
+        private void CrearManejadoresCredencial()
+        {
+            credencialRepositorio = new CredencialRepositorio(this.usuario);
+            controladorCredencial = new ControladorCredencial(this.usuario, credencialRepositorio);
+        }
+
+        private void CrearControladorUsuario()
+        {
+            usuarioRepositorio = new UsuarioRepositorio();
+            controladorUsuario = new ControladorUsuario(usuario, usuarioRepositorio);
+        }
+
         private void CargarOpcionesDeUsuariosACompartir()
         {
-            UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
-            List<Usuario> usuariosDisponibles = controladorObtener.ObtenerUsuarios(repositorioUsuario);
+            List<Usuario> usuariosDisponibles = controladorUsuario.ObtenerTodosMisUsuarios();
+
             usuariosDisponibles.Remove(this.usuario);
 
             foreach (var usuario in usuariosDisponibles)
@@ -35,8 +54,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarOpcionesDeSitiosParaCompartir()
         {
-            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
-            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(repositorioCredencial); 
+            List<Credencial> credenciales = controladorCredencial.ObtenerTodasMisCredenciales(); 
 
             if (credenciales != null)
             foreach (var credencial in credenciales)
@@ -48,8 +66,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             comboBoxUsuariosSitios.Items.Clear();
             string sitio = comboBoxSitios.SelectedItem.ToString();
 
-            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
-            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(repositorioCredencial);
+            List<Credencial> credenciales = controladorCredencial.ObtenerTodasMisCredenciales();
 
             foreach (var credencial in credenciales)
                 if (credencial.NombreSitioApp == sitio)
@@ -74,8 +91,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             {
                 Usuario usuarioAuxiliar = new Usuario();
                 usuarioAuxiliar.Nombre = usuarioSeleccionado;
-                UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
-                usuarioACompartir = controladorObtener.ObtenerUsuario(usuarioAuxiliar, repositorioUsuario);
+                usuarioACompartir = controladorUsuario.ObtenerUnUsuario(usuarioAuxiliar);
 
                 CompartirContraseña(ref usuarioACompartir);
             }
@@ -96,25 +112,24 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                     Credencial credencialACompartir = iterador;
                     try
                     {
-                        controladorAlta.AgregarRegistroCredencialCompartida(credencialACompartir,usuarioACompartir, repositorioCredencialCompartida);
+                        controladorAlta.AgregarRegistroCredencialCompartida(credencialACompartir,usuarioACompartir, 
+                            repositorioCredencialCompartida);
                         MessageBox.Show("Se compartio la contraseña correctamente");
                         IrAInterfazContraseñasCompartidas();
                     }
                     catch (Exception Exepcion_InvalidUsuarioData)
                     {
                         MessageBox.Show("Ya se compartio esta contraseña con el usuario");
-
                     }
                     break;
                 }
             }
         }
 
-    
         private void IrAInterfazContraseñasCompartidas()
         {
             this.Close();
-            InterfazContraseñasCompartidas interfazContraseñasCompartidas = new InterfazContraseñasCompartidas(ref sistema, ref usuario);
+            InterfazContraseñasCompartidas interfazContraseñasCompartidas = new InterfazContraseñasCompartidas(ref usuario);
             interfazContraseñasCompartidas.Show();
         }
     }

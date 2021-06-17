@@ -41,7 +41,7 @@ namespace AccesoDatos
         {
             ContraseñaRepositorio contraseñaRepositorio = new ContraseñaRepositorio(usuario);
             string contraseniaEncriptada = contraseñaRepositorio.ObtenerDto(idContraseña).Contrasenia;
-            string contraseniaDesencriptada = encriptador.Desencriptar(contraseniaEncriptada, encriptador.LlaveEjemplo);
+            string contraseniaDesencriptada = encriptador.Desencriptar(contraseniaEncriptada, encriptador.ObtenerLlaveHardcodeada());
             return new Contraseña(contraseniaDesencriptada);
         }
 

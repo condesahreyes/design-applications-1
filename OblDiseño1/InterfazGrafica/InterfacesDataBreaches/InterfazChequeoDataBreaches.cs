@@ -1,6 +1,6 @@
 ﻿using InterfazGrafica.InterfacesDeContrasenias;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using InterfazGrafica.InterfacesDataBreaches;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using AccesoDatos.Repositorios;
 using System.Windows.Forms;
@@ -15,24 +15,25 @@ namespace InterfazGrafica.InterfazDataBreaches
 {
     public partial class InterfazChequeoDataBreaches : Form
     {
-        private Sistema sistema;
         private Usuario usuario;
 
-        private ControladorObtener controladorObtener;
-        private ControladorAlta controladorAlta;
+        private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
+        private ControladorDataBreach controladorDataBreach;
 
         private IRepositorio<Usuario> usuarioRepositorio;
+        private ControladorUsuario usuarioControlador;
 
-        public InterfazChequeoDataBreaches(ref Sistema sistema, ref Usuario usuario)
+
+        public InterfazChequeoDataBreaches(ref Usuario usuario)
         {
             InitializeComponent();
 
-            controladorObtener = new ControladorObtener();
-            controladorAlta = new ControladorAlta();
-
-            this.sistema = sistema;
             this.usuarioRepositorio = new UsuarioRepositorio();
-            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
+            this.usuarioControlador = new ControladorUsuario(usuario, usuarioRepositorio);
+            this.usuario = usuarioControlador.ObtenerUnUsuario(usuario);
+
+            this.repositorioDataBreach = new DataBrechRepositorio(usuario);
+            this.controladorDataBreach = new ControladorDataBreach(this.usuario, repositorioDataBreach);
         }
 
         private void btnChequear_Click(object sender, EventArgs e)
@@ -49,16 +50,10 @@ namespace InterfazGrafica.InterfazDataBreaches
         {
             ChequeadorDeDataBreaches chequeador = new ChequeadorDeDataBreaches(this.usuario);
 
-            List<Credencial> credencialesVulnderadas = chequeador.ObtenerCredencialesVulneradas(listaDatos);
-            List<Tarjeta> tarjetasVulneradas = chequeador.ObtenerTarjetasVulneradas(listaDatos);
+            this.controladorDataBreach.AgregarRegistroDataBreach(listaDatos);
 
-            chequeador.TarjetasVulneradas = tarjetasVulneradas;
-            chequeador.CredencialesVulneradas = credencialesVulnderadas;
-
-            IRepositorio<ChequeadorDeDataBreaches> dataBreachRepo = new DataBrechRepositorio(this.usuario);
-
-            chequeador.Fecha = DateTime.Now;
-            controladorAlta.AgregarDataBrache(chequeador, dataBreachRepo);
+            List<Tarjeta> tarjetasVulneradas = controladorDataBreach.ObtenerTarjetasVulneradas();
+            List<Credencial> credencialesVulnderadas = controladorDataBreach.ObenerCredencialesVulneradas();
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridCredenciales(credencialesVulnderadas);
@@ -71,7 +66,7 @@ namespace InterfazGrafica.InterfazDataBreaches
                 Credencial credencialSeleccionada = (Credencial)dataGridContrasenias.CurrentRow.DataBoundItem;
 
                 InterfazDeModificarContrasenia interfazModificarContrasenia = new 
-                    InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada, 
+                    InterfazDeModificarContrasenia(ref usuario, credencialSeleccionada, 
                     "InterfazChequeoDataBreaches");
 
                 interfazModificarContrasenia.Show();
@@ -83,7 +78,7 @@ namespace InterfazGrafica.InterfazDataBreaches
         {
             this.Close();
             InterfazHistoricosDataBreach dataBreach = new 
-                InterfazHistoricosDataBreach(ref usuario, ref sistema);
+                InterfazHistoricosDataBreach(ref usuario);
             dataBreach.Show();
         }
 
@@ -92,7 +87,7 @@ namespace InterfazGrafica.InterfazDataBreaches
             string rutaVacia = "";
 
             InterfazImportarDatosDesdeArchivoTxt interfazImportarDesdeArchivo = new 
-                InterfazImportarDatosDesdeArchivoTxt(ref sistema);
+                InterfazImportarDatosDesdeArchivoTxt();
             interfazImportarDesdeArchivo.ShowDialog();
 
             string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
@@ -113,9 +108,11 @@ namespace InterfazGrafica.InterfazDataBreaches
        
         private void CargarDataGridsConDatosImportadosDeArchivo(string rutaSeleccionada)
         {
-            List<Credencial> credencialesVulnderadas = sistema.
+            MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
+
+            List<Credencial> credencialesVulnderadas = controladorDataBreach.
                 ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
-            List<Tarjeta> tarjetasVulneradas = sistema.
+            List<Tarjeta> tarjetasVulneradas = controladorDataBreach.
                 ObtenerDataBreachesTarjetassMedianteRuta(ref usuario, rutaSeleccionada);
 
             CargarDataGridTarjetas(tarjetasVulneradas);
