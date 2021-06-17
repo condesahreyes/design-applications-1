@@ -21,7 +21,6 @@ namespace InterfazGrafica.InterfazDataBreaches
         private IRepositorio<Usuario> usuarioRepositorio;
         private ControladorUsuario usuarioControlador;
 
-
         public InterfazChequeoDataBreaches(ref Usuario usuario)
         {
             InitializeComponent();

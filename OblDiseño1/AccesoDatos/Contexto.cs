@@ -11,6 +11,7 @@ namespace AccesoDatos
         public DbSet<EntidadContraseña> contraseñas { set; get; }
         public DbSet<EntidadTarjeta> tarjetas { get; set; }
         public DbSet<EntidadUsuario> usuarios { get; set; }
+
         public DbSet<EntidadRegistroCredencialCompartida> credencialesCompartidas { get; set; }
 
         public DbSet<EntidadDataBreach> dataBreach { get; set; }
@@ -33,23 +34,14 @@ namespace AccesoDatos
 
             modelBuilder.Entity<EntidadContraseña>().HasKey(c => new { c.ContraseniaId });
             modelBuilder.Entity<EntidadContraseña>().Property(c => c.ContraseniaId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            //modelBuilder.Entity<EntidadContraseña>().HasRequired<EntidadCredencial>(c => c.Credencial).WithRequiredPrincipal(s => s.Contrasenia);
+
 
             modelBuilder.Entity<EntidadCredencial>().HasKey(c => new { c.CredencialId });
             modelBuilder.Entity<EntidadCredencial>().Property(c => c.CredencialId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            //modelBuilder.Entity<EntidadCredencial>().Property(c => c.CredencialId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadUsuario>(c => c.UsuarioGestor).WithMany(u => u.credenciales).HasForeignKey<string>(s => s.UsuarioGestorNombre).WillCascadeOnDelete(false);
             modelBuilder.Entity<EntidadCredencial>().HasRequired<EntidadCategoria>(c => c.Categoria).WithMany(u => u.Credenciales).HasForeignKey(t => new { t.IdCategoria });
             
-            /*
-            modelBuilder.Entity<ContraseñasQueMeComparten>().HasKey(c => new { c.UsuarioNombre, c.CredencialId });
-
-            modelBuilder.Entity<ContraseñasQueComparto>().HasKey(c => new { c.UsuarioNombreDueño, c.CredencialId, c.UsuarioAlQueCompartoNombre });
-
-            modelBuilder.Entity<ContraseñasQueComparto>().HasRequired<EntidadUsuario>(c => c.UsuarioDueño).WithMany(u => u.QueComparto).HasForeignKey(t => new { t.UsuarioNombreDueño, t.CredencialId, t.UsuarioAlQueCompartoNombre }).WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ContraseñasQueMeComparten>().HasRequired<EntidadUsuario>(c => c.UsuarioDueño).WithMany(u => u.QueMeComparten).HasForeignKey(t => new { t.UsuarioNombre, t.CredencialId }).WillCascadeOnDelete(false);
-            */
 
             modelBuilder.Entity<EntidadCredencial>().HasOptional<EntidadContraseña>(c => c.Contrasenia).WithOptionalDependent(u => u.Credencial);
 
@@ -73,5 +65,6 @@ namespace AccesoDatos
             modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadUsuario>(r => r.UsuarioAlQueSeLeCompartio).WithMany(u => u.credencialesQueMeCompartieron).HasForeignKey<string>(s => s.NombreUsuarioAlQueSeLeCompartio).WillCascadeOnDelete(false);
             modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadCredencial>(r => r.CredencialCompartida).WithMany(c => c.registrosEnLosQueEstoyCompartida).HasForeignKey<int>(s => s.CredencialCompartidaId).WillCascadeOnDelete(false);
         }
+
     }
 }

@@ -25,7 +25,6 @@ namespace InterfazGrafica.InterfacesDataBreaches
             this.repositorioDataBreach = new DataBrechRepositorio(usuario);
             this.controladorDataBreach = new ControladorDataBreach(this.usuario, repositorioDataBreach);
             
-
             CargarDataGrid();
             ModificarNombreDeColumnasDelDataGrid();
         }

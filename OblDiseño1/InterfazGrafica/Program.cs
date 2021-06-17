@@ -13,9 +13,15 @@ namespace InterfazGrafica
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InterfazIngresoSistema());
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new InterfazIngresoSistema());
+            
+            //catch (System.data.sqlclient.sqlexception)
+            //{
+
+            //}
         }
     }
 }
