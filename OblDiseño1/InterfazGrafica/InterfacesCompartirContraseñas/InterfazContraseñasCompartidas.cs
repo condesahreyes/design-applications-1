@@ -1,5 +1,4 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
 using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
@@ -7,6 +6,7 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using OblDiseño1.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -14,6 +14,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Usuario usuario;
         GestorContraseniasCompartidas miGestor;
+        ControladorCredencial controladorCredencial;
         public InterfazContraseñasCompartidas(ref Usuario usuario)
         {
             InitializeComponent();
@@ -21,7 +22,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.usuario = usuario;
             miGestor = usuario.GestorCompartirContrasenia;
             miGestor.BorrarDatosDeGestor();
-           
+
+            controladorCredencial = new ControladorCredencial(this.usuario);
             IRepositorioCompartir<Credencial, Usuario> repositorioContraseñasCompartidas = new RegistroCredencialCompartidaRepositorio(this.usuario);
             List<Credencial> contraseñasQueComparto = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueComparto();
             List<Credencial> contraseñasQueMeComparten = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueMeComparten();
@@ -145,9 +147,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonCompartir_Click(object sender, EventArgs e)
         {
-            ControladorObtener controladorObtener = new ControladorObtener();
-            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
-            if (controladorObtener.ObtenerCredenciales(repositorioCredencial).Count > 0)
+            if (controladorCredencial.ObtenerTodasMisCredenciales().Count > 0)
             {
                 this.Close();
                 InterfazCompartirContraseña interfazCompartirContraseña =

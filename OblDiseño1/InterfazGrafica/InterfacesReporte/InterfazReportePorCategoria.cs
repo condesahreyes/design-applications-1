@@ -1,6 +1,5 @@
 ﻿using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 

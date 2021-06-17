@@ -2,7 +2,6 @@
 using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -12,7 +11,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     {
         private Usuario usuario;
 
-        private IRepositorio<Tarjeta> tarjetaRepositorio;
         private ControladorTarjeta controladorTarjeta;
 
 
@@ -20,7 +18,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         {
             InitializeComponent();
             this.usuario = usuario;
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
 
             CrearManejadoresTarjeta();
             CargarListaTarjetas();
@@ -29,8 +26,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void CrearManejadoresTarjeta()
         {
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-            controladorTarjeta = new ControladorTarjeta(this.usuario, tarjetaRepositorio);
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
         }
 
         private void CargarListaTarjetas()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AccesoDatos.Entidades_Datos
 {
@@ -18,8 +13,6 @@ namespace AccesoDatos.Entidades_Datos
         public virtual ICollection<EntidadTarjeta> Tarjetas { set; get; }
 
         public virtual ICollection<EntidadCredencial> Credenciales { set; get; }
-
-        public int CredencialId { get; set; }
 
         public string UsuarioNombre { set; get; }
 

@@ -3,7 +3,6 @@ using InterfazGrafica.InterfazDeCategorias;
 using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -26,9 +25,8 @@ namespace InterfazGrafica.InterfazCategoria
 
         private void CargarLista()
         {
-            CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
             ControladorCategoria controladorCategoria = new 
-                ControladorCategoria(this.usuario, repositorioCategoria);
+                ControladorCategoria(this.usuario);
 
             List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
             categorias.Sort();

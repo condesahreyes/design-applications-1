@@ -1,23 +1,19 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using System.Collections.Generic;
+using AccesoDatos;
 using System;
-using System.Collections.Generic;
 
 namespace OblDiseño1.ControladoresPorEntidad
 {
     public class ControladorTarjeta
     {
-        private ControladorAlta crear = new ControladorAlta();
-        private ControladorModificar modificar = new ControladorModificar();
-        private ControladorObtener obtener = new ControladorObtener();
-        private ControladorEliminar eliminar= new ControladorEliminar();
 
         private IRepositorio<Tarjeta> repositorioTarjeta;
         private Usuario usuario;
 
-        public ControladorTarjeta(Usuario usuario, IRepositorio<Tarjeta> repositorioTarjeta)
+        public ControladorTarjeta(Usuario usuario)
         {
             this.usuario = usuario;
-            this.repositorioTarjeta = repositorioTarjeta;
+            this.repositorioTarjeta = new TarjetaRepositorio(this.usuario);
         }
 
         public void CrearTarjeta(string nombreTarjeta, string tipoTarjeta,
@@ -27,7 +23,12 @@ namespace OblDiseño1.ControladoresPorEntidad
             Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
                 numeroTarjeta, codigoSeguridad, fecha, categoria, notaOpcional);
 
-            crear.AgregarTarjeta(nuevaTarjeta, repositorioTarjeta);
+            repositorioTarjeta.Add(nuevaTarjeta);
+        }
+
+        public void CrearTarjeta(Tarjeta unaTarjeta)
+        {
+            repositorioTarjeta.Add(unaTarjeta);
         }
 
         public bool ExisteEsteNumeroTarjeta(string numeroTarjeta)
@@ -35,7 +36,7 @@ namespace OblDiseño1.ControladoresPorEntidad
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.Numero = numeroTarjeta;
 
-            return obtener.ExisteTarjeta(tarjeta, repositorioTarjeta);
+            return repositorioTarjeta.Existe(tarjeta);
         }
 
         public bool EsElMismoNumeroTarjeta(string numeroTarjeta1, string numeroTarjeta2)
@@ -45,18 +46,17 @@ namespace OblDiseño1.ControladoresPorEntidad
 
         public void ModificarTarjeta(Tarjeta tarjetaOriginal, Tarjeta nuevaTarjeta)
         {
-
-            modificar.ModificarTarjeta(tarjetaOriginal, nuevaTarjeta, repositorioTarjeta);
+            repositorioTarjeta.Modificar(tarjetaOriginal, nuevaTarjeta);
         }
 
         public void EliminarLaTarjeta(Tarjeta tarjeta)
         {
-            eliminar.EliminarTarjeta(tarjeta, repositorioTarjeta);
+            repositorioTarjeta.Delete(tarjeta);
         }
 
         public List<Tarjeta> ObtenerTodasMisTarjetas()
         {
-            return obtener.ObtenerTarjetas(repositorioTarjeta);
+            return repositorioTarjeta.GetAll();
         }
     }
 }

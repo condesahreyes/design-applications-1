@@ -1,4 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using AccesoDatos.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +9,21 @@ namespace OblDiseño1.ControladoresPorEntidad
 {
     public class ControladorDataBreach
     {
-        private ControladorAlta crear = new ControladorAlta();
-        private ControladorModificar modificar = new ControladorModificar();
-        private ControladorObtener obtener = new ControladorObtener();
 
         private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
         private Usuario usuario;
         public ChequeadorDeDataBreaches chequeadorDeDataBreaches;
 
-        public ControladorDataBreach(Usuario usuario, IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)
+        public ControladorDataBreach(Usuario usuario)
         {
             this.usuario = usuario;
-            this.repositorioDataBreach = repositorioDataBreach;
+            this.repositorioDataBreach = new DataBrechRepositorio(this.usuario);
             this.chequeadorDeDataBreaches = new ChequeadorDeDataBreaches(usuario);
         }
 
         public List<ChequeadorDeDataBreaches> ObtenerTodosMisDataBreaches()
         {
-            return obtener.ObtenerDataBreaches(repositorioDataBreach);
+            return repositorioDataBreach.GetAll();
         }
 
         public void AgregarRegistroDataBreach(List<string> listaDatos)
@@ -35,7 +32,7 @@ namespace OblDiseño1.ControladoresPorEntidad
             chequeadorDeDataBreaches.TarjetasVulneradas = chequeadorDeDataBreaches.ObtenerTarjetasVulneradas(listaDatos);
             chequeadorDeDataBreaches.Fecha = DateTime.Now;
 
-            crear.AgregarDataBrache(this.chequeadorDeDataBreaches, this.repositorioDataBreach);
+            repositorioDataBreach.Add(this.chequeadorDeDataBreaches);
         }
 
         public List<Tarjeta> ObtenerTarjetasVulneradas()

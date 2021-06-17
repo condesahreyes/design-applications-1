@@ -2,7 +2,6 @@
 using OblDiseño1.ControladoresPorEntidad;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -17,7 +16,6 @@ namespace InterfazGrafica.InterfacesReporte
         private Reporte manejadorDeDatosReporte;
 
         private ControladorUsuario controladorUsuario;
-        private IRepositorio<Usuario> usuarioRepositorio;
 
         private const int nivelSeguridadRojo = 1;
         private const int nivelSeguridadNaranja = 2;
@@ -41,8 +39,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void CrearControladorUsuario()
         {
-            usuarioRepositorio = new UsuarioRepositorio();
-            controladorUsuario = new ControladorUsuario(usuario, usuarioRepositorio);
+            controladorUsuario = new ControladorUsuario();
         }
 
         public void ActualizarLables()

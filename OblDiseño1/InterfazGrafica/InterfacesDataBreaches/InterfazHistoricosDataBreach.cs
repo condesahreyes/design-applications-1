@@ -11,7 +11,6 @@ namespace InterfazGrafica.InterfacesDataBreaches
 {
     public partial class InterfazHistoricosDataBreach : Form
     {
-        private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
         private ControladorDataBreach controladorDataBreach;
 
         private Usuario usuario;
@@ -21,11 +20,8 @@ namespace InterfazGrafica.InterfacesDataBreaches
             InitializeComponent();
 
             this.usuario = usuario;
-
-            this.repositorioDataBreach = new DataBrechRepositorio(usuario);
-            this.controladorDataBreach = new ControladorDataBreach(this.usuario, repositorioDataBreach);
+            this.controladorDataBreach = new ControladorDataBreach(this.usuario);
             
-
             CargarDataGrid();
             ModificarNombreDeColumnasDelDataGrid();
         }

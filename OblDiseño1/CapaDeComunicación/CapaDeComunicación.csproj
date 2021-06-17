@@ -4,16 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A10C0FE5-5672-40C8-9F8B-9F741C3C1DD2}</ProjectGuid>
+    <ProjectGuid>{102694AF-8A07-4926-BE7B-A9CD8387352D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OblDiseño1</RootNamespace>
-    <AssemblyName>OblDiseño1</AssemblyName>
+    <RootNamespace>CapaDeComunicación</RootNamespace>
+    <AssemblyName>CapaDeComunicación</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,10 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,35 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidades\Categoria.cs" />
-    <Compile Include="Entidades\Contraseña.cs" />
-    <Compile Include="Entidades\Reporte.cs" />
-    <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
-    <Compile Include="Exception\ExcepcionFormatoArchivoInvalido.cs" />
-    <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
-    <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />
-    <Compile Include="Exception\ExepcionIntentoDeObtencionDeObjetoInexistente.cs" />
-    <Compile Include="Exception\ExepcionInvalidCategoriaData.cs" />
-    <Compile Include="Exception\ExepcionInvalidUsuarioData.cs" />
-    <Compile Include="Exception\ExepcionNivelDeSeguridadNoValido.cs" />
-    <Compile Include="Exception\ExepcionObjetosRepetidos.cs" />
-    <Compile Include="Exception\ExepcionTarjetaIncorrecta.cs" />
-    <Compile Include="IRepositorio.cs" />
-    <Compile Include="IRepositorioCompartir.cs" />
-    <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
-    <Compile Include="Entidades\Credencial.cs" />
-    <Compile Include="Entidades\Tarjeta.cs" />
-    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorCategoria.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorCredencial.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorDataBreach.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorTarjeta.cs" />
+    <Compile Include="ControladoresPorEntidad\ControladorUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Manejadores\Encriptador.cs" />
-    <Compile Include="Interfaces\IEncriptado.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
-    <None Include="App.config" />
+    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+      <Project>{cc2d428e-1873-4c52-9de7-8fc2e2e1d467}</Project>
+      <Name>AccesoDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OblDiseño1\LogicaNegocio.csproj">
+      <Project>{a10c0fe5-5672-40c8-9f8b-9f741c3c1dd2}</Project>
+      <Name>LogicaNegocio</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

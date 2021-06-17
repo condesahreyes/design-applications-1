@@ -2,11 +2,10 @@
     InterfazGrafica.InterfacesDeContrasenias.InterfazDeModificarContrasenia;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OblDiseño1.Entidades;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 using OblDiseño1.ControladoresPorEntidad;
+using OblDiseño1.Entidades;
 
 namespace InterfazGrafica.InterfacesReporte
 {
@@ -18,7 +17,6 @@ namespace InterfazGrafica.InterfacesReporte
         private int nivelDeSeguridad;
 
         private ControladorUsuario controladorUsuario;
-        private IRepositorio<Usuario> usuarioRepositorio;
 
         private const int nivelSeguridadVerdeOscuro = 5;
         private const int nivelSeguridadVerdeClaro = 4;
@@ -31,8 +29,7 @@ namespace InterfazGrafica.InterfacesReporte
         {
             InitializeComponent();
 
-            usuarioRepositorio = new UsuarioRepositorio();
-            controladorUsuario = new ControladorUsuario(usuario, usuarioRepositorio);
+            controladorUsuario = new ControladorUsuario();
 
             this.usuario = controladorUsuario.ObtenerUnUsuario(usuario);
             this.nivelDeSeguridad = nivelDeSeguridad;

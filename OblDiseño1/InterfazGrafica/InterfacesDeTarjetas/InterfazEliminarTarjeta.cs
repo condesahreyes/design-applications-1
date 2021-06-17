@@ -1,6 +1,5 @@
 ﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -11,7 +10,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Usuario usuario;
         private Tarjeta tarjeta;
 
-        private IRepositorio<Tarjeta> tarjetaRepositorio;
         private ControladorTarjeta controladorTarjeta;
 
         public InterfazEliminarTarjeta(ref Usuario usuario, ref Tarjeta tarjeta)
@@ -21,13 +19,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.tarjeta = tarjeta;
 
             CrearManejadoresTarjeta();
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
         }
 
         private void CrearManejadoresTarjeta()
         {
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-            controladorTarjeta = new ControladorTarjeta(this.usuario, tarjetaRepositorio);
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
         }
 
         private void buttonAceptar_Click(object sender, EventArgs e)

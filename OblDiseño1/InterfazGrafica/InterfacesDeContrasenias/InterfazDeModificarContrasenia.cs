@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -67,14 +66,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void CrearManejadoresCredencial()
         {
-            credencialRepositorio = new CredencialRepositorio(this.usuario);
-            controladorCredencial = new ControladorCredencial(this.usuario, credencialRepositorio);
+            controladorCredencial = new ControladorCredencial(this.usuario);
         }
 
         private void CrearManejadoresCategoria()
         {
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void ColocarDatosEnLosCampos()
@@ -310,8 +307,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaVulnerada(string posibleContraseña, string mensaje)
         {
-            IRepositorio<ChequeadorDeDataBreaches> repoDataBreach = new DataBrechRepositorio(this.usuario);
-            bool vulnerada = controladorCredencial.ObtenerSiEsContraseñaVulnerada(posibleContraseña, repoDataBreach);
+            bool vulnerada = controladorCredencial.ObtenerSiEsContraseñaVulnerada(posibleContraseña);
 
             if (vulnerada)
                 mensaje = mensaje + "Es una contraseña vulnerada \n";

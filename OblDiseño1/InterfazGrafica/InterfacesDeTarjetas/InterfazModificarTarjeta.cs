@@ -1,8 +1,6 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.ControladoresPorEntidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -13,10 +11,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private Usuario usuario;
         private Tarjeta tarjeta;
 
-        private IRepositorio<Categoria> repositorioCategoria;
         private ControladorCategoria controladorCategoria;
-
-        private IRepositorio<Tarjeta> tarjetaRepositorio;
         private ControladorTarjeta controladorTarjeta;
 
         public InterfazModificarTarjeta(ref Usuario usuario, ref Tarjeta tarjeta)
@@ -34,14 +29,12 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void CrearManejadoresTarjeta()
         {
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-            controladorTarjeta = new ControladorTarjeta(this.usuario, tarjetaRepositorio);
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
         }
 
         private void CrearManejadoresCredencial()
         {
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void CargarComboCategorias()
@@ -102,8 +95,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-
-            ControladorModificar controladorModificar = new ControladorModificar();
 
             Tarjeta nuevaTarjeta = new Tarjeta();
             nuevaTarjeta.Nombre = textBoxNombre.Text;
