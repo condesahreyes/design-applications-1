@@ -63,14 +63,14 @@ namespace OblDiseño1
         {
             ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
 
-            return dataBreaches.ObtenerCredencialesVulneradasDesdeArchivoTxt(rutaDatosBreachados);
+            return dataBreaches.ObtenerCredenciakesVulneradasDesdeArchivo(rutaDatosBreachados);
         }
 
         public List<Tarjeta> ObtenerDataBreachesTarjetassMedianteRuta(ref Usuario usuario, string rutaDatosBreachados)
         {
             ChequeadorDeDataBreaches dataBreaches = new ChequeadorDeDataBreaches(usuario);
 
-            return dataBreaches.ObtenerTarjetasVulneradasDesdeArchivoTxt(rutaDatosBreachados);
+            return dataBreaches.ObtenerTarjetasVulneradasDesdeArchivo(rutaDatosBreachados);
         }
     }
 }

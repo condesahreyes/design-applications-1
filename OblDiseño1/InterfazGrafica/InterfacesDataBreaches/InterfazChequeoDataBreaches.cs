@@ -8,6 +8,8 @@ using System.Linq;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using System.IO;
+using OblDiseño1.Exception;
 
 namespace InterfazGrafica.InterfazDataBreaches
 {
@@ -96,13 +98,21 @@ namespace InterfazGrafica.InterfazDataBreaches
             string rutaSeleccionada = interfazImportarDesdeArchivo.ObteneRutaSeleccionada();
 
             if (!rutaSeleccionada.Equals(rutaVacia))
-                CargarDataGridsConDatosImportados(rutaSeleccionada);
+            {
+                try
+                {
+                    CargarDataGridsConDatosImportadosDeArchivo(rutaSeleccionada);
+                }
+                catch (ExcepcionFormatoArchivoInvalido)
+                {
+                    MessageBox.Show("ERROR: tipo de archivo no soportado (Actualmente se soportan solamente archivos .txt)");
+                }
+            }
         }
 
-        private void CargarDataGridsConDatosImportados(string rutaSeleccionada)
+       
+        private void CargarDataGridsConDatosImportadosDeArchivo(string rutaSeleccionada)
         {
-            MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
-
             List<Credencial> credencialesVulnderadas = sistema.
                 ObtenerDataBreachesCredencialesMedianteRuta(ref usuario, rutaSeleccionada);
             List<Tarjeta> tarjetasVulneradas = sistema.
@@ -110,8 +120,10 @@ namespace InterfazGrafica.InterfazDataBreaches
 
             CargarDataGridTarjetas(tarjetasVulneradas);
             CargarDataGridCredenciales(credencialesVulnderadas);
+            MessageBox.Show("Se importon los datos de: \n\n" + rutaSeleccionada);
         }
 
+        
         private void CargarDataGridCredenciales(List<Credencial> credencialesVulneradas)
         {
             BindingSource biso = new BindingSource();

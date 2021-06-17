@@ -243,5 +243,15 @@ namespace Pruebas
             Assert.IsNull(unaCredencial);
         }
 
+
+        [TestMethod]
+        public void PrimerCredencialEsMenor()
+        {
+            Contraseña contraseña = new Contraseña();
+            Categoria categoria = new Categoria("Alamaula");
+            Credencial credencialMenor = new Credencial("Facundo", contraseña, "unsitio", "", categoria);
+            int comparar = credencialMenor.CompareTo(unaCredencial);
+            Assert.AreEqual(-1, comparar);
+        }
     }
 }

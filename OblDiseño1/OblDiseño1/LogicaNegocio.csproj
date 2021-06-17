@@ -54,6 +54,7 @@
     <Compile Include="Entidades\Contraseña.cs" />
     <Compile Include="Entidades\Reporte.cs" />
     <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
+    <Compile Include="Exception\ExcepcionFormatoArchivoInvalido.cs" />
     <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
     <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />
     <Compile Include="Exception\ExepcionIntentoDeObtencionDeObjetoInexistente.cs" />

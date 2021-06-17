@@ -28,31 +28,10 @@ namespace InterfazGrafica.InterfacesDataBreaches
             if (resultado == DialogResult.OK)
             {
                 string rutaDelResultado = navegadorDeArchivos.FileName;
-                if (VerificarQueEsTxt(rutaDelResultado))
-                {
-                    this.richTextBox_rutaDelArchivoSeleccionado.Text = rutaDelResultado;
-                }
-                else
-                {
-                    MessageBox.Show("ERROR: El archivo debe tener formato: .txt");
-                }
+                this.richTextBox_rutaDelArchivoSeleccionado.Text = rutaDelResultado;
             }
         }
 
-        private bool VerificarQueEsTxt(string ruta)
-        {
-            string extencionTxt = ".txt";
-            bool retorno = false;
-
-            if (Path.HasExtension(ruta))
-            {
-                if (Path.GetExtension(ruta).Equals(extencionTxt))
-                {
-                    retorno = true;
-                }
-            }
-            return retorno;
-        }
 
         private void button_Importar_Click(object sender, EventArgs e)
         {
