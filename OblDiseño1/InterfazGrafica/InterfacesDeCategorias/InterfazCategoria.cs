@@ -1,26 +1,24 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
 using InterfazGrafica.InterfazDeCategorias;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
-using OblDiseño1.ControladoresPorFuncionalidad;
 
 namespace InterfazGrafica.InterfazCategoria
 {
     public partial class InterfazCategorias : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
 
         private readonly string msgNoHayCategorias = "Error, no hay categorías para modificar";
         private readonly string msgSelecionarCategorias = "Error, debe seleccionar una categoría";
 
-        public InterfazCategorias(ref Usuario usuario, ref Sistema sistema)
+        public InterfazCategorias(ref Usuario usuario)
         {
             this.usuario = usuario;
-            this.sistema = sistema;
 
             InitializeComponent();
             CargarLista();
@@ -29,8 +27,10 @@ namespace InterfazGrafica.InterfazCategoria
         private void CargarLista()
         {
             CategoriaRepositorio repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            ControladorObtener controladorObtener = new ControladorObtener();
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            ControladorCategoria controladorCategoria = new 
+                ControladorCategoria(this.usuario, repositorioCategoria);
+
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
             categorias.Sort();
 
             dataGridCategorias.DataSource = categorias;
@@ -39,7 +39,7 @@ namespace InterfazGrafica.InterfazCategoria
         private void btnCategoriaVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -47,7 +47,7 @@ namespace InterfazGrafica.InterfazCategoria
         {
             this.Hide();
             InterfazAgregarCategoria agregarCategoria = new
-                InterfazAgregarCategoria(ref sistema, ref usuario);
+                InterfazAgregarCategoria(ref usuario);
             agregarCategoria.Show();
         }
 
@@ -82,7 +82,7 @@ namespace InterfazGrafica.InterfazCategoria
         {
             this.Hide();
             InterfazModificarCategoria modificarCategoria = new InterfazModificarCategoria
-                (ref sistema, ref usuario, ref aModificar);
+                (ref usuario, ref aModificar);
             modificarCategoria.Show();
         }
     }

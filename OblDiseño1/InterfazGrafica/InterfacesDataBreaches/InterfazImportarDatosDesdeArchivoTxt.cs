@@ -8,11 +8,9 @@ namespace InterfazGrafica.InterfacesDataBreaches
     public partial class InterfazImportarDatosDesdeArchivoTxt : Form
     {
         private string rutaSeleccionada = "";
-        private Sistema sistema;
 
-        public InterfazImportarDatosDesdeArchivoTxt(ref Sistema sistema)
+        public InterfazImportarDatosDesdeArchivoTxt()
         {
-            this.sistema = sistema;
             InitializeComponent();
         }
 

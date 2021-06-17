@@ -1,26 +1,24 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
+using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
+using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos.Repositorios;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
     public partial class InterfazContraseñasCompartidas : Form
     {
-        private Sistema sistema;
         private Usuario usuario;
         GestorContraseniasCompartidas miGestor;
-        public InterfazContraseñasCompartidas(ref Sistema sistema, ref Usuario usuario)
+        public InterfazContraseñasCompartidas(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
             miGestor = usuario.GestorCompartirContrasenia;
             miGestor.BorrarDatosDeGestor();
            
@@ -153,7 +151,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             {
                 this.Close();
                 InterfazCompartirContraseña interfazCompartirContraseña =
-                    new InterfazCompartirContraseña(ref sistema, ref usuario);
+                    new InterfazCompartirContraseña(ref usuario);
                 interfazCompartirContraseña.Show();
             }
             else
@@ -164,7 +162,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void buttonVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -188,14 +186,9 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void IrADejarDeCompartirContrasenia(ref Credencial credencialSeleccionada)
         {
             InterfazDejarDeCompartirContrasenia interfazDejarDeCompartirContrasenias =
-                new InterfazDejarDeCompartirContrasenia(ref sistema, ref usuario, ref credencialSeleccionada);
+                new InterfazDejarDeCompartirContrasenia(ref usuario, ref credencialSeleccionada);
             this.Close();
             interfazDejarDeCompartirContrasenias.Show();
-        }
-
-        private void dataGridContraseñasCompartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using AccesoDatos;
@@ -10,28 +10,39 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     public partial class InterfazAgregarTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
-
-        private ControladorAlta controladorAlta = new ControladorAlta();
-        private ControladorObtener controladorObtener = new ControladorObtener();
 
         private IRepositorio<Categoria> repositorioCategoria;
+        private ControladorCategoria controladorCategoria;
 
-        public InterfazAgregarTarjeta(ref Usuario usuario, ref Sistema sistema)
+        private IRepositorio<Tarjeta> tarjetaRepositorio;
+        private ControladorTarjeta controladorTarjeta;
+
+        public InterfazAgregarTarjeta(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
 
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-
+            CrearManejadoresTarjeta();
+            CrearManejadoresCategoria();
             CargarOpcionesDeCategoria();
+        }
+
+        private void CrearManejadoresTarjeta()
+        {
+            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
+            controladorTarjeta = new ControladorTarjeta(this.usuario, tarjetaRepositorio);
+        }
+
+        private void CrearManejadoresCategoria()
+        {
+            repositorioCategoria = new CategoriaRepositorio(this.usuario);
+            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
         }
 
         private void CargarOpcionesDeCategoria()
         {
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
 
             foreach (var recorredorCategoria in categorias)
             {
@@ -80,12 +91,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-            Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+
+            controladorTarjeta.CrearTarjeta(nombreTarjeta, tipoTarjeta,
                 numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
 
-            IRepositorio<Tarjeta> tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-
-            controladorAlta.AgregarTarjeta(nuevaTarjeta, tarjetaRepositorio);
         }
 
         private void MostrarCualesSonLosDatosCorrectos()
@@ -105,7 +114,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void IrAInterfazTarjeta()
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
 

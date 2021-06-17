@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
     public partial class Contraseña : Form
     {
         private Credencial credencial;
+
         public Contraseña(Credencial unaCredencial)
         {
             this.credencial = unaCredencial;
@@ -40,11 +34,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void button_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void lblListadoContrasenias_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

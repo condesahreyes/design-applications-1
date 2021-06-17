@@ -4,20 +4,16 @@ using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazIngresoSistema : Form
     {
-        private Sistema sistema;
-
         private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
         private ControladorAlta controladorAlta = new ControladorAlta();
 
-        public InterfazIngresoSistema(ref Sistema sistema)
+        public InterfazIngresoSistema()
         {
-            this.sistema = sistema;
             InitializeComponent();
         }
 
@@ -76,7 +72,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void IrAlMenu(ref Usuario usuario)
         {
             this.Hide();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -95,7 +91,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void btnCambiarContraseña_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia(ref sistema);
+            InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia();
             modificarContrasenia.Show();
         }
     }

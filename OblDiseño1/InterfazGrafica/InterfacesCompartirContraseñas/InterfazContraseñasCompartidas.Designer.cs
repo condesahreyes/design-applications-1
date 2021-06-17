@@ -76,7 +76,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             this.dataGridContraseñasCompartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContraseñasCompartidas.Size = new System.Drawing.Size(656, 213);
             this.dataGridContraseñasCompartidas.TabIndex = 0;
-            this.dataGridContraseñasCompartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridContraseñasCompartidas_CellContentClick);
             // 
             // buttonCompartir
             // 
