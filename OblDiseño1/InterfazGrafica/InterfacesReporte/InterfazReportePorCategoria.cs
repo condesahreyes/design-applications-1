@@ -1,7 +1,5 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.Entidades;
+﻿using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -22,20 +20,12 @@ namespace InterfazGrafica.InterfacesReporte
         private const int nivelSeguridadRojo = 1;
  
         private Usuario usuario;
-        private Sistema sistema;
         private reporte reporte;
 
-        private ControladorObtener controladorObtener;
-
-        private IRepositorio<Usuario> usuarioRepositorio;
-
-        public InterfazReportePorCategoria(Usuario usu, Sistema sist, reporte rep)
+        public InterfazReportePorCategoria(Usuario usu, reporte rep)
         {
             InitializeComponent();
 
-            this.controladorObtener = new ControladorObtener();
-            this.sistema = sistema;
-            this.usuarioRepositorio = new UsuarioRepositorio();
             this.usuario = usu;
             this.reporte = rep;
 
@@ -61,7 +51,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void btnVolverAMenu_Click(object sender, EventArgs e)
         {
-            InterfazReporte ventanaReporte = new InterfazReporte(ref usuario, ref sistema);
+            InterfazReporte ventanaReporte = new InterfazReporte(ref usuario);
             ventanaReporte.Show();
             this.Close();
         }

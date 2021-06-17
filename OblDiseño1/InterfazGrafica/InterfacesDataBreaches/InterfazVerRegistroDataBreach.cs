@@ -1,8 +1,7 @@
 ﻿using InterfazGrafica.InterfacesDeContrasenias;
-using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -11,15 +10,13 @@ namespace InterfazGrafica.InterfacesDataBreaches
     public partial class InterfazVerRegistroDataBreach : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private ChequeadorDeDataBreaches dataBreach;
 
         public InterfazVerRegistroDataBreach(ref Usuario usuario, 
-            ref Sistema sistema, ref ChequeadorDeDataBreaches dataBreach)
+            ref ChequeadorDeDataBreaches dataBreach)
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.sistema = sistema;
             this.dataBreach = dataBreach;
             CargarListaTarjetas();
             CargarCredenciales();
@@ -82,7 +79,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
         {
             this.Close();
             InterfazHistoricosDataBreach dataBreach = new 
-                InterfazHistoricosDataBreach(ref usuario, ref sistema);
+                InterfazHistoricosDataBreach(ref usuario);
             dataBreach.Show();
         }
 
@@ -100,10 +97,9 @@ namespace InterfazGrafica.InterfacesDataBreaches
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridCredenciales.CurrentRow.DataBoundItem;
 
-                IRepositorio<Credencial> repoCredencial = new CredencialRepositorio(this.usuario);
-                ControladorObtener controladorObtener = new ControladorObtener();
+                ControladorCredencial controladorCredencial = new ControladorCredencial(this.usuario);
 
-                Credencial credencial = controladorObtener.ObtenerCredencial(credencialSeleccionada, repoCredencial);
+                Credencial credencial = controladorCredencial.ObtenerCredencial(credencialSeleccionada);
 
                 ModificarContraseña(credencial, credencialSeleccionada);
             }
@@ -121,7 +117,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
             {
                 string nombreDeEstaPantalla = "InterfazVerRegistroDataBreach";
                 InterfazDeModificarContrasenia interfazModiicar = new
-                InterfazDeModificarContrasenia(ref usuario, ref sistema, credencialSeleccionada,
+                InterfazDeModificarContrasenia(ref usuario, credencialSeleccionada,
                 nombreDeEstaPantalla, this.dataBreach);
                 this.Close();
                 interfazModiicar.Show();

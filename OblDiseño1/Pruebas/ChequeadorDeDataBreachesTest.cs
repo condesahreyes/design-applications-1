@@ -74,6 +74,7 @@ namespace Pruebas
             chequeador = new ChequeadorDeDataBreaches(usuario);
         }
 
+
         private void CargarTarjetasAlUsuario()
         {
             for (int i = 0; i < nombreTarjetas.Length; i++)
@@ -110,6 +111,42 @@ namespace Pruebas
         public void AltaChequearDataBreaches()
         {
             Assert.IsNotNull(chequeador);
+        }
+
+        [TestMethod]
+        public void AltaChequerDataBreachesConId()
+        {
+            int id = 1;
+            chequeador.id = id;
+            Assert.AreEqual(id, chequeador.id);
+        }
+
+        [TestMethod]
+        public void AltaChequerDataBreachesConFecha()
+        {
+            DateTime fecha = new DateTime(2025,07,19);
+            chequeador.Fecha = fecha;
+            Assert.AreEqual(fecha, chequeador.Fecha);
+        }
+
+
+        [TestMethod]
+        public void ObtenerVulneradosTarjetaDesdeArchivo()
+        {
+            List<Tarjeta> entidadesBreachadas =
+                chequeador.ObtenerTarjetasVulneradasDesdeArchivo(direccionArchivoConInfoBrachada);
+
+            CollectionAssert.AreEqual(entidadesBreachadas, tarjetasBreachadas);
+        }
+
+
+        [TestMethod]
+        public void ObtenerVulneradosCredencialDesdeArchivo()
+        {
+            List<Credencial> entidadesBreachadas =
+                chequeador.ObtenerCredenciakesVulneradasDesdeArchivo(direccionArchivoConInfoBrachada);
+
+            CollectionAssert.AreEqual(entidadesBreachadas, credencialesBracheadas);
         }
 
         [TestMethod]

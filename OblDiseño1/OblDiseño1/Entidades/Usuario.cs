@@ -1,5 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using OblDiseño1.Exception;
 using System.Data;
@@ -65,13 +64,7 @@ namespace OblDiseño1
             return this.categorias;
         }
 
-        public void BorrarListas()
-        {
-            this.categorias.Clear();
-            this.credenciales.Clear();
-            this.tarjetas.Clear();
-        }
-
+       
         private bool ValidarNombreUsuario(string unNombre)
         {
             if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
@@ -241,14 +234,6 @@ namespace OblDiseño1
             return (this.Nombre);
         }
 
-        public Categoria DevolverCategoria(string nombreCategoria)
-        {
-            foreach (Categoria cat in categorias)
-                if (cat.Nombre == nombreCategoria)
-                    return cat;
-            return null;
-        }
-
         public List<string> ListarToStringDeMisTarjetas()
         {
             List<string> tarjetasString = new List<string>();
@@ -256,16 +241,6 @@ namespace OblDiseño1
                 tarjetasString.Add(this.ObtenerTarjetas()[i].ToString());
 
             return tarjetasString;
-        }
-
-        public void CompartirContrasenia(Credencial credencialACompartir, Usuario conEste)
-        {
-            GestorCompartirContrasenia.funcionCompartir(credencialACompartir, conEste);
-        }
-
-        public void DejarDeCompartirContrasenia(Credencial credencialADejarDeCompartir, Usuario conEste)
-        {
-            GestorCompartirContrasenia.DejarDeCompartirContrasenia(credencialADejarDeCompartir, conEste);
         }
     }
 }

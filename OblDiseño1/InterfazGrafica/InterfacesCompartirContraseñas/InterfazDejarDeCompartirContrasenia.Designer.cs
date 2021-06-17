@@ -40,7 +40,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             // 
             // dataGridUsuariosCompartidos
             // 
-            this.dataGridUsuariosCompartidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridUsuariosCompartidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridUsuariosCompartidos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridUsuariosCompartidos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.dataGridUsuariosCompartidos.BorderStyle = System.Windows.Forms.BorderStyle.None;

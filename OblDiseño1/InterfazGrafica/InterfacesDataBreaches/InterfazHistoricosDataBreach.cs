@@ -1,8 +1,7 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using InterfazGrafica.InterfazDataBreaches;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
-using AccesoDatos.Repositorios;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
@@ -11,29 +10,24 @@ namespace InterfazGrafica.InterfacesDataBreaches
 {
     public partial class InterfazHistoricosDataBreach : Form
     {
-        private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
+        private ControladorDataBreach controladorDataBreach;
 
-        private ControladorObtener controladorObtener;
         private Usuario usuario;
-        private Sistema sistema;
 
-        public InterfazHistoricosDataBreach(ref Usuario usuario, ref Sistema sistema)
+        public InterfazHistoricosDataBreach(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
-            this.controladorObtener = new ControladorObtener();
-            this.repositorioDataBreach = new DataBrechRepositorio(usuario);
-
+            this.controladorDataBreach = new ControladorDataBreach(this.usuario);
+            
             CargarDataGrid();
             ModificarNombreDeColumnasDelDataGrid();
         }
 
         private void CargarDataGrid()
         {
-            List<ChequeadorDeDataBreaches> misDataBreaches = controladorObtener.
-                ObtenerDataBreaches(repositorioDataBreach);
+            List<ChequeadorDeDataBreaches> misDataBreaches = controladorDataBreach.ObtenerTodosMisDataBreaches();
 
             dataGridHistorico.DataSource = misDataBreaches;
             dataGridHistorico.Columns["usuario"].Visible = false;
@@ -59,7 +53,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
                 dataGridHistorico.CurrentRow.DataBoundItem;
 
             InterfazVerRegistroDataBreach verRegistro = new InterfazVerRegistroDataBreach
-                (ref this.usuario, ref this.sistema, ref miDataBreach);
+                (ref this.usuario, ref miDataBreach);
 
             this.Close();
             verRegistro.Show();
@@ -68,7 +62,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private void btnContraseniaVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -76,7 +70,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
         {
             this.Close();
             InterfazChequeoDataBreaches dataBreaches = new 
-                InterfazChequeoDataBreaches(ref sistema, ref usuario);
+                InterfazChequeoDataBreaches(ref usuario);
             dataBreaches.Show();
         }
     }

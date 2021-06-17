@@ -1,26 +1,22 @@
 ﻿using InterfazDeModificarContrasenia = 
     InterfazGrafica.InterfacesDeContrasenias.InterfazDeModificarContrasenia;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OblDiseño1.Entidades;
-using AccesoDatos;
 using OblDiseño1;
 using System;
+using OblDiseño1.ControladoresPorEntidad;
+using OblDiseño1.Entidades;
 
 namespace InterfazGrafica.InterfacesReporte
 {
     public partial class InterfazReporteVer : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private reporte reporte;
 
         private int nivelDeSeguridad;
 
-        private ControladorObtener controladorObtener;
-
-        private IRepositorio<Usuario> usuarioRepositorio;
+        private ControladorUsuario controladorUsuario;
 
         private const int nivelSeguridadVerdeOscuro = 5;
         private const int nivelSeguridadVerdeClaro = 4;
@@ -28,15 +24,14 @@ namespace InterfazGrafica.InterfacesReporte
         private const int nivelSeguridadNaranja = 2;
         private const int nivelSeguridadRojo = 1;
 
-        public InterfazReporteVer(ref Usuario usuario, ref Sistema sistema, 
+        public InterfazReporteVer(ref Usuario usuario, 
             reporte reporte, int nivelDeSeguridad)
         {
             InitializeComponent();
 
-            this.controladorObtener = new ControladorObtener();
-            this.sistema = sistema;
-            this.usuarioRepositorio = new UsuarioRepositorio();
-            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
+            controladorUsuario = new ControladorUsuario();
+
+            this.usuario = controladorUsuario.ObtenerUnUsuario(usuario);
             this.nivelDeSeguridad = nivelDeSeguridad;
             this.reporte = reporte;
 
@@ -121,7 +116,7 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void button_Volver_Click(object sender, EventArgs e)
         {
-            InterfazReporte interReporte = new InterfazReporte(ref usuario, ref sistema);
+            InterfazReporte interReporte = new InterfazReporte(ref usuario);
             interReporte.Show();
             this.Close();
         }
@@ -133,7 +128,7 @@ namespace InterfazGrafica.InterfacesReporte
                 Credencial duplaSeleccionada = (Credencial)dataGridView_Contrasenias.CurrentRow.
                     DataBoundItem;
                 InterfazDeModificarContrasenia modContra = new InterfazDeModificarContrasenia
-                    (ref usuario, ref sistema, duplaSeleccionada, "InterfazReporteVer");
+                    (ref usuario, duplaSeleccionada, "InterfazReporteVer");
                 modContra.Show();
                 this.Close();
             }

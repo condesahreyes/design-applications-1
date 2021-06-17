@@ -1,56 +1,66 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using CapaDeComunicación.ControladoresPorEntidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;
-using AccesoDatos.Repositorios;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
     public partial class InterfazContraseñasCompartidas : Form
     {
-        private Sistema sistema;
         private Usuario usuario;
         GestorContraseniasCompartidas miGestor;
-        public InterfazContraseñasCompartidas(ref Sistema sistema, ref Usuario usuario)
+        ControladorRegistroCredencialCompartida controladorRegistroCredencialCompartida;
+        ControladorCredencial controladorCredencial;
+
+        public InterfazContraseñasCompartidas(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
+            this.controladorRegistroCredencialCompartida = new ControladorRegistroCredencialCompartida(this.usuario);
+            this.controladorCredencial = new ControladorCredencial(this.usuario);
             miGestor = usuario.GestorCompartirContrasenia;
             miGestor.BorrarDatosDeGestor();
-           
-            IRepositorioCompartir<Credencial, Usuario> repositorioContraseñasCompartidas = new RegistroCredencialCompartidaRepositorio(this.usuario);
-            List<Credencial> contraseñasQueComparto = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueComparto();
-            List<Credencial> contraseñasQueMeComparten = repositorioContraseñasCompartidas.ObtenerTodasLasCredencialesQueMeComparten();
-            
-            List<Usuario> usuariosQueMeCompartenAlgunaCredencial = repositorioContraseñasCompartidas.ObtenerUsuariosQueMeCompartenAlgunaCredencial();
+
+            CargarGestor();
+            CargarContraseñasCompartidas();
+            CargarContraseñasCompartidasConmigo();
+        }
+
+        private void CargarGestor()
+        {
+            List<Credencial> contraseñasQueComparto = controladorRegistroCredencialCompartida.
+                ObtenerTodasLasCredencialesQueComparto();
+            List<Credencial> contraseñasQueMeComparten = controladorRegistroCredencialCompartida.
+                ObtenerTodasLasCredencialesQueMeComparten();
+
+            List<Usuario> usuariosQueMeCompartenAlgunaCredencial = controladorRegistroCredencialCompartida.
+                ObtenerUsuariosQueMeCompartenAlgunaCredencial();
 
             foreach (var credencial in contraseñasQueComparto)
             {
-                List<Usuario> usuariosALosQueComparto = repositorioContraseñasCompartidas.ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(credencial);
+                List<Usuario> usuariosALosQueComparto = controladorRegistroCredencialCompartida.
+                    ObtenerTodosLosUsuariosALosQueCompartoUnaCredencial(credencial);
                 miGestor.ObtenerContraseniasCompartidasPorMi().Add(credencial, usuariosALosQueComparto);
             }
 
             foreach (var usuarioQueMeComparteAlgunaCred in usuariosQueMeCompartenAlgunaCredencial)
             {
-                List<Credencial> credencialesQueMeComparteElUsuario = repositorioContraseñasCompartidas.ObtenerCredencialesQueMeComparteUnUsuario(usuarioQueMeComparteAlgunaCred);
-                miGestor.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparteAlgunaCred,credencialesQueMeComparteElUsuario);
+                List<Credencial> credencialesQueMeComparteElUsuario = controladorRegistroCredencialCompartida.
+                    ObtenerCredencialesQueMeComparteElUsuario(usuarioQueMeComparteAlgunaCred);
+                miGestor.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparteAlgunaCred, 
+                    credencialesQueMeComparteElUsuario);
             }
-
-            CargarContraseñasCompartidas();
-            CargarContraseñasCompartidasConmigo();
         }
 
         private void CargarContraseñasCompartidas()
         {
-            
-
             BindingSource biso = new BindingSource();
+
             this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
             miGestor = usuario.GestorCompartirContrasenia;
 
@@ -89,7 +99,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarContraseñasCompartidasConmigo()
         {
-
             BindingSource biso2 = new BindingSource();
             this.dataGridContraseñasCompartidas.AllowUserToAddRows = false;
             this.miGestor = usuario.GestorCompartirContrasenia;
@@ -100,7 +109,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 foreach (var iteradorAuxiliar in iterador.Value)
                     listaCredencialesCompartidasConmigo.Add(iteradorAuxiliar);
             }
-
 
             biso2.DataSource = listaCredencialesCompartidasConmigo;
 
@@ -147,24 +155,21 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void buttonCompartir_Click(object sender, EventArgs e)
         {
-            ControladorObtener controladorObtener = new ControladorObtener();
-            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
-            if (controladorObtener.ObtenerCredenciales(repositorioCredencial).Count > 0)
+            if (controladorCredencial.ObtenerTodasMisCredenciales().Count > 0)
             {
                 this.Close();
                 InterfazCompartirContraseña interfazCompartirContraseña =
-                    new InterfazCompartirContraseña(ref sistema, ref usuario);
+                    new InterfazCompartirContraseña(ref usuario);
                 interfazCompartirContraseña.Show();
             }
             else
                 MessageBox.Show("No existen credenciales registradas aun");
-
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -188,14 +193,9 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private void IrADejarDeCompartirContrasenia(ref Credencial credencialSeleccionada)
         {
             InterfazDejarDeCompartirContrasenia interfazDejarDeCompartirContrasenias =
-                new InterfazDejarDeCompartirContrasenia(ref sistema, ref usuario, ref credencialSeleccionada);
+                new InterfazDejarDeCompartirContrasenia(ref usuario, ref credencialSeleccionada);
             this.Close();
             interfazDejarDeCompartirContrasenias.Show();
-        }
-
-        private void dataGridContraseñasCompartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

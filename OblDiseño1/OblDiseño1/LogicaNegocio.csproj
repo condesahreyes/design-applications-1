@@ -46,14 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControladoresPorFuncionalidad\ControladorAlta.cs" />
-    <Compile Include="ControladoresPorFuncionalidad\ControladorEliminar.cs" />
-    <Compile Include="ControladoresPorFuncionalidad\ControladorModificar.cs" />
-    <Compile Include="ControladoresPorFuncionalidad\ControladorObtener.cs" />
     <Compile Include="Entidades\Categoria.cs" />
     <Compile Include="Entidades\Contraseña.cs" />
     <Compile Include="Entidades\Reporte.cs" />
     <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
+    <Compile Include="Exception\ExcepcionFormatoArchivoInvalido.cs" />
     <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
     <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />
     <Compile Include="Exception\ExepcionIntentoDeObtencionDeObjetoInexistente.cs" />
@@ -66,7 +63,6 @@
     <Compile Include="IRepositorioCompartir.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Credencial.cs" />
-    <Compile Include="Manejadores\Sistema.cs" />
     <Compile Include="Entidades\Tarjeta.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

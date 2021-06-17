@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
+using OblDiseño1.Exception;
 
 namespace OblDiseño1
 {
@@ -45,6 +46,41 @@ namespace OblDiseño1
 
             return credencialesVulneradas;
         }
+
+
+        public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivo(string rutaDeArchivo)
+        {
+             if (VerificarQueEsTxt(rutaDeArchivo))
+                 return ObtenerTarjetasVulneradasDesdeArchivoTxt(rutaDeArchivo);
+             else
+                 throw new ExcepcionFormatoArchivoInvalido("Tipo de archivo no soportado");
+            
+        }
+
+        public List<Credencial> ObtenerCredenciakesVulneradasDesdeArchivo(string rutaDeArchivo)
+        {
+            if (VerificarQueEsTxt(rutaDeArchivo))
+                return ObtenerCredencialesVulneradasDesdeArchivoTxt(rutaDeArchivo);
+            else
+                throw new ExcepcionFormatoArchivoInvalido("Tipo de archivo no soportado");
+        }
+
+        private bool VerificarQueEsTxt(string ruta)
+        {
+            string extencionTxt = ".txt";
+            bool retorno = false;
+
+            if (Path.HasExtension(ruta))
+            {
+                if (Path.GetExtension(ruta).Equals(extencionTxt))
+                {
+                    retorno = true;
+                }
+            }
+            return retorno;
+        }
+
+
 
         public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivoTxt(string pathDelArchivo)
         {

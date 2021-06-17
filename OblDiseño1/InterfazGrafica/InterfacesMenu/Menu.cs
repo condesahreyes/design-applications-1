@@ -1,57 +1,52 @@
 ﻿using InterfazGrafica.InterfazCompartirContraseñas;
 using InterfazGrafica.InterfacesDeContrasenias;
-using OblDiseño1.ControladoresPorFuncionalidad;
+using InterfazGrafica.InterfacesDataBreaches;
 using InterfazGrafica.InterfacesDeTarjetas;
-using InterfazGrafica.InterfazDataBreaches;
+using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazIngreso;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos;
-using System.Collections.Generic;
-using InterfazGrafica.InterfacesDataBreaches;
 
 namespace InterfazGrafica.InterfacesMenu
 {
     public partial class Menu : Form
     {
-        private Sistema sistema;
         private Usuario usuario;
-        private ControladorObtener controladorObtener;
-        private CategoriaRepositorio categoriaRepo;
-        private CredencialRepositorio credencialRepo;
+
+        private ControladorCategoria controladorCategoria;
 
         private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
             "se debe registrar una Categoría para acceder a esta opción.";
 
-        public Menu(ref Sistema sistema, ref Usuario usuario)
+        public Menu(ref Usuario usuario)
         {
             this.usuario = usuario;
-            this.sistema = sistema;
-            controladorObtener = new ControladorObtener();
-            categoriaRepo = new CategoriaRepositorio(this.usuario);
-            credencialRepo = new CredencialRepositorio(this.usuario);
 
-
+            CrearManejadoresCategoria();
             InitializeComponent();
+        }
+
+        private void CrearManejadoresCategoria()
+        {
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazCategorias categoria = new InterfazCategorias(ref this.usuario, ref this.sistema);
+            InterfazCategorias categoria = new InterfazCategorias(ref this.usuario);
             categoria.Show();
         }
 
         private void btnContrasenias_Click(object sender, EventArgs e)
         {
-            if (controladorObtener.ObtenerCategorias(categoriaRepo).Count > 0)
+            if (controladorCategoria.ObtenerCategorias().Count > 0)
             {
                 this.Hide();
-                InterfazContrasenia contrasenias = new InterfazContrasenia(ref usuario, ref sistema);
+                InterfazContrasenia contrasenias = new InterfazContrasenia(ref usuario);
                 contrasenias.Show();
             }
             else
@@ -60,7 +55,7 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnTarjetas_Click(object sender, EventArgs e)
         {
-            if (controladorObtener.ObtenerCategorias(categoriaRepo).Count > 0)
+            if (controladorCategoria.ObtenerCategorias().Count > 0)
                 IrAPantallaTarjetas();
             else
                 MessageBox.Show(msgErrorDebeCrearCategoria);
@@ -69,35 +64,35 @@ namespace InterfazGrafica.InterfacesMenu
         private void IrAPantallaTarjetas()
         {
             this.Hide();
-            InterfazTarjeta tarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta tarjeta = new InterfazTarjeta(ref usuario);
             tarjeta.Show();
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazIngresoSistema login = new InterfazIngresoSistema(ref sistema);
+            InterfazIngresoSistema login = new InterfazIngresoSistema();
             login.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazCambioContrasenia cambioContrasenia = new InterfazCambioContrasenia(ref sistema);
+            InterfazCambioContrasenia cambioContrasenia = new InterfazCambioContrasenia();
             cambioContrasenia.Show();
         }
 
         private void btnDataBreaches_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazHistoricosDataBreach dataBreach = new InterfazHistoricosDataBreach(ref usuario, ref sistema);
+            InterfazHistoricosDataBreach dataBreach = new InterfazHistoricosDataBreach(ref usuario);
             dataBreach.Show();
 
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            InterfazReporte reporte = new InterfazReporte(ref usuario, ref sistema);
+            InterfazReporte reporte = new InterfazReporte(ref usuario);
             reporte.Show();
             this.Close();
         }
@@ -106,7 +101,7 @@ namespace InterfazGrafica.InterfacesMenu
         {
                 this.Close();
                 InterfazContraseñasCompartidas interfazContraseñas = new
-                    InterfazContraseñasCompartidas(ref sistema, ref usuario);
+                    InterfazContraseñasCompartidas(ref usuario);
                 interfazContraseñas.Show();
         }
     }

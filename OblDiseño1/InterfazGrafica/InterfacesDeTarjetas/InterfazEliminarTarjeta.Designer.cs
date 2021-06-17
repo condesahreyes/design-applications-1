@@ -37,7 +37,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // buttonAceptar
             // 
             this.buttonAceptar.Location = new System.Drawing.Point(33, 76);
-            this.buttonAceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAceptar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAceptar.Name = "buttonAceptar";
             this.buttonAceptar.Size = new System.Drawing.Size(74, 22);
             this.buttonAceptar.TabIndex = 0;
@@ -48,7 +48,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // buttonCancelar
             // 
             this.buttonCancelar.Location = new System.Drawing.Point(126, 76);
-            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancelar.Name = "buttonCancelar";
             this.buttonCancelar.Size = new System.Drawing.Size(74, 22);
             this.buttonCancelar.TabIndex = 1;
@@ -74,7 +74,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonAceptar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InterfazEliminarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazEliminarTarjeta";

@@ -1,6 +1,5 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -8,16 +7,12 @@ namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazCambioContrasenia : Form
     {
-        private Sistema sistema;
 
-        private ControladorModificar controladorModificar = new ControladorModificar();
-        private ControladorObtener controladorObtener = new ControladorObtener();
-        private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
-
-        public InterfazCambioContrasenia(ref Sistema sistema)
+        private ControladorUsuario controladorUsuario;
+        public InterfazCambioContrasenia()
         {
             InitializeComponent();
-            this.sistema = sistema;
+            controladorUsuario = new ControladorUsuario();
         }
 
         private void btnModificarContrasenia_Click(object sender, EventArgs e)
@@ -29,7 +24,7 @@ namespace InterfazGrafica.InterfazIngreso
             try
             {
                 Usuario intentoLogin = new Usuario(nombreUsuario, contrasenia);
-                Usuario usuarioRegistrado = controladorObtener.ObtenerUsuario(intentoLogin, usuariosRepo);
+                Usuario usuarioRegistrado = controladorUsuario.ObtenerUnUsuario(intentoLogin);
                 if (usuarioRegistrado != null && usuarioRegistrado.Contrasenia == contrasenia)
                     ModificarContrasenia(intentoLogin, nuevaContrasenia);
                 else
@@ -48,7 +43,7 @@ namespace InterfazGrafica.InterfazIngreso
             {
                 Usuario usuarioModificado = new Usuario(usuario.Nombre, unaContrasenia);
 
-                controladorModificar.ModificarUsuario(usuario, usuarioModificado, usuariosRepo);
+                controladorUsuario.ModificarUsuario(usuario, usuarioModificado);
                 MessageBox.Show("Su contraseña se ha actualizado con éxito. Pruebe loguearse");
                 IrAlLogin();
             }
@@ -74,7 +69,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void IrAlLogin()
         {
             this.Hide();
-            InterfazIngresoSistema login = new InterfazIngresoSistema(ref sistema);
+            InterfazIngresoSistema login = new InterfazIngresoSistema();
             login.Show();
         }
     }

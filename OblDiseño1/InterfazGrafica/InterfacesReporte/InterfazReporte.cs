@@ -1,25 +1,21 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using System.Windows.Forms;
+using OblDiseño1.ControladoresPorEntidad;
 using OblDiseño1.Entidades;
+using System.Windows.Forms;
 using OblDiseño1;
 using System;
-using AccesoDatos;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using System.Collections.Generic;
+
 
 namespace InterfazGrafica.InterfacesReporte
 {
     public partial class InterfazReporte : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private reporte reporte;
 
         private Reporte manejadorDeDatosReporte;
 
-        private ControladorObtener controladorObtener;
-
-        private IRepositorio<Usuario> usuarioRepositorio;
+        private ControladorUsuario controladorUsuario;
 
         private const int nivelSeguridadRojo = 1;
         private const int nivelSeguridadNaranja = 2;
@@ -27,19 +23,23 @@ namespace InterfazGrafica.InterfacesReporte
         private const int nivelSeguridadVerdeClaro = 4;
         private const int nivelSeguridadVerdeOscuro = 5;
 
-        public InterfazReporte(ref Usuario usuario, ref Sistema sistema)
+        public InterfazReporte(ref Usuario usuario)
         {
             InitializeComponent();
+            CrearControladorUsuario();
 
-            this.controladorObtener = new ControladorObtener();
-            this.sistema = sistema;
-            this.usuarioRepositorio = new UsuarioRepositorio();
-            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
+            usuario = controladorUsuario.ObtenerUnUsuario(usuario);
+            this.usuario = usuario;
             manejadorDeDatosReporte = new Reporte(usuario);
 
             this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
 
             ActualizarLables();
+        }
+
+        private void CrearControladorUsuario()
+        {
+            controladorUsuario = new ControladorUsuario();
         }
 
         public void ActualizarLables()
@@ -58,47 +58,42 @@ namespace InterfazGrafica.InterfacesReporte
 
         private void button_VerRojo_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, ref sistema,
-                reporte, nivelSeguridadRojo);
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadRojo);
             reporteVer.Show();
             this.Close();
         }
 
         private void button_VerNaranja_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, ref sistema,
-                reporte, nivelSeguridadNaranja);
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadNaranja);
             reporteVer.Show();
             this.Close();
         }
 
         private void button_VerAmarillo_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, ref sistema,
-                reporte, nivelSeguridadAmarillo);
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadAmarillo);
             reporteVer.Show();
             this.Close();
         }
 
         private void button_VerVerdeClaro_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, ref sistema, 
-                reporte, nivelSeguridadVerdeClaro);
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadVerdeClaro);
             reporteVer.Show();
             this.Close();
         }
 
         private void button_VerVerdeOscuro_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, ref sistema, 
-                reporte, nivelSeguridadVerdeOscuro);
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadVerdeOscuro);
             reporteVer.Show();
             this.Close();
         }
 
         private void button_VolverAMenu_Click_1(object sender, EventArgs e)
         {
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
             this.Close();
         }
@@ -106,7 +101,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void button_PorCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(this.usuario, sistema, reporte);
+            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(this.usuario, reporte);
             porCat.Show();
         }
     }

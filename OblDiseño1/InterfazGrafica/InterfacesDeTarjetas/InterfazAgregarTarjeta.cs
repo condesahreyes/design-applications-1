@@ -1,7 +1,6 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -10,28 +9,34 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     public partial class InterfazAgregarTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
 
-        private ControladorAlta controladorAlta = new ControladorAlta();
-        private ControladorObtener controladorObtener = new ControladorObtener();
+        private ControladorCategoria controladorCategoria;
+        private ControladorTarjeta controladorTarjeta;
 
-        private IRepositorio<Categoria> repositorioCategoria;
-
-        public InterfazAgregarTarjeta(ref Usuario usuario, ref Sistema sistema)
+        public InterfazAgregarTarjeta(ref Usuario usuario)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
 
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-
+            CrearManejadoresTarjeta();
+            CrearManejadoresCategoria();
             CargarOpcionesDeCategoria();
+        }
+
+        private void CrearManejadoresTarjeta()
+        {
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
+        }
+
+        private void CrearManejadoresCategoria()
+        {
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void CargarOpcionesDeCategoria()
         {
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
 
             foreach (var recorredorCategoria in categorias)
             {
@@ -80,12 +85,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-            Tarjeta nuevaTarjeta = new Tarjeta(nombreTarjeta, tipoTarjeta,
+
+            controladorTarjeta.CrearTarjeta(nombreTarjeta, tipoTarjeta,
                 numeroTarjeta, codigoSeguridadAConvertir, fecha, categoria, notaOpcional);
 
-            IRepositorio<Tarjeta> tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
-
-            controladorAlta.AgregarTarjeta(nuevaTarjeta, tarjetaRepositorio);
         }
 
         private void MostrarCualesSonLosDatosCorrectos()
@@ -105,7 +108,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void IrAInterfazTarjeta()
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
 

@@ -1,38 +1,41 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OblDiseño1.Entidades;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
     public partial class InterfazAgregarContrasenia : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
 
-        private ControladorObtener controladorObtener = new ControladorObtener();
+        private ControladorCategoria controladorCategoria;
+        private ControladorCredencial controladorCredencial;
 
-        private IRepositorio<Categoria> repositorioCategoria;
-        private IRepositorio<Credencial> repositorioCredencial;
-
-        public InterfazAgregarContrasenia(ref Sistema sistema, ref Usuario usuario)
+        public InterfazAgregarContrasenia(ref Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.sistema = sistema;
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            repositorioCredencial = new CredencialRepositorio(this.usuario);
 
+            CrearManejadoresCredencial();
+            CrearManejadoresCategoria();
             AgregarCategorias();
+        }
+
+        private void CrearManejadoresCredencial()
+        {
+            controladorCredencial = new ControladorCredencial(this.usuario);
+        }
+
+        private void CrearManejadoresCategoria()
+        {
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void AgregarCategorias()
         {
-            List<Categoria> categorias = controladorObtener.ObtenerCategorias(repositorioCategoria);
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
 
             var bindingSource = new BindingSource();
             bindingSource.DataSource = categorias;
@@ -64,17 +67,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private void DarDeAltaCredencial()
         {
             string nombreUsuario = textBoxNombre.Text;
-            string contrasenia = textBoxContrasenia.Text;
+            string contraseña = textBoxContrasenia.Text;
             string nombreSitio = textBoxNombreSitioApp.Text;
             string nota = textBoxNota.Text;
 
-            ControladorAlta controladorAlta = new ControladorAlta();
-
             Categoria categoria = (Categoria)comboBoxCategoria.SelectedItem;
-            OblDiseño1.Entidades.Contraseña contraseña = new OblDiseño1.Entidades.Contraseña(contrasenia);
-            Credencial credencial = new Credencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
-
-            controladorAlta.AgregarCredencial(credencial, repositorioCredencial);
+            controladorCredencial.CrearCredencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
 
             MessageBox.Show("Se ha agregado la contraseña con éxito");
         }
@@ -102,7 +100,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void IrAContraseñas()
         {
-            InterfazContrasenia interfazContrasenia = new InterfazContrasenia(ref usuario, ref sistema);
+            InterfazContrasenia interfazContrasenia = new InterfazContrasenia(ref usuario);
             interfazContrasenia.Show();
             this.Close();
         }
@@ -138,7 +136,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaSegura(string posibleContraseña, string mensaje)
         {
-            bool segura = controladorObtener.ObtenerSiEsContraseniaSegura(posibleContraseña);
+            bool segura = controladorCredencial.ObtenerSiEsContraseniaSegura(posibleContraseña);
 
             if (segura)
                 mensaje = mensaje + "Es una contraseña segura \n";
@@ -150,8 +148,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaDuplicada(string posibleContraseña, string mensaje)
         {
-            bool duplicada = controladorObtener.ObtenerSiEsContraseniaDuplicada
-                (posibleContraseña, null, repositorioCredencial);
+            bool duplicada = controladorCredencial.ObtenerSiEsContraseniaDuplicada(posibleContraseña, null);
 
             if (duplicada)
                 mensaje = mensaje + "Es una contraseña duplicada \n";
@@ -161,8 +158,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaVulnerada(string posibleContraseña, string mensaje)
         {
-            IRepositorio<ChequeadorDeDataBreaches> repoDataBreach = new DataBrechRepositorio(this.usuario);
-            bool vulnerada = controladorObtener.ObtenerSiEsContraseñaVulnerada(posibleContraseña, repoDataBreach);
+            bool vulnerada = controladorCredencial.ObtenerSiEsContraseñaVulnerada(posibleContraseña);
 
             if (vulnerada)
                 mensaje = mensaje + "Es una contraseña vulnerada \n";

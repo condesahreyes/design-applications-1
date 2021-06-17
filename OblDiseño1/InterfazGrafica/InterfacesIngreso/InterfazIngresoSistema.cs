@@ -1,24 +1,19 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
 
 namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazIngresoSistema : Form
     {
-        private Sistema sistema;
+        private ControladorUsuario controladorUsuario;
 
-        private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
-        private ControladorAlta controladorAlta = new ControladorAlta();
-
-        public InterfazIngresoSistema(ref Sistema sistema)
+        public InterfazIngresoSistema()
         {
-            this.sistema = sistema;
             InitializeComponent();
+            controladorUsuario = new ControladorUsuario();
         }
 
         private void ingresoSistema_Click(object sender, EventArgs e)
@@ -37,7 +32,7 @@ namespace InterfazGrafica.InterfazIngreso
         public bool VerificarContraseñaCorrecta(string nombreUsuario, string contrasenia)
         {
             Usuario usuario = new Usuario(nombreUsuario, contrasenia);
-            Usuario usuarioIngresado = usuariosRepo.Get(usuario);
+            Usuario usuarioIngresado = controladorUsuario.ObtenerUnUsuario(usuario);
 
             if (usuarioIngresado.Contrasenia == contrasenia)
                 return true;
@@ -51,15 +46,15 @@ namespace InterfazGrafica.InterfazIngreso
             {
                 Usuario usuario = new Usuario(nombreUsuario, contrasenia);
 
-                if (usuariosRepo.Existe(usuario))
+                if (controladorUsuario.ExisteUsuario(usuario))
                 {
-                    usuario = usuariosRepo.Get(usuario);
+                    usuario = controladorUsuario.ObtenerUnUsuario(usuario);
                     
                 }
                     
                 else
                 {
-                    controladorAlta.AgregarUsuario(usuario, usuariosRepo);
+                    controladorUsuario.AgregarUsuario(usuario);
                     MessageBox.Show("Se lo ha registrado como nuevo usuario");
                 }
                 return usuario;
@@ -76,7 +71,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void IrAlMenu(ref Usuario usuario)
         {
             this.Hide();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
@@ -95,7 +90,7 @@ namespace InterfazGrafica.InterfazIngreso
         private void btnCambiarContraseña_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia(ref sistema);
+            InterfazCambioContrasenia modificarContrasenia = new InterfazCambioContrasenia();
             modificarContrasenia.Show();
         }
     }

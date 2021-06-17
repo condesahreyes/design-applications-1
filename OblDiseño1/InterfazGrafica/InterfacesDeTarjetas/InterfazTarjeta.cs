@@ -1,8 +1,7 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -11,25 +10,28 @@ namespace InterfazGrafica.InterfacesDeTarjetas
     public partial class InterfazTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
 
-        private ControladorObtener controladorObtener = new ControladorObtener();
+        private ControladorTarjeta controladorTarjeta;
 
-        private IRepositorio<Tarjeta> tarjetaRepositorio;
 
-        public InterfazTarjeta(ref Usuario usuario, ref Sistema sistema)
+        public InterfazTarjeta(ref Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.sistema = sistema;
-            tarjetaRepositorio = new TarjetaRepositorio(this.usuario);
+
+            CrearManejadoresTarjeta();
             CargarListaTarjetas();
             ModificarNombreDeColumnasDelDataGrid();
         }
 
+        private void CrearManejadoresTarjeta()
+        {
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
+        }
+
         private void CargarListaTarjetas()
         {
-            List<Tarjeta> misTarjetas = controladorObtener.ObtenerTarjetas(tarjetaRepositorio);
+            List<Tarjeta> misTarjetas = controladorTarjeta.ObtenerTodasMisTarjetas();
             if (misTarjetas.Count > 0)
                 misTarjetas.Sort();
             dataGridTarjetas.DataSource = misTarjetas;
@@ -48,14 +50,14 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void btnTarjetasVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
         private void btnAgregarTarjeta_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
+            InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario);
             interfazAgregar.Show();
         }
 
@@ -77,7 +79,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 this.Hide();
                 InterfazModificarTarjeta modificarTarjeta = new InterfazModificarTarjeta
-                    (ref sistema, ref usuario, ref tarjetaSeleccionada);
+                    (ref usuario, ref tarjetaSeleccionada);
                 modificarTarjeta.Show();
             }
         }
@@ -88,6 +90,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 EliminarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
+            CargarListaTarjetas();
         }
 
         private void EliminarTarjetaSeleccionada()
@@ -99,10 +102,11 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             else
             {
                 InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
-                    (ref sistema, ref usuario, ref tarjetaSeleccionada);
+                    (ref usuario, ref tarjetaSeleccionada);
                 this.Close();
                 eliminarTarjeta.Show();
             }
+            CargarListaTarjetas();
         }
     }
 }

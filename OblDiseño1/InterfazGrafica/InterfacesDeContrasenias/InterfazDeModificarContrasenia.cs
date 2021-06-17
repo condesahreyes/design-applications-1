@@ -1,24 +1,20 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using InterfazGrafica.InterfacesDataBreaches;
+﻿using InterfazGrafica.InterfacesDataBreaches;
 using InterfazGrafica.InterfazDataBreaches;
+using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfacesReporte;
 using System.Collections.Generic;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfacesDeContrasenias
 {
     public partial class InterfazDeModificarContrasenia : Form
     {
+        private ChequeadorDeDataBreaches miChequeador;
         private Credencial credencial;
         private Usuario usuario;
-        private Sistema sistema;
-
-        private ChequeadorDeDataBreaches miChequeador;
 
         private int nivelSeguridadContraseniaOriginal;
         private int nivelSeguridadContraseniaNuevo;
@@ -30,45 +26,47 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
         private const string posibleInterfazPadre_ChequeoDataBreachesHistorico = "InterfazVerRegistroDataBreach";
 
-        private IRepositorio<Credencial> repositorioCredencial;
-        private IRepositorio<OblDiseño1.Entidades.Contraseña> repositorioContraseña;
-        private IRepositorio<Categoria> repositorioCategoria;
+        private ControladorCategoria controladorCategoria;
+        private ControladorCredencial controladorCredencial;
 
-        private ControladorObtener controladorObtener;
-
-
-        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
-            Credencial credencial, string padre)
+        public InterfazDeModificarContrasenia(ref Usuario usuario, Credencial credencial, string padre)
         {
-            Inicializador(ref usuario, ref sistema, credencial, padre, null);
+            Inicializador(ref usuario, credencial, padre, null);
         }
 
-        public InterfazDeModificarContrasenia(ref Usuario usuario, ref Sistema sistema,
+        public InterfazDeModificarContrasenia(ref Usuario usuario,
             Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
         {
-            Inicializador(ref usuario, ref sistema, credencial, padre, miChequeador);
+            Inicializador(ref usuario, credencial, padre, miChequeador);
         }
 
-        private void Inicializador(ref Usuario usuario, ref Sistema sistema,
-            Credencial credencial, string padre, ChequeadorDeDataBreaches miChequeador)
+        private void Inicializador(ref Usuario usuario, Credencial credencial, 
+            string padre, ChequeadorDeDataBreaches miChequeador)
         {
             if (miChequeador != null)
                 this.miChequeador = miChequeador;
 
             this.usuario = usuario;
-            this.sistema = sistema;
             this.credencial = credencial;
             this.nivelSeguridadContraseniaOriginal = this.credencial.ObtenerNivelSeguridad;
             this.nivelSeguridadContraseniaNuevo = this.nivelSeguridadContraseniaOriginal;
             this.interfazPadre = padre;
 
-            this.repositorioCredencial = new CredencialRepositorio(this.usuario);
-            this.repositorioContraseña = new ContraseñaRepositorio(this.usuario);
-            this.repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            this.controladorObtener = new ControladorObtener();
+            CrearManejadoresCredencial();
+            CrearManejadoresCategoria();
 
             InitializeComponent();
             ColocarDatosEnLosCampos();
+        }
+
+        private void CrearManejadoresCredencial()
+        {
+            controladorCredencial = new ControladorCredencial(this.usuario);
+        }
+
+        private void CrearManejadoresCategoria()
+        {
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void ColocarDatosEnLosCampos()
@@ -77,9 +75,9 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             this.textBox_Sitio.Text = credencial.NombreSitioApp;
 
-            List<Categoria> categorias = repositorioCategoria.GetAll();
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
 
-            Credencial credencialPorBD = controladorObtener.ObtenerCredencial(credencial, repositorioCredencial);
+            Credencial credencialPorBD = controladorCredencial.ObtenerCredencial(credencial);
 
             this.textBox_Contrasenia.Text = credencialPorBD.ObtenerContraseña;
 
@@ -147,15 +145,18 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
             else
             {
-                ModificarContrasenia();
-                MessageBox.Show("La contraseña se modifico correctamente");
-                CerrarVentana();
+                bool fueModificada=ModificarContrasenia();
+                if (fueModificada)
+                {
+                    MessageBox.Show("La contraseña se modifico correctamente");
+                    CerrarVentana();
+                }
             }
         }
 
         public bool VerificarQueTengoCombinacionNombreSitio(string nuevoNombreUsuario, string nuevoNombreSitio)
         {
-            List<Credencial> credenciales = repositorioCredencial.GetAll();
+            List<Credencial> credenciales = controladorCredencial.ObtenerTodasMisCredenciales();
             foreach (var credencial in credenciales)
             {
                 if (credencial.NombreUsuario == nuevoNombreUsuario && credencial.NombreSitioApp == nuevoNombreSitio)
@@ -174,22 +175,22 @@ namespace InterfazGrafica.InterfacesDeContrasenias
                     ActualizarReporte(reporte);
                         
                     InterfazReporteVer interfazVer = new InterfazReporteVer(ref usuario, 
-                        ref sistema, reporte, this.nivelSeguridadContraseniaOriginal);
+                        reporte, this.nivelSeguridadContraseniaOriginal);
                     interfazVer.Show();
                     this.Close();
                     break;
                 case posibleInterfazPadre_Contrasenia:
-                    InterfazContrasenia interfazContra = new InterfazContrasenia(ref usuario, ref sistema);
+                    InterfazContrasenia interfazContra = new InterfazContrasenia(ref usuario);
                     interfazContra.Show();
                     this.Close();
                     break;
                 case posibleInterfazPadre_ChequeoDataBreaches:
-                    InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref sistema, ref usuario);
+                    InterfazChequeoDataBreaches interfazDataBreaches = new InterfazChequeoDataBreaches(ref usuario);
                     interfazDataBreaches.Show();
                     this.Close();
                     break;                
                 case posibleInterfazPadre_ChequeoDataBreachesHistorico:
-                    InterfazVerRegistroDataBreach interfazDataBreachesHistorico = new InterfazVerRegistroDataBreach(ref usuario, ref sistema, ref miChequeador);
+                    InterfazVerRegistroDataBreach interfazDataBreachesHistorico = new InterfazVerRegistroDataBreach(ref usuario, ref miChequeador);
                     interfazDataBreachesHistorico.Show();
                     this.Close();
                     break;
@@ -213,6 +214,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             try
             {
                 ModificarCredencial();
+                return true;
             }
             catch (ExepcionDatosDeContraseniaInvalidos)
             {
@@ -231,11 +233,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
             OblDiseño1.Entidades.Contraseña nuevaContraseña = new OblDiseño1.Entidades.Contraseña(contraseñaNuevaCredencial);
             Categoria categoriaNuevaCredencial = (Categoria)this.comboBox_Categoria.SelectedItem;
+
             Credencial credencialAModificar = new Credencial(nombreNuevaCredencial, nuevaContraseña, 
                 sitioNuevaCredencial, notaNuevaCredencial, categoriaNuevaCredencial);
-            ControladorModificar controladorModificar = new ControladorModificar();
 
-            controladorModificar.ModificarCredencial(this.credencial, credencialAModificar, repositorioCredencial);
+            controladorCredencial.ModificarMiCredencial(credencial, credencialAModificar);
+
             this.nivelSeguridadContraseniaNuevo = credencialAModificar.ObtenerNivelSeguridad;
         }
 
@@ -281,7 +284,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaSegura(string posibleContraseña, string mensaje)
         {
-            bool segura = controladorObtener.ObtenerSiEsContraseniaSegura(posibleContraseña);
+            bool segura = controladorCredencial.ObtenerSiEsContraseniaSegura(posibleContraseña);
 
             if (segura)
                 mensaje = mensaje + "Es una contraseña segura \n";
@@ -293,8 +296,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaDuplicada(string posibleContraseña, string mensaje)
         {
-            bool duplicada = controladorObtener.ObtenerSiEsContraseniaDuplicada
-                (posibleContraseña, this.credencial, repositorioCredencial);
+            bool duplicada = controladorCredencial.ObtenerSiEsContraseniaDuplicada(posibleContraseña, this.credencial);
 
             if (duplicada)
                 mensaje = mensaje + "Es una contraseña duplicada \n";
@@ -304,8 +306,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private string EsContraseñaVulnerada(string posibleContraseña, string mensaje)
         {
-            IRepositorio<ChequeadorDeDataBreaches> repoDataBreach = new DataBrechRepositorio(this.usuario);
-            bool vulnerada = controladorObtener.ObtenerSiEsContraseñaVulnerada(posibleContraseña, repoDataBreach);
+            bool vulnerada = controladorCredencial.ObtenerSiEsContraseñaVulnerada(posibleContraseña);
 
             if (vulnerada)
                 mensaje = mensaje + "Es una contraseña vulnerada \n";

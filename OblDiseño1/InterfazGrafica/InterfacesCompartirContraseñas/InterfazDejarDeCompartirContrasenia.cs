@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using CapaDeComunicación.ControladoresPorEntidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
-using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -12,27 +11,19 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private GestorContraseniasCompartidas miGestor;
         private Credencial credencial;
-        private Sistema sistema;
         private Usuario usuario;
 
-        private ControladorObtener controladorObtener = new ControladorObtener();
-        private ControladorEliminar controladorEliminar = new ControladorEliminar();
+        private ControladorRegistroCredencialCompartida controladorRegistroCredencialCompartida;
 
-        private IRepositorioCompartir<Credencial, Usuario> repositorioRegistroContraCompartida;
-
-        public InterfazDejarDeCompartirContrasenia(ref Sistema sistema, 
-            ref Usuario usuario, ref Credencial credencial)
+        public InterfazDejarDeCompartirContrasenia(ref Usuario usuario, ref Credencial credencial)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
             this.credencial = credencial;
+            this.controladorRegistroCredencialCompartida = new ControladorRegistroCredencialCompartida(this.usuario);
 
             miGestor = usuario.GestorCompartirContrasenia;
-
-            repositorioRegistroContraCompartida = new RegistroCredencialCompartidaRepositorio(usuario);
-
             CargarDataGrid();
         }
 
@@ -54,11 +45,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             if (dataGridUsuariosCompartidos.CurrentRow != null && 0 < dataGridUsuariosCompartidos.RowCount)
             {
                 Usuario usuarioSeleccionado = (Usuario)dataGridUsuariosCompartidos.CurrentRow.DataBoundItem;
-                //usuario.DejarDeCompartirContrasenia(this.credencial, usuarioSeleccionado);
-                this.controladorEliminar.EliminarRegistroCredencialCompartida(this.credencial,
-                    usuarioSeleccionado, this.repositorioRegistroContraCompartida);
-                
-                
+                controladorRegistroCredencialCompartida.dejarDeCompartirCredencial(this.credencial, usuarioSeleccionado);
+                MessageBox.Show("La contraseña se dejo de compartir exitosamente");
                 IrAInterfazContraseñasCompartidas();
             }
         }
@@ -72,7 +60,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         {
             this.Close();
             InterfazContraseñasCompartidas interfazContraseñasCompartidas = 
-                new InterfazContraseñasCompartidas(ref sistema, ref usuario);
+                new InterfazContraseñasCompartidas(ref usuario);
             interfazContraseñasCompartidas.Show();
         }
 
