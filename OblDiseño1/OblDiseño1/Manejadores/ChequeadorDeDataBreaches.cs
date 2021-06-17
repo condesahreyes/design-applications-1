@@ -1,50 +1,111 @@
-﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System;
+using OblDiseño1.Exception;
 
 namespace OblDiseño1
 {
     public class ChequeadorDeDataBreaches
     {
-
+        public int id { get; set; }
         public Usuario usuario { get; set; }
 
-        private const int cant_caracteres_en_numero_tarjeta = 16;
-        private const int cant_tipos_de_entidades_vulneradas = 2;
+        public DateTime Fecha { get; set; }
+
+        public List<Tarjeta> TarjetasVulneradas { get; set; }
+
+        public List<Credencial> CredencialesVulneradas { get; set; }
+
         public ChequeadorDeDataBreaches(Usuario unUsuario)
         {
             usuario = unUsuario;
+            CredencialesVulneradas = new List<Credencial>();
+            TarjetasVulneradas = new List<Tarjeta>();
+
         }
 
-        public List<Object>[] ObtenerEntidadesVulneradas(List<string> datosDelDataBreach)
+        public List<Tarjeta> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
         {
-            List<object>[] entidadesVulneradas = new List<object>[cant_tipos_de_entidades_vulneradas];
+            List<Tarjeta> tarjetasVulneradas = new List<Tarjeta>();
 
-            entidadesVulneradas[0]= ObtenerTarjetasVulneradas(datosDelDataBreach);
-            entidadesVulneradas[1] = ObtenerDuplasVulneradas(datosDelDataBreach);
-
-            return entidadesVulneradas;
-        }
-
-        private List<Object> ObtenerTarjetasVulneradas(List<string> datosDelDataBreach)
-        {
-            List<Object> tarjetasVulneradas = new List<Object>();
-
-            foreach (string dato in datosDelDataBreach) 
+            foreach (string dato in datosDelDataBreach)
                 if (Tarjeta.ValidarLargoNumeroDeTarjeta(dato) && this.usuario.RevisarSiLaTarjetaEsMia(dato))
                     tarjetasVulneradas.Add(this.usuario.ObtenerTarjetaDeNumero(dato));
 
             return tarjetasVulneradas;
         }
 
-        private List<Object> ObtenerDuplasVulneradas(List<string> datosDelDataBreach)
+        public List<Credencial> ObtenerCredencialesVulneradas(List<string> datosDelDataBreach)
         {
-            List<Object> duplasVulneradas = new List<Object>();
+            List<Credencial> credencialesVulneradas = new List<Credencial>();
 
             foreach (string dato in datosDelDataBreach)
                 if (this.usuario.RevisarSiLaContraseniaEsMia(dato))
-                    duplasVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
+                    credencialesVulneradas.AddRange(this.usuario.ObtenerDuplasConLaContrasenia(dato));
 
-            return duplasVulneradas;
+            return credencialesVulneradas;
+        }
+
+
+        public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivo(string rutaDeArchivo)
+        {
+             if (VerificarQueEsTxt(rutaDeArchivo))
+                 return ObtenerTarjetasVulneradasDesdeArchivoTxt(rutaDeArchivo);
+             else
+                 throw new ExcepcionFormatoArchivoInvalido("Tipo de archivo no soportado");
+            
+        }
+
+        public List<Credencial> ObtenerCredenciakesVulneradasDesdeArchivo(string rutaDeArchivo)
+        {
+            if (VerificarQueEsTxt(rutaDeArchivo))
+                return ObtenerCredencialesVulneradasDesdeArchivoTxt(rutaDeArchivo);
+            else
+                throw new ExcepcionFormatoArchivoInvalido("Tipo de archivo no soportado");
+        }
+
+        private bool VerificarQueEsTxt(string ruta)
+        {
+            string extencionTxt = ".txt";
+            bool retorno = false;
+
+            if (Path.HasExtension(ruta))
+            {
+                if (Path.GetExtension(ruta).Equals(extencionTxt))
+                {
+                    retorno = true;
+                }
+            }
+            return retorno;
+        }
+
+
+
+        public List<Tarjeta> ObtenerTarjetasVulneradasDesdeArchivoTxt(string pathDelArchivo)
+        {
+            List<string> infoBreachada;
+
+            using (StreamReader lector = new StreamReader(pathDelArchivo))
+            {
+                string infoBrachadaEnUnSoloString = lector.ReadLine();
+                infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
+            }
+
+            return ObtenerTarjetasVulneradas(infoBreachada);
+        }
+
+        public List<Credencial> ObtenerCredencialesVulneradasDesdeArchivoTxt(string pathDelArchivo)
+        {
+            List<string> infoBreachada;
+
+            using (StreamReader lector = new StreamReader(pathDelArchivo))
+            {
+                string infoBrachadaEnUnSoloString = lector.ReadLine();
+                infoBreachada = infoBrachadaEnUnSoloString.Split('\t').ToList();
+            }
+
+            return ObtenerCredencialesVulneradas(infoBreachada);
         }
     }
 }

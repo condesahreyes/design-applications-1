@@ -1,81 +1,99 @@
-﻿using System;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1.ControladoresPorEntidad;
+using OblDiseño1.Entidades;
 using System.Windows.Forms;
 using OblDiseño1;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using System;
+
 
 namespace InterfazGrafica.InterfacesReporte
 {
     public partial class InterfazReporte : Form
     {
-
         private Usuario usuario;
-        private Sistema sistema;
         private reporte reporte;
 
-        const int nivelSeguridadRojo = 1;
-        const int nivelSeguridadNaranja = 2;
-        const int nivelSeguridadAmarillo = 3;
-        const int nivelSeguridadVerdeClaro = 4;
-        const int nivelSeguridadVerdeOscuro = 5;
+        private Reporte manejadorDeDatosReporte;
 
-        public InterfazReporte(ref Usuario usuario, ref Sistema sistema)
+        private ControladorUsuario controladorUsuario;
+
+        private const int nivelSeguridadRojo = 1;
+        private const int nivelSeguridadNaranja = 2;
+        private const int nivelSeguridadAmarillo = 3;
+        private const int nivelSeguridadVerdeClaro = 4;
+        private const int nivelSeguridadVerdeOscuro = 5;
+
+        public InterfazReporte(ref Usuario usuario)
         {
-            this.usuario = usuario;
-            this.sistema = sistema;
-            this.reporte = usuario.ObtenerReporteSeguridadContrasenias();
-
             InitializeComponent();
+            CrearControladorUsuario();
+
+            usuario = controladorUsuario.ObtenerUnUsuario(usuario);
+            this.usuario = usuario;
+            manejadorDeDatosReporte = new Reporte(usuario);
+
+            this.reporte = manejadorDeDatosReporte.ObtenerReporteSeguridadContrasenias();
+
             ActualizarLables();
         }
 
-        public void ActualizarLables() 
+        private void CrearControladorUsuario()
         {
-            // 1->Rojo, 2->Naranja, 3->Amarillo, 4->VerdeClaro, 5->VerdeOscuro
-            this.label_CantidadRojo.Text = "" + reporte.duplasPorSeguridad[1].cantidad;
-            this.label_CantidadNaranja.Text = "" + reporte.duplasPorSeguridad[2].cantidad;
-            this.label_CantidadAmarillo.Text = "" + reporte.duplasPorSeguridad[3].cantidad;
-            this.label_CantidadVerdeClaro.Text = "" + reporte.duplasPorSeguridad[4].cantidad;
-            this.label_CantidadVerdeOscuro.Text = "" + reporte.duplasPorSeguridad[5].cantidad;
+            controladorUsuario = new ControladorUsuario();
+        }
+
+        public void ActualizarLables()
+        {
+            this.label_CantidadRojo.Text = "" + 
+                reporte.duplasPorSeguridad[nivelSeguridadRojo].cantidad;
+            this.label_CantidadNaranja.Text = "" + 
+                reporte.duplasPorSeguridad[nivelSeguridadNaranja].cantidad;
+            this.label_CantidadAmarillo.Text = "" + 
+                reporte.duplasPorSeguridad[nivelSeguridadAmarillo].cantidad;
+            this.label_CantidadVerdeClaro.Text = "" + 
+                reporte.duplasPorSeguridad[nivelSeguridadVerdeClaro].cantidad;
+            this.label_CantidadVerdeOscuro.Text = "" + 
+                reporte.duplasPorSeguridad[nivelSeguridadVerdeOscuro].cantidad;
         }
 
         private void button_VerRojo_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadRojo);
-            reporVer.Show();
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadRojo);
+            reporteVer.Show();
             this.Close();
         }
-        
+
         private void button_VerNaranja_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadNaranja);
-            reporVer.Show();
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadNaranja);
+            reporteVer.Show();
             this.Close();
         }
 
         private void button_VerAmarillo_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadAmarillo);
-            reporVer.Show();
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadAmarillo);
+            reporteVer.Show();
             this.Close();
         }
 
         private void button_VerVerdeClaro_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadVerdeClaro);
-            reporVer.Show();
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadVerdeClaro);
+            reporteVer.Show();
             this.Close();
         }
 
         private void button_VerVerdeOscuro_Click_1(object sender, EventArgs e)
         {
-            InterfazReporteVer reporVer = new InterfazReporteVer(ref usuario, ref sistema, reporte, nivelSeguridadVerdeOscuro);
-            reporVer.Show();
+            InterfazReporteVer reporteVer = new InterfazReporteVer(ref usuario, reporte, nivelSeguridadVerdeOscuro);
+            reporteVer.Show();
             this.Close();
         }
 
-        private void button_Aceptar_Click_1(object sender, EventArgs e)
+        private void button_VolverAMenu_Click_1(object sender, EventArgs e)
         {
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
             this.Close();
         }
@@ -83,7 +101,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void button_PorCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(usuario, sistema, reporte);
+            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(this.usuario, reporte);
             porCat.Show();
         }
     }

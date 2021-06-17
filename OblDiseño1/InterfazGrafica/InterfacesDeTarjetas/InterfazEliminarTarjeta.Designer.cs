@@ -36,9 +36,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // 
             // buttonAceptar
             // 
-            this.buttonAceptar.Location = new System.Drawing.Point(44, 93);
+            this.buttonAceptar.Location = new System.Drawing.Point(33, 76);
+            this.buttonAceptar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAceptar.Name = "buttonAceptar";
-            this.buttonAceptar.Size = new System.Drawing.Size(98, 27);
+            this.buttonAceptar.Size = new System.Drawing.Size(74, 22);
             this.buttonAceptar.TabIndex = 0;
             this.buttonAceptar.Text = "Aceptar";
             this.buttonAceptar.UseVisualStyleBackColor = true;
@@ -46,9 +47,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // 
             // buttonCancelar
             // 
-            this.buttonCancelar.Location = new System.Drawing.Point(168, 93);
+            this.buttonCancelar.Location = new System.Drawing.Point(126, 76);
+            this.buttonCancelar.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancelar.Name = "buttonCancelar";
-            this.buttonCancelar.Size = new System.Drawing.Size(98, 27);
+            this.buttonCancelar.Size = new System.Drawing.Size(74, 22);
             this.buttonCancelar.TabIndex = 1;
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
@@ -57,21 +59,22 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 44);
+            this.label1.Location = new System.Drawing.Point(9, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(304, 17);
+            this.label1.Size = new System.Drawing.Size(225, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "¿Esta seguro que desea eliminar esta Tarjeta?";
-            
             // 
             // InterfazEliminarTarjeta
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 137);
+            this.ClientSize = new System.Drawing.Size(241, 111);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.buttonAceptar);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InterfazEliminarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InterfazEliminarTarjeta";

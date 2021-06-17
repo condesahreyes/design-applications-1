@@ -1,36 +1,49 @@
-﻿using OblDiseño1;
-using System;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
 {
     public partial class InterfazModificarTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
         private Tarjeta tarjeta;
 
-        private List<string> categorias;
+        private ControladorCategoria controladorCategoria;
+        private ControladorTarjeta controladorTarjeta;
 
-        public InterfazModificarTarjeta(ref Sistema sistema, ref Usuario usuario, ref Tarjeta tarjeta)
+        public InterfazModificarTarjeta(ref Usuario usuario, ref Tarjeta tarjeta)
         {
             InitializeComponent();
 
             this.usuario = usuario;
-            this.sistema = sistema;
             this.tarjeta = tarjeta;
-            this.categorias = usuario.ListarToStringDeMisCategorias();
 
+            CrearManejadoresTarjeta();
+            CrearManejadoresCredencial();
             CargarComboCategorias();
             CargarDatosViejos();
         }
 
+        private void CrearManejadoresTarjeta()
+        {
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
+        }
+
+        private void CrearManejadoresCredencial()
+        {
+            controladorCategoria = new ControladorCategoria(this.usuario);
+        }
+
         private void CargarComboCategorias()
         {
-            for (int i = 0; i < categorias.Count; i++)
+            List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
+
+            foreach (var recorredorCategoria in categorias)
             {
-                string categoriaMostrar = categorias[i];
+                string categoriaMostrar = recorredorCategoria.Nombre;
                 comboBoxCategorias.Items.Add(categoriaMostrar);
             }
         }
@@ -48,13 +61,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
-            string codigoSeguridad = textBoxCodigoSeguridad.Text;
-            string nombreCategoria = comboBoxCategorias.Text;
-            Categoria categoria = usuario.DevolverCategoria(nombreCategoria);
             string nuevoNumeroTarjeta = textBoxNumeroTarjeta.Text;
 
-            if (nuevoNumeroTarjeta != this.tarjeta.Numero &&
-                usuario.RevisarSiLaTarjetaEsMia(nuevoNumeroTarjeta))
+            if (!controladorTarjeta.EsElMismoNumeroTarjeta(nuevoNumeroTarjeta, this.tarjeta.Numero) &&
+                controladorTarjeta.ExisteEsteNumeroTarjeta(nuevoNumeroTarjeta))
             {
                 MessageBox.Show("Ya hay una tarjeta registrada con ese numero en el sistema");
             }
@@ -62,33 +72,13 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 try
                 {
-                    int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-
-                    this.tarjeta.Nombre = textBoxNombre.Text;
-                    this.tarjeta.Tipo = textBoxTipo.Text;
-                    this.tarjeta.Numero = textBoxNumeroTarjeta.Text;
-                    this.tarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
-                    this.tarjeta.FechaVencimiento = dateTimePicker1.Value;
-                    this.tarjeta.Categoria = categoria;
-                    this.tarjeta.NotaOpcional = textBoxNotaOpcional.Text;
-
+                    ModificarTarjeta();
                     MessageBox.Show("Se modifico correctamente la tarjeta");
-
-                    this.Close();
                     IrAInterfazTarjeta();
                 }
-                catch (Exception_TarjetaIncorrecta)
+                catch (ExepcionTarjetaIncorrecta)
                 {
-                    MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
-                                    "debe cumplir con el siguiente formato: " +
-                                    "\n\n" +
-                                    "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                    "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
-                                    "> Número: Enteros de 16 dígitos\n\n" +
-                                    "> Código: Enteros de 3 o 4 dígitos, si es American Express deben ser 4 sino 3\n\n" +
-                                    "> Fecha: No vacía\n\n" +
-                                    "> Nota: Como máximo 250 caracteress\n\n" +
-                                    "> Categoría: Se selecciona de las disponibles en el sistema");
+                    MostrarCualesSonLosDatosCorrectos();
                 }
                 catch (System.FormatException)
                 {
@@ -97,19 +87,53 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             }
         }
 
+        private void ModificarTarjeta()
+        {
+            string codigoSeguridad = textBoxCodigoSeguridad.Text;
+            string nombreCategoria = comboBoxCategorias.Text;
+
+            Categoria categoria = new Categoria(nombreCategoria);
+
+            int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
+
+            Tarjeta nuevaTarjeta = new Tarjeta();
+            nuevaTarjeta.Nombre = textBoxNombre.Text;
+            nuevaTarjeta.Tipo = textBoxTipo.Text;
+            nuevaTarjeta.Numero = textBoxNumeroTarjeta.Text;
+            nuevaTarjeta.CodigoSeguridad = codigoSeguridadAConvertir;
+            nuevaTarjeta.FechaVencimiento = dateTimePicker1.Value;
+            nuevaTarjeta.Categoria = categoria;
+            nuevaTarjeta.NotaOpcional = textBoxNotaOpcional.Text;
+
+            controladorTarjeta.ModificarTarjeta(this.tarjeta, nuevaTarjeta);
+        }
+
+        private void MostrarCualesSonLosDatosCorrectos()
+        {
+            MessageBox.Show("DATOS ERRONEOS.Por faver recuerde que la Tarjeta " +
+                            "debe cumplir con el siguiente formato: " +
+                            "\n\n" +
+                            "> Nombre: Mínimo 3 y máximo 25 caracteres \n\n" +
+                            "> Tipo: Mínimo 3 y máximo 25 caracteres \n\n" +
+                            "> Número: Enteros de 16 dígitos\n\n" +
+                            "> Código: Enteros de 3 o 4 dígitos\n\n" +
+                            "> Fecha: No vacía\n\n" +
+                            "> Nota: Como máximo 250 caracteress\n\n" +
+                            "> Categoría: Se selecciona de las disponibles en el sistema");
+        }
+
         private void IrAInterfazTarjeta()
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario, ref sistema);
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
             interfazTarjeta.Show();
         }
-
     }
 }

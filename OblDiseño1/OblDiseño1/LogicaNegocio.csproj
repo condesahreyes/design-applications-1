@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Windows.Forms" />
@@ -44,24 +47,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entidades\Categoria.cs" />
+    <Compile Include="Entidades\Contraseña.cs" />
+    <Compile Include="Entidades\Reporte.cs" />
+    <Compile Include="Entidades\GestorContraseniasCompartidas.cs" />
+    <Compile Include="Exception\ExcepcionFormatoArchivoInvalido.cs" />
+    <Compile Include="Exception\ExepcionDatosDeContraseniaInvalidos.cs" />
+    <Compile Include="Exception\ExepcionEliminacionDeContraseniaCompartida.cs" />
+    <Compile Include="Exception\ExepcionIntentoDeObtencionDeObjetoInexistente.cs" />
+    <Compile Include="Exception\ExepcionInvalidCategoriaData.cs" />
+    <Compile Include="Exception\ExepcionInvalidUsuarioData.cs" />
+    <Compile Include="Exception\ExepcionNivelDeSeguridadNoValido.cs" />
+    <Compile Include="Exception\ExepcionObjetosRepetidos.cs" />
+    <Compile Include="Exception\ExepcionTarjetaIncorrecta.cs" />
+    <Compile Include="IRepositorio.cs" />
+    <Compile Include="IRepositorioCompartir.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
-    <Compile Include="Entidades\Dupla_UsuarioContrasenia.cs" />
-    <Compile Include="Exception\Exepcion_ObjetosRepetidos.cs" />
-    <Compile Include="Exception\Exepcion_IntentoDeObtencionDeObjetoInexistente.cs" />
-    <Compile Include="Exception\Exepcion_NivelDeSeguridadNoValido.cs" />
-    <Compile Include="Exception\Exepcion_InvalidCategoriaData.cs" />
-    <Compile Include="Exception\Exepcion_DatosDeContraseniaInvalidos.cs" />
-    <Compile Include="Exception\Exepcion_InvalidUsuarioData.cs" />
-    <Compile Include="Manejadores\Sistema.cs" />
+    <Compile Include="Entidades\Credencial.cs" />
     <Compile Include="Entidades\Tarjeta.cs" />
-    <Compile Include="Exception\Exception_TarjetaIncorrecta.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Manejadores\Encriptador.cs" />
+    <Compile Include="Interfaces\IEncriptado.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

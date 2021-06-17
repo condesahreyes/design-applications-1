@@ -1,46 +1,52 @@
 ﻿using System.Collections.Generic;
+using OblDiseño1.Entidades;
+using OblDiseño1.Exception;
 using System.Data;
 
 namespace OblDiseño1
 {
-
     public class Usuario
     {
-
-        private string nombre;
-        private string contrasenia;
         private const string mnsjNombreUsuarioError = "El nombre de usuario debe tener entre" +
                                                     " 1 y 25 caracteres";
         private const string mnsjContraseniaError = "La contraseña debe tener entre 5 y" +
                                                     " 25 caracteres";
-        private const string mnsjDuplaYaPresenteError = "Se intento agregar una Dupla que ya" + 
+        private const string mnsjDuplaYaPresenteError = "Se intento agregar una Dupla que ya" +
                                                     " pertenecia al Usuario";
 
-        private const int LARGO_NOMBRE_MIN = 1;
-        private const int LARGO_NOMBRE_MAX = 25;
-        private const int LARGO_CONTRASENIA_MIN = 5;
-        private const int LARGO_CONTRASENIA_MAX = 25;
+        private string nombre;
+        private string contrasenia;
 
-        private List<Dupla_UsuarioContrasenia> duplas;
-        private List<Tarjeta> tarjetas;
-        private List<Categoria> categorias;
-        private Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> contraseniasCompartidasConmigo;
-        private Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> contraseniasCompartidasPorMi;
-        
+        private const int LARGO_CONTRASENIA_MAX = 25;
+        private const int LARGO_CONTRASENIA_MIN = 5;
+        private const int LARGO_NOMBRE_MAX = 25;
+        private const int LARGO_NOMBRE_MIN = 1;
+
+        public List<Credencial> credenciales;
+        public List<Categoria> categorias;
+        public List<Tarjeta> tarjetas;
+
         public string Nombre { get => nombre; set => ActualizarNombreUsuario(value); }
         public string Contrasenia { get => contrasenia; set => ActualizarContrasenia(value); }
 
-        public Usuario() { }
-        
+        public Usuario() 
+        {
+            this.categorias = new List<Categoria>();
+            this.tarjetas = new List<Tarjeta>();
+            this.credenciales = new List<Credencial>();
+            this.GestorCompartirContrasenia = new GestorContraseniasCompartidas(this);
+        }
+
+        public GestorContraseniasCompartidas GestorCompartirContrasenia { get; }
+
         public Usuario(string nombre, string contrasenia)
         {
             Nombre = nombre;
             Contrasenia = contrasenia;
             this.categorias = new List<Categoria>();
             this.tarjetas = new List<Tarjeta>();
-            this.duplas = new List<Dupla_UsuarioContrasenia>();
-            this.contraseniasCompartidasConmigo = new Dictionary<Usuario, List<Dupla_UsuarioContrasenia>>();
-            this.contraseniasCompartidasPorMi = new Dictionary<Dupla_UsuarioContrasenia, List<Usuario>>();
+            this.credenciales = new List<Credencial>();
+            this.GestorCompartirContrasenia = new GestorContraseniasCompartidas(this);
         }
 
         public List<Tarjeta> ObtenerTarjetas()
@@ -48,9 +54,9 @@ namespace OblDiseño1
             return this.tarjetas;
         }
 
-        public List<Dupla_UsuarioContrasenia> ObtenerDuplas()
+        public List<Credencial> ObtenerCredenciales()
         {
-            return this.duplas;
+            return this.credenciales;
         }
 
         public List<Categoria> ObtenerCategorias()
@@ -58,28 +64,19 @@ namespace OblDiseño1
             return this.categorias;
         }
 
-        
-        public Dictionary<Usuario, List<Dupla_UsuarioContrasenia>> ObtenerContraseniasCompartidasConmigo()
-        {
-            return this.contraseniasCompartidasConmigo;
-        }
-
-        public Dictionary<Dupla_UsuarioContrasenia, List<Usuario>> ObtenerContraseniasCompartidasPorMi()
-        {
-            return this.contraseniasCompartidasPorMi;
-        }
-
+       
         private bool ValidarNombreUsuario(string unNombre)
         {
             if (unNombre.Length < LARGO_NOMBRE_MIN || unNombre.Length > LARGO_NOMBRE_MAX)
                 return true;
+
             return false;
         }
 
         public void ActualizarNombreUsuario(string unNombre)
         {
             if (ValidarNombreUsuario(unNombre))
-                throw new Exepcion_InvalidUsuarioData(mnsjNombreUsuarioError);
+                throw new ExepcionInvalidUsuarioData(mnsjNombreUsuarioError);
             else
                 this.nombre = unNombre;
         }
@@ -89,13 +86,14 @@ namespace OblDiseño1
             if (contrasenia.Length < LARGO_CONTRASENIA_MIN ||
                 contrasenia.Length > LARGO_CONTRASENIA_MAX)
                 return true;
+
             return false;
         }
 
         public void ActualizarContrasenia(string unaContrasenia)
         {
             if (ValidarContrasenia(unaContrasenia))
-                throw new Exepcion_InvalidUsuarioData(mnsjContraseniaError);
+                throw new ExepcionInvalidUsuarioData(mnsjContraseniaError);
             else
                 this.contrasenia = unaContrasenia;
         }
@@ -103,9 +101,11 @@ namespace OblDiseño1
         public void AgregarTarjeta(Tarjeta tarjeta)
         {
             if (this.ObtenerTarjetas().Contains(tarjeta))
-                throw new Exepcion_ObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
+                throw new ExepcionObjetosRepetidos("Ya existe una tarjeta con el mismo numero");
             else
-            this.tarjetas.Add(tarjeta);
+            {
+                this.tarjetas.Add(tarjeta);
+            }
         }
 
         public void EliminarTarjeta(Tarjeta tarjeta)
@@ -113,23 +113,23 @@ namespace OblDiseño1
             this.tarjetas.Remove(tarjeta);
         }
 
-        public void AgregarDupla(Dupla_UsuarioContrasenia dupla)
+        public void AgregarCredencial(Credencial credencial)
         {
-            if (this.duplas.Contains(dupla))
-                throw new Exepcion_InvalidUsuarioData(mnsjDuplaYaPresenteError);
-            else 
-                this.duplas.Add(dupla);
+            if (this.credenciales.Contains(credencial))
+                throw new ExepcionInvalidUsuarioData(mnsjDuplaYaPresenteError);
+            else
+                this.credenciales.Add(credencial);
         }
 
-        public void EliminarDupla(Dupla_UsuarioContrasenia dupla)
+        public void EliminarCredencial(Credencial credencial)
         {
-            this.duplas.Remove(dupla);
+            this.credenciales.Remove(credencial);
         }
 
         public void AgregarCategoria(Categoria categoria)
         {
             foreach (Categoria cat in categorias)
-                if(cat.Nombre.ToLower() == categoria.Nombre.ToLower())
+                if (cat.Nombre.ToLower() == categoria.Nombre.ToLower())
                     throw new DuplicateNameException();
 
             this.categorias.Add(categoria);
@@ -154,186 +154,38 @@ namespace OblDiseño1
         {
             List<string> duplasString = new List<string>();
 
-            for (int i = 0; i < this.ObtenerDuplas().Count; i++)
-                duplasString.Add(this.ObtenerDuplas()[i].ToString());
+            for (int i = 0; i < this.ObtenerCredenciales().Count; i++)
+                duplasString.Add(this.ObtenerCredenciales()[i].ToString());
 
             return duplasString;
         }
 
-        public void CompartirContrasenia(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
+        public void RemoverDupla(Credencial credencialARemover)
         {
-            if (VerificarQueLaDuplaEsMia(duplaACompartir))
-            {
-                if (VerificarQueYaSeCompartioLaContraseniaConElUsuario(duplaACompartir, usuarioACompartir))
-                    throw new Exepcion_InvalidUsuarioData("Ya se compartio esta contraseña con el usuario" +
-                        usuarioACompartir.Nombre);
-                else
-                {
-                    GuardarLaContraseniaACompartir(duplaACompartir, usuarioACompartir);
-                    CompartirContraseniaAUsuario(duplaACompartir, usuarioACompartir);
-                }
-            }
+            if (this.credenciales.Contains(credencialARemover) && !this.GestorCompartirContrasenia.
+                VerificarQueEstoyCompartiendoLaContraseniaConAlguien(credencialARemover))
+                this.credenciales.Remove(credencialARemover);
             else
-                throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
-                    duplaACompartir.Contrasenia + "para este usuario");
-        }
-
-        private void GuardarLaContraseniaACompartir(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
-        {
-            if (VerificarQueEstoyCompartiendoLaContraseniaConAlguien(duplaACompartir))
-                this.ObtenerContraseniasCompartidasPorMi()[duplaACompartir].Add(usuarioACompartir);
-            else
-                CompartirContraseniaPorPrimeraVez(duplaACompartir, usuarioACompartir);
-        }
-
-        private void CompartirContraseniaAUsuario(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
-        {
-            if (usuarioACompartir.VerificarQueElUsuarioMeEstaCompartiendoAlgunaContrasenia(this))
-                usuarioACompartir.ObtenerContraseniasCompartidasConmigo()[this].Add(duplaACompartir);
-            else
-                usuarioACompartir.MeCompartenLaContraseniaPorPrimeraVez(this, duplaACompartir);
-        }
-
-        public bool VerificarQueLaDuplaEsMia(Dupla_UsuarioContrasenia dupla)
-        {
-            return this.ObtenerDuplas().Contains(dupla);
-        }
-
-        public bool VerificarQueYaSeCompartioLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, Usuario usuario)
-        {
-            return (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla) &&
-                    this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));
-        }
-
-        public bool VerificarQueEstoyCompartiendoLaContraseniaConAlguien(Dupla_UsuarioContrasenia dupla)
-        {
-            return (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla));
-        }
-
-        public bool VerificarQueElUsuarioMeEstaCompartiendoAlgunaContrasenia(Usuario usuario)
-        {
-            return (this.ObtenerContraseniasCompartidasConmigo().ContainsKey(usuario));
-        }
-
-        public void CompartirContraseniaPorPrimeraVez(Dupla_UsuarioContrasenia duplaACompartir, Usuario usuarioACompartir)
-        {
-            List<Usuario> listaConPrimerUsuario = new List<Usuario>();
-            listaConPrimerUsuario.Add(usuarioACompartir);
-            this.ObtenerContraseniasCompartidasPorMi().Add(duplaACompartir, listaConPrimerUsuario);
-        }
-
-        public void MeCompartenLaContraseniaPorPrimeraVez(Usuario usuarioQueMeComparte, Dupla_UsuarioContrasenia duplaQueMeComparte)
-        {
-            List<Dupla_UsuarioContrasenia> listaConPrimerDupla = new List<Dupla_UsuarioContrasenia>();
-            listaConPrimerDupla.Add(duplaQueMeComparte);
-            this.ObtenerContraseniasCompartidasConmigo().Add(usuarioQueMeComparte, listaConPrimerDupla);
-        }
-
-        public void DejarDeCompartirContrasenia(Dupla_UsuarioContrasenia duplaADejarDeCompartir, Usuario usuarioAlQueDejoDeCompartir)
-        {
-            if (VerificarQueLaDuplaEsMia(duplaADejarDeCompartir))
-                if (VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(duplaADejarDeCompartir, usuarioAlQueDejoDeCompartir))
-                {
-                    this.ObtenerContraseniasCompartidasPorMi()[duplaADejarDeCompartir].Remove(usuarioAlQueDejoDeCompartir);
-                    if (VerificarQueNoEstoyCompartiendoLaContraseniaConAlguien(duplaADejarDeCompartir))
-                        this.ObtenerContraseniasCompartidasPorMi().Remove(duplaADejarDeCompartir);
-                    usuarioAlQueDejoDeCompartir.ObtenerContraseniasCompartidasConmigo()[this].Remove(duplaADejarDeCompartir);
-                    if (usuarioAlQueDejoDeCompartir.ObtenerContraseniasCompartidasConmigo()[this].Count == 0)
-                        usuarioAlQueDejoDeCompartir.ObtenerContraseniasCompartidasConmigo().Remove(this);
-                }
-                else
-                {
-                    throw new Exepcion_InvalidUsuarioData("Esta contraseña no ha sido compartida " +
-                        "anteriormente con el usuario" + usuarioAlQueDejoDeCompartir.Nombre);
-                }
-            else
-                throw new Exepcion_InvalidUsuarioData("No existe una contraseña asociada a " +
-                    duplaADejarDeCompartir.Contrasenia + "para este usuario");
-        }
-
-        public bool VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(Dupla_UsuarioContrasenia dupla, 
-            Usuario usuario)
-        {
-            if (this.ObtenerContraseniasCompartidasPorMi().ContainsKey(dupla))
-                return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Contains(usuario));
-            else
-                return false;
-        }
-
-        public bool VerificarQueNoEstoyCompartiendoLaContraseniaConAlguien(Dupla_UsuarioContrasenia dupla)
-        {
-            return (this.ObtenerContraseniasCompartidasPorMi()[dupla].Count == 0);
-        }
-
-       
-        public List<string> ConvertirContraseñasCompartidasPorMiAListaString(Dictionary<Dupla_UsuarioContrasenia, 
-            List<Usuario>> contrasenias)
-        {
-            List<string> resultado = new List<string>();
-            foreach (var iterador in contrasenias)
-            {
-                resultado.Add(iterador.Key.ToString());
-            }
-            return resultado;
-        }
-
-        public List<string> ConvertirContraseñasCompartidasConmigoAListaString(Dictionary<Usuario, 
-            List<Dupla_UsuarioContrasenia>> contrasenias)
-        {
-            List<string> resultado = new List<string>();
-            foreach (var iterador in contrasenias)
-            {
-                foreach (var iteradorDuplas in iterador.Value)
-                    resultado.Add(iteradorDuplas.ToString());
-            }
-            return resultado;
-        }
-
-        public reporte ObtenerReporteSeguridadContrasenias()
-        {
-            paresSeguridad[] misPares = new paresSeguridad[6];
-            Dictionary<string, int[]> categoria = new Dictionary<string, int[]>();
-            foreach (Categoria cat in this.categorias)
-                categoria.Add(cat.Nombre, new int[6]);
-
-            for (int i = 0; i < 6; i++)
-                misPares[i] = new paresSeguridad(0, null);
-
-            foreach (Dupla_UsuarioContrasenia dupla in this.duplas)
-            {
-
-                string nombreCategoria = dupla.Categoria.Nombre;
-                int nivelSeguridad = dupla.NivelSeguridadContrasenia;
-                categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;
-                misPares[nivelSeguridad].unaListaDuplas.Add(dupla);
-                misPares[nivelSeguridad].cantidad++;
-            }
-            reporte miReporte = new reporte(misPares, categoria);
-
-            return miReporte;
-        }
-
-        public void RemoverDupla(Dupla_UsuarioContrasenia duplaARemover)
-        {
-            if (this.duplas.Contains(duplaARemover))
-                this.duplas.Remove(duplaARemover);
+                throw new ExepcionEliminacionDeContraseniaCompartida("No se puede eliminar una " +
+                    "contraseña compartida");
         }
 
         public bool RevisarSiLaContraseniaEsMia(string unaContrasenia)
         {
-            foreach (Dupla_UsuarioContrasenia unaDupla in this.duplas)
-                if (unaDupla.Contrasenia == unaContrasenia)
+            if(this.credenciales!=null)
+            foreach (Credencial unaDupla in this.credenciales)
+                if (unaDupla.Contraseña.Contrasenia == unaContrasenia)
                     return true;
 
             return false;
         }
 
-        public List<Dupla_UsuarioContrasenia> ObtenerDuplasConLaContrasenia(string laContrasenia)
+        public List<Credencial> ObtenerDuplasConLaContrasenia(string laContrasenia)
         {
-            List<Dupla_UsuarioContrasenia> lasDuplasQueMePidieron = new List<Dupla_UsuarioContrasenia>();
+            List<Credencial> lasDuplasQueMePidieron = new List<Credencial>();
 
-            foreach (Dupla_UsuarioContrasenia unaDupla in this.duplas)
-                if (unaDupla.Contrasenia == laContrasenia)
+            foreach (Credencial unaDupla in this.credenciales)
+                if (unaDupla.Contraseña.Contrasenia == laContrasenia)
                     lasDuplasQueMePidieron.Add(unaDupla);
 
             return lasDuplasQueMePidieron;
@@ -341,7 +193,7 @@ namespace OblDiseño1
 
         public bool RevisarSiLaTarjetaEsMia(string numeroTarjeta)
         {
-            foreach(Tarjeta unaTarjeta in this.tarjetas)
+            foreach (Tarjeta unaTarjeta in this.tarjetas)
                 if (unaTarjeta.Numero == numeroTarjeta)
                     return true;
 
@@ -352,21 +204,21 @@ namespace OblDiseño1
         {
             Tarjeta laTarjetaQueMePidieron = null;
 
-            foreach(Tarjeta unaTarjeta in this.tarjetas)
+            foreach (Tarjeta unaTarjeta in this.tarjetas)
                 if (unaTarjeta.Numero == numeroTarjeta)
                     laTarjetaQueMePidieron = unaTarjeta;
 
             if (laTarjetaQueMePidieron == null)
-                throw new Exepcion_IntentoDeObtencionDeObjetoInexistente("Se intento obtener una " +
+                throw new ExepcionIntentoDeObtencionDeObjetoInexistente("Se intento obtener una " +
                                         "tarjeta que no le pertenecia al Usuario");
 
             return laTarjetaQueMePidieron;
         }
 
-        public bool VerificarQueTengoCombinacionNombreSitio(string nombreDupla, string sitioDupla)
+        public bool VerificarQueTengoCombinacionNombreSitio(string nombreCredencial, string sitioDupla)
         {
-            foreach (Dupla_UsuarioContrasenia dupla in duplas)
-                if (nombreDupla == dupla.NombreUsuario && sitioDupla == dupla.NombreSitioApp)
+            foreach (Credencial credencial in credenciales)
+                if (nombreCredencial == credencial.NombreUsuario && sitioDupla == credencial.NombreSitioApp)
                     return true;
             return false;
         }
@@ -382,14 +234,6 @@ namespace OblDiseño1
             return (this.Nombre);
         }
 
-        public Categoria DevolverCategoria(string nombreCategoria)
-        {
-            foreach (Categoria cat in categorias)
-                if (cat.Nombre == nombreCategoria)
-                    return cat;
-            return null;
-        }
-
         public List<string> ListarToStringDeMisTarjetas()
         {
             List<string> tarjetasString = new List<string>();
@@ -398,33 +242,5 @@ namespace OblDiseño1
 
             return tarjetasString;
         }
-
-    }
-
-    public struct reporte
-    {
-        public paresSeguridad[] duplasPorSeguridad;
-        public Dictionary<string, int[]> duplasPorCategoria;
-
-        public reporte(paresSeguridad[] pares, Dictionary<string, int[]> dicionrio)
-        {
-            duplasPorSeguridad = pares;
-            duplasPorCategoria = dicionrio;
-        }
-    }
-
-    public struct paresSeguridad
-    {
-        public int cantidad;
-        public List<Dupla_UsuarioContrasenia> unaListaDuplas;
-
-        public paresSeguridad(int cant, List<Dupla_UsuarioContrasenia> dupla)
-        {
-            cantidad = cant;
-            unaListaDuplas = new List<Dupla_UsuarioContrasenia>();
-        }
     }
 }
-
-
-

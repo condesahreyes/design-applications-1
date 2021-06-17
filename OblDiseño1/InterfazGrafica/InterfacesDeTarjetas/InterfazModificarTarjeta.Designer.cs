@@ -63,7 +63,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Cancelar.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
             this.Cancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
             this.Cancelar.Location = new System.Drawing.Point(322, 339);
-            this.Cancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Cancelar.Margin = new System.Windows.Forms.Padding(2);
             this.Cancelar.Name = "Cancelar";
             this.Cancelar.Size = new System.Drawing.Size(145, 27);
             this.Cancelar.TabIndex = 61;
@@ -75,7 +75,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // 
             this.dateTimePicker1.CustomFormat = "dd//mm//aaaa";
             this.dateTimePicker1.Location = new System.Drawing.Point(297, 201);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(160, 20);
             this.dateTimePicker1.TabIndex = 60;
@@ -88,7 +88,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Aceptar.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
             this.Aceptar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
             this.Aceptar.Location = new System.Drawing.Point(133, 339);
-            this.Aceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Aceptar.Margin = new System.Windows.Forms.Padding(2);
             this.Aceptar.Name = "Aceptar";
             this.Aceptar.Size = new System.Drawing.Size(145, 27);
             this.Aceptar.TabIndex = 59;
@@ -99,7 +99,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             // textBoxCodigoSeguridad
             // 
             this.textBoxCodigoSeguridad.Location = new System.Drawing.Point(297, 167);
-            this.textBoxCodigoSeguridad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCodigoSeguridad.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCodigoSeguridad.Name = "textBoxCodigoSeguridad";
             this.textBoxCodigoSeguridad.Size = new System.Drawing.Size(160, 20);
             this.textBoxCodigoSeguridad.TabIndex = 58;
@@ -164,7 +164,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.comboBoxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCategorias.FormattingEnabled = true;
             this.comboBoxCategorias.Location = new System.Drawing.Point(297, 233);
-            this.comboBoxCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCategorias.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCategorias.Name = "comboBoxCategorias";
             this.comboBoxCategorias.Size = new System.Drawing.Size(160, 21);
             this.comboBoxCategorias.TabIndex = 63;
@@ -355,10 +355,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             this.Controls.Add(this.textBoxTipo);
             this.Controls.Add(this.lblListadoTarjetas);
             this.Controls.Add(this.textBoxNombre);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "InterfazModificarTarjeta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InterfazModificarTarjeta";
+            this.Text = "Modificar Tarjeta";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,90 +1,112 @@
-﻿using OblDiseño1;
-using System;
+﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Menu = InterfazGrafica.InterfacesMenu.Menu;
+using OblDiseño1;
+using System;
 
 namespace InterfazGrafica.InterfacesDeTarjetas
 {
     public partial class InterfazTarjeta : Form
     {
         private Usuario usuario;
-        private Sistema sistema;
 
-        public InterfazTarjeta(ref Usuario usuario, ref Sistema sistema)
+        private ControladorTarjeta controladorTarjeta;
+
+
+        public InterfazTarjeta(ref Usuario usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
-            this.sistema = sistema;
-            CargarListaTarjetas(ref usuario, ref sistema);
 
+            CrearManejadoresTarjeta();
+            CargarListaTarjetas();
+            ModificarNombreDeColumnasDelDataGrid();
         }
 
-        private void CargarListaTarjetas(ref Usuario usuario, ref Sistema sistema)
+        private void CrearManejadoresTarjeta()
         {
-            if (usuario.ObtenerTarjetas().Count > 0)
-                usuario.ObtenerTarjetas().Sort();
-                dataGridTarjetas.DataSource = usuario.ObtenerTarjetas();
-                dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
-                dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
-                dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+            controladorTarjeta = new ControladorTarjeta(this.usuario);
+        }
+
+        private void CargarListaTarjetas()
+        {
+            List<Tarjeta> misTarjetas = controladorTarjeta.ObtenerTodasMisTarjetas();
+            if (misTarjetas.Count > 0)
+                misTarjetas.Sort();
+            dataGridTarjetas.DataSource = misTarjetas;
+            dataGridTarjetas.Columns["Categoria"].DisplayIndex = 0;
+            dataGridTarjetas.Columns["NotaOpcional"].Visible = false;
+            dataGridTarjetas.Columns["CodigoSeguridad"].Visible = false;
+        }
+
+        private void ModificarNombreDeColumnasDelDataGrid()
+        {
+            dataGridTarjetas.Columns["FechaVencimiento"].HeaderText = "Fecha Vencimiento";
+            dataGridTarjetas.Columns["Numero"].HeaderText = "Número";
+            dataGridTarjetas.Columns["Categoria"].HeaderText = "Categoría";
         }
 
         private void btnTarjetasVolverMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Menu menu = new Menu(ref sistema, ref usuario);
+            Menu menu = new Menu(ref usuario);
             menu.Show();
         }
 
         private void btnAgregarTarjeta_Click(object sender, EventArgs e)
         {
-                this.Close();
-                InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario, ref sistema);
-                interfazAgregar.Show();
+            this.Close();
+            InterfazAgregarTarjeta interfazAgregar = new InterfazAgregarTarjeta(ref usuario);
+            interfazAgregar.Show();
         }
 
         private void btnModificarTarjeta_Click(object sender, EventArgs e)
         {
             if (dataGridTarjetas.RowCount > 0)
-            {
-                Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
-                
-                if (tarjetaSeleccionada == null)
-                    MessageBox.Show("Error, debe seleccionar una tarjeta");
-                else
-                {
-                    
-                    this.Hide();
-                    InterfazModificarTarjeta modificarTarjeta = new InterfazModificarTarjeta
-                        (ref sistema, ref usuario, ref tarjetaSeleccionada);
-                    modificarTarjeta.Show();
-                }
-            }
+                AModificarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
+        }
+
+        private void AModificarTarjetaSeleccionada()
+        {
+            Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
+
+            if (tarjetaSeleccionada == null)
+                MessageBox.Show("Error, debe seleccionar una tarjeta");
+            else
+            {
+                this.Hide();
+                InterfazModificarTarjeta modificarTarjeta = new InterfazModificarTarjeta
+                    (ref usuario, ref tarjetaSeleccionada);
+                modificarTarjeta.Show();
+            }
         }
 
         private void btnEliminarTarjeta_Click(object sender, EventArgs e)
         {
             if (dataGridTarjetas.RowCount > 0)
-            {
-                Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
-                
-                if (tarjetaSeleccionada == null)
-                    MessageBox.Show("Error, debe seleccionar una tarjeta");
-                else
-                {
-
-                    InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
-                        (ref sistema, ref usuario, ref tarjetaSeleccionada);
-                    this.Close();
-                    eliminarTarjeta.Show();
-                }
-            }
+                EliminarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
+            CargarListaTarjetas();
+        }
 
+        private void EliminarTarjetaSeleccionada()
+        {
+            Tarjeta tarjetaSeleccionada = (Tarjeta)dataGridTarjetas.CurrentRow.DataBoundItem;
+
+            if (tarjetaSeleccionada == null)
+                MessageBox.Show("Error, debe seleccionar una tarjeta");
+            else
+            {
+                InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
+                    (ref usuario, ref tarjetaSeleccionada);
+                this.Close();
+                eliminarTarjeta.Show();
+            }
+            CargarListaTarjetas();
         }
     }
 }

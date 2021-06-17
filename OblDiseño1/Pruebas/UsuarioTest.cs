@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
 
 namespace Pruebas
 {
@@ -9,13 +10,13 @@ namespace Pruebas
     [TestClass]
     public class UsuarioTest
     {
-        private static string notaDupla;
-        private static string nombreSitioDupla;
-        private static string nombresitioDuplaQueNoEsta;
+        private static string notaCredencial;
+        private static string nombreSitioCredencial;
+        private static string nombresitioCredencialQueNoEsta;
         private static string nombreLargo;
         private static string contraseniaCorta;
         private static string contraseniaLarga;
-        private static string contraseniaNoPresenteEnListaDuplas;
+        private static string contraseniaNoPresenteEnListaCredenciales;
         private static string numeroDeTarjetaNoPresenteEnListaTarjetas;
 
         private static string[] contrasenias = {"contrasenia123",
@@ -38,28 +39,29 @@ namespace Pruebas
         private static int[] codigosTarjetas = { 123, 321, 456, 789 };
 
         private List<Tarjeta> tarjetas;
-        private List<Dupla_UsuarioContrasenia> duplas;
+        private List<Credencial> credenciales;
         private List<Categoria> categorias;
 
         private Usuario usuario;
         private Tarjeta tarjeta;
         private Categoria categoria;
-        private Dupla_UsuarioContrasenia dupla;
+        private Credencial dupla;
+        private Contraseña contraseña;
+
 
         [TestInitialize]
         public void Setup()
         {
-            notaDupla = "";
-            nombreSitioDupla = "Instagram";
-            nombresitioDuplaQueNoEsta = "Twitter";
+            notaCredencial = "";
+            nombreSitioCredencial = "Instagram";
+            nombresitioCredencialQueNoEsta = "Twitter";
             contraseniaCorta = "1234";
             contraseniaLarga = "contrasenia123456789012345";
-            contraseniaNoPresenteEnListaDuplas = "ContraseniaNoPrsente";
+            contraseniaNoPresenteEnListaCredenciales = "ContraseniaNoPrsente";
             numeroDeTarjetaNoPresenteEnListaTarjetas = "2000200020002000";
             nombreLargo = "Este es un nombre muy largo";
-            
 
-            duplas = new List<Dupla_UsuarioContrasenia>();
+            credenciales = new List<Credencial>();
             tarjetas = new List<Tarjeta>();
             categorias = new List<Categoria>();
 
@@ -67,8 +69,9 @@ namespace Pruebas
             categoria = new Categoria(nombresCategorias[0]);
             tarjeta = new Tarjeta(nombresTarjetas[0], tiposTarjetas[0], numTarjetas[0],
                 codigosTarjetas[0], new DateTime(2021, 12, 15), categoria, null);
-            dupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[0],
-                nombreSitioDupla, notaDupla, categoria);
+            contraseña = new Contraseña(contrasenias[0]);
+            dupla = new Credencial(nombres[1], contraseña,
+                nombreSitioCredencial, notaCredencial, categoria);
         }
 
         [TestMethod]
@@ -90,28 +93,28 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioNombreVacio()
         {
             Usuario unUsuario = new Usuario("", contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioNombreLargo()
         {
             Usuario unUsuario = new Usuario(nombreLargo, contrasenias[0]);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioContraseniaCorta()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AltaUsuarioContraseniaLarga()
         {
             Usuario unUsuario = new Usuario(nombres[1], contraseniaLarga);
@@ -126,14 +129,14 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CambiarContraseniaCorta()
         {
             usuario.ActualizarContrasenia(contraseniaCorta);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void CambiarContraseniaLarga()
         {
             usuario.ActualizarContrasenia(contraseniaLarga);
@@ -159,18 +162,18 @@ namespace Pruebas
         [TestMethod]
         public void AgregarDuplaPorPrimeraVez()
         {
-            usuario.AgregarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
 
-            Assert.AreEqual(1, usuario.ObtenerDuplas().Count);
+            Assert.AreEqual(1, usuario.ObtenerCredenciales().Count);
         }
 
         [TestMethod]
         public void EliminarMiUnicaDupla()
         {
-            usuario.AgregarDupla(dupla);
-            usuario.EliminarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
+            usuario.EliminarCredencial(dupla);
 
-            Assert.AreEqual(0, usuario.ObtenerDuplas().Count);
+            Assert.AreEqual(0, usuario.ObtenerCredenciales().Count);
         }
 
         [TestMethod]
@@ -224,17 +227,18 @@ namespace Pruebas
         [TestMethod]
         public void ListarDuplas()
         {
-            List<Dupla_UsuarioContrasenia> duplas = new List<Dupla_UsuarioContrasenia>();
+            List<Credencial> duplas = new List<Credencial>();
 
             for (int i = 0; i < nombres.Length; i++)
             {
-                Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
-                    contrasenias[i], "Instagram", "", categoria);
+                Contraseña contra = new Contraseña(contrasenias[i]);
+                Credencial unaDupla = new Credencial(nombres[i],
+                    contra, "Instagram", "", categoria);
                 duplas.Add(unaDupla);
-                usuario.AgregarDupla(unaDupla);
+                usuario.AgregarCredencial(unaDupla);
             }
 
-            CollectionAssert.AreEquivalent(duplas, usuario.ObtenerDuplas());
+            CollectionAssert.AreEquivalent(duplas, usuario.ObtenerCredenciales());
         }
 
         [TestMethod]
@@ -290,14 +294,16 @@ namespace Pruebas
 
             for (int i = 0; i < nombres.Length; i++)
             {
-                Dupla_UsuarioContrasenia unaDupla = new Dupla_UsuarioContrasenia(nombres[i],
-                    contrasenias[i], "Instagram", "", categoria);
+                Contraseña contra = new Contraseña(contrasenias[i]);
+                Credencial unaDupla = new Credencial(nombres[i],
+                    contra, "Instagram", "", categoria);
 
-                usuario.AgregarDupla(unaDupla);
+                usuario.AgregarCredencial(unaDupla);
 
-                listaDuplas.Add("Nombre : " + unaDupla.NombreUsuario + " Contraseña: " + unaDupla.Contrasenia +
-                " Nombre sitio: " + unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria +
-                " Nivel de seguridad: " + unaDupla.NivelSeguridadContrasenia);
+                listaDuplas.Add("Nombre: " + unaDupla.NombreUsuario + " Contraseña: " + 
+                    unaDupla.Contraseña.Contrasenia + " Nivel de seguridad: " + 
+                    unaDupla.Contraseña.NivelSeguridadContrasenia + " Nombre sitio: " + 
+                    unaDupla.NombreSitioApp + " Categoria: " + unaDupla.Categoria);
             }
 
             listarDuplasPorMetodo = usuario.ListarToStringDeMisDuplas();
@@ -329,7 +335,7 @@ namespace Pruebas
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_IntentoDeObtencionDeObjetoInexistente))]
+        [ExpectedException(typeof(ExepcionIntentoDeObtencionDeObjetoInexistente))]
         public void ObtenerTarjetaDeNumeroNOPresenteTest()
         {
             usuario.AgregarTarjeta(tarjeta);
@@ -339,263 +345,67 @@ namespace Pruebas
         [TestMethod]
         public void RevisarSiLaContraseniaEsMiaTest()
         {
-            usuario.AgregarDupla(dupla);
+            usuario.AgregarCredencial(dupla);
             Assert.IsTrue(usuario.RevisarSiLaContraseniaEsMia(contrasenias[0]));
         }
 
         [TestMethod]
         public void RevisarSiLaContraseniaNOEsMiaTest()
         {
-            usuario.AgregarDupla(dupla);
-            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(contraseniaNoPresenteEnListaDuplas));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsFalse(usuario.RevisarSiLaTarjetaEsMia(contraseniaNoPresenteEnListaCredenciales));
         }
 
         [TestMethod]
         public void ObtenerDuplasConLaContraseniaTest()
         {
-            usuario.AgregarDupla(dupla);
-            duplas.Add(dupla);
-            List<Dupla_UsuarioContrasenia> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contrasenia);
-            CollectionAssert.AreEquivalent(duplas, listaDuplas);
+            usuario.AgregarCredencial(dupla);
+            credenciales.Add(dupla);
+            List<Credencial> listaDuplas = usuario.ObtenerDuplasConLaContrasenia(dupla.Contraseña.Contrasenia);
+            CollectionAssert.AreEquivalent(credenciales, listaDuplas);
         }
 
         [TestMethod]
         public void ObtenerDuplasConContraseniaNOPresenteTest()
         {
-            usuario.AgregarDupla(dupla);
-            List<Dupla_UsuarioContrasenia> duplasConContraseniaNoPresente = new List<Dupla_UsuarioContrasenia>();
-            List<Dupla_UsuarioContrasenia> duplasUsuario = usuario.ObtenerDuplasConLaContrasenia(contraseniaNoPresenteEnListaDuplas);
+            usuario.AgregarCredencial(dupla);
+            List<Credencial> duplasConContraseniaNoPresente = new List<Credencial>();
+            List<Credencial> duplasUsuario = usuario.ObtenerDuplasConLaContrasenia(contraseniaNoPresenteEnListaCredenciales);
             CollectionAssert.AreEquivalent(duplasConContraseniaNoPresente, duplasUsuario);
         }
-
-
-        [TestMethod]
-        public void ListarContraseñasQueComparto()
-        {
-            string[] contraseniasCompartidasConmigo = { contrasenias[0], contrasenias[1] };
-
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
-               "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contrasenias[1],
-              "Facebook", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
-        }
-
-
-        [TestMethod]
-        public void ListarContraseñasQueMeComparten()
-        {
-            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
-            Usuario usuarioQueQueMeComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
-            Usuario usuarioAlQueLeCompartenContrasenia = new Usuario(nombres[1], "olapapu");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
-              "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
-              "Facebook", "", categoria);
-
-            usuarioQueQueMeComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueQueMeComparteContrasenia.AgregarDupla(segundadupla);
-
-            usuarioQueQueMeComparteContrasenia.CompartirContrasenia(usuarioQueQueMeComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueLeCompartenContrasenia);
-            usuarioQueQueMeComparteContrasenia.CompartirContrasenia(usuarioQueQueMeComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueLeCompartenContrasenia);
-
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueLeCompartenContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueLeCompartenContrasenia.ObtenerContraseniasCompartidasConmigo()));
-        }
-
-
-        [TestMethod]
-        public void UusarioQueDejaDeCompartirContrasenia()
-        {
-            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
-              "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
-              "Facebook", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
-
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-
-            
-            Assert.IsFalse(usuarioQueComparteContrasenia.VerificarQueEstaSiendoCompartidaLaContraseniaConElUsuario(primerdupla, usuarioAlQueCompartoContrasenia));
-         }
-
-        [TestMethod]
-        public void UsuarioQueLeDejanDeCompartirContrasenia()
-        {
-            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
-              "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
-              "Facebook", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
-
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.DejarDeCompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-
-            List<string> listaEsperada = new List<string> { primerdupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
-        }
-
-
-        [TestMethod]
-        public void ActualizarContraseñaQueComparto()
-        {
-
-            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
-              "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
-              "Facebook", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
-
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            primerdupla.ActualizarContrasenia("nuevaPassword");
-
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
-        }
-
-        [TestMethod]
-        public void ActualizarContraseñaQueMeComparten()
-        {
-            string[] contraseniasCompartidasPorMi = { contrasenias[1], contrasenias[2] };
-
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "olapapu");
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[2], "tranquilaso");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia(nombres[2], contrasenias[1],
-              "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia(nombres[1], contrasenias[2],
-              "Facebook", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.AgregarDupla(segundadupla);
-
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[1], usuarioAlQueCompartoContrasenia);
-            segundadupla.ActualizarContrasenia("otraPassword");
-
-            List<string> listaEsperada = new List<string> { primerdupla.ToString(), segundadupla.ToString() };
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioAlQueCompartoContrasenia.ConvertirContraseñasCompartidasConmigoAListaString(usuarioAlQueCompartoContrasenia.ObtenerContraseniasCompartidasConmigo()));
-        }
-
-
-        [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
-        public void CompartirLaMismaContraseniaConElMismoUsuario()
-        {
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
-               "Instagram", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], usuarioAlQueCompartoContrasenia);
-            List<string> listaEsperada = new List<string> { primerdupla.ToString()};
-
-            CollectionAssert.AreEquivalent(listaEsperada, usuarioQueComparteContrasenia.ConvertirContraseñasCompartidasPorMiAListaString(usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()));
-        }
-
-
-        [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
-        public void CompartirUnaContraseniaQueNoTengoEnMiLista()
-        {
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
-            Usuario usuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
-               "Instagram", "", categoria);
-
-            usuarioQueComparteContrasenia.CompartirContrasenia(primerdupla, usuarioAlQueCompartoContrasenia);
-        }
-
-        [TestMethod]
-        public void CompartirUnaContraseniaCon2UsuariosDiferentes()
-        {
-            Usuario usuarioQueComparteContrasenia = new Usuario(nombres[0], "queonda");
-            Usuario primerUsuarioAlQueCompartoContrasenia = new Usuario(nombres[2], "muymanso");
-            Usuario segundaUsuarioAlQueCompartoContrasenia = new Usuario(nombres[1], "kondacabron");
-
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
-               "Instagram", "", categoria);
-
-            usuarioQueComparteContrasenia.AgregarDupla(primerdupla);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], primerUsuarioAlQueCompartoContrasenia);
-            usuarioQueComparteContrasenia.CompartirContrasenia(usuarioQueComparteContrasenia.ObtenerDuplas()[0], segundaUsuarioAlQueCompartoContrasenia);
-            List<Usuario> listaEsperada = new List<Usuario> { primerUsuarioAlQueCompartoContrasenia, segundaUsuarioAlQueCompartoContrasenia};
-            List<Usuario> listaResultante = new List<Usuario>();
-            listaResultante = usuarioQueComparteContrasenia.ObtenerContraseniasCompartidasPorMi()[primerdupla];
-
-            CollectionAssert.AreEquivalent(listaEsperada, listaResultante);
-        }
-
 
         [TestMethod]
         public void RemoverDuplaExistente()
         {
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Contraseña contraseña1 = new Contraseña(contrasenias[0]);
+            Contraseña contraseña2 = new Contraseña(contrasenias[0]);
+
+            Credencial primerdupla = new Credencial("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            Dupla_UsuarioContrasenia segundadupla = new Dupla_UsuarioContrasenia("soydeort@ort.com.uy", contrasenias[1],
+            Credencial segundadupla = new Credencial("soydeort@ort.com.uy", contraseña2,
               "Facebook", "", categoria);
-            usuario.AgregarDupla(primerdupla);
-            usuario.AgregarDupla(segundadupla);
+            usuario.AgregarCredencial(primerdupla);
+            usuario.AgregarCredencial(segundadupla);
             usuario.RemoverDupla(primerdupla);
 
-            List<Dupla_UsuarioContrasenia> listaEsperada = new List<Dupla_UsuarioContrasenia> { segundadupla };
+            List<Credencial> listaEsperada = new List<Credencial> { segundadupla };
 
-            CollectionAssert.AreEquivalent(listaEsperada, usuario.ObtenerDuplas());
+            CollectionAssert.AreEquivalent(listaEsperada, usuario.ObtenerCredenciales());
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_InvalidUsuarioData))]
+        [ExpectedException(typeof(ExepcionInvalidUsuarioData))]
         public void AgregarDuplaExistente()
         {
-            Dupla_UsuarioContrasenia primerdupla = new Dupla_UsuarioContrasenia("fing@edu.com", contrasenias[0],
+            Contraseña contraseña1 = new Contraseña(contrasenias[0]);
+            Credencial primerdupla = new Credencial("fing@edu.com", contraseña1,
                "Instagram", "", categoria);
-            usuario.AgregarDupla(primerdupla);
-            usuario.AgregarDupla(primerdupla);
+            usuario.AgregarCredencial(primerdupla);
+            usuario.AgregarCredencial(primerdupla);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exepcion_ObjetosRepetidos))]
+        [ExpectedException(typeof(ExepcionObjetosRepetidos))]
         public void AgregarTarjetaRepetida()
         {
             Tarjeta tarjetaConMismoNumero = new Tarjeta(nombresTarjetas[1], tiposTarjetas[1], numTarjetas[0],
@@ -608,16 +418,17 @@ namespace Pruebas
         public void VerificarQUeCombinacionNombreSitioEsata()
         {
             usuario.AgregarCategoria(categoria);
-            usuario.AgregarDupla(dupla);
-            Assert.IsTrue(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[1], nombreSitioDupla));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsTrue(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[1], nombreSitioCredencial));
         }
 
         [TestMethod]
         public void VerificarQUeCombinacionNombreSitioNOEsata()
         {
             usuario.AgregarCategoria(categoria);
-            usuario.AgregarDupla(dupla);
-            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], nombresitioDuplaQueNoEsta));
+            usuario.AgregarCredencial(dupla);
+            Assert.IsFalse(usuario.VerificarQueTengoCombinacionNombreSitio(nombres[0], 
+                nombresitioCredencialQueNoEsta));
         }
 
     }

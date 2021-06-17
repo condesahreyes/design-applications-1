@@ -46,6 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnSugerencias = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancelarCategoria
@@ -89,7 +90,6 @@
             this.label1.Size = new System.Drawing.Size(81, 22);
             this.label1.TabIndex = 11;
             this.label1.Text = "Nombre";
-            
             // 
             // lblListadoTarjetas
             // 
@@ -160,7 +160,6 @@
             this.label4.Size = new System.Drawing.Size(51, 22);
             this.label4.TabIndex = 19;
             this.label4.Text = "Nota";
-            
             // 
             // textBoxNota
             // 
@@ -190,7 +189,6 @@
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(178, 21);
             this.comboBoxCategoria.TabIndex = 21;
-            
             // 
             // butto_GenerarContrasenia
             // 
@@ -201,7 +199,7 @@
             this.butto_GenerarContrasenia.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
             this.butto_GenerarContrasenia.Location = new System.Drawing.Point(375, 134);
             this.butto_GenerarContrasenia.Name = "butto_GenerarContrasenia";
-            this.butto_GenerarContrasenia.Size = new System.Drawing.Size(70, 25);
+            this.butto_GenerarContrasenia.Size = new System.Drawing.Size(70, 30);
             this.butto_GenerarContrasenia.TabIndex = 22;
             this.butto_GenerarContrasenia.Text = "Generar";
             this.butto_GenerarContrasenia.UseVisualStyleBackColor = false;
@@ -255,12 +253,28 @@
             this.label9.TabIndex = 26;
             this.label9.Text = "*";
             // 
+            // btnSugerencias
+            // 
+            this.btnSugerencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(216)))), ((int)(((byte)(243)))));
+            this.btnSugerencias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSugerencias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSugerencias.Font = new System.Drawing.Font("Candara", 11F, System.Drawing.FontStyle.Bold);
+            this.btnSugerencias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(12)))), ((int)(((byte)(44)))));
+            this.btnSugerencias.Location = new System.Drawing.Point(267, 134);
+            this.btnSugerencias.Name = "btnSugerencias";
+            this.btnSugerencias.Size = new System.Drawing.Size(102, 30);
+            this.btnSugerencias.TabIndex = 28;
+            this.btnSugerencias.Text = "Sugerencias";
+            this.btnSugerencias.UseVisualStyleBackColor = false;
+            this.btnSugerencias.Click += new System.EventHandler(this.btnSugerencias_Click);
+            // 
             // InterfazAgregarContrasenia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::InterfazGrafica.Properties.Resources.fondo3;
             this.ClientSize = new System.Drawing.Size(563, 386);
+            this.Controls.Add(this.btnSugerencias);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -282,7 +296,6 @@
             this.Name = "InterfazAgregarContrasenia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Contraseña";
-            
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,5 +321,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnSugerencias;
     }
 }
