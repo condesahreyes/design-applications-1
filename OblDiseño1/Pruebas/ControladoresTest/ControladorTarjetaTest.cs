@@ -1,22 +1,19 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OblDiseño1.ControladoresPorEntidad;
+using AccesoDatos.Entidades_Datos;
 using System.Collections.Generic;
 using AccesoDatos;
-using AccesoDatos.Entidades_Datos;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
-using OblDiseño1.ControladoresPorEntidad;
+using System;
 
 namespace Pruebas.ControladoresTest
 {
     [TestClass]
     public class ControladorTarjetaTest
     {
-
-        private const string usuarioCredencial = "Usuario insta";
         private const string numeroTarjeta = "1234567891234567";
         private const string contraseña = "Mi contraseña";
         private const string categoriaNombre = "Personal";
-        private const string credencialSitio = "Facebook";
         private const string nombreTarjeta = "Master Card";
         private const string usuarioGestor = "Hernán";
         private const string credencialNota = "Nota ";
@@ -98,7 +95,6 @@ namespace Pruebas.ControladoresTest
 
             Assert.IsTrue(seAgregoCorrectamente);
         }
-
 
         [TestMethod]
         public void QuererObtenerTarjetaInexistente()
@@ -229,12 +225,6 @@ namespace Pruebas.ControladoresTest
         {
             ControladorTarjeta controladorTarjeta = new ControladorTarjeta(usuario);
             controladorTarjeta.CrearTarjeta(tarjeta);
-        }
-
-        private void AgregarCredencial(Credencial credencial, Usuario usuario)
-        {
-            ControladorCredencial controladorCredencial = new ControladorCredencial(usuario);
-            controladorCredencial.AgregarCredencial(credencial);
         }
 
         private void AgregarUnRegistroEnCadaTabla()

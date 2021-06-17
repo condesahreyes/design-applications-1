@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OblDiseño1;
 using OblDiseño1.Manejadores;
+using OblDiseño1;
 using System;
 
 namespace Pruebas
@@ -11,7 +11,6 @@ namespace Pruebas
     {
         private static readonly string contrasenia1 = "cae][qwQWDc,p[12waC,WQE";
         private static readonly string contrasenia2 = "QWERTY123.";
-
 
         private static string llave1;
         private static string llave2;
@@ -25,7 +24,6 @@ namespace Pruebas
             llave2 = null;
         }
         
-
         [TestMethod]
         public void GenerarLLave()
         {
@@ -97,6 +95,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta1()
         {
@@ -107,6 +106,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta2()
         {
@@ -128,6 +128,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta4()
         {
@@ -138,6 +139,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta55555()
         {
@@ -148,6 +150,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta6()
         {
@@ -158,6 +161,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta7()
         {
@@ -168,6 +172,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta8()
         {
@@ -178,6 +183,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta9()
         {
@@ -188,6 +194,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta10()
         {
@@ -198,6 +205,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta11()
         {
@@ -208,6 +216,7 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
+
         [TestMethod]
         public void DesencriptaCorrectamenteContraseniaCorta12()
         {
@@ -218,10 +227,5 @@ namespace Pruebas
             string contrasenia1Desencriptada = encriptador.Desencriptar(contrasenia1Encriptada, llave1);
             Assert.AreEqual(contraseniaCorta, contrasenia1Desencriptada);
         }
-        /*      [TestMethod]
-              public void sdcaesvfdetrwferfdgrwe()
-              {
-                  string encriptado = "7J\u0088^·6P\u0097PÖV(\u001b\u009c\u001e¨\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-              }*/
     }
 }
