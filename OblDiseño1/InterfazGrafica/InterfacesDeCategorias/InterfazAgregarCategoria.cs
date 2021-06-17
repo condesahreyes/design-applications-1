@@ -21,7 +21,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             this.usuario = usuario;
 
             repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)

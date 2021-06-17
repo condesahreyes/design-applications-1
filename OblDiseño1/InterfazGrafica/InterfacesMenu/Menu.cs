@@ -7,7 +7,6 @@ using InterfazGrafica.InterfazCategoria;
 using InterfazGrafica.InterfacesReporte;
 using InterfazGrafica.InterfazIngreso;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -17,7 +16,6 @@ namespace InterfazGrafica.InterfacesMenu
     {
         private Usuario usuario;
 
-        private CategoriaRepositorio repositorioCategoria;
         private ControladorCategoria controladorCategoria;
 
         private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
@@ -33,8 +31,7 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void CrearManejadoresCategoria()
         {
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)

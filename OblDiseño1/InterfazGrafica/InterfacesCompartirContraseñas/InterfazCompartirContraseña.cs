@@ -14,9 +14,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         private Usuario usuario;
 
         private ControladorUsuario controladorUsuario;
-        private IRepositorio<Usuario> usuarioRepositorio;
-
-        private IRepositorio<Credencial> credencialRepositorio;
         private ControladorCredencial controladorCredencial;
 
          public InterfazCompartirContraseña(ref Usuario usuario)
@@ -32,14 +29,12 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CrearManejadoresCredencial()
         {
-            credencialRepositorio = new CredencialRepositorio(this.usuario);
-            controladorCredencial = new ControladorCredencial(this.usuario, credencialRepositorio);
+            controladorCredencial = new ControladorCredencial(this.usuario);
         }
 
         private void CrearControladorUsuario()
         {
-            usuarioRepositorio = new UsuarioRepositorio();
-            controladorUsuario = new ControladorUsuario(usuario, usuarioRepositorio);
+            controladorUsuario = new ControladorUsuario();
         }
 
         private void CargarOpcionesDeUsuariosACompartir()

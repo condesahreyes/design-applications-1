@@ -17,10 +17,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             repositorioUsuario.Modificar(usuarioOriginal, usuario);
         }
 
-        public void ModificarCategoria(Categoria categoriaOriginal, Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
-        {
-            repositorioCategoria.Modificar(categoriaOriginal, categoria);
-        }
+
 
         public void ModificarTarjeta(Tarjeta tarjetaOriginal, Tarjeta tarjeta, IRepositorio<Tarjeta> repositorioTarjeta)
         {

@@ -2,7 +2,6 @@
 using InterfazGrafica.InterfazCategoria;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 
 namespace InterfazGrafica.InterfazDeCategorias
@@ -11,8 +10,6 @@ namespace InterfazGrafica.InterfazDeCategorias
     {
         private Usuario usuario;
         private Categoria categoria;
-
-        private CategoriaRepositorio repositorioCategoria;
         private ControladorCategoria controladorCategoria;
 
         private string validacionNombre = "Error el " +
@@ -27,8 +24,7 @@ namespace InterfazGrafica.InterfazDeCategorias
             this.categoria = categoria;
             this.textBoxModificarCategoria.Text = this.categoria.Nombre;
 
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
-            controladorCategoria = new ControladorCategoria(this.usuario, repositorioCategoria);
+            controladorCategoria = new ControladorCategoria(this.usuario);
         }
 
         private void btnModificarCategoria_Click_1(object sender, System.EventArgs e)

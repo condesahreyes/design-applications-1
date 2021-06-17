@@ -2,7 +2,6 @@
 using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -13,7 +12,6 @@ namespace InterfazGrafica.InterfacesDeContrasenias
     {
         private Usuario usuario;
 
-        private IRepositorio<Credencial> credencialRepositorio;
         private ControladorCredencial controladorCredencial;
 
         public InterfazContrasenia(ref Usuario usuario)
@@ -28,8 +26,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void CrearManejadoresCredencial()
         {
-            credencialRepositorio = new CredencialRepositorio(this.usuario);
-            controladorCredencial = new ControladorCredencial(this.usuario, credencialRepositorio);
+            controladorCredencial = new ControladorCredencial(this.usuario);
         }
 
         private void CargarCredenciales()

@@ -46,11 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControladoresPorEntidad\ControladorCategoria.cs" />
-    <Compile Include="ControladoresPorEntidad\ControladorCredencial.cs" />
-    <Compile Include="ControladoresPorEntidad\ControladorDataBreach.cs" />
-    <Compile Include="ControladoresPorEntidad\ControladorTarjeta.cs" />
-    <Compile Include="ControladoresPorEntidad\ControladorUsuario.cs" />
     <Compile Include="ControladoresPorFuncionalidad\ControladorAlta.cs" />
     <Compile Include="ControladoresPorFuncionalidad\ControladorEliminar.cs" />
     <Compile Include="ControladoresPorFuncionalidad\ControladorModificar.cs" />

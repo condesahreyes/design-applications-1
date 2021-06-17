@@ -1,23 +1,21 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OblDiseño1.Entidades;
+using AccesoDatos;
+using AccesoDatos.Repositorios;
 
 namespace OblDiseño1.ControladoresPorEntidad
 {
     public class ControladorCredencial
     {
-        private ControladorAlta crear = new ControladorAlta();
-        private ControladorModificar modificar = new ControladorModificar();
-        private ControladorObtener obtener = new ControladorObtener();
-        private ControladorEliminar eliminar = new ControladorEliminar();
-
         private IRepositorio<Credencial> repositorioCredencial;
         private Usuario usuario;
+        private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
 
-        public ControladorCredencial(Usuario usuario, IRepositorio<Credencial> repositorioCredencial)
+        public ControladorCredencial(Usuario usuario)
         {
             this.usuario = usuario;
-            this.repositorioCredencial = repositorioCredencial;
+            this.repositorioCredencial = new CredencialRepositorio(this.usuario);
+            this.repositorioDataBreach = new DataBrechRepositorio(this.usuario);
         }
 
         public void CrearCredencial(string nombreUsuario, string contraseñaString, string nombreSitio, string nota, Categoria categoria)
@@ -25,12 +23,12 @@ namespace OblDiseño1.ControladoresPorEntidad
             Contraseña contraseña = new Contraseña(contraseñaString);
             Credencial credencial = new Credencial(nombreUsuario, contraseña, nombreSitio, nota, categoria);
 
-            crear.AgregarCredencial(credencial, repositorioCredencial);
+            repositorioCredencial.Add(credencial);
         }
 
         public bool ObtenerSiEsContraseniaDuplicada(string unaContrasenia, Credencial credencial)
         {
-            List<Credencial> credenciales = obtener.ObtenerCredenciales(repositorioCredencial);
+            List<Credencial> credenciales = repositorioCredencial.GetAll();
 
             int cantContrasenias = 0;
 
@@ -50,10 +48,9 @@ namespace OblDiseño1.ControladoresPorEntidad
             return seguridad == 4 || seguridad == 5 ? true : false;
         }
 
-        public bool ObtenerSiEsContraseñaVulnerada(string contraseña, IRepositorio<ChequeadorDeDataBreaches>
-            repositorioDataBreach)
+        public bool ObtenerSiEsContraseñaVulnerada(string contraseña)
         {
-            List<Credencial> misCredencialesVulneradas =  ObtenerTodasLasCredencialesVulneradas(repositorioDataBreach);
+            List<Credencial> misCredencialesVulneradas =  ObtenerTodasLasCredencialesVulneradas();
 
             foreach (var credencial in misCredencialesVulneradas)
                 if (credencial.ObtenerContraseña == contraseña)
@@ -62,10 +59,9 @@ namespace OblDiseño1.ControladoresPorEntidad
             return false;
         }
 
-        private List<Credencial> ObtenerTodasLasCredencialesVulneradas(IRepositorio<ChequeadorDeDataBreaches>
-            repositorioDataBreach)
+        private List<Credencial> ObtenerTodasLasCredencialesVulneradas()
         {
-            List<ChequeadorDeDataBreaches> misDataBreaches = obtener.ObtenerDataBreaches(repositorioDataBreach);
+            List<ChequeadorDeDataBreaches> misDataBreaches = repositorioDataBreach.GetAll();
 
             List<Credencial> misCredencialesVulneradas = new List<Credencial>();
 
@@ -77,22 +73,22 @@ namespace OblDiseño1.ControladoresPorEntidad
 
         public void EliminarLaCredencial(Credencial credencial)
         {
-            eliminar.EliminarCredencial(credencial, repositorioCredencial);
+            repositorioCredencial.Delete(credencial);
         }
 
         public List<Credencial> ObtenerTodasMisCredenciales()
         {
-            return obtener.ObtenerCredenciales(repositorioCredencial);
+            return repositorioCredencial.GetAll();
         }
 
         public Credencial ObtenerCredencial(Credencial credencial)
         {
-            return obtener.ObtenerCredencial(credencial, repositorioCredencial);
+            return repositorioCredencial.Get(credencial);
         }
 
         public void ModificarMiCredencial(Credencial credencialOriginal, Credencial credencialAModificar)
         {
-            modificar.ModificarCredencial(credencialOriginal, credencialAModificar, repositorioCredencial);
+            repositorioCredencial.Modificar(credencialOriginal, credencialAModificar);
         }
     }
 }

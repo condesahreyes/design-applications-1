@@ -98,8 +98,7 @@ namespace InterfazGrafica.InterfacesDataBreaches
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridCredenciales.CurrentRow.DataBoundItem;
 
-                IRepositorio<Credencial> repoCredencial = new CredencialRepositorio(this.usuario);
-                ControladorCredencial controladorCredencial = new ControladorCredencial(this.usuario, repoCredencial);
+                ControladorCredencial controladorCredencial = new ControladorCredencial(this.usuario);
 
                 Credencial credencial = controladorCredencial.ObtenerCredencial(credencialSeleccionada);
 

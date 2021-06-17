@@ -14,10 +14,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             repositorioUsuario.Add(usuario);
         }
 
-        public void AgregarCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
-        {
-            repositorioCategoria.Add(categoria);
-        }
+
 
 
         public void AgregarTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
@@ -25,10 +22,6 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             repositorioTarjeta.Add(tarjetaAgregar);
         }
 
-        public void AgregarCredencial(Credencial credencialAgregar, IRepositorio<Credencial> repositorioCredencial)
-        {
-            repositorioCredencial.Add(credencialAgregar);
-        }
 
 
         public void AgregarDataBrache(ChequeadorDeDataBreaches dataBreach, IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)

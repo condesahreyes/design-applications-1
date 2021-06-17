@@ -13,15 +13,8 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             return repositorioUsuario.Get(usuario);
         }
 
-        public Categoria ObtenerCategoria(Categoria categoria, IRepositorio<Categoria> repositorioCategoria)
-        {
-            return repositorioCategoria.Get(categoria);
-        }
 
-        public List<Categoria> ObtenerCategorias(IRepositorio<Categoria> repositorioCategoria)
-        {
-            return repositorioCategoria.GetAll();
-        }
+
 
         public Tarjeta ObtenerTarjeta(Tarjeta tarjetaAgregar, IRepositorio<Tarjeta> repositorioTarjeta)
         {
@@ -43,10 +36,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             return repositorioCredencial.Get(credencial);
         }
 
-        public List<Credencial> ObtenerCredenciales(IRepositorio<Credencial> repositorioCredencial)
-        {
-            return repositorioCredencial.GetAll();
-        }
+
 
         public ChequeadorDeDataBreaches ObtenerDataBreach(ChequeadorDeDataBreaches dataBreach, IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach)
         {

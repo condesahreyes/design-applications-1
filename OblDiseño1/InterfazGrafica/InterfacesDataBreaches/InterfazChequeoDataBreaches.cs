@@ -14,23 +14,16 @@ namespace InterfazGrafica.InterfazDataBreaches
     public partial class InterfazChequeoDataBreaches : Form
     {
         private Usuario usuario;
-
-        private IRepositorio<ChequeadorDeDataBreaches> repositorioDataBreach;
         private ControladorDataBreach controladorDataBreach;
-
-        private IRepositorio<Usuario> usuarioRepositorio;
         private ControladorUsuario usuarioControlador;
 
         public InterfazChequeoDataBreaches(ref Usuario usuario)
         {
             InitializeComponent();
 
-            this.usuarioRepositorio = new UsuarioRepositorio();
-            this.usuarioControlador = new ControladorUsuario(usuario, usuarioRepositorio);
+            this.usuarioControlador = new ControladorUsuario();
             this.usuario = usuarioControlador.ObtenerUnUsuario(usuario);
-
-            this.repositorioDataBreach = new DataBrechRepositorio(usuario);
-            this.controladorDataBreach = new ControladorDataBreach(this.usuario, repositorioDataBreach);
+            this.controladorDataBreach = new ControladorDataBreach(this.usuario);
         }
 
         private void btnChequear_Click(object sender, EventArgs e)
