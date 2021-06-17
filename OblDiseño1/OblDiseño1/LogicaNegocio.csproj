@@ -71,7 +71,6 @@
     <Compile Include="IRepositorioCompartir.cs" />
     <Compile Include="Manejadores\ChequeadorDeDataBreaches.cs" />
     <Compile Include="Entidades\Credencial.cs" />
-    <Compile Include="Manejadores\Sistema.cs" />
     <Compile Include="Entidades\Tarjeta.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

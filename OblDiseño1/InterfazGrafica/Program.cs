@@ -15,7 +15,6 @@ namespace InterfazGrafica
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Sistema sistema = new Sistema();
             Application.Run(new InterfazIngresoSistema());
         }
     }

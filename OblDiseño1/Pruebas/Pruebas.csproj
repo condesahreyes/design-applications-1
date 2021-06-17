@@ -66,7 +66,6 @@
     <Compile Include="ControladorObtencionTest.cs" />
     <Compile Include="CredencialTest.cs" />
     <Compile Include="GestorContraseniasCompartidasTest.cs" />
-    <Compile Include="SistemaTest.cs" />
     <Compile Include="TarjetaTest.cs" />
     <Compile Include="CategoriaTest.cs" />
     <Compile Include="ChequeadorDeDataBreachesTest.cs" />
