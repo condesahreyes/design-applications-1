@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using OblDiseño1.Interfaces;
 using System.IO;
+using System;
 
 namespace OblDiseño1.Manejadores
 {
@@ -13,13 +9,12 @@ namespace OblDiseño1.Manejadores
     {
         private readonly byte[] vectorDeInicializacion = new byte[16];
 
-        private const string llaveEjemplo = "™œMÆ\u0015,(\u001añ»Zf¸\rQÈËˆë\u000fŽ_Æ\f?©ž”tiÙê";
+        private const string llaveEjemplo = "23-137-23-40-105-219-185-252-253-147-46-44-227-39-192-187-224-254-239-138-89-34-137-213-128-22-16-171-186-80-142-252";
 
         public Encriptador()
         {
 
         }
-
 
         public string ObtenerLlaveHardcodeada()
         {
@@ -28,17 +23,18 @@ namespace OblDiseño1.Manejadores
 
         public string Desencriptar(string textoEncriptado, string llave)
         {
-            byte[] buffer = Encoding.Default.GetBytes(textoEncriptado);
+            byte[] buffer = CadenaStringABytes(textoEncriptado);
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.Default.GetBytes(llave);
+                aes.Key = CadenaStringABytes(llave);
                 aes.IV = vectorDeInicializacion;
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                 using (MemoryStream memoryStream = new MemoryStream(buffer))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, 
+                        CryptoStreamMode.Read))
                     {
                         using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
                         {
@@ -56,7 +52,7 @@ namespace OblDiseño1.Manejadores
 
             using (Aes aes = Aes.Create())
             {
-                byte[] keyAux = Encoding.Default.GetBytes(llave);
+                byte[] keyAux = CadenaStringABytes(llave);
                 aes.Key = keyAux;
                 aes.IV = iv;
 
@@ -64,7 +60,8 @@ namespace OblDiseño1.Manejadores
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
+                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, 
+                        CryptoStreamMode.Write))
                     {
                         using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
                         {
@@ -76,9 +73,8 @@ namespace OblDiseño1.Manejadores
                 }
             }
 
-            return Encoding.Default.GetString(contraseniaEncriptada);
+            return CadenaBytesAString(contraseniaEncriptada);
         }
-
 
         public string GenerarLlave()
         {
@@ -87,10 +83,40 @@ namespace OblDiseño1.Manejadores
             {
                 aes.GenerateKey();
                 byte[] llaveEnBytes = aes.Key;
-
-                llave = Encoding.Default.GetString(llaveEnBytes);
+                llave = CadenaBytesAString(llaveEnBytes);
             }
             return llave;
+        }
+
+        private string CadenaBytesAString(byte[] cadenaDeBytes)
+        {
+            string retorno = "";
+            bool primero = true;
+            foreach (byte b in cadenaDeBytes)
+            {
+                if (!primero)
+                    retorno = String.Concat(retorno, "-", b);
+                else
+                {
+                    retorno = String.Concat(retorno, b);
+                    primero = false;
+                }
+
+            }
+            return retorno;
+        }
+
+        private byte[] CadenaStringABytes(string cadenaDeBytesEnString)
+        {
+            string[] bytesEnFormatoString = cadenaDeBytesEnString.Split('-');
+            byte[] retorno = new byte[bytesEnFormatoString.Length];
+
+            for (int i = 0; i < bytesEnFormatoString.Length; i++)
+            {
+                int unint = Int16.Parse(bytesEnFormatoString[i]);
+                retorno[i] = (byte)unint;
+            }
+            return retorno;
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using AccesoDatos.Entidades_Datos;
 using AccesoDatos.Repositorios;
+using OblDiseño1.Manejadores;
 using OblDiseño1.Entidades;
 using OblDiseño1;
-using System.Collections.Generic;
-using OblDiseño1.Manejadores;
 
 namespace AccesoDatos
 {
@@ -114,28 +113,26 @@ namespace AccesoDatos
             return tarjetaDominio;
         }
 
-        /*public EntidadGestorContraseñasCompartidas PasarAEntidad(GestorContraseniasCompartidas gestorDominio)
-        {
-            EntidadGestorContraseñasCompartidas gestorEntidad = new EntidadGestorContraseñasCompartidas();
-            gestorEntidad.contraseniasCompartidasConmigo = gestorDominio.ObtenerContraseniasCompartidasConmigo();
-            
-        }*/
 
         public EntidadUsuario PasarAEntidad(Usuario usuarioDominio)
         {
+            string contraseñaEncriptada = encriptador.Encriptar
+                (usuarioDominio.Contrasenia, encriptador.ObtenerLlaveHardcodeada());
             EntidadUsuario usuarioEntidad = new EntidadUsuario();
             usuarioEntidad.Nombre = usuarioDominio.Nombre;
-            usuarioEntidad.Contrasenia = usuarioDominio.Contrasenia;
+            usuarioEntidad.Contrasenia = contraseñaEncriptada;
 
             return usuarioEntidad;
         }
 
         public Usuario PasarADominio(EntidadUsuario usuarioEntidad)
         {
+            string contraseñaDesencriptada = encriptador.Desencriptar
+                (usuarioEntidad.Contrasenia, encriptador.ObtenerLlaveHardcodeada());
             Usuario usuarioDominio = new Usuario();
             
             usuarioDominio.Nombre = usuarioEntidad.Nombre;
-            usuarioDominio.Contrasenia = usuarioEntidad.Contrasenia;
+            usuarioDominio.Contrasenia = contraseñaDesencriptada;
             TarjetaRepositorio repoTarjeta = new TarjetaRepositorio(usuarioDominio);
             CategoriaRepositorio repoCategoria = new CategoriaRepositorio(usuarioDominio);
             CredencialRepositorio repoCredencial = new CredencialRepositorio(usuarioDominio);

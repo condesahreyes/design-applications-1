@@ -1,8 +1,7 @@
-﻿using System.Windows.Forms;
-using AccesoDatos;
+﻿using OblDiseño1.ControladoresPorEntidad;
+using System.Windows.Forms;
 using OblDiseño1;
 using System;
-using OblDiseño1.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazIngreso
 {

@@ -90,6 +90,7 @@ namespace InterfazGrafica.InterfacesDeTarjetas
                 EliminarTarjetaSeleccionada();
             else
                 MessageBox.Show("Error, no hay tarjetas para modificar");
+            CargarListaTarjetas();
         }
 
         private void EliminarTarjetaSeleccionada()
@@ -102,8 +103,10 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             {
                 InterfazEliminarTarjeta eliminarTarjeta = new InterfazEliminarTarjeta
                     (ref usuario, ref tarjetaSeleccionada);
+                this.Close();
                 eliminarTarjeta.Show();
             }
+            CargarListaTarjetas();
         }
     }
 }

@@ -40,8 +40,9 @@ namespace OblDiseño1.ControladoresPorEntidad
             foreach (Credencial unaDupla in credenciales)
                 if (unaDupla.ObtenerContraseña == unaContrasenia)
                     cantContrasenias++;
-
-            if ((credencial == null && cantContrasenias == 0) || (credencial != null && cantContrasenias == 1))
+            
+            if ((credencial == null && cantContrasenias == 0) || (credencial!= null && (credencial.ObtenerContraseña == 
+                unaContrasenia && cantContrasenias == 1)) || cantContrasenias==0)
                 return false;
 
             return true;

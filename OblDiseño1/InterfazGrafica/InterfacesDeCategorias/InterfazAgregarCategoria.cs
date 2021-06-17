@@ -1,7 +1,6 @@
 ﻿using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfazCategoria;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
 
@@ -10,8 +9,6 @@ namespace InterfazGrafica.InterfazDeCategorias
     public partial class InterfazAgregarCategoria : Form
     {
         private Usuario usuario;
-
-        private CategoriaRepositorio repositorioCategoria;
         private ControladorCategoria controladorCategoria;
 
         public InterfazAgregarCategoria(ref Usuario usuario)
@@ -19,7 +16,6 @@ namespace InterfazGrafica.InterfazDeCategorias
             InitializeComponent();
             this.usuario = usuario;
 
-            repositorioCategoria = new CategoriaRepositorio(this.usuario);
             controladorCategoria = new ControladorCategoria(this.usuario);
         }
 

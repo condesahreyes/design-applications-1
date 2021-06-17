@@ -123,9 +123,7 @@ namespace Pruebas.ControladoresTest
         {
             AgregarUnRegistroEnCadaTabla();
             Categoria categoria = new Categoria(categoriaNombre);
-            string contraseñaEncriptada = EncriptarContraseña(contraseña);
-            Contraseña contraseñaDominio = new Contraseña(contraseñaEncriptada);
-
+            Contraseña contraseñaDominio = new Contraseña(contraseña);
             Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio,
                  credencialSitio, credencialNota, categoria);
 
@@ -318,8 +316,9 @@ namespace Pruebas.ControladoresTest
 
         public void AgregarContraseña(string contraseña, int nivelSeguridadContrasenia)
         {
-            EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, nivelSeguridadContrasenia);
             contraseña = EncriptarContraseña(contraseña);
+            EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, nivelSeguridadContrasenia);
+
             using (Contexto contexto = new Contexto())
             {
                 contexto.contraseñas.Add(entidadContraseña);

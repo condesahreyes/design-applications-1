@@ -1,11 +1,9 @@
-﻿using OblDiseño1.ControladoresPorEntidad;
+﻿using CapaDeComunicación.ControladoresPorEntidad;
+using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
-using AccesoDatos.Repositorios;
 using System.Windows.Forms;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using CapaDeComunicación.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -98,7 +96,6 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         {
             string nomSitioSeleccionado = comboBoxSitios.Text;
             string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
-            RegistroCredencialCompartidaRepositorio repositorioCredencialCompartida = new RegistroCredencialCompartidaRepositorio(this.usuario);
             
             foreach (var iterador in this.usuario.ObtenerCredenciales())
             {

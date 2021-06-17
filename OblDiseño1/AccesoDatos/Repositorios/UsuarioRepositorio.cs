@@ -1,5 +1,6 @@
 ﻿using AccesoDatos.Entidades_Datos;
 using System.Collections.Generic;
+using OblDiseño1.Manejadores;
 using System.Linq;
 using OblDiseño1;
 using System;
@@ -120,17 +121,22 @@ namespace AccesoDatos
 
         public void Modificar(Usuario usuarioOriginal, Usuario usuario)
         {
+            Encriptador encriptador = new Encriptador();
+            string llave = encriptador.ObtenerLlaveHardcodeada();
             using (Contexto contexto = new Contexto())
             {
                 if (Existe(usuarioOriginal))
                 {
                     foreach (var usuarioContexto in contexto.usuarios)
                         if (usuarioContexto.Nombre == usuarioOriginal.Nombre)
-                            usuarioContexto.Contrasenia = usuario.Contrasenia;
+                        {
+                            usuarioContexto.Contrasenia  = encriptador.Encriptar(usuario.Contrasenia, llave);
+                        } 
                     contexto.SaveChanges();
                 }
                 else
-                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con este nombre");
+                    throw new ExepcionIntentoDeObtencionDeObjetoInexistente("No existe una categoria con " +
+                        "este nombre");
             }
         }
     }

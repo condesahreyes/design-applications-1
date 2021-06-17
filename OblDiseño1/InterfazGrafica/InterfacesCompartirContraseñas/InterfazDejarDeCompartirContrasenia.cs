@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using AccesoDatos.Repositorios;
+﻿using CapaDeComunicación.ControladoresPorEntidad;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System;
-using CapaDeComunicación.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {

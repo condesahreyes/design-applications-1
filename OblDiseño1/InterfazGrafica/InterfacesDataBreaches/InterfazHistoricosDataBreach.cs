@@ -2,7 +2,6 @@
 using InterfazGrafica.InterfazDataBreaches;
 using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
-using AccesoDatos.Repositorios;
 using System.Windows.Forms;
 using OblDiseño1;
 using System;

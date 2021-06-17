@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections;
-using System.ComponentModel.DataAnnotations;
 
 namespace OblDiseño1.Entidades
 {
@@ -24,7 +21,6 @@ namespace OblDiseño1.Entidades
         private static Random numRandom = new Random();
 
         private string contrasenia;
-
 
         public Contraseña() { } 
         public Contraseña(string unaContrasenia)

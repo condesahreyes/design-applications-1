@@ -3,7 +3,6 @@ using InterfazGrafica.InterfazDataBreaches;
 using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfacesReporte;
 using System.Collections.Generic;
-using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using System.Windows.Forms;
 using OblDiseño1;
@@ -27,12 +26,8 @@ namespace InterfazGrafica.InterfacesDeContrasenias
         private const string posibleInterfazPadre_ChequeoDataBreaches = "InterfazChequeoDataBreaches";
         private const string posibleInterfazPadre_ChequeoDataBreachesHistorico = "InterfazVerRegistroDataBreach";
 
-        private IRepositorio<Categoria> repositorioCategoria;
         private ControladorCategoria controladorCategoria;
-
-        private IRepositorio<Credencial> credencialRepositorio;
         private ControladorCredencial controladorCredencial;
-
 
         public InterfazDeModificarContrasenia(ref Usuario usuario, Credencial credencial, string padre)
         {
@@ -150,9 +145,12 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             }
             else
             {
-                ModificarContrasenia();
-                MessageBox.Show("La contraseña se modifico correctamente");
-                CerrarVentana();
+                bool fueModificada=ModificarContrasenia();
+                if (fueModificada)
+                {
+                    MessageBox.Show("La contraseña se modifico correctamente");
+                    CerrarVentana();
+                }
             }
         }
 
@@ -216,6 +214,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
             try
             {
                 ModificarCredencial();
+                return true;
             }
             catch (ExepcionDatosDeContraseniaInvalidos)
             {

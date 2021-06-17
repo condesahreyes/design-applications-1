@@ -57,6 +57,7 @@
             this.textBoxNuevaContrasenia.Name = "textBoxNuevaContrasenia";
             this.textBoxNuevaContrasenia.Size = new System.Drawing.Size(160, 20);
             this.textBoxNuevaContrasenia.TabIndex = 23;
+            this.textBoxNuevaContrasenia.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -76,6 +77,7 @@
             this.textBoxContrasenia.Name = "textBoxContrasenia";
             this.textBoxContrasenia.Size = new System.Drawing.Size(160, 20);
             this.textBoxContrasenia.TabIndex = 21;
+            this.textBoxContrasenia.UseSystemPasswordChar = true;
             // 
             // label1
             // 

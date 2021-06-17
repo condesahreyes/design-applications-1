@@ -338,10 +338,6 @@
     <None Include="Resources\fondo31.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
-      <Project>{cc2d428e-1873-4c52-9de7-8fc2e2e1d467}</Project>
-      <Name>AccesoDatos</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CapaDeComunicación\CapaDeComunicación.csproj">
       <Project>{102694AF-8A07-4926-BE7B-A9CD8387352D}</Project>
       <Name>CapaDeComunicación</Name>

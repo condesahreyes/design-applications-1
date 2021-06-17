@@ -40,6 +40,9 @@ namespace InterfazGrafica.InterfacesDeTarjetas
         private void IrAInterfazTarjeta()
         {
             this.Close();
+            InterfazTarjeta interfazTarjeta = new InterfazTarjeta(ref usuario);
+            interfazTarjeta.Show();
+
         }
     }
 }

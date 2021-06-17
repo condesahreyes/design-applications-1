@@ -2,14 +2,11 @@
 using InterfazGrafica.InterfacesDataBreaches;
 using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
-using AccesoDatos.Repositorios;
+using OblDiseño1.Exception;
 using System.Windows.Forms;
 using System.Linq;
-using AccesoDatos;
 using OblDiseño1;
 using System;
-using System.IO;
-using OblDiseño1.Exception;
 
 namespace InterfazGrafica.InterfazDataBreaches
 {
