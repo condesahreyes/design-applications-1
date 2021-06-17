@@ -1,40 +1,38 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1.ControladoresPorEntidad;
+using AccesoDatos.Entidades_Datos;
+using System.Collections.Generic;
+using OblDiseño1.Manejadores;
 using OblDiseño1.Entidades;
 using AccesoDatos;
+using System.Linq;
 using OblDiseño1;
 using System;
-using System.Collections.Generic;
-using AccesoDatos.Entidades_Datos;
-using System.Linq;
 
 namespace Pruebas.ControladoresTest
 {
     [TestClass]
     public class UnitTest2
     {
-
         private const string usuarioCredencial = "Usuario insta";
-        private const string numeroTarjeta = "1234567891234567";
-        private const string contraseña = "Mi contraseña";
+        private static string contraseña = "Mi contraseña";
         private const string categoriaNombre = "Personal";
         private const string credencialSitio = "Facebook";
-        private const string nombreTarjeta = "Master Card";
         private const string usuarioGestor = "Hernán";
         private const string credencialNota = "Nota ";
-        private const string tipoTarjeta = "Debito";
 
-        private static Usuario usuario = new Usuario(usuarioGestor, contraseña);
-
+        private static Usuario usuario;
+        private ControladorCredencial controladorCredencial;
         private Categoria categoria;
+
         private DateTime fecha;
-        private ControladorCredencial controladorCredencial = new ControladorCredencial(usuario);
 
         [TestInitialize]
         public void Setup()
         {
             EliminarDatosBD();
-
+            usuario = new Usuario(usuarioGestor, contraseña);
+            controladorCredencial = new ControladorCredencial(usuario);
             categoria = new Categoria(categoriaNombre);
             fecha = new DateTime(2021, 12, 15);
         }
@@ -125,7 +123,9 @@ namespace Pruebas.ControladoresTest
         {
             AgregarUnRegistroEnCadaTabla();
             Categoria categoria = new Categoria(categoriaNombre);
-            Contraseña contraseñaDominio = new Contraseña(contraseña);
+            string contraseñaEncriptada = EncriptarContraseña(contraseña);
+            Contraseña contraseñaDominio = new Contraseña(contraseñaEncriptada);
+
             Credencial credencial = new Credencial(usuarioCredencial, contraseñaDominio,
                  credencialSitio, credencialNota, categoria);
 
@@ -236,7 +236,6 @@ namespace Pruebas.ControladoresTest
             Assert.IsTrue(mismoNombre);
         }
 
-
         private void AgregarUnRegistroEnCadaTabla()
         {
             AgregarUsuario(usuarioGestor, contraseña);
@@ -290,21 +289,6 @@ namespace Pruebas.ControladoresTest
             }
         }
 
-        public void AgregarTarjeta(string numeroTarjeta, string nombreUsuario, string nombreCategoria)
-        {
-            int idCategoria = ObtenerIdCategoria(nombreCategoria, nombreUsuario);
-
-            EntidadUsuario entidadUsuario = new EntidadUsuario(nombreUsuario, null);
-            EntidadTarjeta entidadTarjeta = new EntidadTarjeta(credencialNota, nombreTarjeta,
-                tipoTarjeta, numeroTarjeta, 1234, fecha, idCategoria, nombreUsuario);
-
-            using (Contexto contexto = new Contexto())
-            {
-                contexto.tarjetas.Add(entidadTarjeta);
-                contexto.SaveChanges();
-            }
-        }
-
         public int ObtenerIdCategoria(string nombreCategoria, string usuarioDueño)
         {
             using (Contexto contexto = new Contexto())
@@ -335,11 +319,20 @@ namespace Pruebas.ControladoresTest
         public void AgregarContraseña(string contraseña, int nivelSeguridadContrasenia)
         {
             EntidadContraseña entidadContraseña = new EntidadContraseña(contraseña, nivelSeguridadContrasenia);
+            contraseña = EncriptarContraseña(contraseña);
             using (Contexto contexto = new Contexto())
             {
                 contexto.contraseñas.Add(entidadContraseña);
                 contexto.SaveChanges();
             }
+        }
+
+        private string EncriptarContraseña(string contraseña)
+        {
+            Encriptador encriptador = new Encriptador();
+
+            string llave = encriptador.GenerarLlave();
+            return encriptador.Encriptar(contraseña, llave);
         }
     }
 }

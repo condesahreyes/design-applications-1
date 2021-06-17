@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OblDiseño1.ControladoresPorEntidad;
+using AccesoDatos.Entidades_Datos;
 using System.Collections.Generic;
 using AccesoDatos;
-using AccesoDatos.Entidades_Datos;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OblDiseño1;
-using OblDiseño1.ControladoresPorEntidad;
+using System;
 
 namespace Pruebas.ControladoresTest
 {
@@ -18,7 +18,7 @@ namespace Pruebas.ControladoresTest
         private Categoria categoria;
         private DateTime fecha;
         private ControladorCategoria controladorCategoria;
-        private static Usuario usuario = new Usuario(usuarioGestor, contraseña);
+        private static Usuario usuario;
 
         [TestInitialize]
         public void Setup()
@@ -26,7 +26,7 @@ namespace Pruebas.ControladoresTest
             EliminarDatosBD();
             categoria = new Categoria("Personal");
             fecha = new DateTime(2021, 12, 15);
-
+            usuario = new Usuario(usuarioGestor, contraseña);
             controladorCategoria = new ControladorCategoria(usuario);
         }
 
@@ -65,7 +65,6 @@ namespace Pruebas.ControladoresTest
             Assert.IsTrue(contidadCategorias > 0);
         }
 
-
         [TestMethod]
         public void VerificarQueSeAgregoCategoriaCorrectamente()
         {
@@ -92,7 +91,6 @@ namespace Pruebas.ControladoresTest
             List<Categoria> categorias = controladorCategoria.ObtenerCategorias();
             Assert.IsTrue(categorias.Count == 1);
         }
-
 
         [TestMethod]
         public void ObtenerCategoria()
@@ -122,7 +120,6 @@ namespace Pruebas.ControladoresTest
 
             Assert.IsTrue(categoria.Nombre == categoriaObtenida.Nombre);
         }
-
 
         [TestMethod]
         public void ModificarNombreCategoria()
