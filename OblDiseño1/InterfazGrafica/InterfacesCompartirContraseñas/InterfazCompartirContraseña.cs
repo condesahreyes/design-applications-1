@@ -1,6 +1,10 @@
 ﻿using System.Windows.Forms;
 using System;
 using OblDiseño1;
+using OblDiseño1.ControladoresPorFuncionalidad;
+using AccesoDatos;
+using System.Collections.Generic;
+using AccesoDatos.Repositorios;
 
 namespace InterfazGrafica.InterfazCompartirContraseñas
 {
@@ -8,8 +12,8 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
     {
         private Sistema sistema;
         private Usuario usuario;
-
-        public InterfazCompartirContraseña(ref Sistema sistema, ref Usuario usuario)
+        ControladorObtener controladorObtener = new ControladorObtener();
+         public InterfazCompartirContraseña(ref Sistema sistema, ref Usuario usuario)
         {
             InitializeComponent();
             this.sistema = sistema;
@@ -21,26 +25,35 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
 
         private void CargarOpcionesDeUsuariosACompartir()
         {
-            foreach (var iterador in sistema.ObtenerUsuarios())
-                if (iterador.Nombre != this.usuario.Nombre)
-                    comboBoxUsuarios.Items.Add(iterador.Nombre);
+            UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
+            List<Usuario> usuariosDisponibles = controladorObtener.ObtenerUsuarios(repositorioUsuario);
+            usuariosDisponibles.Remove(this.usuario);
+
+            foreach (var usuario in usuariosDisponibles)
+                comboBoxUsuarios.Items.Add(usuario.Nombre);
         }
 
         private void CargarOpcionesDeSitiosParaCompartir()
         {
-            foreach (var iterador in usuario.ObtenerCredenciales())
-                comboBoxSitios.Items.Add(iterador.NombreSitioApp);
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
+            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(repositorioCredencial); 
+
+            if (credenciales != null)
+            foreach (var credencial in credenciales)
+                comboBoxSitios.Items.Add(credencial.NombreSitioApp);
         }
 
         private void comboBoxSitios_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxUsuariosSitios.Items.Clear();
             string sitio = comboBoxSitios.SelectedItem.ToString();
-            foreach (var iterador in usuario.ObtenerCredenciales())
-            {
-                if (iterador.NombreSitioApp == sitio)
-                    comboBoxUsuariosSitios.Items.Add(iterador.NombreUsuario);
-            }
+
+            CredencialRepositorio repositorioCredencial = new CredencialRepositorio(this.usuario);
+            List<Credencial> credenciales = controladorObtener.ObtenerCredenciales(repositorioCredencial);
+
+            foreach (var credencial in credenciales)
+                if (credencial.NombreSitioApp == sitio)
+                    comboBoxUsuariosSitios.Items.Add(credencial.NombreUsuario);
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)
@@ -59,7 +72,10 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
                 MessageBox.Show("Debe seleccionar un usuario para compartir");
             else
             {
-                usuarioACompartir = ObtenerUsuarioACompartir(usuarioSeleccionado);
+                Usuario usuarioAuxiliar = new Usuario();
+                usuarioAuxiliar.Nombre = usuarioSeleccionado;
+                UsuarioRepositorio repositorioUsuario = new UsuarioRepositorio();
+                usuarioACompartir = controladorObtener.ObtenerUsuario(usuarioAuxiliar, repositorioUsuario);
 
                 CompartirContraseña(ref usuarioACompartir);
             }
@@ -69,16 +85,18 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
         {
             string nomSitioSeleccionado = comboBoxSitios.Text;
             string nomUsuarioSeleccionado = comboBoxUsuariosSitios.Text;
+            RegistroCredencialCompartidaRepositorio repositorioCredencialCompartida = new RegistroCredencialCompartidaRepositorio(this.usuario);
+            ControladorAlta controladorAlta = new ControladorAlta();
 
             foreach (var iterador in this.usuario.ObtenerCredenciales())
             {
                 if ((iterador.NombreSitioApp == nomSitioSeleccionado) && 
                     (iterador.NombreUsuario == nomUsuarioSeleccionado))
                 {
-                    Credencial duplaACompartir = iterador;
+                    Credencial credencialACompartir = iterador;
                     try
                     {
-                        this.usuario.CompartirContrasenia(duplaACompartir, usuarioACompartir);
+                        controladorAlta.AgregarRegistroCredencialCompartida(credencialACompartir,usuarioACompartir, repositorioCredencialCompartida);
                         MessageBox.Show("Se compartio la contraseña correctamente");
                         IrAInterfazContraseñasCompartidas();
                     }
@@ -92,14 +110,7 @@ namespace InterfazGrafica.InterfazCompartirContraseñas
             }
         }
 
-        private Usuario ObtenerUsuarioACompartir(String usuarioSeleccionado)
-        {
-            foreach (var iteradorUsuario in this.sistema.ObtenerUsuarios())
-                if (iteradorUsuario.Nombre == usuarioSeleccionado)
-                    return iteradorUsuario;
-            return null;
-        }
-
+    
         private void IrAInterfazContraseñasCompartidas()
         {
             this.Close();

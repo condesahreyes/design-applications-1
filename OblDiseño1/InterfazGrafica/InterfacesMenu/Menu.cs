@@ -22,6 +22,7 @@ namespace InterfazGrafica.InterfacesMenu
         private Usuario usuario;
         private ControladorObtener controladorObtener;
         private CategoriaRepositorio categoriaRepo;
+        private CredencialRepositorio credencialRepo;
 
         private readonly string msgErrorDebeCrearCategoria = "Error, primero " +
             "se debe registrar una Categoría para acceder a esta opción.";
@@ -32,6 +33,8 @@ namespace InterfazGrafica.InterfacesMenu
             this.sistema = sistema;
             controladorObtener = new ControladorObtener();
             categoriaRepo = new CategoriaRepositorio(this.usuario);
+            credencialRepo = new CredencialRepositorio(this.usuario);
+
 
             InitializeComponent();
         }
@@ -101,10 +104,10 @@ namespace InterfazGrafica.InterfacesMenu
 
         private void btnCompartirContrasenia_Click_1(object sender, EventArgs e)
         {
-            this.Close();
-            InterfazContraseñasCompartidas interfazContraseñas = new 
-                InterfazContraseñasCompartidas(ref sistema, ref usuario);
-            interfazContraseñas.Show();
+                this.Close();
+                InterfazContraseñasCompartidas interfazContraseñas = new
+                    InterfazContraseñasCompartidas(ref sistema, ref usuario);
+                interfazContraseñas.Show();
         }
     }
 }

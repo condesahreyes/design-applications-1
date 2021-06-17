@@ -36,7 +36,7 @@ namespace InterfazGrafica.InterfacesReporte
             this.controladorObtener = new ControladorObtener();
             this.sistema = sistema;
             this.usuarioRepositorio = new UsuarioRepositorio();
-            this.usuario = controladorObtener.ObtenerUsuario(usuario, usuarioRepositorio);
+            this.usuario = usu;
             this.reporte = rep;
 
             CrearGraficas();

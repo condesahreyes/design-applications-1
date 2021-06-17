@@ -89,6 +89,14 @@ namespace InterfazGrafica.InterfacesDataBreaches
         private void btnModificarContraseña_Click(object sender, EventArgs e)
         {
             if (0 < dataGridCredenciales.RowCount)
+                ModificarCredencial();
+            else
+                MessageBox.Show("No hay contraseñas para modificar");
+        }
+
+        private void ModificarCredencial()
+        {
+            try
             {
                 Credencial credencialSeleccionada = (Credencial)dataGridCredenciales.CurrentRow.DataBoundItem;
 
@@ -99,8 +107,10 @@ namespace InterfazGrafica.InterfacesDataBreaches
 
                 ModificarContraseña(credencial, credencialSeleccionada);
             }
-            else
-                MessageBox.Show("No hay contraseñas para modificar");
+            catch (ExepcionIntentoDeObtencionDeObjetoInexistente)
+            {
+                MessageBox.Show("Esta contraseña ya fue modificada");
+            }
         }
 
         private void ModificarContraseña(Credencial credencial, Credencial credencialSeleccionada)

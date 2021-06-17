@@ -11,6 +11,7 @@ namespace AccesoDatos
         public DbSet<EntidadContraseña> contraseñas { set; get; }
         public DbSet<EntidadTarjeta> tarjetas { get; set; }
         public DbSet<EntidadUsuario> usuarios { get; set; }
+        public DbSet<EntidadRegistroCredencialCompartida> credencialesCompartidas { get; set; }
 
         public DbSet<EntidadDataBreach> dataBreach { get; set; }
         public DbSet<EntidadDataBrechTarjeta> dataBreachTarjetas { get; set; }
@@ -66,6 +67,11 @@ namespace AccesoDatos
 
             modelBuilder.Entity<EntidadDataBrechCredencial>().HasRequired<EntidadDataBreach>(c => c.dataBreach).WithMany(u => u.credencialVulneradas).HasForeignKey(t => new { t.DataBrechId });
 
+
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasKey(e => new { e.NombreUsuarioQueComparte, e.NombreUsuarioAlQueSeLeCompartio, e.CredencialCompartidaId }) ;
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadUsuario>(r => r.UsuarioQueComparte).WithMany(u => u.credencialesQueComparto).HasForeignKey<string>(s => s.NombreUsuarioQueComparte).WillCascadeOnDelete(false);
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadUsuario>(r => r.UsuarioAlQueSeLeCompartio).WithMany(u => u.credencialesQueMeCompartieron).HasForeignKey<string>(s => s.NombreUsuarioAlQueSeLeCompartio).WillCascadeOnDelete(false);
+            modelBuilder.Entity<EntidadRegistroCredencialCompartida>().HasRequired<EntidadCredencial>(r => r.CredencialCompartida).WithMany(c => c.registrosEnLosQueEstoyCompartida).HasForeignKey<int>(s => s.CredencialCompartidaId).WillCascadeOnDelete(false);
         }
     }
 }

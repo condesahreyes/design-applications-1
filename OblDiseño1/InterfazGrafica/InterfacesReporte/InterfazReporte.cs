@@ -106,7 +106,7 @@ namespace InterfazGrafica.InterfacesReporte
         private void button_PorCategoria_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(usuario, sistema, reporte);
+            InterfazReportePorCategoria porCat = new InterfazReportePorCategoria(this.usuario, sistema, reporte);
             porCat.Show();
         }
     }

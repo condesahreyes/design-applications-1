@@ -35,6 +35,12 @@ namespace AccesoDatos.Entidades_Datos
 
         public DateTime FechaUltimaModificacion { get; set; }
 
+        //BORRAR SI NU FUNCA
+        //BORRAR SI NU FUNCA
+        public virtual ICollection<EntidadRegistroCredencialCompartida> registrosEnLosQueEstoyCompartida { set; get; }
+        //BORRAR SI NU FUNCA
+        //BORRAR SI NU FUNCA
+
         public EntidadCredencial()
         {
         }

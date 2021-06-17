@@ -97,7 +97,7 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
             return false;
         }
 
-        private List<Credencial> ObtenerTodasLasCredencialesVulneradas(IRepositorio<ChequeadorDeDataBreaches> 
+        private List<Credencial> ObtenerTodasLasCredencialesVulneradas(IRepositorio<ChequeadorDeDataBreaches>
             repositorioDataBreach)
         {
             List<ChequeadorDeDataBreaches> misDataBreaches = ObtenerDataBreaches(repositorioDataBreach);
@@ -108,6 +108,11 @@ namespace OblDiseño1.ControladoresPorFuncionalidad
                 misCredencialesVulneradas.AddRange(dataBreach.CredencialesVulneradas);
 
             return misCredencialesVulneradas;
+        }
+
+        public List<Usuario> ObtenerUsuarios(IRepositorio<Usuario> repositorioUsuario)
+        {
+            return repositorioUsuario.GetAll();
         }
     }
 }

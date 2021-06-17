@@ -28,7 +28,6 @@ namespace OblDiseño1.Entidades
 
             foreach (Credencial dupla in misCredenciales)
             {
-
                 string nombreCategoria = dupla.Categoria.Nombre;
                 int nivelSeguridad = dupla.Contraseña.NivelSeguridadContrasenia;
                 categoria[nombreCategoria][nivelSeguridad] = categoria[nombreCategoria][nivelSeguridad] + 1;

@@ -111,7 +111,7 @@ namespace InterfazGrafica.InterfacesDeContrasenias
 
         private void btnEliminarContrasenia_Click(object sender, System.EventArgs e)
         {
-            if (0 < controladorObtener.ObtenerCredenciales(credencialRepositorio).Count && ConfirmarEliminacion())
+            if (0 < dataGridView_ListaDuplas.RowCount && ConfirmarEliminacion())
             {
                 EliminarContrasenia();
                 CargarCredenciales();

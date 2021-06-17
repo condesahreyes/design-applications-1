@@ -20,6 +20,13 @@ namespace AccesoDatos.Entidades_Datos
 
 
 
+        //BORRAR SI NU FUNCA
+        //BORRAR SI NU FUNCA
+        public virtual ICollection<EntidadRegistroCredencialCompartida> credencialesQueComparto { set; get; }
+        public virtual ICollection<EntidadRegistroCredencialCompartida> credencialesQueMeCompartieron { set; get; }
+        //BORRAR SI NU FUNCA
+        //BORRAR SI NU FUNCA
+
         public EntidadUsuario() 
         {
         }

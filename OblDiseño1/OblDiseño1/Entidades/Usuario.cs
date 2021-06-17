@@ -35,6 +35,7 @@ namespace OblDiseño1
             this.categorias = new List<Categoria>();
             this.tarjetas = new List<Tarjeta>();
             this.credenciales = new List<Credencial>();
+            this.GestorCompartirContrasenia = new GestorContraseniasCompartidas(this);
         }
 
         public GestorContraseniasCompartidas GestorCompartirContrasenia { get; }
