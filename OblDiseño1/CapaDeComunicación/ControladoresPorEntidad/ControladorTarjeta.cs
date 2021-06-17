@@ -26,6 +26,11 @@ namespace OblDiseño1.ControladoresPorEntidad
             repositorioTarjeta.Add(nuevaTarjeta);
         }
 
+        public void CrearTarjeta(Tarjeta unaTarjeta)
+        {
+            repositorioTarjeta.Add(unaTarjeta);
+        }
+
         public bool ExisteEsteNumeroTarjeta(string numeroTarjeta)
         {
             Tarjeta tarjeta = new Tarjeta();

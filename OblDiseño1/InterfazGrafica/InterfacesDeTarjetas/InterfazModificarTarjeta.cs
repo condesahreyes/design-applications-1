@@ -1,5 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.ControladoresPorEntidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using OblDiseño1;
@@ -96,8 +95,6 @@ namespace InterfazGrafica.InterfacesDeTarjetas
             Categoria categoria = new Categoria(nombreCategoria);
 
             int codigoSeguridadAConvertir = Int32.Parse(codigoSeguridad);
-
-            ControladorModificar controladorModificar = new ControladorModificar();
 
             Tarjeta nuevaTarjeta = new Tarjeta();
             nuevaTarjeta.Nombre = textBoxNombre.Text;

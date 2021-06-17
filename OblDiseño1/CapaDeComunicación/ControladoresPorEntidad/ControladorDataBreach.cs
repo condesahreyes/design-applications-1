@@ -1,5 +1,4 @@
 ﻿using AccesoDatos.Repositorios;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System;
 using System.Collections.Generic;
 using System.Linq;

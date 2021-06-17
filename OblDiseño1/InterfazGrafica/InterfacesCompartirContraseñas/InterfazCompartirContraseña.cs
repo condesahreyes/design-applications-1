@@ -1,5 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.ControladoresPorEntidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using System.Collections.Generic;
 using AccesoDatos.Repositorios;
 using System.Windows.Forms;

@@ -1,5 +1,4 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Collections.Generic;
 using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;

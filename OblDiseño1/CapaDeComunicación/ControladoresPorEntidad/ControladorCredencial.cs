@@ -26,6 +26,11 @@ namespace OblDiseño1.ControladoresPorEntidad
             repositorioCredencial.Add(credencial);
         }
 
+        public void AgregarCredencial(Credencial credencial)
+        {
+            repositorioCredencial.Add(credencial);
+        }
+
         public bool ObtenerSiEsContraseniaDuplicada(string unaContrasenia, Credencial credencial)
         {
             List<Credencial> credenciales = repositorioCredencial.GetAll();

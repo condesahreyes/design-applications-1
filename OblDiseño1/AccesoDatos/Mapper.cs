@@ -1,10 +1,8 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using AccesoDatos.Entidades_Datos;
+﻿using AccesoDatos.Entidades_Datos;
 using AccesoDatos.Repositorios;
 using OblDiseño1.Entidades;
 using OblDiseño1;
 using System.Collections.Generic;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using OblDiseño1.Manejadores;
 
 namespace AccesoDatos
@@ -134,8 +132,6 @@ namespace AccesoDatos
 
         public Usuario PasarADominio(EntidadUsuario usuarioEntidad)
         {
-            ControladorObtener controladorObtener = new ControladorObtener();
-
             Usuario usuarioDominio = new Usuario();
             
             usuarioDominio.Nombre = usuarioEntidad.Nombre;

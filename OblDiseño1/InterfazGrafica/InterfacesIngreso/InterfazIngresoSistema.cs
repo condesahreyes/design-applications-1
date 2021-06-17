@@ -1,20 +1,20 @@
 ﻿using Menu = InterfazGrafica.InterfacesMenu.Menu;
-using OblDiseño1.ControladoresPorFuncionalidad;
 using System.Windows.Forms;
 using AccesoDatos;
 using OblDiseño1;
 using System;
+using OblDiseño1.ControladoresPorEntidad;
 
 namespace InterfazGrafica.InterfazIngreso
 {
     public partial class InterfazIngresoSistema : Form
     {
-        private UsuarioRepositorio usuariosRepo = new UsuarioRepositorio();
-        private ControladorAlta controladorAlta = new ControladorAlta();
+        private ControladorUsuario controladorUsuario;
 
         public InterfazIngresoSistema()
         {
             InitializeComponent();
+            controladorUsuario = new ControladorUsuario();
         }
 
         private void ingresoSistema_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace InterfazGrafica.InterfazIngreso
         public bool VerificarContraseñaCorrecta(string nombreUsuario, string contrasenia)
         {
             Usuario usuario = new Usuario(nombreUsuario, contrasenia);
-            Usuario usuarioIngresado = usuariosRepo.Get(usuario);
+            Usuario usuarioIngresado = controladorUsuario.ObtenerUnUsuario(usuario);
 
             if (usuarioIngresado.Contrasenia == contrasenia)
                 return true;
@@ -47,15 +47,15 @@ namespace InterfazGrafica.InterfazIngreso
             {
                 Usuario usuario = new Usuario(nombreUsuario, contrasenia);
 
-                if (usuariosRepo.Existe(usuario))
+                if (controladorUsuario.ExisteUsuario(usuario))
                 {
-                    usuario = usuariosRepo.Get(usuario);
+                    usuario = controladorUsuario.ObtenerUnUsuario(usuario);
                     
                 }
                     
                 else
                 {
-                    controladorAlta.AgregarUsuario(usuario, usuariosRepo);
+                    controladorUsuario.AgregarUsuario(usuario);
                     MessageBox.Show("Se lo ha registrado como nuevo usuario");
                 }
                 return usuario;

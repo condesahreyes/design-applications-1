@@ -1,5 +1,4 @@
-﻿using OblDiseño1.ControladoresPorFuncionalidad;
-using OblDiseño1.ControladoresPorEntidad;
+﻿using OblDiseño1.ControladoresPorEntidad;
 using InterfazGrafica.InterfazCategoria;
 using System.Windows.Forms;
 using AccesoDatos;
